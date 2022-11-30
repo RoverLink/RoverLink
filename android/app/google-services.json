@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "902226075536",
+    "project_id": "roverhub-roverlink",
+    "storage_bucket": "roverhub-roverlink.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902226075536:android:4a149c39c602f329935d15",
+        "android_client_info": {
+          "package_name": "com.roverhub.roverlink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902226075536-32i62k218h5lr2p65gei13k1gvj74r2i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roverhub.roverlink",
+            "certificate_hash": "5b03378513bec769736cc3e62f1509eae64e0f6c"
+          }
+        },
+        {
+          "client_id": "902226075536-vd5n7qkv0scpacpordpj9ccqr6pgpgpq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roverhub.roverlink",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "902226075536-dg7kfinv0sq0g15bck1aj14kqqitr2uk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXlO3Hn1o86TLM_R6Or8Hk00JcUL6Mpes"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902226075536-dg7kfinv0sq0g15bck1aj14kqqitr2uk.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "902226075536-ftie8gasfgmnmkpu7qrc65urv0jkcbfk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.roverhub.roverlink"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
