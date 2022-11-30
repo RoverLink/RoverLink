@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../components/back_button_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -75,25 +76,29 @@ class _MenuWidgetState extends State<MenuWidget> {
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: Hero(
-                              tag: 'PFP',
-                              transitionOnUserGestures: true,
-                              child: Container(
-                                width: 80,
-                                height: 80,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.asset(
-                                  'assets/images/face-holding-back-tears_1f979.png',
-                                  fit: BoxFit.cover,
+                          if (currentUserPhoto != null &&
+                              currentUserPhoto != '')
+                            Align(
+                              alignment: AlignmentDirectional(0, 0),
+                              child: AuthUserStreamWidget(
+                                child: Hero(
+                                  tag: currentUserPhoto,
+                                  transitionOnUserGestures: true,
+                                  child: Container(
+                                    width: 80,
+                                    height: 80,
+                                    clipBehavior: Clip.antiAlias,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.network(
+                                      currentUserPhoto,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(15, 0, 0, 0),
@@ -175,7 +180,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                             child: Text(
-                              'School',
+                              'Schools',
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(
@@ -275,6 +280,72 @@ class _MenuWidgetState extends State<MenuWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                             child: Text(
                               'About',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyText1Family,
+                                    fontSize: 17,
+                                    useGoogleFonts: GoogleFonts.asMap()
+                                        .containsKey(
+                                            FlutterFlowTheme.of(context)
+                                                .bodyText1Family),
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        var confirmDialogResponse = await showDialog<bool>(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  title: Text('Log Out?'),
+                                  content:
+                                      Text('Are you sure you want to log out?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, false),
+                                      child: Text('Cancel'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(
+                                          alertDialogContext, true),
+                                      child: Text('Log Out'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ) ??
+                            false;
+                        if (confirmDialogResponse) {
+                          GoRouter.of(context).prepareAuthEvent();
+                          await signOut();
+                        } else {
+                          return;
+                        }
+
+                        context.goNamedAuth('Onboarding', mounted);
+                      },
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                            child: Icon(
+                              Icons.logout,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 24,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                            child: Text(
+                              'Log Out',
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
                                   .override(

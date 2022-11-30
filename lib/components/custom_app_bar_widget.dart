@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -144,28 +145,49 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(13, 13, 13, 13),
-                        child: InkWell(
-                          onTap: () async {
-                            context.pushNamed('Menu');
-                          },
-                          child: Hero(
-                            tag: 'PFP',
-                            transitionOnUserGestures: true,
-                            child: Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                'assets/images/face-holding-back-tears_1f979.png',
-                                fit: BoxFit.cover,
+                      if (currentUserPhoto != null && currentUserPhoto != '')
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(13, 13, 13, 13),
+                          child: AuthUserStreamWidget(
+                            child: InkWell(
+                              onTap: () async {
+                                context.pushNamed('Menu');
+                              },
+                              child: Hero(
+                                tag: currentUserPhoto,
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    currentUserPhoto,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      if (currentUserPhoto == null || currentUserPhoto == '')
+                        AuthUserStreamWidget(
+                          child: FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
+                            borderRadius: 30,
+                            borderWidth: 1,
+                            buttonSize: 60,
+                            icon: Icon(
+                              Icons.person_outline,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 30,
+                            ),
+                            onPressed: () async {
+                              context.pushNamed('Menu');
+                            },
+                          ),
+                        ),
                     ],
                   ),
                 ],

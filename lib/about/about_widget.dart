@@ -57,7 +57,6 @@ class _AboutWidgetState extends State<AboutWidget> {
                         context.pushNamed('TermsOfUse');
                       },
                       child: Container(
-                        height: 50,
                         decoration: BoxDecoration(
                           color: Color(0x32A40000),
                           borderRadius: BorderRadius.circular(20),
