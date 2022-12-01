@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -52,7 +51,25 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     .containsKey(FlutterFlowTheme.of(context).title2Family),
               ),
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.logout,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 30,
+            ),
+            onPressed: () async {
+              GoRouter.of(context).prepareAuthEvent();
+              await signOut();
+
+              context.goNamedAuth('Onboarding', mounted);
+            },
+          ),
+        ],
         centerTitle: true,
         elevation: 0,
       ),
@@ -69,32 +86,19 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     children: [
                       Align(
                         alignment: AlignmentDirectional(0, 0),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: AuthUserStreamWidget(
-                              child: Hero(
-                                tag: currentUserPhoto,
-                                transitionOnUserGestures: true,
-                                child: Container(
-                                  width: 130,
-                                  height: 130,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: currentUserPhoto,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
+                        child: Hero(
+                          tag: 'PFP',
+                          transitionOnUserGestures: true,
+                          child: Container(
+                            width: 130,
+                            height: 130,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: Image.asset(
+                              'assets/images/face-holding-back-tears_1f979.png',
+                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -261,7 +265,6 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                           },
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
-                            primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: post.length,

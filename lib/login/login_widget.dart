@@ -1,12 +1,9 @@
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
-import '../custom_code/actions/index.dart' as actions;
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -164,12 +161,6 @@ class _LoginWidgetState extends State<LoginWidget>
       ],
     ),
   };
-  String? gravatarHashUrl;
-  TextEditingController? emailAddressLoginController;
-  TextEditingController? passwordLoginController;
-
-  late bool passwordLoginVisibility;
-  String? gravatarHashUrlGuest;
   TextEditingController? emailAddressController;
   TextEditingController? passwordController;
 
@@ -177,6 +168,10 @@ class _LoginWidgetState extends State<LoginWidget>
   TextEditingController? passwordConfirmController;
 
   late bool passwordConfirmVisibility;
+  TextEditingController? emailAddressLoginController;
+  TextEditingController? passwordLoginController;
+
+  late bool passwordLoginVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -604,10 +599,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   0, 24, 0, 0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          var _shouldSetState =
-                                                              false;
-                                                          Function() _navigate =
-                                                              () {};
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
 
@@ -623,40 +614,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          _navigate = () =>
-                                                              context
-                                                                  .goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
-                                                          if (currentUserPhoto ==
-                                                                  null ||
-                                                              currentUserPhoto ==
-                                                                  '') {
-                                                            gravatarHashUrl =
-                                                                await actions
-                                                                    .gravatarHash(
-                                                              currentUserEmail,
-                                                            );
-                                                            _shouldSetState =
-                                                                true;
-                                                          } else {
-                                                            if (_shouldSetState)
-                                                              setState(() {});
-                                                            return;
-                                                          }
-
-                                                          final usersUpdateData =
-                                                              createUsersRecordData(
-                                                            photoUrl:
-                                                                gravatarHashUrl,
-                                                          );
-                                                          await currentUserReference!
-                                                              .update(
-                                                                  usersUpdateData);
-
-                                                          _navigate();
-                                                          if (_shouldSetState)
-                                                            setState(() {});
+                                                          context.goNamedAuth(
+                                                              'HomePage',
+                                                              mounted);
                                                         },
                                                         text: 'Login',
                                                         options:
@@ -665,7 +625,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           height: 50,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryColor,
+                                                              .secondaryColor,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -789,7 +749,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             context)
                                                                         .primaryText,
                                                                     fontSize:
-                                                                        15,
+                                                                        16,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
@@ -837,8 +797,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryText,
-                                                                    fontSize:
-                                                                        15,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500,
@@ -1477,10 +1435,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   0, 24, 0, 0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          var _shouldSetState =
-                                                              false;
-                                                          Function() _navigate =
-                                                              () {};
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
                                                           if (passwordController
@@ -1511,40 +1465,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          _navigate = () =>
-                                                              context
-                                                                  .goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
-                                                          if (currentUserPhoto ==
-                                                                  null ||
-                                                              currentUserPhoto ==
-                                                                  '') {
-                                                            gravatarHashUrlGuest =
-                                                                await actions
-                                                                    .gravatarHash(
-                                                              currentUserEmail,
-                                                            );
-                                                            _shouldSetState =
-                                                                true;
-                                                          } else {
-                                                            if (_shouldSetState)
-                                                              setState(() {});
-                                                            return;
-                                                          }
-
-                                                          final usersUpdateData =
-                                                              createUsersRecordData(
-                                                            photoUrl:
-                                                                gravatarHashUrlGuest,
-                                                          );
-                                                          await currentUserReference!
-                                                              .update(
-                                                                  usersUpdateData);
-
-                                                          _navigate();
-                                                          if (_shouldSetState)
-                                                            setState(() {});
+                                                          context.goNamedAuth(
+                                                              'HomePage',
+                                                              mounted);
                                                         },
                                                         text: 'Create Account',
                                                         options:
@@ -1553,7 +1476,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           height: 50,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primaryColor,
+                                                              .secondaryColor,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1841,7 +1764,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).subtitle2Family,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .primaryText,
+                                                                            .secondaryText,
                                                                         fontSize:
                                                                             13,
                                                                         useGoogleFonts:

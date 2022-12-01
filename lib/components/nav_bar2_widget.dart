@@ -72,30 +72,19 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
               children: [
                 Align(
                   alignment: AlignmentDirectional(0, 1),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 6),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      buttonSize: 70,
-                      icon: Icon(
-                        Icons.home_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        size: 40,
-                      ),
-                      onPressed: () async {
-                        context.pushNamed(
-                          'HomePage',
-                          extra: <String, dynamic>{
-                            kTransitionInfoKey: TransitionInfo(
-                              hasTransition: true,
-                              transitionType: PageTransitionType.fade,
-                            ),
-                          },
-                        );
-                      },
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    buttonSize: 70,
+                    icon: Icon(
+                      Icons.home_rounded,
+                      color: FlutterFlowTheme.of(context).secondaryText,
+                      size: 40,
                     ),
+                    onPressed: () async {
+                      context.pushNamed('HomePage');
+                    },
                   ),
                 ),
                 Column(
@@ -123,22 +112,19 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                 ),
                 Align(
                   alignment: AlignmentDirectional(0, 1),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 6),
-                    child: FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      borderWidth: 1,
-                      buttonSize: 70,
-                      icon: FaIcon(
-                        FontAwesomeIcons.solidCalendar,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 30,
-                      ),
-                      onPressed: () {
-                        print('IconButton pressed ...');
-                      },
+                  child: FlutterFlowIconButton(
+                    borderColor: Colors.transparent,
+                    borderRadius: 30,
+                    borderWidth: 1,
+                    buttonSize: 70,
+                    icon: FaIcon(
+                      FontAwesomeIcons.solidCalendar,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 30,
                     ),
+                    onPressed: () async {
+                      context.goNamed('NewCalendar');
+                    },
                   ),
                 ),
               ],

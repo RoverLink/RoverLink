@@ -82,54 +82,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomePageWidget(),
             ),
             FFRoute(
-              name: 'Events',
-              path: 'events',
-              builder: (context, params) => EventsWidget(),
-            ),
-            FFRoute(
-              name: 'Announcements',
-              path: 'announcements',
-              builder: (context, params) => AnnouncementsWidget(),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
+              name: 'NewCalendar',
+              path: 'newCalendar',
+              builder: (context, params) => NewCalendarWidget(),
             ),
             FFRoute(
               name: 'Menu',
               path: 'menu',
               builder: (context, params) => MenuWidget(),
-            ),
-            FFRoute(
-              name: 'YourProfile',
-              path: 'yourProfile',
-              builder: (context, params) => YourProfileWidget(),
-            ),
-            FFRoute(
-              name: 'ReportABug',
-              path: 'reportABug',
-              builder: (context, params) => ReportABugWidget(),
-            ),
-            FFRoute(
-              name: 'About',
-              path: 'about',
-              builder: (context, params) => AboutWidget(),
-            ),
-            FFRoute(
-              name: 'PrivacyPolicy',
-              path: 'privacyPolicy',
-              builder: (context, params) => PrivacyPolicyWidget(),
-            ),
-            FFRoute(
-              name: 'TermsOfUse',
-              path: 'termsOfUse',
-              builder: (context, params) => TermsOfUseWidget(),
-            ),
-            FFRoute(
-              name: 'Onboarding',
-              path: 'onboarding',
-              builder: (context, params) => OnboardingWidget(),
             ),
             FFRoute(
               name: 'Login',
@@ -142,9 +102,44 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'AboutCopy',
-              path: 'aboutCopy',
-              builder: (context, params) => AboutCopyWidget(),
+              name: 'PrivacyPolicy',
+              path: 'privacyPolicy',
+              builder: (context, params) => PrivacyPolicyWidget(),
+            ),
+            FFRoute(
+              name: 'TermsOfUse',
+              path: 'termsOfUse',
+              builder: (context, params) => TermsOfUseWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
+              name: 'YourProfile',
+              path: 'yourProfile',
+              builder: (context, params) => YourProfileWidget(),
+            ),
+            FFRoute(
+              name: 'Onboarding',
+              path: 'onboarding',
+              builder: (context, params) => OnboardingWidget(),
+            ),
+            FFRoute(
+              name: 'Announcements',
+              path: 'announcements',
+              builder: (context, params) => AnnouncementsWidget(),
+            ),
+            FFRoute(
+              name: 'About',
+              path: 'about',
+              builder: (context, params) => AboutWidget(),
+            ),
+            FFRoute(
+              name: 'ReportABug',
+              path: 'reportABug',
+              builder: (context, params) => ReportABugWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

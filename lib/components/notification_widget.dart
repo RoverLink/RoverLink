@@ -4,19 +4,19 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AnnouncementWidget extends StatefulWidget {
-  const AnnouncementWidget({
+class NotificationWidget extends StatefulWidget {
+  const NotificationWidget({
     Key? key,
-    this.announcement,
+    this.post,
   }) : super(key: key);
 
-  final dynamic announcement;
+  final dynamic post;
 
   @override
-  _AnnouncementWidgetState createState() => _AnnouncementWidgetState();
+  _NotificationWidgetState createState() => _NotificationWidgetState();
 }
 
-class _AnnouncementWidgetState extends State<AnnouncementWidget> {
+class _NotificationWidgetState extends State<NotificationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,8 +58,8 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 12),
                     child: Text(
                       getJsonField(
-                        widget.announcement,
-                        r'''$.englishSnippet''',
+                        widget.post,
+                        r'''$.description''',
                       ).toString(),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'Outfit',
@@ -78,8 +78,8 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                       children: [
                         Text(
                           functions.humanDate(getJsonField(
-                            widget.announcement,
-                            r'''$.scheduledTime''',
+                            widget.post,
+                            r'''$.publishDate''',
                           ).toString()),
                           style: FlutterFlowTheme.of(context)
                               .bodyText2

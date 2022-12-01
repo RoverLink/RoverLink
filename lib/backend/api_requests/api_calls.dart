@@ -48,68 +48,6 @@ class CalendarCall {
       );
 }
 
-class NotificationsCall {
-  static Future<ApiCallResponse> call() {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Notifications',
-      apiUrl: 'https://alert.eastonsd.org/api/notifications',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {
-        'stags': "easd",
-      },
-      returnBody: true,
-      cache: false,
-    );
-  }
-
-  static dynamic notifications(dynamic response) => getJsonField(
-        response,
-        r'''$''',
-        true,
-      );
-}
-
-class TagsCall {
-  static Future<ApiCallResponse> call() {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Tags',
-      apiUrl: 'https://alert.eastonsd.org/api/notifications/tags',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
-      returnBody: true,
-      cache: false,
-    );
-  }
-
-  static dynamic tags(dynamic response) => getJsonField(
-        response,
-        r'''$''',
-        true,
-      );
-}
-
-class NavigationItemsCall {
-  static Future<ApiCallResponse> call() {
-    return ApiManager.instance.makeApiCall(
-      callName: 'Navigation Items',
-      apiUrl: 'https://alert.eastonsd.org/api/NavigationItems',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
-      returnBody: true,
-      cache: false,
-    );
-  }
-
-  static dynamic navigationItems(dynamic response) => getJsonField(
-        response,
-        r'''$''',
-        true,
-      );
-}
-
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

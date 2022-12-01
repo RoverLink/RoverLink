@@ -48,60 +48,36 @@ class _AboutWidgetState extends State<AboutWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: AlignmentDirectional(0, -1),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(30, 30, 30, 30),
-                    child: InkWell(
-                      onTap: () async {
-                        context.pushNamed('TermsOfUse');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0x32A40000),
-                          borderRadius: BorderRadius.circular(20),
+                InkWell(
+                  onTap: () async {
+                    context.pushNamed('TermsOfUse');
+                  },
+                  child: Text(
+                    'Terms of  Use >',
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: FlutterFlowTheme.of(context).title1Family,
+                          color: FlutterFlowTheme.of(context).alternate,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).title1Family),
                         ),
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Text(
-                          'Terms of  Use >',
-                          style: FlutterFlowTheme.of(context).title1.override(
-                                fontFamily:
-                                    FlutterFlowTheme.of(context).title1Family,
-                                color: FlutterFlowTheme.of(context).alternate,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).title1Family),
-                              ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
-                Align(
-                  alignment: AlignmentDirectional(0.65, 1),
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(30, 30, 30, 30),
-                    child: InkWell(
-                      onTap: () async {
-                        context.pushNamed('PrivacyPolicy');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0x32A40000),
-                          borderRadius: BorderRadius.circular(20),
+                Divider(
+                  thickness: 1,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                ),
+                InkWell(
+                  onTap: () async {
+                    context.pushNamed('PrivacyPolicy');
+                  },
+                  child: Text(
+                    'Privacy Policy >',
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: FlutterFlowTheme.of(context).title1Family,
+                          color: FlutterFlowTheme.of(context).alternate,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).title1Family),
                         ),
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Text(
-                          'Privacy Policy >',
-                          style: FlutterFlowTheme.of(context).title1.override(
-                                fontFamily:
-                                    FlutterFlowTheme.of(context).title1Family,
-                                color: FlutterFlowTheme.of(context).alternate,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context).title1Family),
-                              ),
-                        ),
-                      ),
-                    ),
                   ),
                 ),
               ],
