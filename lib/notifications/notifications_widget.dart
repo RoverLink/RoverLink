@@ -28,7 +28,9 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Notifications',
+          FFLocalizations.of(context).getText(
+            'ic7yfb2d' /* Notifications */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,

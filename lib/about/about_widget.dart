@@ -24,7 +24,9 @@ class _AboutWidgetState extends State<AboutWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'About',
+          FFLocalizations.of(context).getText(
+            '0igoc7rh' /* About */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,
@@ -57,14 +59,15 @@ class _AboutWidgetState extends State<AboutWidget> {
                         context.pushNamed('TermsOfUse');
                       },
                       child: Container(
-                        height: 50,
                         decoration: BoxDecoration(
                           color: Color(0x32A40000),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Terms of  Use >',
+                          FFLocalizations.of(context).getText(
+                            '71leui0d' /* Terms of  Use > */,
+                          ),
                           style: FlutterFlowTheme.of(context).title1.override(
                                 fontFamily:
                                     FlutterFlowTheme.of(context).title1Family,
@@ -92,7 +95,9 @@ class _AboutWidgetState extends State<AboutWidget> {
                         ),
                         alignment: AlignmentDirectional(0, 0),
                         child: Text(
-                          'Privacy Policy >',
+                          FFLocalizations.of(context).getText(
+                            'nxi85yjz' /* Privacy Policy > */,
+                          ),
                           style: FlutterFlowTheme.of(context).title1.override(
                                 fontFamily:
                                     FlutterFlowTheme.of(context).title1Family,

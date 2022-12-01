@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "902226075536-sqhu171auruf8tqabf9phlq8rkc59u8g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roverhub.roverlink",
+            "certificate_hash": "7ed4da1163a1f49485e4e54ead4ad015ab2b2c19"
+          }
+        },
+        {
           "client_id": "902226075536-vd5n7qkv0scpacpordpj9ccqr6pgpgpq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

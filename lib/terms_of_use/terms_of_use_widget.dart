@@ -25,7 +25,9 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Terms Of Use',
+          FFLocalizations.of(context).getText(
+            'ciag688w' /* Terms Of Use */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,

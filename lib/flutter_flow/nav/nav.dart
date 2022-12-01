@@ -145,6 +145,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'AboutCopy',
               path: 'aboutCopy',
               builder: (context, params) => AboutCopyWidget(),
+            ),
+            FFRoute(
+              name: 'SigningOut',
+              path: 'signingOut',
+              builder: (context, params) => SigningOutWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

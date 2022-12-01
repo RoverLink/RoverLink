@@ -7,7 +7,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   ApiCallResponse? apiResultbmf;
-  PagingController<ApiPagingParams, dynamic>? _pagingController;
+  Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -49,100 +48,72 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   height: MediaQuery.of(context).size.height * 1,
                   child: Stack(
                     children: [
-                      SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              height: 54,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                      FutureBuilder<ApiCallResponse>(
+                        future: (_apiRequestCompleter ??=
+                                Completer<ApiCallResponse>()
+                                  ..complete(SocialPostsCall.call()))
+                            .future,
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                ),
                               ),
-                            ),
-                            RefreshIndicator(
-                              onRefresh: () async {
-                                apiResultbmf = await SocialPostsCall.call();
-                                if (!(apiResultbmf?.succeeded ?? true)) {
-                                  await Future.delayed(
-                                      const Duration(milliseconds: 1000));
-                                }
-                                setState(() => _pagingController?.refresh());
-                                await waitForOnePage();
-                              },
-                              child: PagedListView<ApiPagingParams, dynamic>(
-                                pagingController: () {
-                                  if (_pagingController != null) {
-                                    return _pagingController!;
+                            );
+                          }
+                          final listViewSocialPostsResponse = snapshot.data!;
+                          return Builder(
+                            builder: (context) {
+                              final post = SocialPostsCall.posts(
+                                listViewSocialPostsResponse.jsonBody,
+                              ).map((e) => e).toList();
+                              return RefreshIndicator(
+                                onRefresh: () async {
+                                  apiResultbmf = await SocialPostsCall.call();
+                                  if (!(apiResultbmf?.succeeded ?? true)) {
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 1000));
                                   }
-
-                                  _pagingController = PagingController(
-                                    firstPageKey: ApiPagingParams(
-                                      nextPageNumber: 0,
-                                      numItems: 0,
-                                      lastResponse: null,
-                                    ),
-                                  );
-                                  _pagingController!
-                                      .addPageRequestListener((nextPageMarker) {
-                                    SocialPostsCall.call()
-                                        .then((listViewSocialPostsResponse) {
-                                      final pageItems = SocialPostsCall.posts(
-                                        listViewSocialPostsResponse.jsonBody,
-                                      ).map((e) => e).toList() as List;
-                                      final newNumItems =
-                                          nextPageMarker.numItems +
-                                              pageItems.length;
-                                      _pagingController!.appendPage(
-                                        pageItems,
-                                        (pageItems.length > 0)
-                                            ? ApiPagingParams(
-                                                nextPageNumber: nextPageMarker
-                                                        .nextPageNumber +
-                                                    1,
-                                                numItems: newNumItems,
-                                                lastResponse:
-                                                    listViewSocialPostsResponse,
-                                              )
-                                            : null,
-                                      );
-                                    });
-                                  });
-                                  return _pagingController!;
-                                }(),
-                                padding: EdgeInsets.zero,
-                                primary: false,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                builderDelegate:
-                                    PagedChildBuilderDelegate<dynamic>(
-                                  // Customize what your widget looks like when it's loading the first page.
-                                  firstPageProgressIndicatorBuilder: (_) =>
-                                      Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                      ),
-                                    ),
-                                  ),
-
-                                  itemBuilder: (context, _, postIndex) {
-                                    final postItem =
-                                        _pagingController!.itemList![postIndex];
-                                    return SocialPostWidget(
-                                      key: Key('SocialPost_${postIndex}'),
-                                      post: postItem,
+                                  setState(() => _apiRequestCompleter = null);
+                                  await waitForApiRequestCompleter();
+                                },
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: post.length,
+                                  itemBuilder: (context, postIndex) {
+                                    final postItem = post[postIndex];
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        if (postIndex == 0)
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 54,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFF22282F),
+                                            ),
+                                          ),
+                                        SocialPostWidget(
+                                          post: postItem,
+                                        ),
+                                      ],
                                     );
                                   },
                                 ),
-                              ),
-                            ),
-                          ],
-                        ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       CustomAppBarWidget(),
                       Align(
@@ -160,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     );
   }
 
-  Future waitForOnePage({
+  Future waitForApiRequestCompleter({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {
@@ -168,8 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     while (true) {
       await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete =
-          (_pagingController?.nextPageKey?.nextPageNumber ?? 0) > 0;
+      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

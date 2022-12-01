@@ -108,6 +108,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                             ),
                             selectedDateStyle: TextStyle(),
                             inactiveDateStyle: TextStyle(),
+                            locale: FFLocalizations.of(context).languageCode,
                           );
                         },
                       ),
@@ -118,7 +119,11 @@ class _EventsWidgetState extends State<EventsWidget> {
                             children: [
                               Text(
                                 dateTimeFormat(
-                                    'MMMEd', FFAppState().selectedDate),
+                                  'MMMEd',
+                                  FFAppState().selectedDate,
+                                  locale:
+                                      FFLocalizations.of(context).languageCode,
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText1
                                     .override(
@@ -182,7 +187,10 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                       .title3,
                                             ),
                                             subtitle: Text(
-                                              'asdfasdfasdf idk',
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '9rwtk0cd' /* asdfasdfasdf idk */,
+                                              ),
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .subtitle2,

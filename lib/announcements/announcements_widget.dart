@@ -28,7 +28,9 @@ class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Announcements',
+          FFLocalizations.of(context).getText(
+            'lznq1wwo' /* Announcements */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,

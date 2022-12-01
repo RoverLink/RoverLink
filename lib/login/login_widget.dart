@@ -1,9 +1,12 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'dart:ui';
+import '../custom_code/actions/index.dart' as actions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -161,6 +164,12 @@ class _LoginWidgetState extends State<LoginWidget>
       ],
     ),
   };
+  String? gravatarHashUrl;
+  TextEditingController? emailAddressLoginController;
+  TextEditingController? passwordLoginController;
+
+  late bool passwordLoginVisibility;
+  String? gravatarHashUrlGuest;
   TextEditingController? emailAddressController;
   TextEditingController? passwordController;
 
@@ -168,10 +177,6 @@ class _LoginWidgetState extends State<LoginWidget>
   TextEditingController? passwordConfirmController;
 
   late bool passwordConfirmVisibility;
-  TextEditingController? emailAddressLoginController;
-  TextEditingController? passwordLoginController;
-
-  late bool passwordLoginVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -256,10 +261,14 @@ class _LoginWidgetState extends State<LoginWidget>
                             indicatorColor: Colors.white,
                             tabs: [
                               Tab(
-                                text: 'Sign In',
+                                text: FFLocalizations.of(context).getText(
+                                  'fw22h2r7' /* Sign In */,
+                                ),
                               ),
                               Tab(
-                                text: 'Sign Up',
+                                text: FFLocalizations.of(context).getText(
+                                  '432nyxa1' /* Sign Up */,
+                                ),
                               ),
                             ],
                           ),
@@ -311,7 +320,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         decoration:
                                                             InputDecoration(
                                                           labelText:
-                                                              'Email Address',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                            '5uknzhia' /* Email Address */,
+                                                          ),
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -449,7 +462,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             !passwordLoginVisibility,
                                                         decoration:
                                                             InputDecoration(
-                                                          labelText: 'Password',
+                                                          labelText:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                            't3a5dj0t' /* Password */,
+                                                          ),
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -580,8 +598,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   fontFamily: FlutterFlowTheme.of(
                                                                           context)
                                                                       .subtitle2Family,
-                                                                  color: Color(
-                                                                      0xFF0F1113),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   useGoogleFonts: GoogleFonts
                                                                           .asMap()
                                                                       .containsKey(
@@ -599,6 +618,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   0, 24, 0, 0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
+                                                          var _shouldSetState =
+                                                              false;
+                                                          Function() _navigate =
+                                                              () {};
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
 
@@ -614,11 +637,47 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          context.goNamedAuth(
-                                                              'HomePage',
-                                                              mounted);
+                                                          _navigate = () =>
+                                                              context
+                                                                  .goNamedAuth(
+                                                                      'HomePage',
+                                                                      mounted);
+                                                          if (currentUserPhoto ==
+                                                                  null ||
+                                                              currentUserPhoto ==
+                                                                  '') {
+                                                            gravatarHashUrl =
+                                                                await actions
+                                                                    .gravatarHash(
+                                                              currentUserEmail,
+                                                            );
+                                                            _shouldSetState =
+                                                                true;
+                                                          } else {
+                                                            if (_shouldSetState)
+                                                              setState(() {});
+                                                            return;
+                                                          }
+
+                                                          final usersUpdateData =
+                                                              createUsersRecordData(
+                                                            photoUrl:
+                                                                gravatarHashUrl,
+                                                          );
+                                                          await currentUserReference!
+                                                              .update(
+                                                                  usersUpdateData);
+
+                                                          _navigate();
+                                                          if (_shouldSetState)
+                                                            setState(() {});
                                                         },
-                                                        text: 'Login',
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'hy0koxex' /* Login */,
+                                                        ),
                                                         options:
                                                             FFButtonOptions(
                                                           width: 230,
@@ -678,7 +737,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               'HomePage',
                                                               mounted);
                                                         },
-                                                        text: 'Login as Guest',
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'ldepbzep' /* Login as Guest */,
+                                                        ),
                                                         icon: Icon(
                                                           Icons.person,
                                                           size: 15,
@@ -730,7 +794,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               'ForgotPassword');
                                                         },
                                                         text:
-                                                            'Forgot Password?',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'd59ena4o' /* Forgot Password? */,
+                                                        ),
                                                         options:
                                                             FFButtonOptions(
                                                           width: 170,
@@ -749,7 +817,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             context)
                                                                         .primaryText,
                                                                     fontSize:
-                                                                        16,
+                                                                        15,
                                                                     useGoogleFonts: GoogleFonts
                                                                             .asMap()
                                                                         .containsKey(
@@ -786,7 +854,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         0,
                                                                         0),
                                                             child: Text(
-                                                              'Or use a social account to login',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                                '0vvoynsh' /* Or use a social account to log... */,
+                                                              ),
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .subtitle2
@@ -797,6 +869,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .primaryText,
+                                                                    fontSize:
+                                                                        15,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500,
@@ -988,7 +1062,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         decoration:
                                                             InputDecoration(
                                                           labelText:
-                                                              'Email Address',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                            '46p8zoxf' /* Email Address */,
+                                                          ),
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1125,7 +1203,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             !passwordVisibility,
                                                         decoration:
                                                             InputDecoration(
-                                                          labelText: 'Password',
+                                                          labelText:
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                            'uvpchzqb' /* Password */,
+                                                          ),
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1254,8 +1337,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .override(
                                                                   fontFamily:
                                                                       'Lexend Deca',
-                                                                  color: Color(
-                                                                      0xFF14181B),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize: 14,
                                                                   fontWeight:
                                                                       FontWeight
@@ -1283,7 +1367,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                         decoration:
                                                             InputDecoration(
                                                           labelText:
-                                                              'Confirm Password',
+                                                              FFLocalizations.of(
+                                                                      context)
+                                                                  .getText(
+                                                            'cuwd3isk' /* Confirm Password */,
+                                                          ),
                                                           labelStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1412,8 +1500,9 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 .override(
                                                                   fontFamily:
                                                                       'Lexend Deca',
-                                                                  color: Color(
-                                                                      0xFF14181B),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
                                                                   fontSize: 14,
                                                                   fontWeight:
                                                                       FontWeight
@@ -1435,6 +1524,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   0, 24, 0, 0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
+                                                          var _shouldSetState =
+                                                              false;
+                                                          Function() _navigate =
+                                                              () {};
                                                           GoRouter.of(context)
                                                               .prepareAuthEvent();
                                                           if (passwordController
@@ -1465,11 +1558,47 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             return;
                                                           }
 
-                                                          context.goNamedAuth(
-                                                              'HomePage',
-                                                              mounted);
+                                                          _navigate = () =>
+                                                              context
+                                                                  .goNamedAuth(
+                                                                      'HomePage',
+                                                                      mounted);
+                                                          if (currentUserPhoto ==
+                                                                  null ||
+                                                              currentUserPhoto ==
+                                                                  '') {
+                                                            gravatarHashUrlGuest =
+                                                                await actions
+                                                                    .gravatarHash(
+                                                              currentUserEmail,
+                                                            );
+                                                            _shouldSetState =
+                                                                true;
+                                                          } else {
+                                                            if (_shouldSetState)
+                                                              setState(() {});
+                                                            return;
+                                                          }
+
+                                                          final usersUpdateData =
+                                                              createUsersRecordData(
+                                                            photoUrl:
+                                                                gravatarHashUrlGuest,
+                                                          );
+                                                          await currentUserReference!
+                                                              .update(
+                                                                  usersUpdateData);
+
+                                                          _navigate();
+                                                          if (_shouldSetState)
+                                                            setState(() {});
                                                         },
-                                                        text: 'Create Account',
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          'vlydnlyl' /* Create Account */,
+                                                        ),
                                                         options:
                                                             FFButtonOptions(
                                                           width: 230,
@@ -1531,7 +1660,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0,
                                                                           0),
                                                               child: Text(
-                                                                'Or use a social account to create account',
+                                                                FFLocalizations.of(
+                                                                        context)
+                                                                    .getText(
+                                                                  'e0v4b1we' /* Or use a social account to cre... */,
+                                                                ),
                                                                 textAlign:
                                                                     TextAlign
                                                                         .center,
@@ -1689,7 +1822,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             MainAxisSize.max,
                                                         children: [
                                                           Text(
-                                                            'By clicking \"Create Account\" you agree to our ',
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                              'zquwm76t' /* By clicking "Create Account" y... */,
+                                                            ),
                                                             textAlign: TextAlign
                                                                 .center,
                                                             style: FlutterFlowTheme
@@ -1725,7 +1862,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       'TermsOfUse');
                                                                 },
                                                                 child: Text(
-                                                                  'Terms of Use',
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '7q7e9rd3' /* Terms of Use */,
+                                                                  ),
                                                                   textAlign:
                                                                       TextAlign
                                                                           .center,
@@ -1753,7 +1894,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             8,
                                                                             0),
                                                                 child: Text(
-                                                                  'and',
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '7r5t8rbc' /* and */,
+                                                                  ),
                                                                   textAlign:
                                                                       TextAlign
                                                                           .center,
@@ -1779,7 +1924,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       'PrivacyPolicy');
                                                                 },
                                                                 child: Text(
-                                                                  'Privacy Policy',
+                                                                  FFLocalizations.of(
+                                                                          context)
+                                                                      .getText(
+                                                                    '2s8cej1h' /* Privacy Policy */,
+                                                                  ),
                                                                   textAlign:
                                                                       TextAlign
                                                                           .center,

@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -42,7 +43,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
           },
         ),
         title: Text(
-          'John Smith',
+          FFLocalizations.of(context).getText(
+            '128bjwio' /* John Smith */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,
@@ -51,51 +54,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     .containsKey(FlutterFlowTheme.of(context).title2Family),
               ),
         ),
-        actions: [
-          FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            icon: Icon(
-              Icons.logout,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30,
-            ),
-            onPressed: () async {
-              var confirmDialogResponse = await showDialog<bool>(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: Text('Log Out?'),
-                        content: Text('Are you sure you want to log out?'),
-                        actions: [
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.pop(alertDialogContext, false),
-                            child: Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.pop(alertDialogContext, true),
-                            child: Text('Log Out'),
-                          ),
-                        ],
-                      );
-                    },
-                  ) ??
-                  false;
-              if (confirmDialogResponse) {
-                GoRouter.of(context).prepareAuthEvent();
-                await signOut();
-              } else {
-                return;
-              }
-
-              context.goNamedAuth('Onboarding', mounted);
-            },
-          ),
-        ],
+        actions: [],
         centerTitle: true,
         elevation: 0,
       ),
@@ -112,19 +71,32 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     children: [
                       Align(
                         alignment: AlignmentDirectional(0, 0),
-                        child: Hero(
-                          tag: 'PFP',
-                          transitionOnUserGestures: true,
-                          child: Container(
-                            width: 130,
-                            height: 130,
-                            clipBehavior: Clip.antiAlias,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              'assets/images/face-holding-back-tears_1f979.png',
-                              fit: BoxFit.cover,
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Align(
+                            alignment: AlignmentDirectional(0, 0),
+                            child: AuthUserStreamWidget(
+                              child: Hero(
+                                tag: currentUserPhoto,
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  width: 130,
+                                  height: 130,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: currentUserPhoto,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -156,7 +128,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                   child: Text(
-                    '@johnsmth',
+                    FFLocalizations.of(context).getText(
+                      'pvml1uvt' /* @johnsmth */,
+                    ),
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily:
                               FlutterFlowTheme.of(context).bodyText1Family,
@@ -168,7 +142,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                   ),
                 ),
                 Text(
-                  'smithj@roverkids.org',
+                  FFLocalizations.of(context).getText(
+                    '4m7glwx6' /* smithj@roverkids.org */,
+                  ),
                   style: FlutterFlowTheme.of(context).bodyText1.override(
                         fontFamily:
                             FlutterFlowTheme.of(context).bodyText1Family,
@@ -195,7 +171,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
                             child: Text(
-                              'Student',
+                              FFLocalizations.of(context).getText(
+                                'f3lrbddq' /* Student */,
+                              ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -225,7 +203,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
                             child: Text(
-                              'Developer',
+                              FFLocalizations.of(context).getText(
+                                'g5djk00i' /* Developer */,
+                              ),
                               textAlign: TextAlign.center,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText1
@@ -250,7 +230,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                   child: Text(
-                    'Your Posts',
+                    FFLocalizations.of(context).getText(
+                      'h2m279q1' /* Your Posts */,
+                    ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyText1.override(
                           fontFamily:

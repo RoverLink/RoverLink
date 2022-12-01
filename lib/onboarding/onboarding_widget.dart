@@ -49,7 +49,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'RoverLink',
+                  FFLocalizations.of(context).getText(
+                    'spquv07m' /* RoverLink */,
+                  ),
                   style: FlutterFlowTheme.of(context).title1.override(
                         fontFamily: FlutterFlowTheme.of(context).title1Family,
                         fontSize: 48,
@@ -77,7 +79,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
-                              width: 100,
+                              width: MediaQuery.of(context).size.width,
                               height: 100,
                               decoration: BoxDecoration(),
                               child: Column(
@@ -124,7 +126,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Connect With Peers',
+                                            FFLocalizations.of(context).getText(
+                                              'nwm3x2ci' /* Connect With Peers */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1,
@@ -141,7 +145,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Our platform creates a safe, friendly environment for students to form a shared sense of community.',
+                                            FFLocalizations.of(context).getText(
+                                              'mbvv5wuj' /* Our platform creates a safe, f... */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle2,
@@ -194,7 +200,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Stay Up to Date',
+                                            FFLocalizations.of(context).getText(
+                                              '0vkk9jb4' /* Stay Up to Date */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1,
@@ -211,7 +219,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Keep up with the latest announcements from our district.',
+                                            FFLocalizations.of(context).getText(
+                                              'lgulcrc0' /* Keep up with the latest announ... */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle2,
@@ -264,7 +274,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Report Absences',
+                                            FFLocalizations.of(context).getText(
+                                              'if1zlxpq' /* Report Absences */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .title1,
@@ -281,7 +293,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            'Easily submit absences to your school office',
+                                            FFLocalizations.of(context).getText(
+                                              'tn2qltve' /* Easily submit absences to your... */,
+                                            ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
                                                 .subtitle2,
@@ -345,7 +359,9 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                     onPressed: () async {
                       context.pushNamed('Login');
                     },
-                    text: 'Continue',
+                    text: FFLocalizations.of(context).getText(
+                      '9y5crtlg' /* Continue */,
+                    ),
                     options: FFButtonOptions(
                       width: 200,
                       height: 50,

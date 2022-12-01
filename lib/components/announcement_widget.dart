@@ -38,7 +38,9 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Title',
+              FFLocalizations.of(context).getText(
+                '9uhbwmcj' /* Title */,
+              ),
               style: FlutterFlowTheme.of(context).subtitle1.override(
                     fontFamily: 'Outfit',
                     color: FlutterFlowTheme.of(context).primaryText,

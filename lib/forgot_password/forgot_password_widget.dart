@@ -131,7 +131,9 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Text(
-                                        'We will send you an email with a link to reset your password, please enter the email associated with your account below.',
+                                        FFLocalizations.of(context).getText(
+                                          'r9qondpm' /* We will send you an email with... */,
+                                        ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText1,
                                       ),
@@ -143,7 +145,11 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                               emailAddressForgotPasswordController,
                                           obscureText: false,
                                           decoration: InputDecoration(
-                                            labelText: 'Email Address',
+                                            labelText:
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                              'c86nuu8p' /* Email Address */,
+                                            ),
                                             labelStyle: FlutterFlowTheme.of(
                                                     context)
                                                 .bodyText1
@@ -260,7 +266,10 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                               context: context,
                                             );
                                           },
-                                          text: 'Send Link',
+                                          text: FFLocalizations.of(context)
+                                              .getText(
+                                            'wt8fom27' /* Send Link */,
+                                          ),
                                           options: FFButtonOptions(
                                             width: 270,
                                             height: 50,

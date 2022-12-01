@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -51,8 +52,8 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                     ),
-                    child: Image.network(
-                      getJsonField(
+                    child: CachedNetworkImage(
+                      imageUrl: getJsonField(
                         widget.post,
                         r'''$.authorProfileImage''',
                       ),
@@ -109,7 +110,9 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
                                 child: Text(
-                                  '•',
+                                  FFLocalizations.of(context).getText(
+                                    'jqn6iwma' /* • */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -189,8 +192,8 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                           PageTransition(
                             type: PageTransitionType.fade,
                             child: FlutterFlowExpandedImageView(
-                              image: Image.network(
-                                getJsonField(
+                              image: CachedNetworkImage(
+                                imageUrl: getJsonField(
                                   widget.post,
                                   r'''$.image''',
                                 ),
@@ -214,12 +217,12 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                         transitionOnUserGestures: true,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
-                          child: Image.network(
-                            getJsonField(
+                          child: CachedNetworkImage(
+                            imageUrl: getJsonField(
                               widget.post,
                               r'''$.image''',
                             ),
-                            width: double.infinity,
+                            width: MediaQuery.of(context).size.width,
                             height: 230,
                             fit: BoxFit.cover,
                           ),
@@ -251,7 +254,9 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                                 child: Text(
-                                  '4',
+                                  FFLocalizations.of(context).getText(
+                                    'iklzch53' /* 4 */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -289,7 +294,9 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(4, 0, 8, 0),
                                 child: Text(
-                                  '4',
+                                  FFLocalizations.of(context).getText(
+                                    '8xg00nve' /* 4 */,
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

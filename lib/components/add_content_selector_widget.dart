@@ -59,7 +59,9 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Share',
+                              FFLocalizations.of(context).getText(
+                                'f25z3d1z' /* Share */,
+                              ),
                               style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ],
@@ -103,7 +105,9 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Phone a Friend',
+                              FFLocalizations.of(context).getText(
+                                '5tk1ocrh' /* Phone a Friend */,
+                              ),
                               style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ],
@@ -147,7 +151,9 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Turn in Absence Excuse',
+                              FFLocalizations.of(context).getText(
+                                'xcdyw8hv' /* Turn in Absence Excuse */,
+                              ),
                               style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ],
@@ -191,7 +197,9 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Add Post',
+                              FFLocalizations.of(context).getText(
+                                't7nb2xmc' /* Add Post */,
+                              ),
                               style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ],

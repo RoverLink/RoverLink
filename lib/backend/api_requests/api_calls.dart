@@ -110,6 +110,24 @@ class NavigationItemsCall {
       );
 }
 
+class TestJWTCallCall {
+  static Future<ApiCallResponse> call({
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Test JWT Call',
+      apiUrl: 'https://eot2zo80jvgmzmt.m.pipedream.net',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      cache: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -13,3 +13,4 @@ export 'onboarding/onboarding_widget.dart' show OnboardingWidget;
 export 'login/login_widget.dart' show LoginWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'about_copy/about_copy_widget.dart' show AboutCopyWidget;
+export 'signing_out/signing_out_widget.dart' show SigningOutWidget;

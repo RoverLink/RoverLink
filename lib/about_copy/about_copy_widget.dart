@@ -24,7 +24,9 @@ class _AboutCopyWidgetState extends State<AboutCopyWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'About',
+          FFLocalizations.of(context).getText(
+            '0jf66ulq' /* About */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,

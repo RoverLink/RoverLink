@@ -25,7 +25,9 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Report a Bug',
+          FFLocalizations.of(context).getText(
+            'tgvlttpa' /* Report a Bug */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,
