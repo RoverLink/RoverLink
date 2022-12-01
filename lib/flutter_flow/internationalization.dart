@@ -381,7 +381,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // SigningOut
   {
     'k3xhf8py': {
-      'en': 'Come back soon!',
+      'en': 'Logging Out...',
       'es': '',
     },
     '4nwadicu': {

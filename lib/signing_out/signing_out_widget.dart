@@ -43,6 +43,13 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
           begin: 0.8,
           end: 1.5,
         ),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 3000.ms,
+          duration: 600.ms,
+          begin: 1,
+          end: 0,
+        ),
       ],
     ),
     'containerOnPageLoadAnimation': AnimationInfo(
@@ -54,6 +61,13 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
           duration: 3000.ms,
           begin: 1,
           end: 0.6,
+        ),
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 3000.ms,
+          begin: 0,
+          end: 0.01,
         ),
       ],
     ),
@@ -130,7 +144,7 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
                       children: [
                         Text(
                           FFLocalizations.of(context).getText(
-                            'k3xhf8py' /* Come back soon! */,
+                            'k3xhf8py' /* Logging Out... */,
                           ),
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).title1.override(
@@ -162,7 +176,7 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
                                   ),
                                   child: Card(
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    color: Color(0xFF74A3C5),
+                                    color: Color(0xFF94A6B8),
                                     elevation: 3,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(16),
@@ -178,16 +192,14 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
                                   decoration: BoxDecoration(
                                     color: Color(0x00101213),
                                   ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 20, 20, 20),
-                                    child: Lottie.asset(
-                                      'assets/lottie_animations/cute_tiger_lottie.json',
-                                      width: 150,
-                                      height: 130,
-                                      fit: BoxFit.cover,
-                                      animate: true,
-                                    ),
+                                  child: Lottie.asset(
+                                    'assets/lottie_animations/thank_you2_lottie.json',
+                                    width:
+                                        MediaQuery.of(context).size.width * 2.5,
+                                    height: 150,
+                                    fit: BoxFit.contain,
+                                    repeat: false,
+                                    animate: true,
                                   ),
                                 ),
                               ],

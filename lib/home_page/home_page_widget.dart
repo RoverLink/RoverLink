@@ -100,7 +100,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                 .width,
                                             height: 54,
                                             decoration: BoxDecoration(
-                                              color: Color(0xFF22282F),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
                                             ),
                                           ),
                                         SocialPostWidget(
