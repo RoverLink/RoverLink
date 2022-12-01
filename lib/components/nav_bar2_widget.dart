@@ -83,7 +83,15 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       size: 40,
                     ),
                     onPressed: () async {
-                      context.pushNamed('HomePage');
+                      context.pushNamed(
+                        'HomePage',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                          ),
+                        },
+                      );
                     },
                   ),
                 ),
@@ -122,8 +130,8 @@ class _NavBar2WidgetState extends State<NavBar2Widget> {
                       color: FlutterFlowTheme.of(context).primaryText,
                       size: 30,
                     ),
-                    onPressed: () async {
-                      context.goNamed('NewCalendar');
+                    onPressed: () {
+                      print('IconButton pressed ...');
                     },
                   ),
                 ),

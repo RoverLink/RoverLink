@@ -123,7 +123,15 @@ class _NavBar1WidgetState extends State<NavBar1Widget> {
                       size: 30,
                     ),
                     onPressed: () async {
-                      context.pushNamed('NewCalendar');
+                      context.pushNamed(
+                        'Events',
+                        extra: <String, dynamic>{
+                          kTransitionInfoKey: TransitionInfo(
+                            hasTransition: true,
+                            transitionType: PageTransitionType.fade,
+                          ),
+                        },
+                      );
                     },
                   ),
                 ),

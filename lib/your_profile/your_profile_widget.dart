@@ -63,8 +63,34 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
               size: 30,
             ),
             onPressed: () async {
-              GoRouter.of(context).prepareAuthEvent();
-              await signOut();
+              var confirmDialogResponse = await showDialog<bool>(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: Text('Log Out?'),
+                        content: Text('Are you sure you want to log out?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, false),
+                            child: Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, true),
+                            child: Text('Log Out'),
+                          ),
+                        ],
+                      );
+                    },
+                  ) ??
+                  false;
+              if (confirmDialogResponse) {
+                GoRouter.of(context).prepareAuthEvent();
+                await signOut();
+              } else {
+                return;
+              }
 
               context.goNamedAuth('Onboarding', mounted);
             },
@@ -265,6 +291,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                           },
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
+                            primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
                             itemCount: post.length,

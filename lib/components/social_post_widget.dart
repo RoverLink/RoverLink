@@ -1,8 +1,10 @@
+import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SocialPostWidget extends StatefulWidget {
   const SocialPostWidget({
@@ -42,24 +44,19 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      context.pushNamed('HomePage');
-                    },
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
+                  Container(
+                    width: 50,
+                    height: 50,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.network(
+                      getJsonField(
+                        widget.post,
+                        r'''$.authorProfileImage''',
                       ),
-                      child: Image.network(
-                        getJsonField(
-                          widget.post,
-                          r'''$.authorProfileImage''',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Padding(
@@ -185,16 +182,48 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                     widget.post,
                     r'''$.showImage''',
                   ))
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.network(
-                        getJsonField(
+                    InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.fade,
+                            child: FlutterFlowExpandedImageView(
+                              image: Image.network(
+                                getJsonField(
+                                  widget.post,
+                                  r'''$.image''',
+                                ),
+                                fit: BoxFit.contain,
+                              ),
+                              allowRotation: false,
+                              tag: getJsonField(
+                                widget.post,
+                                r'''$.image''',
+                              ),
+                              useHeroAnimation: true,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Hero(
+                        tag: getJsonField(
                           widget.post,
                           r'''$.image''',
                         ),
-                        width: double.infinity,
-                        height: 230,
-                        fit: BoxFit.cover,
+                        transitionOnUserGestures: true,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            getJsonField(
+                              widget.post,
+                              r'''$.image''',
+                            ),
+                            width: double.infinity,
+                            height: 230,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                       ),
                     ),
                   Padding(

@@ -1,6 +1,6 @@
 import '../backend/api_requests/api_calls.dart';
+import '../components/announcement_widget.dart';
 import '../components/back_button_widget.dart';
-import '../components/notification_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
@@ -50,7 +50,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               children: [
                 FutureBuilder<ApiCallResponse>(
                   future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                        ..complete(SocialPostsCall.call()))
+                        ..complete(NotificationsCall.call()))
                       .future,
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -65,11 +65,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                         ),
                       );
                     }
-                    final listViewSocialPostsResponse = snapshot.data!;
+                    final listViewNotificationsResponse = snapshot.data!;
                     return Builder(
                       builder: (context) {
-                        final post = SocialPostsCall.posts(
-                          listViewSocialPostsResponse.jsonBody,
+                        final announcement = NotificationsCall.notifications(
+                          listViewNotificationsResponse.jsonBody,
                         ).map((e) => e).toList();
                         return RefreshIndicator(
                           onRefresh: () async {
@@ -78,14 +78,16 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                           },
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
+                            primary: false,
                             shrinkWrap: true,
                             scrollDirection: Axis.vertical,
-                            itemCount: post.length,
-                            itemBuilder: (context, postIndex) {
-                              final postItem = post[postIndex];
-                              return NotificationWidget(
-                                key: Key('Notification_${postIndex}'),
-                                post: postItem,
+                            itemCount: announcement.length,
+                            itemBuilder: (context, announcementIndex) {
+                              final announcementItem =
+                                  announcement[announcementIndex];
+                              return AnnouncementWidget(
+                                key: Key('Announcement_${announcementIndex}'),
+                                announcement: announcementItem,
                               );
                             },
                           ),

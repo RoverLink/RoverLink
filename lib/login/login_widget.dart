@@ -625,7 +625,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           height: 50,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryColor,
+                                                              .primaryColor,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1476,7 +1476,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           height: 50,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryColor,
+                                                              .primaryColor,
                                                           textStyle:
                                                               FlutterFlowTheme.of(
                                                                       context)
@@ -1764,7 +1764,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontFamily:
                                                                             FlutterFlowTheme.of(context).subtitle2Family,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryText,
+                                                                            .primaryText,
                                                                         fontSize:
                                                                             13,
                                                                         useGoogleFonts:

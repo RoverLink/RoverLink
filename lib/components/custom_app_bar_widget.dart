@@ -145,7 +145,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                        padding: EdgeInsetsDirectional.fromSTEB(13, 13, 13, 13),
                         child: InkWell(
                           onTap: () async {
                             context.pushNamed('Menu');
