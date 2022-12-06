@@ -304,6 +304,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': 'サイン',
       'zh_Hans': '签名',
     },
+    'ku9v4t7r': {
+      'en': 'Submit Excuse',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
     'ig4pe40x': {
       'en': 'Report an Absence ',
       'de': 'Melden Sie eine Abwesenheit',
@@ -1426,6 +1435,16 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '2orputwt': {
       'en': '',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'hjhv1xzh': {
+      'en':
+          'In order to add calendar events this app requires permission to access the calendar.',
       'de': '',
       'es': '',
       'fr': '',

@@ -82,7 +82,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                   onTap: () async {
                     Navigator.pop(context);
 
-                    context.pushNamed('Menu');
+                    context.pushNamed('ReportAbsence');
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
