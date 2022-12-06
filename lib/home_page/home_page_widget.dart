@@ -1,6 +1,6 @@
 import '../backend/api_requests/api_calls.dart';
 import '../components/custom_app_bar_widget.dart';
-import '../components/nav_bar1_widget.dart';
+import '../components/navbar_floating_widget.dart';
 import '../components/social_post_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -37,97 +37,112 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Align(
-          alignment: AlignmentDirectional(0, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 1,
-                  child: Stack(
-                    children: [
-                      FutureBuilder<ApiCallResponse>(
-                        future: (_apiRequestCompleter ??=
-                                Completer<ApiCallResponse>()
-                                  ..complete(SocialPostsCall.call()))
-                            .future,
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          final listViewSocialPostsResponse = snapshot.data!;
-                          return Builder(
-                            builder: (context) {
-                              final post = SocialPostsCall.posts(
-                                listViewSocialPostsResponse.jsonBody,
-                              ).map((e) => e).toList();
-                              return RefreshIndicator(
-                                onRefresh: () async {
-                                  apiResultbmf = await SocialPostsCall.call();
-                                  if (!(apiResultbmf?.succeeded ?? true)) {
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 1000));
-                                  }
-                                  setState(() => _apiRequestCompleter = null);
-                                  await waitForApiRequestCompleter();
-                                },
-                                child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: post.length,
-                                  itemBuilder: (context, postIndex) {
-                                    final postItem = post[postIndex];
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        if (postIndex == 0)
-                                          Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            height: 54,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                            ),
-                                          ),
-                                        SocialPostWidget(
-                                          post: postItem,
-                                        ),
-                                      ],
-                                    );
-                                  },
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // Stack the listview, custom appbar, and floating navbar on top of each other
+            Expanded(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 1,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 1,
+                        constraints: BoxConstraints(
+                          maxWidth: 600,
+                        ),
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context)
+                              .transparentBackground,
+                        ),
+                        child:
+                            // ListView of aggregated twitter posts
+                            FutureBuilder<ApiCallResponse>(
+                          future: (_apiRequestCompleter ??=
+                                  Completer<ApiCallResponse>()
+                                    ..complete(SocialPostsCall.call()))
+                              .future,
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
                                 ),
                               );
-                            },
-                          );
-                        },
+                            }
+                            final listViewSocialPostsResponse = snapshot.data!;
+                            return Builder(
+                              builder: (context) {
+                                final post = SocialPostsCall.posts(
+                                  listViewSocialPostsResponse.jsonBody,
+                                ).map((e) => e).toList();
+                                return RefreshIndicator(
+                                  onRefresh: () async {
+                                    apiResultbmf = await SocialPostsCall.call();
+                                    if (!(apiResultbmf?.succeeded ?? true)) {
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 1000));
+                                    }
+                                    setState(() => _apiRequestCompleter = null);
+                                    await waitForApiRequestCompleter();
+                                  },
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: post.length,
+                                    itemBuilder: (context, postIndex) {
+                                      final postItem = post[postIndex];
+                                      return Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          // Because of the Appbar we don't want to start the posts directly underneath so on the very first post we want to introduce some spacing
+                                          if (postIndex == 0)
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              height: 54,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .appbarSpacer,
+                                              ),
+                                            ),
+                                          SocialPostWidget(
+                                            post: postItem,
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
                       ),
-                      CustomAppBarWidget(),
-                      Align(
-                        alignment: AlignmentDirectional(0, 1),
-                        child: NavBar1Widget(),
-                      ),
-                    ],
-                  ),
+                    ),
+                    CustomAppBarWidget(),
+                    Align(
+                      alignment: AlignmentDirectional(0, 1),
+                      child: NavbarFloatingWidget(),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

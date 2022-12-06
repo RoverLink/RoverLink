@@ -87,14 +87,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
               name: 'Announcements',
               path: 'announcements',
               builder: (context, params) => AnnouncementsWidget(),
             ),
             FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
+              name: 'ReportAbsence',
+              path: 'reportAbsence',
+              builder: (context, params) => ReportAbsenceWidget(),
             ),
             FFRoute(
               name: 'Menu',
@@ -107,9 +112,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => YourProfileWidget(),
             ),
             FFRoute(
+              name: 'EditProfile',
+              path: 'editProfile',
+              builder: (context, params) => EditProfileWidget(),
+            ),
+            FFRoute(
               name: 'ReportABug',
               path: 'reportABug',
               builder: (context, params) => ReportABugWidget(),
+            ),
+            FFRoute(
+              name: 'Settings',
+              path: 'settings',
+              builder: (context, params) => SettingsWidget(),
+            ),
+            FFRoute(
+              name: 'Following',
+              path: 'following',
+              builder: (context, params) => FollowingWidget(),
+            ),
+            FFRoute(
+              name: 'SchoolsFollowed',
+              path: 'schoolsFollowed',
+              builder: (context, params) => SchoolsFollowedWidget(),
             ),
             FFRoute(
               name: 'About',
@@ -117,9 +142,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => AboutWidget(),
             ),
             FFRoute(
-              name: 'PrivacyPolicy',
-              path: 'privacyPolicy',
-              builder: (context, params) => PrivacyPolicyWidget(),
+              name: 'SigningOut',
+              path: 'signingOut',
+              builder: (context, params) => SigningOutWidget(),
             ),
             FFRoute(
               name: 'TermsOfUse',
@@ -127,14 +152,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => TermsOfUseWidget(),
             ),
             FFRoute(
-              name: 'Onboarding',
-              path: 'onboarding',
-              builder: (context, params) => OnboardingWidget(),
-            ),
-            FFRoute(
               name: 'Login',
               path: 'login',
               builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
+              name: 'PrivacyPolicy',
+              path: 'privacyPolicy',
+              builder: (context, params) => PrivacyPolicyWidget(),
+            ),
+            FFRoute(
+              name: 'Onboarding',
+              path: 'onboarding',
+              builder: (context, params) => OnboardingWidget(),
             ),
             FFRoute(
               name: 'ForgotPassword',
@@ -142,14 +172,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'AboutCopy',
-              path: 'aboutCopy',
-              builder: (context, params) => AboutCopyWidget(),
+              name: 'Copyrights',
+              path: 'copyrights',
+              builder: (context, params) => CopyrightsWidget(),
             ),
             FFRoute(
-              name: 'SigningOut',
-              path: 'signingOut',
-              builder: (context, params) => SigningOutWidget(),
+              name: 'Theme',
+              path: 'theme',
+              builder: (context, params) => ThemeWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -322,12 +352,13 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primaryColor,
+              ? Container(
+                  color: Color(0xFF1A1F24),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/RoverLinkDarkTheme.png',
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 )

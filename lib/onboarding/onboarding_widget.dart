@@ -1,3 +1,4 @@
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -5,6 +6,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
@@ -15,13 +17,37 @@ class OnboardingWidget extends StatefulWidget {
   _OnboardingWidgetState createState() => _OnboardingWidgetState();
 }
 
-class _OnboardingWidgetState extends State<OnboardingWidget> {
+class _OnboardingWidgetState extends State<OnboardingWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'imageOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 1.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 300.ms,
+          begin: 0,
+          end: 1,
+        ),
+        ScaleEffect(
+          curve: Curves.elasticOut,
+          delay: 200.ms,
+          duration: 600.ms,
+          begin: 1,
+          end: 1.2,
+        ),
+      ],
+    ),
+  };
   PageController? pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       if (FFAppState().viewedOnboarding == true) {
@@ -44,10 +70,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
         height: MediaQuery.of(context).size.height * 1,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              FlutterFlowTheme.of(context).gray600,
-              FlutterFlowTheme.of(context).black600
-            ],
+            colors: [Color(0xFF430000), FlutterFlowTheme.of(context).black600],
             stops: [0, 1],
             begin: AlignmentDirectional(0, -1),
             end: AlignmentDirectional(0, 1),
@@ -62,18 +85,17 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    FFLocalizations.of(context).getText(
-                      'spquv07m' /* RoverLink */,
+                  Hero(
+                    tag: 'RoverLinkLogo',
+                    transitionOnUserGestures: true,
+                    child: Image.asset(
+                      'assets/images/RoverLinkDarkTheme.png',
+                      width: MediaQuery.of(context).size.width * 0.7,
+                      height: 105,
+                      fit: BoxFit.contain,
                     ),
-                    style: FlutterFlowTheme.of(context).title1.override(
-                          fontFamily: FlutterFlowTheme.of(context).title1Family,
-                          color: Colors.white,
-                          fontSize: 48,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).title1Family),
-                        ),
-                  ),
+                  ).animateOnPageLoad(
+                      animationsMap['imageOnPageLoadAnimation']!),
                 ],
               ),
             ),
@@ -123,7 +145,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                               'https://assets9.lottiefiles.com/packages/lf20_4djadzzo.json',
                                               width: 200,
                                               height: 200,
-                                              fit: BoxFit.fitHeight,
+                                              fit: BoxFit.contain,
                                               animate: true,
                                             ),
                                           ),
@@ -229,7 +251,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'https://assets1.lottiefiles.com/packages/lf20_ilp95ggh.json',
                                             width: 200,
                                             height: 200,
-                                            fit: BoxFit.fitHeight,
+                                            fit: BoxFit.contain,
                                             animate: true,
                                           ),
                                         ),
@@ -320,7 +342,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             'https://assets10.lottiefiles.com/packages/lf20_NFGsCh.json',
                                             width: 200,
                                             height: 200,
-                                            fit: BoxFit.fitHeight,
+                                            fit: BoxFit.contain,
                                             animate: true,
                                           ),
                                         ),
@@ -370,7 +392,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
-                                                'tn2qltve' /* Easily submit absences to your... */,
+                                                'tn2qltve' /* Roverlink makes it easy for yo... */,
                                               ),
                                               textAlign: TextAlign.center,
                                               style:

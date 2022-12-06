@@ -20,6 +20,11 @@
 	<array>
 		<string>en</string>
 		<string>es</string>
+		<string>ja</string>
+		<string>fr</string>
+		<string>de</string>
+		<string>it</string>
+		<string>zh_Hans</string>
 	</array>
 
 	<key>CFBundleShortVersionString</key>
@@ -58,7 +63,10 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 
-
+	<key>NSCameraUsageDescription</key>
+      <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+      <string>In order to upload media, this app requires permission to access the photo library.</string>
 
 
 

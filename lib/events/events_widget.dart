@@ -1,10 +1,11 @@
 import '../backend/api_requests/api_calls.dart';
 import '../components/custom_app_bar_widget.dart';
-import '../components/nav_bar2_widget.dart';
+import '../components/navbar_floating_widget.dart';
 import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,178 +52,313 @@ class _EventsWidgetState extends State<EventsWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 54, 0, 0),
+              Expanded(
                 child: Container(
-                  width: double.infinity,
-                  height: double.infinity,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
+                  height: MediaQuery.of(context).size.height * 1,
+                  child: Stack(
                     children: [
-                      FutureBuilder<ApiCallResponse>(
-                        future: CalendarCall.call(),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
-                                ),
-                              ),
-                            );
-                          }
-                          final calendarCalendarResponse = snapshot.data!;
-                          return FlutterFlowCalendar(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            iconColor: FlutterFlowTheme.of(context).grayIcon,
-                            weekFormat: true,
-                            weekStartsMonday: false,
-                            onChange: (DateTimeRange? newSelectedDate) async {
-                              calendarSelectedDay = newSelectedDate;
-                              setState(() => FFAppState().selectedDate =
-                                  calendarSelectedDay?.start);
-                              setState(() {});
-                            },
-                            titleStyle: FlutterFlowTheme.of(context).subtitle1,
-                            dayOfWeekStyle: FlutterFlowTheme.of(context)
-                                .subtitle2
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .subtitle2Family,
-                                  useGoogleFonts: GoogleFonts.asMap()
-                                      .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle2Family),
-                                  lineHeight: 1.1,
-                                ),
-                            dateStyle: TextStyle(
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                            ),
-                            selectedDateStyle: TextStyle(),
-                            inactiveDateStyle: TextStyle(),
-                            locale: FFLocalizations.of(context).languageCode,
-                          );
-                        },
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                dateTimeFormat(
-                                  'MMMEd',
-                                  FFAppState().selectedDate,
-                                  locale:
-                                      FFLocalizations.of(context).languageCode,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      fontSize: 17,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
-                                    ),
-                              ),
-                              FutureBuilder<ApiCallResponse>(
-                                future: CalendarCall.call(),
-                                builder: (context, snapshot) {
-                                  // Customize what your widget looks like when it's loading.
-                                  if (!snapshot.hasData) {
-                                    return Center(
-                                      child: SizedBox(
-                                        width: 50,
-                                        height: 50,
-                                        child: CircularProgressIndicator(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryColor,
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 1,
+                          constraints: BoxConstraints(
+                            maxWidth: 600,
+                          ),
+                          decoration: BoxDecoration(),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 54, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                FutureBuilder<ApiCallResponse>(
+                                  future: CalendarCall.call(),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: CircularProgressIndicator(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  }
-                                  final listViewCalendarResponse =
-                                      snapshot.data!;
-                                  return Builder(
-                                    builder: (context) {
-                                      final event = CalendarCall.events(
-                                        listViewCalendarResponse.jsonBody,
-                                      )
-                                          .where((e) => functions.isSameDay(
-                                              getJsonField(
-                                                e,
-                                                r'''$.pubDate''',
-                                              ).toString(),
-                                              FFAppState().selectedDate))
-                                          .toList()
-                                          .map((e) => e)
-                                          .toList();
-                                      return ListView.builder(
-                                        padding: EdgeInsets.zero,
-                                        primary: false,
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.vertical,
-                                        itemCount: event.length,
-                                        itemBuilder: (context, eventIndex) {
-                                          final eventItem = event[eventIndex];
-                                          return ListTile(
-                                            title: Text(
-                                              getJsonField(
-                                                eventItem,
-                                                r'''$.title''',
-                                              ).toString(),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .title3,
-                                            ),
-                                            subtitle: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                '9rwtk0cd' /* asdfasdfasdf idk */,
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2,
-                                            ),
-                                            trailing: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color: Color(0xFF303030),
-                                              size: 20,
-                                            ),
-                                            tileColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .transparentBackground,
-                                            dense: false,
-                                          );
-                                        },
                                       );
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
+                                    }
+                                    final calendarCalendarResponse =
+                                        snapshot.data!;
+                                    return FlutterFlowCalendar(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                      iconColor:
+                                          FlutterFlowTheme.of(context).grayIcon,
+                                      weekFormat: true,
+                                      weekStartsMonday: false,
+                                      rowHeight: 100,
+                                      onChange: (DateTimeRange?
+                                          newSelectedDate) async {
+                                        calendarSelectedDay = newSelectedDate;
+                                        setState(() =>
+                                            FFAppState().selectedDate =
+                                                calendarSelectedDay?.start);
+                                        setState(() {});
+                                      },
+                                      titleStyle: FlutterFlowTheme.of(context)
+                                          .subtitle1,
+                                      dayOfWeekStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family,
+                                            useGoogleFonts: GoogleFonts.asMap()
+                                                .containsKey(
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle2Family),
+                                            lineHeight: 1.1,
+                                          ),
+                                      dateStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                      ),
+                                      selectedDateStyle: TextStyle(),
+                                      inactiveDateStyle: TextStyle(),
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    );
+                                  },
+                                ),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Text(
+                                          dateTimeFormat(
+                                            'MMMEd',
+                                            FFAppState().selectedDate,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                fontSize: 17,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                              ),
+                                        ),
+                                        FutureBuilder<ApiCallResponse>(
+                                          future: CalendarCall.call(),
+                                          builder: (context, snapshot) {
+                                            // Customize what your widget looks like when it's loading.
+                                            if (!snapshot.hasData) {
+                                              return Center(
+                                                child: SizedBox(
+                                                  width: 50,
+                                                  height: 50,
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryColor,
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                            final listViewCalendarResponse =
+                                                snapshot.data!;
+                                            return Builder(
+                                              builder: (context) {
+                                                final event = CalendarCall
+                                                        .events(
+                                                  listViewCalendarResponse
+                                                      .jsonBody,
+                                                )
+                                                    .where((e) =>
+                                                        functions.isSameDay(
+                                                            getJsonField(
+                                                              e,
+                                                              r'''$.pubDate''',
+                                                            ).toString(),
+                                                            FFAppState()
+                                                                .selectedDate))
+                                                    .toList()
+                                                    .map((e) => e)
+                                                    .toList();
+                                                return ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  primary: false,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount: event.length,
+                                                  itemBuilder:
+                                                      (context, eventIndex) {
+                                                    final eventItem =
+                                                        event[eventIndex];
+                                                    return Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(16, 12,
+                                                                  16, 0),
+                                                      child: Container(
+                                                        width: double.infinity,
+                                                        height: 100,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              blurRadius: 5,
+                                                              color: Color(
+                                                                  0x3416202A),
+                                                              offset:
+                                                                  Offset(0, 2),
+                                                            )
+                                                          ],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(12),
+                                                          shape: BoxShape
+                                                              .rectangle,
+                                                        ),
+                                                        child: Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      10,
+                                                                      10,
+                                                                      10,
+                                                                      10),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            8,
+                                                                            8,
+                                                                            8,
+                                                                            8),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .start,
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  children: [
+                                                                    Text(
+                                                                      getJsonField(
+                                                                        eventItem,
+                                                                        r'''$.title''',
+                                                                      )
+                                                                          .toString()
+                                                                          .maybeHandleOverflow(
+                                                                            maxChars:
+                                                                                29,
+                                                                            replacement:
+                                                                                '…',
+                                                                          ),
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .start,
+                                                                      style: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .subtitle1,
+                                                                    ),
+                                                                    Padding(
+                                                                      padding: EdgeInsetsDirectional
+                                                                          .fromSTEB(
+                                                                              0,
+                                                                              5,
+                                                                              0,
+                                                                              0),
+                                                                      child:
+                                                                          AutoSizeText(
+                                                                        FFLocalizations.of(context)
+                                                                            .getText(
+                                                                          'ybsl0owd' /* Ur mom */,
+                                                                        ),
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle2
+                                                                            .override(
+                                                                              fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
+                                                                              fontWeight: FontWeight.w500,
+                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          0.9,
+                                                                          0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .arrow_forward_ios,
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .secondaryText,
+                                                                    size: 18,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
+                      ),
+                      CustomAppBarWidget(),
+                      Align(
+                        alignment: AlignmentDirectional(0, 1),
+                        child: NavbarFloatingWidget(),
                       ),
                     ],
                   ),
                 ),
-              ),
-              CustomAppBarWidget(),
-              Align(
-                alignment: AlignmentDirectional(0, 1),
-                child: NavBar2Widget(),
               ),
             ],
           ),

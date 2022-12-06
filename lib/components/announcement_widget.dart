@@ -42,7 +42,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                 '9uhbwmcj' /* Title */,
               ),
               style: FlutterFlowTheme.of(context).subtitle1.override(
-                    fontFamily: 'Outfit',
+                    fontFamily: 'Fira Sans',
                     color: FlutterFlowTheme.of(context).primaryText,
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -64,7 +64,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                         r'''$.englishSnippet''',
                       ).toString(),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Outfit',
+                            fontFamily: 'Fira Sans',
                             color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -86,7 +86,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyText2
                               .override(
-                                fontFamily: 'Outfit',
+                                fontFamily: 'Fira Sans',
                                 color: Color(0xFF57636C),
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,

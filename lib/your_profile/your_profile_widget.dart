@@ -42,255 +42,248 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
             context.pop();
           },
         ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            '128bjwio' /* John Smith */,
+        title: AuthUserStreamWidget(
+          child: Text(
+            currentUserDisplayName,
+            style: FlutterFlowTheme.of(context).title2.override(
+                  fontFamily: FlutterFlowTheme.of(context).title2Family,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22,
+                  useGoogleFonts: GoogleFonts.asMap()
+                      .containsKey(FlutterFlowTheme.of(context).title2Family),
+                ),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
         ),
-        actions: [],
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.mode_edit,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 25,
+            ),
+            onPressed: () async {
+              context.pushNamed('EditProfile');
+            },
+          ),
+        ],
         centerTitle: true,
         elevation: 0,
       ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(0, 0),
-                        child: Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            shape: BoxShape.circle,
+          child: Align(
+            alignment: AlignmentDirectional(0, 0),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 1,
+              constraints: BoxConstraints(
+                maxWidth: 600,
+              ),
+              decoration: BoxDecoration(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0, 0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                        child: AuthUserStreamWidget(
+                          child: Hero(
+                            tag: currentUserPhoto,
+                            transitionOnUserGestures: true,
+                            child: Container(
+                              width: 130,
+                              height: 130,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: currentUserPhoto,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0, 0),
-                            child: AuthUserStreamWidget(
-                              child: Hero(
-                                tag: currentUserPhoto,
-                                transitionOnUserGestures: true,
-                                child: Container(
-                                  width: 130,
-                                  height: 130,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                      child: Text(
+                        '@${FFAppState().username}',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 17,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+                      child: Text(
+                        currentUserEmail,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 17,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                borderRadius: BorderRadius.circular(20),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'f3lrbddq' /* Student */,
                                   ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: currentUserPhoto,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyText1Family,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        fontSize: 12,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
+                                      ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional(0.35, 0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                          child: FlutterFlowIconButton(
-                            borderRadius: 30,
-                            borderWidth: 0,
-                            buttonSize: 30,
-                            fillColor: FlutterFlowTheme.of(context).primaryText,
-                            icon: Icon(
-                              Icons.mode_edit,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              size: 15,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                  child: Text(
-                    FFLocalizations.of(context).getText(
-                      'pvml1uvt' /* @johnsmth */,
-                    ),
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyText1Family,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          fontSize: 17,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyText1Family),
-                        ),
-                  ),
-                ),
-                Text(
-                  FFLocalizations.of(context).getText(
-                    '4m7glwx6' /* smithj@roverkids.org */,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyText1Family,
-                        color: FlutterFlowTheme.of(context).secondaryText,
-                        fontSize: 17,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyText1Family),
-                      ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            borderRadius: BorderRadius.circular(20),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'f3lrbddq' /* Student */,
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                borderRadius: BorderRadius.circular(20),
+                                shape: BoxShape.rectangle,
                               ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 12,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyText1Family),
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
+                                child: Text(
+                                  FFLocalizations.of(context).getText(
+                                    'g5djk00i' /* Developer */,
                                   ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            borderRadius: BorderRadius.circular(20),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
-                            child: Text(
-                              FFLocalizations.of(context).getText(
-                                'g5djk00i' /* Developer */,
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyText1Family,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryBackground,
+                                        fontSize: 12,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
+                                      ),
+                                ),
                               ),
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyText1Family,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    fontSize: 12,
-                                    useGoogleFonts: GoogleFonts.asMap()
-                                        .containsKey(
-                                            FlutterFlowTheme.of(context)
-                                                .bodyText1Family),
-                                  ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Text(
-                    FFLocalizations.of(context).getText(
-                      'h2m279q1' /* Your Posts */,
                     ),
-                    textAlign: TextAlign.start,
-                    style: FlutterFlowTheme.of(context).bodyText1.override(
-                          fontFamily:
-                              FlutterFlowTheme.of(context).bodyText1Family,
-                          fontSize: 20,
-                          useGoogleFonts: GoogleFonts.asMap().containsKey(
-                              FlutterFlowTheme.of(context).bodyText1Family),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'h2m279q1' /* Your Posts */,
                         ),
-                  ),
-                ),
-                FutureBuilder<ApiCallResponse>(
-                  future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                        ..complete(SocialPostsCall.call()))
-                      .future,
-                  builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CircularProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                        ),
-                      );
-                    }
-                    final listViewSocialPostsResponse = snapshot.data!;
-                    return Builder(
-                      builder: (context) {
-                        final post = SocialPostsCall.posts(
-                          listViewSocialPostsResponse.jsonBody,
-                        ).map((e) => e).toList();
-                        return RefreshIndicator(
-                          onRefresh: () async {
-                            setState(() => _apiRequestCompleter = null);
-                            await waitForApiRequestCompleter();
+                        textAlign: TextAlign.start,
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              fontSize: 20,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
+                    ),
+                    FutureBuilder<ApiCallResponse>(
+                      future:
+                          (_apiRequestCompleter ??= Completer<ApiCallResponse>()
+                                ..complete(SocialPostsCall.call()))
+                              .future,
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50,
+                              height: 50,
+                              child: CircularProgressIndicator(
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                              ),
+                            ),
+                          );
+                        }
+                        final listViewSocialPostsResponse = snapshot.data!;
+                        return Builder(
+                          builder: (context) {
+                            final post = SocialPostsCall.posts(
+                              listViewSocialPostsResponse.jsonBody,
+                            ).map((e) => e).toList();
+                            return RefreshIndicator(
+                              onRefresh: () async {
+                                setState(() => _apiRequestCompleter = null);
+                                await waitForApiRequestCompleter();
+                              },
+                              child: ListView.builder(
+                                padding: EdgeInsets.zero,
+                                primary: false,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemCount: post.length,
+                                itemBuilder: (context, postIndex) {
+                                  final postItem = post[postIndex];
+                                  return SocialPostWidget(
+                                    key: Key('SocialPost_${postIndex}'),
+                                    post: postItem,
+                                  );
+                                },
+                              ),
+                            );
                           },
-                          child: ListView.builder(
-                            padding: EdgeInsets.zero,
-                            primary: false,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: post.length,
-                            itemBuilder: (context, postIndex) {
-                              final postItem = post[postIndex];
-                              return SocialPostWidget(
-                                key: Key('SocialPost_${postIndex}'),
-                                post: postItem,
-                              );
-                            },
-                          ),
                         );
                       },
-                    );
-                  },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ),

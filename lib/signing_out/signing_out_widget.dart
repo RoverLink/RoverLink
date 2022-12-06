@@ -92,7 +92,7 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await Future.delayed(const Duration(milliseconds: 3500));
+      await Future.delayed(const Duration(milliseconds: 4000));
       GoRouter.of(context).prepareAuthEvent();
       await signOut();
 

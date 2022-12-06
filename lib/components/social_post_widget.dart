@@ -1,6 +1,7 @@
 import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class SocialPostWidget extends StatefulWidget {
 }
 
 class _SocialPostWidgetState extends State<SocialPostWidget> {
+  String? imageDownload;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -70,13 +73,16 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                           getJsonField(
                             widget.post,
                             r'''$.author''',
-                          ).toString(),
+                          ).toString().maybeHandleOverflow(
+                                maxChars: 30,
+                                replacement: '…',
+                              ),
                           style: FlutterFlowTheme.of(context)
                               .subtitle1
                               .override(
-                                fontFamily: 'Outfit',
+                                fontFamily: 'Fira Sans',
                                 color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 18,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
@@ -96,7 +102,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyText2
                                     .override(
-                                      fontFamily: 'Outfit',
+                                      fontFamily: 'Fira Sans',
                                       color: Color(0xFF57636C),
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
@@ -116,7 +122,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Outfit',
+                                        fontFamily: 'Fira Sans',
                                         color: Color(0xFF57636C),
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
@@ -138,7 +144,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Outfit',
+                                        fontFamily: 'Fira Sans',
                                         color: Color(0xFF57636C),
                                         fontSize: 14,
                                         fontWeight: FontWeight.normal,
@@ -172,7 +178,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                         r'''$.description''',
                       ).toString(),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Outfit',
+                            fontFamily: 'Fira Sans',
                             color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -260,7 +266,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Outfit',
+                                        fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
                                         fontSize: 14,
@@ -300,7 +306,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
-                                        fontFamily: 'Outfit',
+                                        fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
                                         fontSize: 14,
@@ -349,6 +355,52 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 ),
                               ),
                             ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                          child: InkWell(
+                            onTap: () async {
+                              imageDownload = await actions.downloadImage(
+                                getJsonField(
+                                  widget.post,
+                                  r'''$.image''',
+                                ),
+                                isiOS,
+                                isAndroid,
+                                isWeb,
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Image Downloaded',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Color(0x00000000),
+                                ),
+                              );
+
+                              setState(() {});
+                            },
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Icon(
+                                    Icons.download_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],

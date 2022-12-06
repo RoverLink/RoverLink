@@ -1,17 +1,18 @@
 import '../components/back_button_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AboutCopyWidget extends StatefulWidget {
-  const AboutCopyWidget({Key? key}) : super(key: key);
+class CopyrightsWidget extends StatefulWidget {
+  const CopyrightsWidget({Key? key}) : super(key: key);
 
   @override
-  _AboutCopyWidgetState createState() => _AboutCopyWidgetState();
+  _CopyrightsWidgetState createState() => _CopyrightsWidgetState();
 }
 
-class _AboutCopyWidgetState extends State<AboutCopyWidget> {
+class _CopyrightsWidgetState extends State<CopyrightsWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -25,7 +26,7 @@ class _AboutCopyWidgetState extends State<AboutCopyWidget> {
         leading: BackButtonWidget(),
         title: Text(
           FFLocalizations.of(context).getText(
-            '0jf66ulq' /* About */,
+            'dl3iivct' /* Copyright and Licensing */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
@@ -42,10 +43,18 @@ class _AboutCopyWidgetState extends State<AboutCopyWidget> {
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.85,
-            decoration: BoxDecoration(),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              FlutterFlowWebView(
+                url: 'https://roverlink.github.io/PrivacyPolicy',
+                bypass: false,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 1,
+                verticalScroll: false,
+                horizontalScroll: false,
+              ),
+            ],
           ),
         ),
       ),
