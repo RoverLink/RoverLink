@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../components/back_button_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -6,7 +8,9 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:signature/signature.dart';
 
@@ -21,12 +25,13 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
   bool isMediaUploading = false;
   String uploadedFileUrl = '';
 
+  DateTime? datePicked;
+  TextEditingController? absenceDateController;
+  String? gradeValue;
   String? schoolValue;
-  TextEditingController? textController1;
+  TextEditingController? studentNameController;
   TextEditingController? teacherController;
-  TextEditingController? gradeController;
-  TextEditingController? textController4;
-  TextEditingController? textController5;
+  TextEditingController? reasonController;
   late SignatureController signatureController;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -34,11 +39,10 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
   @override
   void initState() {
     super.initState();
-    gradeController = TextEditingController();
+    absenceDateController = TextEditingController();
+    studentNameController = TextEditingController();
     teacherController = TextEditingController();
-    textController1 = TextEditingController();
-    textController4 = TextEditingController();
-    textController5 = TextEditingController();
+    reasonController = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 2,
       penColor: Colors.black,
@@ -48,11 +52,10 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
 
   @override
   void dispose() {
-    gradeController?.dispose();
+    absenceDateController?.dispose();
+    studentNameController?.dispose();
     teacherController?.dispose();
-    textController1?.dispose();
-    textController4?.dispose();
-    textController5?.dispose();
+    reasonController?.dispose();
     super.dispose();
   }
 
@@ -95,7 +98,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                     child: TextFormField(
-                      controller: textController1,
+                      controller: studentNameController,
                       autofocus: true,
                       obscureText: false,
                       decoration: InputDecoration(
@@ -137,21 +140,52 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                       keyboardType: TextInputType.name,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'Please enter full name of student';
+                        }
+
+                        if (val.length < 5) {
+                          return 'Please enter full name of student';
+                        }
+
+                        return null;
+                      },
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                     child: FlutterFlowDropDown<String>(
+                      initialOption: schoolValue ??= '',
                       options: [
+                        'eahs',
+                        'eams',
+                        'palmer',
+                        'forks',
+                        'tracy',
+                        'cheston',
+                        'paxinosa',
+                        'shawnee',
+                        'march',
+                        'cyber'
+                      ],
+                      optionLabels: [
                         FFLocalizations.of(context).getText(
-                          'u546gkcb' /* schol */,
+                          'u546gkcb' /* Easton Area High School */,
                         ),
                         FFLocalizations.of(context).getText(
-                          'td3ko32x' /* da biger schol */,
+                          'td3ko32x' /* Easton Area Middle School */,
                         ),
                         FFLocalizations.of(context).getText(
-                          'ezn4z6q4' /* ba smolllll elementary */,
-                        )
+                          'ezn4z6q4' /* Palmer Elementary School */,
+                        ),
+                        'Forks Elementary School',
+                        'Tracy Elementary School',
+                        'Cheston Elementary School',
+                        'Paxinosa Elementary School',
+                        'Shawnee Elementary School',
+                        'March Elementary School',
+                        'Easton Cyber Academy'
                       ],
                       onChanged: (val) => setState(() => schoolValue = val),
                       width: MediaQuery.of(context).size.width,
@@ -219,104 +253,178 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                     ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                    child: TextFormField(
-                      controller: gradeController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          '3mahtt71' /* Grade */,
-                        ),
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
+                    child: FlutterFlowDropDown<String>(
+                      initialOption: gradeValue ??= '',
+                      options: [
+                        'K',
+                        '1',
+                        '2',
+                        '3',
+                        '4',
+                        '5',
+                        '6',
+                        '7',
+                        '8',
+                        '9',
+                        '10',
+                        '11',
+                        '12'
+                      ],
+                      optionLabels: [
+                        'Kindergarten',
+                        '1st Grade',
+                        '2nd Grade',
+                        '3rd Grade',
+                        '4th Grade',
+                        '5th Grade',
+                        '6th Grade',
+                        '7th Grade',
+                        '8th Grade',
+                        '9th Grade',
+                        '10th Grade',
+                        '11th Grade',
+                        '12th Grade'
+                      ],
+                      onChanged: (val) => setState(() => gradeValue = val),
+                      width: MediaQuery.of(context).size.width,
+                      height: 50,
+                      textStyle: FlutterFlowTheme.of(context)
+                          .bodyText1
+                          .override(
+                            fontFamily:
+                                FlutterFlowTheme.of(context).bodyText1Family,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                FlutterFlowTheme.of(context).bodyText1Family),
                           ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedErrorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                      keyboardType: TextInputType.number,
+                      hintText: 'Please select a grade level',
+                      fillColor:
+                          FlutterFlowTheme.of(context).secondaryBackground,
+                      elevation: 2,
+                      borderColor: Colors.transparent,
+                      borderWidth: 0,
+                      borderRadius: 0,
+                      margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+                      hidesUnderline: true,
                     ),
+                  ),
+                  Stack(
+                    children: [
+                      if (false)
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                          child: TextFormField(
+                            controller: absenceDateController,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                              labelText: FFLocalizations.of(context).getText(
+                                'a2wcicz4' /* Date */,
+                              ),
+                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              errorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              focusedErrorBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Color(0x00000000),
+                                  width: 1,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              filled: true,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            style: FlutterFlowTheme.of(context).bodyText1,
+                          ),
+                        ),
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(10, 15, 0, 0),
+                              child: Text(
+                                valueOrDefault<String>(
+                                  dateTimeFormat(
+                                    'MMMMEEEEd',
+                                    datePicked,
+                                    locale: FFLocalizations.of(context)
+                                        .languageCode,
+                                  ),
+                                  'Select Date of Absence',
+                                ),
+                                style: FlutterFlowTheme.of(context).bodyText1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            await DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              onConfirm: (date) {
+                                setState(() => datePicked = date);
+                              },
+                              currentTime: getCurrentTimestamp,
+                              minTime: DateTime(0, 0, 0),
+                              locale: LocaleType.values.firstWhere(
+                                (l) =>
+                                    l.name ==
+                                    FFLocalizations.of(context).languageCode,
+                                orElse: () => LocaleType.en,
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 50,
+                            decoration: BoxDecoration(),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                     child: TextFormField(
-                      controller: textController4,
+                      controller: reasonController,
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: FFLocalizations.of(context).getText(
-                          'a2wcicz4' /* Date */,
-                        ),
-                        hintStyle: FlutterFlowTheme.of(context).bodyText2,
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        errorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        focusedErrorBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Color(0x00000000),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        filled: true,
-                        fillColor:
-                            FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                      keyboardType: TextInputType.datetime,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
-                    child: TextFormField(
-                      controller: textController5,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        labelText: FFLocalizations.of(context).getText(
-                          'xrqv4ouh' /* Reason for Absense */,
+                          'xrqv4ouh' /* Reason for Absence */,
                         ),
                         hintStyle: FlutterFlowTheme.of(context).bodyText2,
                         enabledBorder: UnderlineInputBorder(
@@ -354,6 +462,13 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                       style: FlutterFlowTheme.of(context).bodyText1,
                       maxLines: 5,
                       keyboardType: TextInputType.multiline,
+                      validator: (val) {
+                        if (val == null || val.isEmpty) {
+                          return 'A reason for student\'s absence must be provided';
+                        }
+
+                        return null;
+                      },
                     ),
                   ),
                   Padding(
@@ -438,7 +553,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                         }
                       },
                       text: FFLocalizations.of(context).getText(
-                        '2cpyhjt3' /* Upload Excuse */,
+                        '2cpyhjt3' /* Add Doctor's Note Photo */,
                       ),
                       options: FFButtonOptions(
                         width: double.infinity,
@@ -465,8 +580,15 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(20, 20, 0, 0),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        '3c4nk704' /* Signature */,
+                        '3c4nk704' /* Parent or Guardian Signature */,
                       ),
+                      style: FlutterFlowTheme.of(context).subtitle1,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+                    child: Text(
+                      'Sign your name below on the signature pad',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
                   ),
@@ -494,10 +616,58 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         FFButtonWidget(
-                          onPressed: () {
-                            print('Button pressed ...');
+                          onPressed: () async {
+                            if (formKey.currentState == null ||
+                                !formKey.currentState!.validate()) {
+                              return;
+                            }
+
+                            if (schoolValue == null) {
+                              return;
+                            }
+                            if (datePicked == null) {
+                              return;
+                            }
+
+                            if (datePicked != null) {
+                              final excusesCreateData = createExcusesRecordData(
+                                excuseUser: currentUserReference,
+                                excusePhotoUrl: uploadedFileUrl,
+                                excuseDateMissed: datePicked,
+                              );
+                              await ExcusesRecord.collection
+                                  .doc()
+                                  .set(excusesCreateData);
+
+                              context.goNamed(
+                                'FormSubmitted',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                  ),
+                                },
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'You must select a date of absence.',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor: Color(0x00000000),
+                                ),
+                              );
+                              return;
+                            }
                           },
-                          text: 'Submit Excuse',
+                          text: FFLocalizations.of(context).getText(
+                            'bdsydx61' /* Submit Excuse */,
+                          ),
                           options: FFButtonOptions(
                             width: 130,
                             height: 40,

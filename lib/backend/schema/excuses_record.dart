@@ -16,6 +16,9 @@ abstract class ExcusesRecord
   @BuiltValueField(wireName: 'excuse_photo_url')
   String? get excusePhotoUrl;
 
+  @BuiltValueField(wireName: 'excuse_date_missed')
+  DateTime? get excuseDateMissed;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -47,13 +50,15 @@ abstract class ExcusesRecord
 Map<String, dynamic> createExcusesRecordData({
   DocumentReference? excuseUser,
   String? excusePhotoUrl,
+  DateTime? excuseDateMissed,
 }) {
   final firestoreData = serializers.toFirestore(
     ExcusesRecord.serializer,
     ExcusesRecord(
       (e) => e
         ..excuseUser = excuseUser
-        ..excusePhotoUrl = excusePhotoUrl,
+        ..excusePhotoUrl = excusePhotoUrl
+        ..excuseDateMissed = excuseDateMissed,
     ),
   );
 

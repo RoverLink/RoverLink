@@ -148,30 +148,32 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         height: 2.5,
                                         decoration: BoxDecoration(),
                                       ),
-                                      Text(
-                                        '@${FFAppState().username}'
-                                            .maybeHandleOverflow(
-                                          maxChars: 22,
-                                          replacement: '…',
+                                      if (FFAppState().username != null &&
+                                          FFAppState().username != '')
+                                        Text(
+                                          '@${FFAppState().username}'
+                                              .maybeHandleOverflow(
+                                            maxChars: 22,
+                                            replacement: '…',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 17,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                              ),
                                         ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 17,
-                                              useGoogleFonts:
-                                                  GoogleFonts.asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                            ),
-                                      ),
                                       Container(
                                         height: 2.5,
                                         decoration: BoxDecoration(),

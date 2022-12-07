@@ -97,14 +97,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => AnnouncementsWidget(),
             ),
             FFRoute(
-              name: 'ReportAbsence',
-              path: 'reportAbsence',
-              builder: (context, params) => ReportAbsenceWidget(),
-            ),
-            FFRoute(
               name: 'Menu',
               path: 'menu',
               builder: (context, params) => MenuWidget(),
+            ),
+            FFRoute(
+              name: 'ReportAbsence',
+              path: 'reportAbsence',
+              builder: (context, params) => ReportAbsenceWidget(),
             ),
             FFRoute(
               name: 'YourProfile',
@@ -180,6 +180,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Theme',
               path: 'theme',
               builder: (context, params) => ThemeWidget(),
+            ),
+            FFRoute(
+              name: 'FormSubmitted',
+              path: 'formSubmitted',
+              builder: (context, params) => FormSubmittedWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

@@ -35,6 +35,13 @@ class _$ExcusesRecordSerializer implements StructuredSerializer<ExcusesRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.excuseDateMissed;
+    if (value != null) {
+      result
+        ..add('excuse_date_missed')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -68,6 +75,10 @@ class _$ExcusesRecordSerializer implements StructuredSerializer<ExcusesRecord> {
           result.excusePhotoUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'excuse_date_missed':
+          result.excuseDateMissed = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -87,12 +98,15 @@ class _$ExcusesRecord extends ExcusesRecord {
   @override
   final String? excusePhotoUrl;
   @override
+  final DateTime? excuseDateMissed;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$ExcusesRecord([void Function(ExcusesRecordBuilder)? updates]) =>
       (new ExcusesRecordBuilder()..update(updates))._build();
 
-  _$ExcusesRecord._({this.excuseUser, this.excusePhotoUrl, this.ffRef})
+  _$ExcusesRecord._(
+      {this.excuseUser, this.excusePhotoUrl, this.excuseDateMissed, this.ffRef})
       : super._();
 
   @override
@@ -108,12 +122,15 @@ class _$ExcusesRecord extends ExcusesRecord {
     return other is ExcusesRecord &&
         excuseUser == other.excuseUser &&
         excusePhotoUrl == other.excusePhotoUrl &&
+        excuseDateMissed == other.excuseDateMissed &&
         ffRef == other.ffRef;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, excuseUser.hashCode), excusePhotoUrl.hashCode),
+    return $jf($jc(
+        $jc($jc($jc(0, excuseUser.hashCode), excusePhotoUrl.hashCode),
+            excuseDateMissed.hashCode),
         ffRef.hashCode));
   }
 
@@ -122,6 +139,7 @@ class _$ExcusesRecord extends ExcusesRecord {
     return (newBuiltValueToStringHelper(r'ExcusesRecord')
           ..add('excuseUser', excuseUser)
           ..add('excusePhotoUrl', excusePhotoUrl)
+          ..add('excuseDateMissed', excuseDateMissed)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -141,6 +159,11 @@ class ExcusesRecordBuilder
   set excusePhotoUrl(String? excusePhotoUrl) =>
       _$this._excusePhotoUrl = excusePhotoUrl;
 
+  DateTime? _excuseDateMissed;
+  DateTime? get excuseDateMissed => _$this._excuseDateMissed;
+  set excuseDateMissed(DateTime? excuseDateMissed) =>
+      _$this._excuseDateMissed = excuseDateMissed;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -154,6 +177,7 @@ class ExcusesRecordBuilder
     if ($v != null) {
       _excuseUser = $v.excuseUser;
       _excusePhotoUrl = $v.excusePhotoUrl;
+      _excuseDateMissed = $v.excuseDateMissed;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -179,6 +203,7 @@ class ExcusesRecordBuilder
         new _$ExcusesRecord._(
             excuseUser: excuseUser,
             excusePhotoUrl: excusePhotoUrl,
+            excuseDateMissed: excuseDateMissed,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

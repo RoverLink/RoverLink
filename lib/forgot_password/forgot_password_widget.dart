@@ -144,7 +144,20 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                               'r9qondpm' /* We will send you an email with... */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: Colors.white,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                ),
                                           ),
                                           Padding(
                                             padding:
