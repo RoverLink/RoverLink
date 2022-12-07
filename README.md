@@ -23,7 +23,7 @@ Features
 *   Change theme
 *   Change language
 *   Report absences
-* Submit excuses and attach signatures
+*   Submit excuses and attach signatures
 
 Installation Guide
 --------------
@@ -33,27 +33,35 @@ Usage
 --------------
 
 **Sign in/Sign up**
+
 Once you get past the onboarding page, the sign in and sign up options should be the first thing to show up when you open the app while signed out. To sign in, simply log in through email/password, login as a guest, or hit one of the social account buttons to log in through those platforms. If you are signing up for the first time, hit the Sign Up tab and use email/password or a social account.
 
 **Social Media Platform**
+
 On the home page, you can view your feed. Hitting an image will expand it. From here you can navigate to the calendar/events page, see the announcements, or hit your profile to see the menu.
 
 **Calendar**
+
 From the home page, hit the calendar icon on the bottom navigation bar. From here you can view the events on each day by simply selecting the date on the calendar.
 
 **Report an Absence**
+
 To report an absence, select the plus button on the bottom navigation bar and hit the "Turn in Absence Excuse" option. From there you can fill out the form and optionally submit a doctor's note as well.
 
 **View/Edit Profile**
+
 From the home page, hit your profile icon to navigate to the menu, and select the button with your profile. To edit it, select the pencil icon on the top right. From there you can change your display name, username, and profile picture.
 
 **Report a Bug**
+
 To report a bug, navigate to the main menu by hitting your profile icon on the home page. From there, select the "Report a Bug" option and fill out the bug report form.
 
 **Change Settings**
+
 Navigate to the settings page through the bottom navigation bar on the home page or through the menu by hitting your profile icon. From here you can view and change the people, tags, and schools you are following, and change your preferred language and theme. 
 
 **About Page**
+
 To access the about page, navigate to the main menu by hitting your profile icon on the home page. From there, select the "About" option. On this page you can view details about the app, as well as its copyright and licensing, terms of use, and privacy policy.
 
 Resources Used
