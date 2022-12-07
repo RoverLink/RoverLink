@@ -13,17 +13,17 @@ Features
 
 *   Designed for Android and iOS devices
 *   Multiple login options
-*   Forgot password functionality
 *   Calendar featuring events from across the district
 *   View posts made by students, teachers, and administration
 *   Filter posts by school
 *   View district-wide announcements
+*   Submit excuses and attach signatures
 *   Report bugs
 *   Edit user profile
 *   Change theme
 *   Change language
 *   Report absences
-*   Submit excuses and attach signatures
+*   Reset password functionality
 
 
 Usage
