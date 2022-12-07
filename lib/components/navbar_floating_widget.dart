@@ -107,7 +107,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                               setState(
                                   () => FFAppState().currentPage = 'Events');
 
-                              context.pushNamed(
+                              context.goNamed(
                                 'Events',
                                 extra: <String, dynamic>{
                                   kTransitionInfoKey: TransitionInfo(
@@ -142,8 +142,24 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 : FlutterFlowTheme.of(context).navbarLink,
                             size: 30,
                           ),
-                          onPressed: () {
-                            print('SchoolButton pressed ...');
+                          onPressed: () async {
+                            if (FFAppState().currentPage != 'Schools') {
+                              setState(
+                                  () => FFAppState().currentPage = 'Schools');
+
+                              context.goNamed(
+                                'Events',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 50),
+                                  ),
+                                },
+                              );
+                            } else {
+                              return;
+                            }
                           },
                         ),
                         FlutterFlowIconButton(
@@ -158,8 +174,24 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 : FlutterFlowTheme.of(context).navbarLink,
                             size: 30,
                           ),
-                          onPressed: () {
-                            print('SettingsButton pressed ...');
+                          onPressed: () async {
+                            if (FFAppState().currentPage != 'Settings') {
+                              setState(
+                                  () => FFAppState().currentPage = 'Settings');
+
+                              context.goNamed(
+                                'Settings',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 50),
+                                  ),
+                                },
+                              );
+                            } else {
+                              return;
+                            }
                           },
                         ),
                       ],

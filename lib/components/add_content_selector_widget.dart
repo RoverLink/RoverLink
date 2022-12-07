@@ -16,7 +16,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 1,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

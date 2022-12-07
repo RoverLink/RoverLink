@@ -1,6 +1,7 @@
 // Export pages
 export 'home_page/home_page_widget.dart' show HomePageWidget;
 export 'events/events_widget.dart' show EventsWidget;
+export 'show_event/show_event_widget.dart' show ShowEventWidget;
 export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'announcements/announcements_widget.dart' show AnnouncementsWidget;
 export 'menu/menu_widget.dart' show MenuWidget;

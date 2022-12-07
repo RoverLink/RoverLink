@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
+import '../flutter_flow/random_data_util.dart' as random_data;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -260,9 +261,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'iklzch53' /* 4 */,
-                                  ),
+                                  random_data.randomInteger(0, 25).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -300,9 +299,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(4, 0, 8, 0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '8xg00nve' /* 4 */,
-                                  ),
+                                  random_data.randomInteger(0, 5).toString(),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(

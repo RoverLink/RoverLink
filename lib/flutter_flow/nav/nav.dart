@@ -87,6 +87,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'ShowEvent',
+              path: 'showEvent',
+              builder: (context, params) => ShowEventWidget(
+                event: params.getParam('event', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
               name: 'Notifications',
               path: 'notifications',
               builder: (context, params) => NotificationsWidget(),

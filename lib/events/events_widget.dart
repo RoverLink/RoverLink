@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_calendar.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -247,91 +246,90 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                       10,
                                                                       10,
                                                                       10),
-                                                          child: Row(
-                                                            mainAxisSize:
-                                                                MainAxisSize
-                                                                    .max,
-                                                            children: [
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            8,
-                                                                            8,
-                                                                            8,
-                                                                            8),
-                                                                child: Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .start,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Text(
-                                                                      getJsonField(
-                                                                        eventItem,
-                                                                        r'''$.title''',
-                                                                      )
-                                                                          .toString()
-                                                                          .maybeHandleOverflow(
-                                                                            maxChars:
-                                                                                29,
-                                                                            replacement:
-                                                                                '…',
-                                                                          ),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .subtitle1,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              5,
-                                                                              0,
-                                                                              0),
-                                                                      child:
-                                                                          AutoSizeText(
-                                                                        FFLocalizations.of(context)
-                                                                            .getText(
-                                                                          'ybsl0owd' /* Ur mom */,
-                                                                        ),
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .subtitle2
-                                                                            .override(
-                                                                              fontFamily: FlutterFlowTheme.of(context).subtitle2Family,
-                                                                              fontWeight: FontWeight.w500,
-                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              context.pushNamed(
+                                                                'ShowEvent',
+                                                                queryParams: {
+                                                                  'event':
+                                                                      serializeParam(
+                                                                    eventItem,
+                                                                    ParamType
+                                                                        .JSON,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                                extra: <String,
+                                                                    dynamic>{
+                                                                  kTransitionInfoKey:
+                                                                      TransitionInfo(
+                                                                    hasTransition:
+                                                                        true,
+                                                                    transitionType:
+                                                                        PageTransitionType
+                                                                            .rightToLeft,
+                                                                  ),
+                                                                },
+                                                              );
+                                                            },
+                                                            child: Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          8,
+                                                                          8,
+                                                                          8,
+                                                                          8),
+                                                                  child: Column(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Text(
+                                                                        getJsonField(
+                                                                          eventItem,
+                                                                          r'''$.title''',
+                                                                        )
+                                                                            .toString()
+                                                                            .maybeHandleOverflow(
+                                                                              maxChars: 29,
+                                                                              replacement: '…',
                                                                             ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .subtitle1,
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                child: Align(
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0.9,
-                                                                          0),
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .arrow_forward_ios,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryText,
-                                                                    size: 18,
+                                                                    ],
                                                                   ),
                                                                 ),
-                                                              ),
-                                                            ],
+                                                                Expanded(
+                                                                  child: Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.9,
+                                                                            0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .arrow_forward_ios,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size: 18,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
                                                           ),
                                                         ),
                                                       ),

@@ -103,7 +103,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .title1
                                               .override(
-                                                fontFamily: 'Poppins',
+                                                fontFamily: 'Fira Sans',
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,

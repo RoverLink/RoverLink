@@ -97,15 +97,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Events
   {
-    'ybsl0owd': {
-      'en': 'Ur mom',
-      'de': 'Deine Mutter',
-      'es': 'Tu mamá',
-      'fr': 'Ta mère',
-      'it': 'Tua mamma',
-      'ja': 'あなたのお母さん',
-      'zh_Hans': '你妈妈',
-    },
     'vqrob0gm': {
       'en': 'Home',
       'de': 'Heim',
@@ -114,6 +105,36 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'it': 'Casa',
       'ja': '家',
       'zh_Hans': '家',
+    },
+  },
+  // ShowEvent
+  {
+    '2tnb2hiq': {
+      'en': 'Option 1',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'kw43z2bf': {
+      'en': 'Event',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'jnxq5d8g': {
+      'en': 'Home',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
     },
   },
   // Notifications
@@ -271,7 +292,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': 'ba smollll エレメンタリー',
       'zh_Hans': '小基础',
     },
-    'i5wqd0wb': {
+    '95odp2s9': {
       'en': 'Forks Elementary School',
       'de': '',
       'es': '',
@@ -280,7 +301,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'lgw1476k': {
+    'wttpv6mg': {
       'en': 'Tracy Elementary School',
       'de': '',
       'es': '',
@@ -289,7 +310,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '4n4muv23': {
+    'ye394v5i': {
       'en': 'Cheston Elementary School',
       'de': '',
       'es': '',
@@ -298,7 +319,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '6y83xwa9': {
+    'c663xwra': {
       'en': 'Paxinosa Elementary School',
       'de': '',
       'es': '',
@@ -307,7 +328,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '8y02wpa2': {
+    'slco59yt': {
       'en': 'Shawnee Elementary School',
       'de': '',
       'es': '',
@@ -316,7 +337,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'e8rbnjjm': {
+    'hadultzj': {
       'en': 'March Elementary School',
       'de': '',
       'es': '',
@@ -325,7 +346,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '850a9x9w': {
+    '2lrlcmws': {
       'en': 'Easton Cyber Academy',
       'de': '',
       'es': '',
@@ -361,7 +382,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '8n71aobg': {
+    'qfkjpxyg': {
       'en': 'Kindergarten',
       'de': '',
       'es': '',
@@ -370,7 +391,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'v7qlkwqb': {
+    'ku0m2sig': {
       'en': '1st Grade',
       'de': '',
       'es': '',
@@ -379,7 +400,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'ik2w56qi': {
+    'e7gxn2u3': {
       'en': '2nd Grade',
       'de': '',
       'es': '',
@@ -388,7 +409,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'i2rktvs9': {
+    'm38xj8c2': {
       'en': '3rd Grade',
       'de': '',
       'es': '',
@@ -397,7 +418,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '0lc101up': {
+    'vg2qkos0': {
       'en': '4th Grade',
       'de': '',
       'es': '',
@@ -406,7 +427,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'o2xfsvtw': {
+    'qxqlbsfh': {
       'en': '5th Grade',
       'de': '',
       'es': '',
@@ -415,7 +436,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'njw81idy': {
+    'r9nul7lr': {
       'en': '6th Grade',
       'de': '',
       'es': '',
@@ -424,7 +445,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '6wsb5xj4': {
+    'cs5gm7aa': {
       'en': '7th Grade',
       'de': '',
       'es': '',
@@ -433,7 +454,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'k065ravw': {
+    '7kk549v5': {
       'en': '8th Grade',
       'de': '',
       'es': '',
@@ -442,7 +463,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'qgrf3zve': {
+    'qbhk3f34': {
       'en': '9th Grade',
       'de': '',
       'es': '',
@@ -451,7 +472,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '5hcgqi8u': {
+    'pyq64fdx': {
       'en': '10th Grade',
       'de': '',
       'es': '',
@@ -460,7 +481,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'bfses5vq': {
+    'nkzzxbye': {
       'en': '11th Grade',
       'de': '',
       'es': '',
@@ -469,7 +490,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'nsb0pryy': {
+    '730k1onl': {
       'en': '12th Grade',
       'de': '',
       'es': '',
@@ -478,7 +499,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'tmvvrqyu': {
+    'cibsn1fo': {
       'en': 'Please select a grade level',
       'de': '',
       'es': '',
@@ -541,7 +562,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': 'サイン',
       'zh_Hans': '签名',
     },
-    's5wl9vvc': {
+    'lqihzcox': {
       'en': 'Sign your name below on the signature pad',
       'de': '',
       'es': '',
@@ -559,7 +580,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '言い訳を送信',
       'zh_Hans': '提交借口',
     },
-    'g4ii48o3': {
+    '6qrnuoul': {
       'en': 'Please enter full name of student',
       'de': '',
       'es': '',
@@ -568,7 +589,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'qyqungkz': {
+    'yl7jmd83': {
       'en': 'Please enter full name of student',
       'de': '',
       'es': '',
@@ -577,7 +598,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'zc78o9dk': {
+    '5qf83f4u': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -586,7 +607,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'wpmuhigb': {
+    'ztu46xg7': {
       'en': 'Field is required',
       'de': '',
       'es': '',
@@ -595,7 +616,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '5xxmxekw': {
+    'vy8t6bt5': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -604,7 +625,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '36ys0doy': {
+    'uq9kknj4': {
       'en': 'Field is required',
       'de': '',
       'es': '',
@@ -613,7 +634,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'qz3efcbz': {
+    '1vmzib8m': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -622,7 +643,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '3eezqw7e': {
+    'mlgmzzoo': {
       'en': 'A reason for student\'s absence must be provided',
       'de': '',
       'es': '',
@@ -631,7 +652,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    '8jcskcl8': {
+    'zxot1wum': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -1654,24 +1675,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '•',
       'zh_Hans': '•',
     },
-    'iklzch53': {
-      'en': '4',
-      'de': '4',
-      'es': '4',
-      'fr': '4',
-      'it': '4',
-      'ja': '4',
-      'zh_Hans': '4个',
-    },
-    '8xg00nve': {
-      'en': '4',
-      'de': '4',
-      'es': '4',
-      'fr': '4',
-      'it': '4',
-      'ja': '4',
-      'zh_Hans': '4个',
-    },
   },
   // CustomAppBar
   {
@@ -1746,20 +1749,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'it': '',
       'ja': '',
       'zh_Hans': '',
-    },
-    '87s2j00w': {
-      'en':
-          'In order to add calendar events this app requires permission to access the calendar.',
-      'de':
-          'Um Kalenderereignisse hinzuzufügen, benötigt diese App die Berechtigung zum Zugriff auf den Kalender.',
-      'es':
-          'Para agregar eventos de calendario, esta aplicación requiere permiso para acceder al calendario.',
-      'fr':
-          'Afin d\'ajouter des événements de calendrier, cette application nécessite l\'autorisation d\'accéder au calendrier.',
-      'it':
-          'Per aggiungere eventi del calendario questa app richiede l\'autorizzazione per accedere al calendario.',
-      'ja': 'カレンダー イベントを追加するには、このアプリにカレンダーへのアクセス許可が必要です。',
-      'zh_Hans': '为了添加日历事件，此应用程序需要访问日历的权限。',
     },
     '27uisxge': {
       'en': '',
