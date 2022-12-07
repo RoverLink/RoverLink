@@ -74,6 +74,8 @@ Calendar Animation - [https://lottiefiles.com/104954-calendar](https://lottiefil
 
 Thank You with Confetti Animation - [https://lottiefiles.com/74797-thank-you-with-confetti](https://lottiefiles.com/74797-thank-you-with-confetti)
 
+Success Animation - [https://lottiefiles.com/97240-success](https://lottiefiles.com/97240-success)
+
 Software and Services Used
 --------------------------
 
