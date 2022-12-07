@@ -25,9 +25,6 @@ Features
 *   Report absences
 *   Submit excuses and attach signatures
 
-Installation Guide
---------------
-
 
 Usage
 --------------
