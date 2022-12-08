@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class _MenuWidgetState extends State<MenuWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -63,6 +66,7 @@ class _MenuWidgetState extends State<MenuWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  // Profile card
                   if (FFAppState().isAnonymous == false)
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
@@ -178,6 +182,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         height: 2.5,
                                         decoration: BoxDecoration(),
                                       ),
+
+                                      // Email from FireBase
                                       Text(
                                         currentUserEmail.maybeHandleOverflow(
                                           maxChars: 23,
@@ -210,6 +216,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                         ),
                       ),
                     ),
+
+                  // Contains settings options
                   Expanded(
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
@@ -572,8 +580,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           ) ??
                                           false;
                                   if (confirmDialogResponse) {
-                                    setState(
-                                        () => FFAppState().isAnonymous = false);
+                                    setState(() {
+                                      FFAppState().isAnonymous = false;
+                                    });
 
                                     context.pushNamed('SigningOut');
                                   } else {

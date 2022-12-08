@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class NotificationsWithStuffWidget extends StatefulWidget {
   const NotificationsWithStuffWidget({Key? key}) : super(key: key);
@@ -22,6 +23,8 @@ class _NotificationsWithStuffWidgetState
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

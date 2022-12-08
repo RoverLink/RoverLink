@@ -12,6 +12,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
 
 class ReportAbsenceWidget extends StatefulWidget {
@@ -56,11 +57,14 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
     studentNameController?.dispose();
     teacherController?.dispose();
     reasonController?.dispose();
+    signatureController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -461,6 +465,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   },
                                   currentTime: getCurrentTimestamp,
                                   minTime: DateTime(0, 0, 0),
+                                  maxTime: getCurrentTimestamp,
                                   locale: LocaleType.values.firstWhere(
                                     (l) =>
                                         l.name ==
