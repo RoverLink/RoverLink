@@ -32,73 +32,121 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
         ],
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+        padding: EdgeInsetsDirectional.fromSTEB(16, 4, 16, 4),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              FFLocalizations.of(context).getText(
-                '9uhbwmcj' /* Title */,
-              ),
-              style: FlutterFlowTheme.of(context).subtitle1.override(
-                    fontFamily: 'Fira Sans',
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    useGoogleFonts: GoogleFonts.asMap().containsKey(
-                        FlutterFlowTheme.of(context).subtitle1Family),
-                  ),
-            ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 8),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 12),
-                    child: Text(
-                      getJsonField(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
+              child: InkWell(
+                onTap: () async {
+                  context.pushNamed(
+                    'ShowEvent',
+                    queryParams: {
+                      'event': serializeParam(
                         widget.announcement,
-                        r'''$.englishSnippet''',
-                      ).toString(),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Fira Sans',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
-                          ),
-                    ),
+                        ParamType.JSON,
+                      ),
+                    }.withoutNulls,
+                    extra: <String, dynamic>{
+                      kTransitionInfoKey: TransitionInfo(
+                        hasTransition: true,
+                        transitionType: PageTransitionType.fade,
+                        duration: Duration(milliseconds: 400),
+                      ),
+                    },
+                  );
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    boxShadow: [
+                      BoxShadow(
+                        blurRadius: 3,
+                        color: Color(0x411D2429),
+                        offset: Offset(0, 1),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(
-                          functions.humanDate(getJsonField(
-                            widget.announcement,
-                            r'''$.scheduledTime''',
-                          ).toString()),
-                          style: FlutterFlowTheme.of(context)
-                              .bodyText2
-                              .override(
-                                fontFamily: 'Fira Sans',
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(8, 10, 4, 10),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  getJsonField(
+                                    widget.announcement,
+                                    r'''$.englishSnippet''',
+                                  ).toString(),
+                                  style: FlutterFlowTheme.of(context)
+                                      .subtitle1
+                                      .override(
+                                        fontFamily: 'Fira Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle1Family),
+                                      ),
+                                ),
+                                Text(
+                                  functions.humanDate(getJsonField(
+                                    widget.announcement,
+                                    r'''$.scheduledTime''',
+                                  ).toString()),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText2
+                                      .override(
+                                        fontFamily: 'Fira Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.normal,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText2Family),
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                              child: Icon(
+                                Icons.chevron_right_rounded,
                                 color: Color(0xFF57636C),
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .bodyText2Family),
+                                size: 24,
                               ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ),
-                ],
+                ),
               ),
             ),
           ],

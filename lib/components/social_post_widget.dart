@@ -26,122 +26,77 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: FlutterFlowTheme.of(context).primaryBackground,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 0,
-            color: Color(0xFFF1F4F8),
-            offset: Offset(0, 1),
-          )
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
-                    child: CachedNetworkImage(
-                      imageUrl: getJsonField(
-                        widget.post,
-                        r'''$.authorProfileImage''',
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: FlutterFlowTheme.of(context).secondaryBackground,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
                       ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(12, 4, 0, 4),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          getJsonField(
-                            widget.post,
-                            r'''$.author''',
-                          ).toString().maybeHandleOverflow(
-                                maxChars: 30,
-                                replacement: '…',
-                              ),
-                          style: FlutterFlowTheme.of(context)
-                              .subtitle1
-                              .override(
-                                fontFamily: 'Fira Sans',
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .subtitle1Family),
-                              ),
+                      child: CachedNetworkImage(
+                        imageUrl: getJsonField(
+                          widget.post,
+                          r'''$.authorProfileImage''',
                         ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                '@${getJsonField(
-                                  widget.post,
-                                  r'''$.authorScreenName''',
-                                ).toString()}',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: 'Fira Sans',
-                                      color: Color(0xFF57636C),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText2Family),
-                                    ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'jqn6iwma' /* • */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Fira Sans',
-                                        color: Color(0xFF57636C),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
-                                      ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(12, 4, 0, 4),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            getJsonField(
+                              widget.post,
+                              r'''$.author''',
+                            ).toString().maybeHandleOverflow(
+                                  maxChars: 30,
+                                  replacement: '…',
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
-                                child: Text(
-                                  functions.humanDate(getJsonField(
+                            style: FlutterFlowTheme.of(context)
+                                .subtitle1
+                                .override(
+                                  fontFamily: 'Fira Sans',
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .subtitle1Family),
+                                ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  '@${getJsonField(
                                     widget.post,
-                                    r'''$.publishDate''',
-                                  ).toString()),
+                                    r'''$.authorScreenName''',
+                                  ).toString()}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText2
                                       .override(
@@ -155,234 +110,216 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                                     .bodyText2Family),
                                       ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4, 0, 0, 0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'jqn6iwma' /* • */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Fira Sans',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
+                                        ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4, 0, 0, 0),
+                                  child: Text(
+                                    functions.humanDate(getJsonField(
+                                      widget.post,
+                                      r'''$.publishDate''',
+                                    ).toString()),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Fira Sans',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 8),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 12),
-                    child: Text(
-                      getJsonField(
-                        widget.post,
-                        r'''$.description''',
-                      ).toString(),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Fira Sans',
-                            color: FlutterFlowTheme.of(context).primaryText,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
-                          ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 4, 12),
+                      child: Text(
+                        getJsonField(
+                          widget.post,
+                          r'''$.description''',
+                        ).toString(),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Fira Sans',
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
                     ),
-                  ),
-                  if (getJsonField(
-                    widget.post,
-                    r'''$.showImage''',
-                  ))
-                    InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.fade,
-                            child: FlutterFlowExpandedImageView(
-                              image: CachedNetworkImage(
-                                imageUrl: getJsonField(
+                    if (getJsonField(
+                      widget.post,
+                      r'''$.showImage''',
+                    ))
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.fade,
+                              child: FlutterFlowExpandedImageView(
+                                image: CachedNetworkImage(
+                                  imageUrl: getJsonField(
+                                    widget.post,
+                                    r'''$.image''',
+                                  ),
+                                  fit: BoxFit.contain,
+                                ),
+                                allowRotation: false,
+                                tag: getJsonField(
                                   widget.post,
                                   r'''$.image''',
                                 ),
-                                fit: BoxFit.contain,
+                                useHeroAnimation: true,
                               ),
-                              allowRotation: false,
-                              tag: getJsonField(
+                            ),
+                          );
+                        },
+                        child: Hero(
+                          tag: getJsonField(
+                            widget.post,
+                            r'''$.image''',
+                          ),
+                          transitionOnUserGestures: true,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: CachedNetworkImage(
+                              imageUrl: getJsonField(
                                 widget.post,
                                 r'''$.image''',
                               ),
-                              useHeroAnimation: true,
+                              width: MediaQuery.of(context).size.width,
+                              height: 230,
+                              fit: BoxFit.cover,
                             ),
-                          ),
-                        );
-                      },
-                      child: Hero(
-                        tag: getJsonField(
-                          widget.post,
-                          r'''$.image''',
-                        ),
-                        transitionOnUserGestures: true,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
-                          child: CachedNetworkImage(
-                            imageUrl: getJsonField(
-                              widget.post,
-                              r'''$.image''',
-                            ),
-                            width: MediaQuery.of(context).size.width,
-                            height: 230,
-                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ),
-                  Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4, 8, 4, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                                child: Icon(
-                                  Icons.mode_comment_outlined,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                                child: Text(
-                                  random_data.randomInteger(0, 25).toString(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Fira Sans',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
-                                child: Icon(
-                                  Icons.favorite_border_rounded,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(4, 0, 8, 0),
-                                child: Text(
-                                  random_data.randomInteger(0, 5).toString(),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: 'Fira Sans',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                child: Icon(
-                                  Icons.bookmark_border,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                                child: Icon(
-                                  Icons.ios_share,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
-                          child: InkWell(
-                            onTap: () async {
-                              imageDownload = await actions.downloadImage(
-                                getJsonField(
-                                  widget.post,
-                                  r'''$.image''',
-                                ),
-                                isiOS,
-                                isAndroid,
-                                isWeb,
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    'Image Downloaded',
-                                    style: TextStyle(
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(4, 8, 4, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 0, 8),
+                                  child: Icon(
+                                    Icons.mode_comment_outlined,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
                                   ),
-                                  duration: Duration(milliseconds: 4000),
-                                  backgroundColor: Color(0x00000000),
                                 ),
-                              );
-
-                              setState(() {});
-                            },
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 0, 8, 0),
+                                  child: Text(
+                                    random_data.randomInteger(0, 25).toString(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Fira Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 0, 8),
+                                  child: Icon(
+                                    Icons.favorite_border_rounded,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      4, 0, 8, 0),
+                                  child: Text(
+                                    random_data.randomInteger(0, 5).toString(),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Fira Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText2Family),
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -390,7 +327,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8, 8, 8, 8),
                                   child: Icon(
-                                    Icons.download_outlined,
+                                    Icons.bookmark_border,
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
                                     size: 24,
@@ -399,14 +336,80 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      8, 8, 8, 8),
+                                  child: Icon(
+                                    Icons.ios_share,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 24,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                            child: InkWell(
+                              onTap: () async {
+                                imageDownload = await actions.downloadImage(
+                                  getJsonField(
+                                    widget.post,
+                                    r'''$.image''',
+                                  ),
+                                  isiOS,
+                                  isAndroid,
+                                  isWeb,
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      'Image Downloaded',
+                                      style: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                      ),
+                                    ),
+                                    duration: Duration(milliseconds: 4000),
+                                    backgroundColor: Color(0x00000000),
+                                  ),
+                                );
+
+                                setState(() {});
+                              },
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        8, 8, 8, 8),
+                                    child: Icon(
+                                      Icons.download_outlined,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

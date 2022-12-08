@@ -7,14 +7,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AnnouncementsWidget extends StatefulWidget {
-  const AnnouncementsWidget({Key? key}) : super(key: key);
+class NotificationsWithStuffWidget extends StatefulWidget {
+  const NotificationsWithStuffWidget({Key? key}) : super(key: key);
 
   @override
-  _AnnouncementsWidgetState createState() => _AnnouncementsWidgetState();
+  _NotificationsWithStuffWidgetState createState() =>
+      _NotificationsWithStuffWidgetState();
 }
 
-class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
+class _NotificationsWithStuffWidgetState
+    extends State<NotificationsWithStuffWidget> {
   Completer<ApiCallResponse>? _apiRequestCompleter;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -29,7 +31,7 @@ class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
         leading: BackButtonWidget(),
         title: Text(
           FFLocalizations.of(context).getText(
-            '8ik7jrgg' /* Announcements */,
+            'ic7yfb2d' /* Notifications */,
           ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,

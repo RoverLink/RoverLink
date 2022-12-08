@@ -95,81 +95,30 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
+  // ShowEvent
+  {
+    'z2rye3bx': {
+      'en': 'Announcement',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'i3nqql9w': {
+      'en': 'Home',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+  },
   // Events
   {
     'vqrob0gm': {
-      'en': 'Home',
-      'de': 'Heim',
-      'es': 'Hogar',
-      'fr': 'Maison',
-      'it': 'Casa',
-      'ja': '家',
-      'zh_Hans': '家',
-    },
-  },
-  // ShowEvent
-  {
-    '2tnb2hiq': {
-      'en': 'Option 1',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'kw43z2bf': {
-      'en': 'Event',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'jnxq5d8g': {
-      'en': 'Home',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-  },
-  // Notifications
-  {
-    'ic7yfb2d': {
-      'en': 'Notifications',
-      'de': 'Benachrichtigungen',
-      'es': 'Notificaciones',
-      'fr': 'Avis',
-      'it': 'Notifiche',
-      'ja': '通知',
-      'zh_Hans': '通知',
-    },
-    'ovaggf7w': {
-      'en': 'Home',
-      'de': 'Heim',
-      'es': 'Hogar',
-      'fr': 'Maison',
-      'it': 'Casa',
-      'ja': '家',
-      'zh_Hans': '家',
-    },
-  },
-  // Announcements
-  {
-    'lznq1wwo': {
-      'en': 'Announcements',
-      'de': 'Ankündigungen',
-      'es': 'Anuncios',
-      'fr': 'Annonces',
-      'it': 'Annunci',
-      'ja': 'お知らせ',
-      'zh_Hans': '公告',
-    },
-    '0qzj91xg': {
       'en': 'Home',
       'de': 'Heim',
       'es': 'Hogar',
@@ -709,7 +658,55 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': 'あなたの投稿',
       'zh_Hans': '你的帖子',
     },
+    'c6d9mukv': {
+      'en': 'You haven\'t posted anything yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
     '3eryex94': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'it': 'Casa',
+      'ja': '家',
+      'zh_Hans': '家',
+    },
+  },
+  // YourProfileWithPosts
+  {
+    '27y4wq9u': {
+      'en': 'Student',
+      'de': 'Student',
+      'es': 'Alumno',
+      'fr': 'Étudiant',
+      'it': 'Alunno',
+      'ja': '学生',
+      'zh_Hans': '学生',
+    },
+    '8crp5dhl': {
+      'en': 'Developer',
+      'de': 'Entwickler',
+      'es': 'Desarrollador',
+      'fr': 'Développeur',
+      'it': 'Sviluppatore',
+      'ja': 'デベロッパー',
+      'zh_Hans': '开发商',
+    },
+    '0l3jeb0s': {
+      'en': 'Your Posts',
+      'de': 'Deine Posts',
+      'es': 'Tus publicaciones',
+      'fr': 'Vos publications',
+      'it': 'I tuoi post',
+      'ja': 'あなたの投稿',
+      'zh_Hans': '你的帖子',
+    },
+    'lr0gyjii': {
       'en': 'Home',
       'de': 'Heim',
       'es': 'Hogar',
@@ -730,15 +727,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '表示名',
       'zh_Hans': '显示名称',
     },
-    'jb4h6tf6': {
-      'en': 'Username',
-      'de': 'Nutzername',
-      'es': 'Nombre de usuario',
-      'fr': 'Nom d\'utilisateur',
-      'it': 'Nome utente',
-      'ja': 'ユーザー名',
-      'zh_Hans': '用户名',
-    },
     'hpd4j8lo': {
       'en': '@',
       'de': '@',
@@ -748,6 +736,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '@',
       'zh_Hans': '@',
     },
+    '0tn91lqy': {
+      'en': 'Username',
+      'de': 'Nutzername',
+      'es': 'Nombre de usuario',
+      'fr': 'Nom d\'utilisateur',
+      'it': 'Nome utente',
+      'ja': 'ユーザー名',
+      'zh_Hans': '用户名',
+    },
     '4eqfcqb2': {
       'en': 'Save',
       'de': 'Speichern',
@@ -756,6 +753,69 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'it': 'Salva',
       'ja': '保存',
       'zh_Hans': '节省',
+    },
+    'd19sztq6': {
+      'en': 'Field is required',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'hfxyy11j': {
+      'en': 'Please choose an option from the dropdown',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'zw001qap': {
+      'en': 'Username is required',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'qz53miub': {
+      'en': 'Username should be at least 5 characters',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'rqm8092b': {
+      'en': 'Username can have at most 15 characters',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'oxx5e4zi': {
+      'en': 'Usernames can only contain letters, numbers, and underscores',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    '87tnyrpg': {
+      'en': 'Please choose an option from the dropdown',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
     },
     'r9459w4x': {
       'en': 'Edit Profile',
@@ -817,14 +877,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': 'フォローした学校',
       'zh_Hans': '关注的学校',
     },
-    'tokogtjz': {
+    'pz832rs4': {
+      'en': 'Automatic',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    '8je81vc8': {
+      'en': 'Dark',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'v585efme': {
+      'en': 'Light',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    '9ju6f8ep': {
       'en': 'Theme',
-      'de': 'Thema',
-      'es': 'Tema',
-      'fr': 'Thème',
-      'it': 'Tema',
-      'ja': 'テーマ',
-      'zh_Hans': '主题',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
     },
     'xyrn7olz': {
       'en': 'Settings',
@@ -1374,27 +1461,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
-  // PrivacyPolicy
-  {
-    'yjmnhfal': {
-      'en': 'Privacy Policy',
-      'de': 'Datenschutz-Bestimmungen',
-      'es': 'Política de privacidad',
-      'fr': 'Politique de confidentialité',
-      'it': 'politica sulla riservatezza',
-      'ja': 'プライバシーポリシー',
-      'zh_Hans': '隐私政策',
-    },
-    'd9hd9ruv': {
-      'en': 'Home',
-      'de': 'Heim',
-      'es': 'Hogar',
-      'fr': 'Maison',
-      'it': 'Casa',
-      'ja': '家',
-      'zh_Hans': '家',
-    },
-  },
   // Onboarding
   {
     'nwm3x2ci': {
@@ -1474,6 +1540,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'it': 'Continua',
       'ja': '継続する',
       'zh_Hans': '继续',
+    },
+  },
+  // PrivacyPolicy
+  {
+    'yjmnhfal': {
+      'en': 'Privacy Policy',
+      'de': 'Datenschutz-Bestimmungen',
+      'es': 'Política de privacidad',
+      'fr': 'Politique de confidentialité',
+      'it': 'politica sulla riservatezza',
+      'ja': 'プライバシーポリシー',
+      'zh_Hans': '隐私政策',
+    },
+    'd9hd9ruv': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'it': 'Casa',
+      'ja': '家',
+      'zh_Hans': '家',
     },
   },
   // ForgotPassword
@@ -1590,6 +1677,78 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
+  // Notifications
+  {
+    '7wicg251': {
+      'en': 'Notifications',
+      'de': 'Benachrichtigungen',
+      'es': 'Notificaciones',
+      'fr': 'Avis',
+      'it': 'Notifiche',
+      'ja': '通知',
+      'zh_Hans': '通知',
+    },
+    '2hest3cb': {
+      'en': 'You haven\'t recived any notifications yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'itr8nwq2': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'it': 'Casa',
+      'ja': '家',
+      'zh_Hans': '家',
+    },
+  },
+  // NotificationsWithStuff
+  {
+    'ic7yfb2d': {
+      'en': 'Notifications',
+      'de': 'Benachrichtigungen',
+      'es': 'Notificaciones',
+      'fr': 'Avis',
+      'it': 'Notifiche',
+      'ja': '通知',
+      'zh_Hans': '通知',
+    },
+    'ovaggf7w': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'it': 'Casa',
+      'ja': '家',
+      'zh_Hans': '家',
+    },
+  },
+  // Announcements
+  {
+    '8ik7jrgg': {
+      'en': 'Announcements',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+    'lczjz5cm': {
+      'en': 'Home',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'it': '',
+      'ja': '',
+      'zh_Hans': '',
+    },
+  },
   // FormSubmitted
   {
     'sltw2h07': {
@@ -1603,7 +1762,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'bxeung14': {
       'en':
-          'Your child\'s absence has been recorded and sent to the appropriate grade-level office. Please contact your  child\'s school if you have any additional concerns.',
+          'Your child\'s absence has been recorded and sent to the appropriate grade-level office. Please contact your child\'s school if you have any additional concerns.',
       'de':
           'Die Abwesenheit Ihres Kindes wurde erfasst und an das zuständige Klassenbüro weitergeleitet. Bitte kontaktieren Sie die Schule Ihres Kindes, wenn Sie weitere Bedenken haben.',
       'es':
@@ -1636,15 +1795,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddContentSelector
   {
-    'f25z3d1z': {
-      'en': 'Share',
-      'de': 'Teilen',
-      'es': 'Cuota',
-      'fr': 'Partager',
-      'it': 'Condividere',
-      'ja': 'シェア',
-      'zh_Hans': '分享',
-    },
     'xcdyw8hv': {
       'en': 'Turn in Absence Excuse',
       'de': 'Entschuldigung für Abwesenheit abgeben',
@@ -1678,8 +1828,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // CustomAppBar
   {
-    'z9j9w26h': {
-      'en': '6',
+    'd6o0mmr4': {
+      'en': '2',
       'de': '6',
       'es': '6',
       'fr': '6',
@@ -1687,7 +1837,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '6',
       'zh_Hans': '6个',
     },
-    'y0g4iir5': {
+    'avox4qrx': {
       'en': '6',
       'de': '6',
       'es': '6',
@@ -1718,16 +1868,37 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '6个',
     },
   },
-  // Announcement
+  // SocialPostCopy
   {
-    '9uhbwmcj': {
-      'en': 'Title',
-      'de': 'Titel',
-      'es': 'Título',
-      'fr': 'Titre',
-      'it': 'Titolo',
-      'ja': '題名',
-      'zh_Hans': '标题',
+    'l8uxyhmh': {
+      'en': '•',
+      'de': '•',
+      'es': '•',
+      'fr': '•',
+      'it': '•',
+      'ja': '•',
+      'zh_Hans': '•',
+    },
+  },
+  // CustomAppBarCopy2
+  {
+    '558saoxe': {
+      'en': '12',
+      'de': '6',
+      'es': '6',
+      'fr': '6',
+      'it': '6',
+      'ja': '6',
+      'zh_Hans': '6个',
+    },
+    'k1s3mbjb': {
+      'en': '6',
+      'de': '6',
+      'es': '6',
+      'fr': '6',
+      'it': '6',
+      'ja': '6',
+      'zh_Hans': '6个',
     },
   },
   // Miscellaneous

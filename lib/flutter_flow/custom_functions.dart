@@ -40,3 +40,7 @@ bool isElementaryOrMiddleSchool(String? schoolName) {
   return schoolName.toLowerCase().contains("elementary") ||
       schoolName.toLowerCase().contains("middle school");
 }
+
+String formatDateTime(String date) {
+  return DateFormat('MMM d yyyy hh:mm a').format(DateTime.parse(date));
+}

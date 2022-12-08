@@ -1,4 +1,5 @@
 import '../components/back_button_widget.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_language_selector.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -14,6 +15,7 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
+  String? dropDownValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -272,75 +274,102 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                      child: InkWell(
-                        onTap: () async {
-                          context.pushNamed('Theme');
-                        },
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            boxShadow: [
-                              BoxShadow(
-                                blurRadius: 5,
-                                color: Color(0x3416202A),
-                                offset: Offset(0, 2),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(12),
-                            shape: BoxShape.rectangle,
-                          ),
-                          child: Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.paintBrush,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      14, 0, 0, 0),
-                                  child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'tokogtjz' /* Theme */,
-                                    ),
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 15,
-                                          useGoogleFonts: GoogleFonts.asMap()
-                                              .containsKey(
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1Family),
-                                        ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.9, 0),
-                                    child: Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      size: 18,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                      child: Container(
+                        width: double.infinity,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          boxShadow: [
+                            BoxShadow(
+                              blurRadius: 5,
+                              color: Color(0x3416202A),
+                              offset: Offset(0, 2),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(12),
+                          shape: BoxShape.rectangle,
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(17, 0, 0, 0),
+                              child: FaIcon(
+                                FontAwesomeIcons.paintBrush,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 20,
+                              ),
                             ),
-                          ),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(1, 5, 3, 5),
+                                child: FlutterFlowDropDown<String>(
+                                  options: [
+                                    FFLocalizations.of(context).getText(
+                                      'pz832rs4' /* Automatic */,
+                                    ),
+                                    FFLocalizations.of(context).getText(
+                                      '8je81vc8' /* Dark */,
+                                    ),
+                                    FFLocalizations.of(context).getText(
+                                      'v585efme' /* Light */,
+                                    )
+                                  ],
+                                  onChanged: (val) async {
+                                    setState(() => dropDownValue = val);
+                                    if (dropDownValue == 'Dark') {
+                                      setDarkModeSetting(
+                                          context, ThemeMode.dark);
+                                      setState(() =>
+                                          FFAppState().automaticTheme = false);
+                                    }
+                                    if (dropDownValue == 'Light') {
+                                      setDarkModeSetting(
+                                          context, ThemeMode.light);
+                                      setState(() =>
+                                          FFAppState().automaticTheme = false);
+                                    }
+                                    if (dropDownValue == 'Automatic') {
+                                      setDarkModeSetting(
+                                          context, ThemeMode.system);
+                                      setState(() =>
+                                          FFAppState().automaticTheme = true);
+                                    }
+                                  },
+                                  width: 180,
+                                  height: 50,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyText1Family,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        fontSize: 15,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
+                                      ),
+                                  hintText: FFLocalizations.of(context).getText(
+                                    '9ju6f8ep' /* Theme */,
+                                  ),
+                                  fillColor: Colors.white,
+                                  elevation: 2,
+                                  borderColor: Colors.transparent,
+                                  borderWidth: 0,
+                                  borderRadius: 0,
+                                  margin: EdgeInsetsDirectional.fromSTEB(
+                                      12, 4, 12, 4),
+                                  hidesUnderline: true,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

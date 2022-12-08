@@ -82,11 +82,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomePageWidget(),
             ),
             FFRoute(
-              name: 'Events',
-              path: 'events',
-              builder: (context, params) => EventsWidget(),
-            ),
-            FFRoute(
               name: 'ShowEvent',
               path: 'showEvent',
               builder: (context, params) => ShowEventWidget(
@@ -94,14 +89,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
-            ),
-            FFRoute(
-              name: 'Announcements',
-              path: 'announcements',
-              builder: (context, params) => AnnouncementsWidget(),
+              name: 'Events',
+              path: 'events',
+              builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
               name: 'Menu',
@@ -117,6 +107,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'YourProfile',
               path: 'yourProfile',
               builder: (context, params) => YourProfileWidget(),
+            ),
+            FFRoute(
+              name: 'YourProfileWithPosts',
+              path: 'yourProfileWithPosts',
+              builder: (context, params) => YourProfileWithPostsWidget(),
             ),
             FFRoute(
               name: 'EditProfile',
@@ -164,14 +159,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginWidget(),
             ),
             FFRoute(
-              name: 'PrivacyPolicy',
-              path: 'privacyPolicy',
-              builder: (context, params) => PrivacyPolicyWidget(),
-            ),
-            FFRoute(
               name: 'Onboarding',
               path: 'onboarding',
               builder: (context, params) => OnboardingWidget(),
+            ),
+            FFRoute(
+              name: 'PrivacyPolicy',
+              path: 'privacyPolicy',
+              builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
               name: 'ForgotPassword',
@@ -187,6 +182,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Theme',
               path: 'theme',
               builder: (context, params) => ThemeWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
+              name: 'NotificationsWithStuff',
+              path: 'notificationsWithStuff',
+              builder: (context, params) => NotificationsWithStuffWidget(),
+            ),
+            FFRoute(
+              name: 'Announcements',
+              path: 'announcements',
+              builder: (context, params) => AnnouncementsWidget(),
             ),
             FFRoute(
               name: 'FormSubmitted',

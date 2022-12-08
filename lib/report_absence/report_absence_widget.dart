@@ -694,6 +694,29 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 }
 
                                 if (schoolValue == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'You must select a school',
+                                        style: TextStyle(),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor: Color(0x00000000),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                if (gradeValue == null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'You must select a grade level',
+                                        style: TextStyle(),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor: Color(0x00000000),
+                                    ),
+                                  );
                                   return;
                                 }
                                 if (datePicked == null) {

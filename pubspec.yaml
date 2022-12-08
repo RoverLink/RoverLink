@@ -51,6 +51,7 @@ dependencies:
   flutter_clean_calendar: ^1.1.0
   flutter_datetime_picker: 1.5.1
   flutter_gravatar:
+  flutter_html: 3.0.0-alpha.5
   flutter_secure_storage: 6.0.0
   flutter_shimmer_widget: ^1.1.0
   flutter_svg: 0.22.0
@@ -93,6 +94,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dependency_overrides:
+  provider: 6.0.0
   webview_flutter_android: 2.10.3
   webview_flutter_platform_interface: 1.9.5
   webview_flutter_wkwebview: 2.9.5

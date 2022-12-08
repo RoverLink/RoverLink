@@ -8,14 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomAppBarWidget extends StatefulWidget {
-  const CustomAppBarWidget({Key? key}) : super(key: key);
+class CustomAppBarCopy2Widget extends StatefulWidget {
+  const CustomAppBarCopy2Widget({Key? key}) : super(key: key);
 
   @override
-  _CustomAppBarWidgetState createState() => _CustomAppBarWidgetState();
+  _CustomAppBarCopy2WidgetState createState() =>
+      _CustomAppBarCopy2WidgetState();
 }
 
-class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
+class _CustomAppBarCopy2WidgetState extends State<CustomAppBarCopy2Widget> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -58,11 +59,11 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 0),
                     child: Badge(
                       badgeContent: Text(
                         FFLocalizations.of(context).getText(
-                          'd6o0mmr4' /* 2 */,
+                          '558saoxe' /* 12 */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily:
@@ -73,10 +74,10 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                   FlutterFlowTheme.of(context).bodyText1Family),
                             ),
                       ),
-                      showBadge: false,
+                      showBadge: true,
                       shape: BadgeShape.circle,
                       badgeColor: Color(0xFFDC1313),
-                      elevation: 3,
+                      elevation: 0,
                       padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
                       position: BadgePosition.topEnd(),
                       animationType: BadgeAnimationType.scale,
@@ -106,7 +107,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                         child: Badge(
                           badgeContent: Text(
                             FFLocalizations.of(context).getText(
-                              'avox4qrx' /* 6 */,
+                              'k1s3mbjb' /* 6 */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1
@@ -120,7 +121,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                           .bodyText1Family),
                                 ),
                           ),
-                          showBadge: false,
+                          showBadge: true,
                           shape: BadgeShape.circle,
                           badgeColor: Color(0xFFDC1313),
                           elevation: 3,

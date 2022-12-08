@@ -1,8 +1,10 @@
 import '../components/back_button_widget.dart';
-import '../flutter_flow/flutter_flow_choice_chips.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ShowEventWidget extends StatefulWidget {
@@ -18,7 +20,6 @@ class ShowEventWidget extends StatefulWidget {
 }
 
 class _ShowEventWidgetState extends State<ShowEventWidget> {
-  String? choiceChipsValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -31,7 +32,9 @@ class _ShowEventWidgetState extends State<ShowEventWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Event',
+          FFLocalizations.of(context).getText(
+            'z2rye3bx' /* Announcement */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,
@@ -76,10 +79,10 @@ class _ShowEventWidgetState extends State<ShowEventWidget> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                getJsonField(
+                                functions.formatDateTime(getJsonField(
                                   widget.event,
                                   r'''$.scheduledTime''',
-                                ).toString(),
+                                ).toString()),
                                 style: FlutterFlowTheme.of(context).bodyText1,
                               ),
                               Text(
@@ -89,68 +92,84 @@ class _ShowEventWidgetState extends State<ShowEventWidget> {
                                 ).toString(),
                                 style: FlutterFlowTheme.of(context).title2,
                               ),
-                              FlutterFlowChoiceChips(
-                                options: (getJsonField(
-                                  widget.event,
-                                  r'''$.tags[:].abbreviation''',
-                                ) as List)
-                                    .map<String>((s) => s.toString())
-                                    .toList()
-                                    .map((label) => ChipData(label))
-                                    .toList(),
-                                onChanged: (val) => setState(
-                                    () => choiceChipsValue = val?.first),
-                                selectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).alternate,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        color: Colors.white,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
-                                      ),
-                                  iconColor:
-                                      FlutterFlowTheme.of(context).alternate,
-                                  iconSize: 18,
-                                  elevation: 4,
-                                ),
-                                unselectedChipStyle: ChipStyle(
-                                  backgroundColor:
-                                      FlutterFlowTheme.of(context).alternate,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .bodyText2
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText2Family,
-                                        color: Colors.white,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
-                                      ),
-                                  iconColor: Color(0xFF323B45),
-                                  iconSize: 18,
-                                  elevation: 4,
-                                ),
-                                chipSpacing: 10,
-                                multiselect: false,
-                                alignment: WrapAlignment.start,
-                              ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                                child: Text(
-                                  getJsonField(
-                                    widget.event,
-                                    r'''$.englishContent''',
-                                  ).toString(),
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                    EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final school = getJsonField(
+                                      widget.event,
+                                      r'''$.tags''',
+                                    ).toList();
+                                    return Wrap(
+                                      spacing: 5,
+                                      runSpacing: 5,
+                                      alignment: WrapAlignment.start,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.start,
+                                      direction: Axis.horizontal,
+                                      runAlignment: WrapAlignment.start,
+                                      verticalDirection: VerticalDirection.down,
+                                      clipBehavior: Clip.none,
+                                      children: List.generate(school.length,
+                                          (schoolIndex) {
+                                        final schoolItem = school[schoolIndex];
+                                        return FFButtonWidget(
+                                          onPressed: () {
+                                            print('Button pressed ...');
+                                          },
+                                          text: getJsonField(
+                                            schoolItem,
+                                            r'''$.abbreviation''',
+                                          ).toString(),
+                                          options: FFButtonOptions(
+                                            height: 30,
+                                            color: colorFromCssString(
+                                              '#${getJsonField(
+                                                schoolItem,
+                                                r'''$.color''',
+                                              ).toString()}',
+                                              defaultColor: Colors.black,
+                                            ),
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2
+                                                    .override(
+                                                      fontFamily:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .subtitle2Family,
+                                                      color: Colors.white,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      useGoogleFonts: GoogleFonts
+                                                              .asMap()
+                                                          .containsKey(
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .subtitle2Family),
+                                                    ),
+                                            elevation: 0,
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                          ),
+                                          showLoadingIndicator: false,
+                                        );
+                                      }),
+                                    );
+                                  },
                                 ),
+                              ),
+                              Html(
+                                data: getJsonField(
+                                  widget.event,
+                                  r'''$.englishContent''',
+                                ).toString(),
                               ),
                             ],
                           ),

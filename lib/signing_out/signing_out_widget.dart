@@ -130,7 +130,7 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          FlutterFlowTheme.of(context).gray600,
+                          Color(0xFF430000),
                           FlutterFlowTheme.of(context).black600
                         ],
                         stops: [0, 1],
