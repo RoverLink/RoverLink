@@ -57,6 +57,10 @@ abstract class FlutterFlowTheme {
   late Color transparentBackground;
   late Color customColor1;
   late Color translucentBG;
+  late Color navbarBackground;
+  late Color navbarActiveLink;
+  late Color navbarLink;
+  late Color appbarSpacer;
 
   String get title1Family => typography.title1Family;
   TextStyle get title1 => typography.title1;
@@ -112,6 +116,10 @@ class LightModeTheme extends FlutterFlowTheme {
   late Color transparentBackground = Color(0x00F1F4F8);
   late Color customColor1 = Color(0xFF2FB73C);
   late Color translucentBG = Color(0x4DFFFFFF);
+  late Color navbarBackground = Color(0x96FFFFFF);
+  late Color navbarActiveLink = Color(0xFF000000);
+  late Color navbarLink = Color(0xFF57636C);
+  late Color appbarSpacer = Color(0xFFEBEDF3);
 }
 
 abstract class Typography {
@@ -136,51 +144,51 @@ class MobileTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Poppins';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'Poppins';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'Poppins';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Poppins';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Poppins';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Poppins';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Poppins';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12,
@@ -192,51 +200,51 @@ class TabletTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Poppins';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'Poppins';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'Poppins';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Poppins';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Poppins';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Poppins';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Poppins';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12,
@@ -248,51 +256,51 @@ class DesktopTypography extends Typography {
 
   final FlutterFlowTheme theme;
 
-  String get title1Family => 'Poppins';
+  String get title1Family => 'Fira Sans';
   TextStyle get title1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  String get title2Family => 'Poppins';
+  String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 22,
       );
-  String get title3Family => 'Poppins';
+  String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 20,
       );
-  String get subtitle1Family => 'Poppins';
+  String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
         fontSize: 18,
       );
-  String get subtitle2Family => 'Poppins';
+  String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
         fontSize: 16,
       );
-  String get bodyText1Family => 'Poppins';
+  String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
-  String get bodyText2Family => 'Poppins';
+  String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Poppins',
+        'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
         fontSize: 12,
@@ -320,6 +328,10 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color transparentBackground = Color(0x001A1F24);
   late Color customColor1 = Color(0xFF452FB7);
   late Color translucentBG = Color(0x4D101213);
+  late Color navbarBackground = Color(0x9622282F);
+  late Color navbarActiveLink = Color(0xFFFFFFFF);
+  late Color navbarLink = Color(0xFF95A1AC);
+  late Color appbarSpacer = Color(0xFF20242C);
 }
 
 extension TextStyleHelper on TextStyle {

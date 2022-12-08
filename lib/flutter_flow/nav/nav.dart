@@ -82,19 +82,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => HomePageWidget(),
             ),
             FFRoute(
+              name: 'ShowEvent',
+              path: 'showEvent',
+              builder: (context, params) => ShowEventWidget(
+                event: params.getParam('event', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
               name: 'Events',
               path: 'events',
               builder: (context, params) => EventsWidget(),
-            ),
-            FFRoute(
-              name: 'Announcements',
-              path: 'announcements',
-              builder: (context, params) => AnnouncementsWidget(),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'Menu',
@@ -102,9 +99,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => MenuWidget(),
             ),
             FFRoute(
+              name: 'ReportAbsence',
+              path: 'reportAbsence',
+              builder: (context, params) => ReportAbsenceWidget(),
+            ),
+            FFRoute(
               name: 'YourProfile',
               path: 'yourProfile',
               builder: (context, params) => YourProfileWidget(),
+            ),
+            FFRoute(
+              name: 'YourProfileWithPosts',
+              path: 'yourProfileWithPosts',
+              builder: (context, params) => YourProfileWithPostsWidget(),
+            ),
+            FFRoute(
+              name: 'EditProfile',
+              path: 'editProfile',
+              builder: (context, params) => EditProfileWidget(),
             ),
             FFRoute(
               name: 'ReportABug',
@@ -112,14 +124,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ReportABugWidget(),
             ),
             FFRoute(
+              name: 'Settings',
+              path: 'settings',
+              builder: (context, params) => SettingsWidget(),
+            ),
+            FFRoute(
+              name: 'Following',
+              path: 'following',
+              builder: (context, params) => FollowingWidget(),
+            ),
+            FFRoute(
+              name: 'SchoolsFollowed',
+              path: 'schoolsFollowed',
+              builder: (context, params) => SchoolsFollowedWidget(),
+            ),
+            FFRoute(
               name: 'About',
               path: 'about',
               builder: (context, params) => AboutWidget(),
             ),
             FFRoute(
-              name: 'PrivacyPolicy',
-              path: 'privacyPolicy',
-              builder: (context, params) => PrivacyPolicyWidget(),
+              name: 'SigningOut',
+              path: 'signingOut',
+              builder: (context, params) => SigningOutWidget(),
             ),
             FFRoute(
               name: 'TermsOfUse',
@@ -127,14 +154,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => TermsOfUseWidget(),
             ),
             FFRoute(
+              name: 'Login',
+              path: 'login',
+              builder: (context, params) => LoginWidget(),
+            ),
+            FFRoute(
               name: 'Onboarding',
               path: 'onboarding',
               builder: (context, params) => OnboardingWidget(),
             ),
             FFRoute(
-              name: 'Login',
-              path: 'login',
-              builder: (context, params) => LoginWidget(),
+              name: 'PrivacyPolicy',
+              path: 'privacyPolicy',
+              builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
               name: 'ForgotPassword',
@@ -142,9 +174,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ForgotPasswordWidget(),
             ),
             FFRoute(
-              name: 'AboutCopy',
-              path: 'aboutCopy',
-              builder: (context, params) => AboutCopyWidget(),
+              name: 'Copyrights',
+              path: 'copyrights',
+              builder: (context, params) => CopyrightsWidget(),
+            ),
+            FFRoute(
+              name: 'Theme',
+              path: 'theme',
+              builder: (context, params) => ThemeWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
+            ),
+            FFRoute(
+              name: 'NotificationsWithStuff',
+              path: 'notificationsWithStuff',
+              builder: (context, params) => NotificationsWithStuffWidget(),
+            ),
+            FFRoute(
+              name: 'Announcements',
+              path: 'announcements',
+              builder: (context, params) => AnnouncementsWidget(),
+            ),
+            FFRoute(
+              name: 'FormSubmitted',
+              path: 'formSubmitted',
+              builder: (context, params) => FormSubmittedWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -317,12 +374,13 @@ class FFRoute {
                 )
               : builder(context, ffParams);
           final child = appStateNotifier.loading
-              ? Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(
-                      color: FlutterFlowTheme.of(context).primaryColor,
+              ? Container(
+                  color: Color(0xFF1A1F24),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/RoverLinkDarkTheme.png',
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      fit: BoxFit.contain,
                     ),
                   ),
                 )

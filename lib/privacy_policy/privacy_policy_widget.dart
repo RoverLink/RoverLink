@@ -25,7 +25,9 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
         automaticallyImplyLeading: false,
         leading: BackButtonWidget(),
         title: Text(
-          'Privacy Policy',
+          FFLocalizations.of(context).getText(
+            'yjmnhfal' /* Privacy Policy */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: FlutterFlowTheme.of(context).title2Family,
                 color: FlutterFlowTheme.of(context).primaryText,

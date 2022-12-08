@@ -33,3 +33,14 @@ bool isSameDay(
       date1.month == date2.month &&
       date1.year == date2.year;
 }
+
+bool isElementaryOrMiddleSchool(String? schoolName) {
+  // checks if string contains "Elementary" or "Middle School"
+  if (schoolName == null) return false;
+  return schoolName.toLowerCase().contains("elementary") ||
+      schoolName.toLowerCase().contains("middle school");
+}
+
+String formatDateTime(String date) {
+  return DateFormat('MMM d yyyy hh:mm a').format(DateTime.parse(date));
+}

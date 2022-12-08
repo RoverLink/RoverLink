@@ -47,7 +47,9 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
                   child: Badge(
                     badgeContent: Text(
-                      '6',
+                      FFLocalizations.of(context).getText(
+                        'm6x8ui7t' /* 6 */,
+                      ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:
                                 FlutterFlowTheme.of(context).bodyText1Family,
@@ -89,7 +91,9 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
                       child: Badge(
                         badgeContent: Text(
-                          '6',
+                          FFLocalizations.of(context).getText(
+                            'i9hhqjo1' /* 6 */,
+                          ),
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
                               .override(

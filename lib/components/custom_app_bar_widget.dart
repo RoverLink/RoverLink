@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -20,12 +21,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
     return Stack(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(8),
-            bottomRight: Radius.circular(8),
-            topLeft: Radius.circular(0),
-            topRight: Radius.circular(0),
-          ),
+          borderRadius: BorderRadius.circular(0),
           child: BackdropFilter(
             filter: ImageFilter.blur(
               sigmaX: 5,
@@ -49,7 +45,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
           ),
         ),
         Align(
-          alignment: AlignmentDirectional(0, -1.01),
+          alignment: AlignmentDirectional(0, -1.02),
           child: Container(
             width: double.infinity,
             height: 54,
@@ -62,10 +58,12 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 10, 0, 0),
                     child: Badge(
                       badgeContent: Text(
-                        '6',
+                        FFLocalizations.of(context).getText(
+                          'd6o0mmr4' /* 2 */,
+                        ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).bodyText1Family,
@@ -75,11 +73,11 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                   FlutterFlowTheme.of(context).bodyText1Family),
                             ),
                       ),
-                      showBadge: true,
+                      showBadge: false,
                       shape: BadgeShape.circle,
                       badgeColor: Color(0xFFDC1313),
                       elevation: 3,
-                      padding: EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
+                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
                       position: BadgePosition.topEnd(),
                       animationType: BadgeAnimationType.scale,
                       toAnimate: true,
@@ -91,7 +89,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                         icon: FaIcon(
                           FontAwesomeIcons.bullhorn,
                           color: FlutterFlowTheme.of(context).primaryText,
-                          size: 25,
+                          size: 24,
                         ),
                         onPressed: () async {
                           context.pushNamed('Announcements');
@@ -104,10 +102,12 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 10, 8, 0),
                         child: Badge(
                           badgeContent: Text(
-                            '6',
+                            FFLocalizations.of(context).getText(
+                              'avox4qrx' /* 6 */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1
                                 .override(
@@ -120,11 +120,11 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                                           .bodyText1Family),
                                 ),
                           ),
-                          showBadge: true,
+                          showBadge: false,
                           shape: BadgeShape.circle,
                           badgeColor: Color(0xFFDC1313),
                           elevation: 3,
-                          padding: EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
+                          padding: EdgeInsetsDirectional.fromSTEB(5, 5, 5, 5),
                           position: BadgePosition.topEnd(),
                           animationType: BadgeAnimationType.scale,
                           toAnimate: true,
@@ -136,7 +136,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                             icon: Icon(
                               Icons.notifications_outlined,
                               color: FlutterFlowTheme.of(context).primaryText,
-                              size: 30,
+                              size: 32,
                             ),
                             onPressed: () async {
                               context.pushNamed('Notifications');
@@ -144,28 +144,52 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(13, 13, 13, 13),
-                        child: InkWell(
-                          onTap: () async {
-                            context.pushNamed('Menu');
-                          },
-                          child: Hero(
-                            tag: 'PFP',
-                            transitionOnUserGestures: true,
-                            child: Container(
-                              clipBehavior: Clip.antiAlias,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: Image.asset(
-                                'assets/images/face-holding-back-tears_1f979.png',
-                                fit: BoxFit.cover,
+                      if (currentUserPhoto != null && currentUserPhoto != '')
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(13, 20, 13, 5),
+                          child: AuthUserStreamWidget(
+                            child: InkWell(
+                              onTap: () async {
+                                context.pushNamed('Menu');
+                              },
+                              child: Hero(
+                                tag: currentUserPhoto,
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Image.network(
+                                    currentUserPhoto,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
+                      if (currentUserPhoto == null || currentUserPhoto == '')
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 7, 0, 0),
+                          child: AuthUserStreamWidget(
+                            child: FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: Icon(
+                                Icons.person_outline,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 35,
+                              ),
+                              onPressed: () async {
+                                context.pushNamed('Menu');
+                              },
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ],
