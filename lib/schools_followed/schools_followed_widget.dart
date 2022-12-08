@@ -4,6 +4,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SchoolsFollowedWidget extends StatefulWidget {
   const SchoolsFollowedWidget({Key? key}) : super(key: key);
@@ -45,6 +46,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -141,11 +144,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'eahs',
                                           true,
                                         );
-                                        setState(() =>
-                                            FFAppState().subscriptions =
-                                                FFAppState()
-                                                    .subscriptions
-                                                    .toList());
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {

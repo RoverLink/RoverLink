@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
@@ -20,6 +21,8 @@ class _SettingsWidgetState extends State<SettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -324,20 +327,23 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     if (dropDownValue == 'Dark') {
                                       setDarkModeSetting(
                                           context, ThemeMode.dark);
-                                      setState(() =>
-                                          FFAppState().automaticTheme = false);
+                                      setState(() {
+                                        FFAppState().automaticTheme = false;
+                                      });
                                     }
                                     if (dropDownValue == 'Light') {
                                       setDarkModeSetting(
                                           context, ThemeMode.light);
-                                      setState(() =>
-                                          FFAppState().automaticTheme = false);
+                                      setState(() {
+                                        FFAppState().automaticTheme = false;
+                                      });
                                     }
                                     if (dropDownValue == 'Automatic') {
                                       setDarkModeSetting(
                                           context, ThemeMode.system);
-                                      setState(() =>
-                                          FFAppState().automaticTheme = true);
+                                      setState(() {
+                                        FFAppState().automaticTheme = true;
+                                      });
                                     }
                                   },
                                   width: 180,

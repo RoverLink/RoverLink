@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileWidget extends StatefulWidget {
   const EditProfileWidget({Key? key}) : super(key: key);
@@ -43,6 +44,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -201,8 +204,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
 
                                       if (uploadedFileUrl != null &&
                                           uploadedFileUrl != '') {
-                                        setState(() => FFAppState()
-                                            .profilePicture = uploadedFileUrl);
+                                        setState(() {
+                                          FFAppState().profilePicture =
+                                              uploadedFileUrl;
+                                        });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
@@ -420,21 +425,26 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 );
                                 await currentUserReference!
                                     .update(usersUpdateData);
-                                setState(() => FFAppState().username =
-                                    usernameController!.text);
+                                setState(() {
+                                  FFAppState().username =
+                                      usernameController!.text;
+                                });
                               } else {
                                 final usersUpdateData = createUsersRecordData(
                                   displayName: displayNameController!.text,
                                 );
                                 await currentUserReference!
                                     .update(usersUpdateData);
-                                setState(() => FFAppState().username =
-                                    usernameController!.text);
+                                setState(() {
+                                  FFAppState().username =
+                                      usernameController!.text;
+                                });
                               }
 
                               if (FFAppState().newAccount == true) {
-                                setState(
-                                    () => FFAppState().currentPage = 'Home');
+                                setState(() {
+                                  FFAppState().currentPage = 'Home';
+                                });
 
                                 context.pushNamed('HomePage');
 
@@ -451,7 +461,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     backgroundColor: Color(0x00000000),
                                   ),
                                 );
-                                setState(() => FFAppState().newAccount = false);
+                                setState(() {
+                                  FFAppState().newAccount = false;
+                                });
                               } else {
                                 context.pop();
                                 ScaffoldMessenger.of(context).showSnackBar(

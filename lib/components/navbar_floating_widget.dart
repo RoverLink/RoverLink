@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class NavbarFloatingWidget extends StatefulWidget {
   const NavbarFloatingWidget({Key? key}) : super(key: key);
@@ -17,6 +18,8 @@ class NavbarFloatingWidget extends StatefulWidget {
 class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Stack(
       alignment: AlignmentDirectional(0, 0),
       children: [
@@ -72,7 +75,9 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           showLoadingIndicator: true,
                           onPressed: () async {
                             if (FFAppState().currentPage != 'Home') {
-                              setState(() => FFAppState().currentPage = 'Home');
+                              setState(() {
+                                FFAppState().currentPage = 'Home';
+                              });
 
                               context.goNamed(
                                 'HomePage',
@@ -104,8 +109,9 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           showLoadingIndicator: true,
                           onPressed: () async {
                             if (FFAppState().currentPage != 'Events') {
-                              setState(
-                                  () => FFAppState().currentPage = 'Events');
+                              setState(() {
+                                FFAppState().currentPage = 'Events';
+                              });
 
                               context.goNamed(
                                 'Events',
@@ -144,8 +150,9 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           ),
                           onPressed: () async {
                             if (FFAppState().currentPage != 'Schools') {
-                              setState(
-                                  () => FFAppState().currentPage = 'Schools');
+                              setState(() {
+                                FFAppState().currentPage = 'Schools';
+                              });
 
                               context.goNamed(
                                 'Events',
@@ -176,8 +183,9 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           ),
                           onPressed: () async {
                             if (FFAppState().currentPage != 'Settings') {
-                              setState(
-                                  () => FFAppState().currentPage = 'Settings');
+                              setState(() {
+                                FFAppState().currentPage = 'Settings';
+                              });
 
                               context.goNamed(
                                 'Settings',

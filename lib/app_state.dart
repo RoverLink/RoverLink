@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:csv/csv.dart';
 import 'flutter_flow/lat_lng.dart';
 
-class FFAppState {
+class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
 
   factory FFAppState() {
@@ -28,40 +29,83 @@ class FFAppState {
 
   late FlutterSecureStorage secureStorage;
 
-  DateTime? selectedDate = DateTime.fromMillisecondsSinceEpoch(946702800000);
+  DateTime? _selectedDate = DateTime.fromMillisecondsSinceEpoch(946702800000);
+  DateTime? get selectedDate => _selectedDate;
+  set selectedDate(DateTime? _value) {
+    notifyListeners();
+    if (_value == null) {
+      return;
+    }
+    _selectedDate = _value;
+  }
+
+  void deleteSelectedDate() {
+    notifyListeners();
+    secureStorage.delete(key: 'ff_selectedDate');
+  }
 
   bool _viewedOnboarding = false;
   bool get viewedOnboarding => _viewedOnboarding;
   set viewedOnboarding(bool _value) {
+    notifyListeners();
+
     _viewedOnboarding = _value;
     secureStorage.setBool('ff_viewedOnboarding', _value);
   }
 
   void deleteViewedOnboarding() {
+    notifyListeners();
     secureStorage.delete(key: 'ff_viewedOnboarding');
   }
 
-  String currentPage = '';
+  String _currentPage = '';
+  String get currentPage => _currentPage;
+  set currentPage(String _value) {
+    notifyListeners();
 
-  bool newAccount = false;
+    _currentPage = _value;
+  }
+
+  void deleteCurrentPage() {
+    notifyListeners();
+    secureStorage.delete(key: 'ff_currentPage');
+  }
+
+  bool _newAccount = false;
+  bool get newAccount => _newAccount;
+  set newAccount(bool _value) {
+    notifyListeners();
+
+    _newAccount = _value;
+  }
+
+  void deleteNewAccount() {
+    notifyListeners();
+    secureStorage.delete(key: 'ff_newAccount');
+  }
 
   List<String> _subscriptions = ['easd'];
   List<String> get subscriptions => _subscriptions;
   set subscriptions(List<String> _value) {
+    notifyListeners();
+
     _subscriptions = _value;
     secureStorage.setStringList('ff_subscriptions', _value);
   }
 
   void deleteSubscriptions() {
+    notifyListeners();
     secureStorage.delete(key: 'ff_subscriptions');
   }
 
   void addToSubscriptions(String _value) {
+    notifyListeners();
     _subscriptions.add(_value);
     secureStorage.setStringList('ff_subscriptions', _subscriptions);
   }
 
   void removeFromSubscriptions(String _value) {
+    notifyListeners();
     _subscriptions.remove(_value);
     secureStorage.setStringList('ff_subscriptions', _subscriptions);
   }
@@ -69,35 +113,55 @@ class FFAppState {
   bool _automaticTheme = true;
   bool get automaticTheme => _automaticTheme;
   set automaticTheme(bool _value) {
+    notifyListeners();
+
     _automaticTheme = _value;
     secureStorage.setBool('ff_automaticTheme', _value);
   }
 
   void deleteAutomaticTheme() {
+    notifyListeners();
     secureStorage.delete(key: 'ff_automaticTheme');
   }
 
   bool _isAnonymous = false;
   bool get isAnonymous => _isAnonymous;
   set isAnonymous(bool _value) {
+    notifyListeners();
+
     _isAnonymous = _value;
     secureStorage.setBool('ff_isAnonymous', _value);
   }
 
   void deleteIsAnonymous() {
+    notifyListeners();
     secureStorage.delete(key: 'ff_isAnonymous');
   }
 
-  String profilePicture = '';
+  String _profilePicture = '';
+  String get profilePicture => _profilePicture;
+  set profilePicture(String _value) {
+    notifyListeners();
+
+    _profilePicture = _value;
+  }
+
+  void deleteProfilePicture() {
+    notifyListeners();
+    secureStorage.delete(key: 'ff_profilePicture');
+  }
 
   String _username = '';
   String get username => _username;
   set username(String _value) {
+    notifyListeners();
+
     _username = _value;
     secureStorage.setString('ff_username', _value);
   }
 
   void deleteUsername() {
+    notifyListeners();
     secureStorage.delete(key: 'ff_username');
   }
 }

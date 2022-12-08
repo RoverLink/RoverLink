@@ -7,6 +7,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBarCopy2Widget extends StatefulWidget {
   const CustomAppBarCopy2Widget({Key? key}) : super(key: key);
@@ -19,6 +20,8 @@ class CustomAppBarCopy2Widget extends StatefulWidget {
 class _CustomAppBarCopy2WidgetState extends State<CustomAppBarCopy2Widget> {
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Stack(
       children: [
         ClipRRect(

@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ThemeWidget extends StatefulWidget {
   const ThemeWidget({Key? key}) : super(key: key);
@@ -16,6 +17,8 @@ class _ThemeWidgetState extends State<ThemeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -63,7 +66,9 @@ class _ThemeWidgetState extends State<ThemeWidget> {
                         child: InkWell(
                           onTap: () async {
                             setDarkModeSetting(context, ThemeMode.system);
-                            setState(() => FFAppState().automaticTheme = true);
+                            setState(() {
+                              FFAppState().automaticTheme = true;
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.75,
@@ -102,7 +107,9 @@ class _ThemeWidgetState extends State<ThemeWidget> {
                         child: InkWell(
                           onTap: () async {
                             setDarkModeSetting(context, ThemeMode.dark);
-                            setState(() => FFAppState().automaticTheme = false);
+                            setState(() {
+                              FFAppState().automaticTheme = false;
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.75,
@@ -146,7 +153,9 @@ class _ThemeWidgetState extends State<ThemeWidget> {
                         child: InkWell(
                           onTap: () async {
                             setDarkModeSetting(context, ThemeMode.light);
-                            setState(() => FFAppState().automaticTheme = false);
+                            setState(() {
+                              FFAppState().automaticTheme = false;
+                            });
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.75,

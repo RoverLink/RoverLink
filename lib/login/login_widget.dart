@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -205,6 +206,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: Color(0xFF14181B),
@@ -725,10 +728,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              setState(() =>
-                                                                  FFAppState()
-                                                                          .isAnonymous =
-                                                                      true);
+                                                              setState(() {
+                                                                FFAppState()
+                                                                        .isAnonymous =
+                                                                    true;
+                                                              });
                                                               GoRouter.of(
                                                                       context)
                                                                   .prepareAuthEvent();
@@ -1474,10 +1478,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               await currentUserReference!
                                                                   .update(
                                                                       usersUpdateData);
-                                                              setState(() =>
-                                                                  FFAppState()
-                                                                          .newAccount =
-                                                                      true);
+                                                              setState(() {
+                                                                FFAppState()
+                                                                        .newAccount =
+                                                                    true;
+                                                              });
 
                                                               context.pushNamedAuth(
                                                                   'EditProfile',

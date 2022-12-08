@@ -5,6 +5,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CustomAppBarCopyWidget extends StatefulWidget {
   const CustomAppBarCopyWidget({Key? key}) : super(key: key);
@@ -16,6 +17,8 @@ class CustomAppBarCopyWidget extends StatefulWidget {
 class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: 54,

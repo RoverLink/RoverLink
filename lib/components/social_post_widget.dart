@@ -8,6 +8,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class SocialPostWidget extends StatefulWidget {
   const SocialPostWidget({
@@ -26,6 +27,8 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
       child: Container(
