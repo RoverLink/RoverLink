@@ -77,9 +77,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomePageWidget() : OnboardingWidget(),
           routes: [
             FFRoute(
+              name: 'ReportAbsence',
+              path: 'reportAbsence',
+              builder: (context, params) => ReportAbsenceWidget(),
+            ),
+            FFRoute(
               name: 'HomePage',
               path: 'homePage',
               builder: (context, params) => HomePageWidget(),
+            ),
+            FFRoute(
+              name: 'Events',
+              path: 'events',
+              builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
               name: 'ShowEvent',
@@ -89,19 +99,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Events',
-              path: 'events',
-              builder: (context, params) => EventsWidget(),
-            ),
-            FFRoute(
               name: 'Menu',
               path: 'menu',
               builder: (context, params) => MenuWidget(),
-            ),
-            FFRoute(
-              name: 'ReportAbsence',
-              path: 'reportAbsence',
-              builder: (context, params) => ReportAbsenceWidget(),
             ),
             FFRoute(
               name: 'YourProfile',
@@ -117,6 +117,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'EditProfile',
               path: 'editProfile',
               builder: (context, params) => EditProfileWidget(),
+            ),
+            FFRoute(
+              name: 'Schools',
+              path: 'schools',
+              builder: (context, params) => SchoolsWidget(),
+            ),
+            FFRoute(
+              name: 'EAHS',
+              path: 'eahs',
+              builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
               name: 'ReportABug',
@@ -179,11 +189,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => CopyrightsWidget(),
             ),
             FFRoute(
-              name: 'Theme',
-              path: 'theme',
-              builder: (context, params) => ThemeWidget(),
-            ),
-            FFRoute(
               name: 'Notifications',
               path: 'notifications',
               builder: (context, params) => NotificationsWidget(),
@@ -202,6 +207,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'FormSubmitted',
               path: 'formSubmitted',
               builder: (context, params) => FormSubmittedWidget(),
+            ),
+            FFRoute(
+              name: 'CreatePost2',
+              path: 'createPost2',
+              builder: (context, params) => CreatePost2Widget(),
+            ),
+            FFRoute(
+              name: 'CreatePost',
+              path: 'createPost',
+              builder: (context, params) => CreatePostWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

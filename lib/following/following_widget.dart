@@ -355,7 +355,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 20, 0, 0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          'tsf7osq8' /* Tags */,
+                          'tsf7osq8' /* Groups */,
                         ),
                         style: FlutterFlowTheme.of(context).subtitle1,
                       ),

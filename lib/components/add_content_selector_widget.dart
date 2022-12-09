@@ -19,7 +19,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
 
     return Container(
       width: double.infinity,
-      height: 160,
+      height: 85.3,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),
@@ -29,59 +29,6 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: double.infinity,
-              height: 60,
-              decoration: BoxDecoration(),
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(12, 8, 12, 8),
-                child: InkWell(
-                  onTap: () async {
-                    Navigator.pop(context);
-
-                    context.pushNamed('ReportAbsence');
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Card(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-                          child: Icon(
-                            Icons.mode_edit,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'xcdyw8hv' /* Turn in Absence Excuse */,
-                                ),
-                                style: FlutterFlowTheme.of(context).subtitle2,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
             Container(
               width: double.infinity,
               height: 60,
@@ -101,7 +48,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                         child: Icon(
-                          Icons.delete_outline,
+                          Icons.add,
                           color: FlutterFlowTheme.of(context).secondaryText,
                           size: 20,
                         ),

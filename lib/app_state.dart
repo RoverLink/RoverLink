@@ -39,11 +39,6 @@ class FFAppState extends ChangeNotifier {
     _selectedDate = _value;
   }
 
-  void deleteSelectedDate() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_selectedDate');
-  }
-
   bool _viewedOnboarding = false;
   bool get viewedOnboarding => _viewedOnboarding;
   set viewedOnboarding(bool _value) {
@@ -66,22 +61,12 @@ class FFAppState extends ChangeNotifier {
     _currentPage = _value;
   }
 
-  void deleteCurrentPage() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_currentPage');
-  }
-
   bool _newAccount = false;
   bool get newAccount => _newAccount;
   set newAccount(bool _value) {
     notifyListeners();
 
     _newAccount = _value;
-  }
-
-  void deleteNewAccount() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_newAccount');
   }
 
   List<String> _subscriptions = ['easd'];
@@ -144,11 +129,6 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
 
     _profilePicture = _value;
-  }
-
-  void deleteProfilePicture() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_profilePicture');
   }
 
   String _username = '';

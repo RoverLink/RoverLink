@@ -952,60 +952,63 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   ),
                                                                 ),
                                                               ),
-                                                              InkWell(
-                                                                onTap:
-                                                                    () async {
-                                                                  GoRouter.of(
-                                                                          context)
-                                                                      .prepareAuthEvent();
-                                                                  final user =
-                                                                      await signInWithApple(
-                                                                          context);
-                                                                  if (user ==
-                                                                      null) {
-                                                                    return;
-                                                                  }
+                                                              if (isiOS == true)
+                                                                InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    GoRouter.of(
+                                                                            context)
+                                                                        .prepareAuthEvent();
+                                                                    final user =
+                                                                        await signInWithApple(
+                                                                            context);
+                                                                    if (user ==
+                                                                        null) {
+                                                                      return;
+                                                                    }
 
-                                                                  context.goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  width: 50,
-                                                                  height: 50,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .primaryText,
-                                                                    boxShadow: [
-                                                                      BoxShadow(
-                                                                        blurRadius:
-                                                                            5,
-                                                                        color: Color(
-                                                                            0x3314181B),
-                                                                        offset: Offset(
+                                                                    context.goNamedAuth(
+                                                                        'HomePage',
+                                                                        mounted);
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    width: 50,
+                                                                    height: 50,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      boxShadow: [
+                                                                        BoxShadow(
+                                                                          blurRadius:
+                                                                              5,
+                                                                          color:
+                                                                              Color(0x3314181B),
+                                                                          offset: Offset(
+                                                                              0,
+                                                                              2),
+                                                                        )
+                                                                      ],
+                                                                      shape: BoxShape
+                                                                          .circle,
+                                                                    ),
+                                                                    alignment:
+                                                                        AlignmentDirectional(
                                                                             0,
-                                                                            2),
-                                                                      )
-                                                                    ],
-                                                                    shape: BoxShape
-                                                                        .circle,
-                                                                  ),
-                                                                  alignment:
-                                                                      AlignmentDirectional(
-                                                                          0, 0),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .apple,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    size: 24,
+                                                                            0),
+                                                                    child:
+                                                                        FaIcon(
+                                                                      FontAwesomeIcons
+                                                                          .apple,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      size: 24,
+                                                                    ),
                                                                   ),
                                                                 ),
-                                                              ),
                                                             ],
                                                           ),
                                                         ),
