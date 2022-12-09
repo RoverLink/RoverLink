@@ -257,7 +257,9 @@ class _CreatePost2WidgetState extends State<CreatePost2Widget> {
                           maxLines: 7,
                           validator: (val) {
                             if (val == null || val.isEmpty) {
-                              return 'Field is required';
+                              return FFLocalizations.of(context).getText(
+                                'btch7u3y' /* Field is required */,
+                              );
                             }
 
                             if (val.length < 0) {

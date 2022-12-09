@@ -1979,7 +1979,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'eydtosut': {
+    'btch7u3y': {
       'en': 'Field is required',
       'de': '',
       'es': '',
@@ -1988,7 +1988,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'ms1szor8': {
+    'wlz8pg9w': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -2019,7 +2019,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '使用条款',
     },
     's1ftfujq': {
-      'en': 'What\'s happening?',
+      'en': 'Share something...',
       'de': '',
       'es': '',
       'fr': '',
@@ -2027,7 +2027,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'deqwso0a': {
+    'dibo4g0i': {
       'en': 'Field is required',
       'de': '',
       'es': '',
@@ -2036,7 +2036,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'ja': '',
       'zh_Hans': '',
     },
-    'hzmqov0r': {
+    'b7n21ke3': {
       'en': 'Please choose an option from the dropdown',
       'de': '',
       'es': '',
@@ -2044,6 +2044,15 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'it': '',
       'ja': '',
       'zh_Hans': '',
+    },
+    '0zn9tdv2': {
+      'en': 'Post',
+      'de': 'Speichern',
+      'es': 'Ahorrar',
+      'fr': 'sauvegarder',
+      'it': 'Salva',
+      'ja': '保存',
+      'zh_Hans': '节省',
     },
     'ckw33i1w': {
       'en': 'Home',

@@ -9,8 +9,8 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
@@ -457,23 +457,22 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                             child: InkWell(
                               onTap: () async {
-                                await DatePicker.showDatePicker(
-                                  context,
-                                  showTitleActions: true,
-                                  onConfirm: (date) {
-                                    setState(() => datePicked = date);
-                                  },
-                                  currentTime: getCurrentTimestamp,
-                                  minTime: DateTime(0, 0, 0),
-                                  maxTime: getCurrentTimestamp,
-                                  locale: LocaleType.values.firstWhere(
-                                    (l) =>
-                                        l.name ==
-                                        FFLocalizations.of(context)
-                                            .languageCode,
-                                    orElse: () => LocaleType.en,
-                                  ),
+                                final _datePickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: getCurrentTimestamp,
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2050),
                                 );
+
+                                if (_datePickedDate != null) {
+                                  setState(
+                                    () => datePicked = DateTime(
+                                      _datePickedDate.year,
+                                      _datePickedDate.month,
+                                      _datePickedDate.day,
+                                    ),
+                                  );
+                                }
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,

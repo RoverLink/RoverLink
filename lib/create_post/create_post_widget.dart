@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_expanded_image_view.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -93,16 +94,20 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             AuthUserStreamWidget(
-                              child: Container(
-                                width: 50,
-                                height: 50,
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: CachedNetworkImage(
-                                  imageUrl: currentUserPhoto,
-                                  fit: BoxFit.cover,
+                              child: Hero(
+                                tag: currentUserPhoto,
+                                transitionOnUserGestures: true,
+                                child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  clipBehavior: Clip.antiAlias,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: CachedNetworkImage(
+                                    imageUrl: currentUserPhoto,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
@@ -215,7 +220,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                                       decoration: InputDecoration(
                                         hintText:
                                             FFLocalizations.of(context).getText(
-                                          's1ftfujq' /* What's happening? */,
+                                          's1ftfujq' /* Share something... */,
                                         ),
                                         hintStyle: FlutterFlowTheme.of(context)
                                             .bodyText1
@@ -413,6 +418,32 @@ class _CreatePostWidgetState extends State<CreatePostWidget> {
                       ),
                     ],
                   ),
+                ),
+              ),
+            ),
+            FFButtonWidget(
+              onPressed: () async {
+                context.pop();
+              },
+              text: FFLocalizations.of(context).getText(
+                '0zn9tdv2' /* Post */,
+              ),
+              options: FFButtonOptions(
+                width: 230,
+                height: 50,
+                color: FlutterFlowTheme.of(context).primaryColor,
+                textStyle: FlutterFlowTheme.of(context).subtitle2.override(
+                      fontFamily: 'Fira Sans',
+                      color: FlutterFlowTheme.of(context).primaryBtnText,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                      useGoogleFonts: GoogleFonts.asMap().containsKey(
+                          FlutterFlowTheme.of(context).subtitle2Family),
+                    ),
+                elevation: 5,
+                borderSide: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
                 ),
               ),
             ),
