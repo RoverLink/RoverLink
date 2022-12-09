@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -305,7 +306,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  context.pushNamed('ReportABug');
+                                  Instabug.show();
                                 },
                                 child: Container(
                                   width: double.infinity,
