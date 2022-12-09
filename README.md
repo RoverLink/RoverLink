@@ -99,6 +99,10 @@ FlutterFlow - [https://flutterflow.io/](https://flutterflow.io/)
 
 > FlutterFlow was used to create the initial UI design and functionality of our app.
 
+Android Studio - [https://developer.android.com/studio](https://developer.android.com/studio)
+
+> Android Studio is the official IDE for Android App development. It was used to write and test our code.
+
 Dependencies Used
 -------
 [flutter](https://pub.dev/packages/flutter)
