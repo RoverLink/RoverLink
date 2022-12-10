@@ -32,7 +32,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   void initState() {
     super.initState();
     displayNameController = TextEditingController(text: currentUserDisplayName);
-    usernameController = TextEditingController(text: FFAppState().username);
+    usernameController = TextEditingController(
+        text: valueOrDefault(currentUserDocument?.username, ''));
   }
 
   @override
@@ -331,82 +332,89 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   ),
                                 ),
                                 Expanded(
-                                  child: TextFormField(
-                                    controller: usernameController,
-                                    obscureText: false,
-                                    decoration: InputDecoration(
-                                      labelText:
-                                          FFLocalizations.of(context).getText(
-                                        '0tn91lqy' /* Username */,
-                                      ),
-                                      hintStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2,
-                                      enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                  child: AuthUserStreamWidget(
+                                    child: TextFormField(
+                                      controller: usernameController,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText:
+                                            FFLocalizations.of(context).getText(
+                                          '0tn91lqy' /* Username */,
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      errorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      focusedErrorBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                        errorBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                        borderRadius: BorderRadius.circular(8),
+                                        focusedErrorBorder:
+                                            UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        filled: true,
+                                        fillColor: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        contentPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0, 12, 12, 12),
                                       ),
-                                      filled: true,
-                                      fillColor: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      contentPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0, 12, 12, 12),
-                                    ),
-                                    style:
-                                        FlutterFlowTheme.of(context).bodyText1,
-                                    validator: (val) {
-                                      if (val == null || val.isEmpty) {
-                                        return FFLocalizations.of(context)
-                                            .getText(
-                                          'zw001qap' /* Username is required */,
-                                        );
-                                      }
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                      validator: (val) {
+                                        if (val == null || val.isEmpty) {
+                                          return FFLocalizations.of(context)
+                                              .getText(
+                                            'zw001qap' /* Username is required */,
+                                          );
+                                        }
 
-                                      if (val.length < 5) {
-                                        return FFLocalizations.of(context)
-                                            .getText(
-                                          'qz53miub' /* Username should be at least 5 ... */,
-                                        );
-                                      }
-                                      if (val.length > 15) {
-                                        return FFLocalizations.of(context)
-                                            .getText(
-                                          'rqm8092b' /* Username can have at most 15 c... */,
-                                        );
-                                      }
-                                      if (!RegExp(r"[a-zA-Z0-9_]{5,15}$")
-                                          .hasMatch(val)) {
-                                        return FFLocalizations.of(context)
-                                            .getText(
-                                          'oxx5e4zi' /* Usernames can only contain let... */,
-                                        );
-                                      }
-                                      return null;
-                                    },
+                                        if (val.length < 5) {
+                                          return FFLocalizations.of(context)
+                                              .getText(
+                                            'qz53miub' /* Username should be at least 5 ... */,
+                                          );
+                                        }
+                                        if (val.length > 15) {
+                                          return FFLocalizations.of(context)
+                                              .getText(
+                                            'rqm8092b' /* Username can have at most 15 c... */,
+                                          );
+                                        }
+                                        if (!RegExp(r"[a-zA-Z0-9_]{5,15}$")
+                                            .hasMatch(val)) {
+                                          return FFLocalizations.of(context)
+                                              .getText(
+                                            'oxx5e4zi' /* Usernames can only contain let... */,
+                                          );
+                                        }
+                                        return null;
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],
@@ -422,23 +430,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 final usersUpdateData = createUsersRecordData(
                                   photoUrl: FFAppState().profilePicture,
                                   displayName: displayNameController!.text,
+                                  username: usernameController!.text,
                                 );
                                 await currentUserReference!
                                     .update(usersUpdateData);
-                                setState(() {
-                                  FFAppState().username =
-                                      usernameController!.text;
-                                });
                               } else {
                                 final usersUpdateData = createUsersRecordData(
                                   displayName: displayNameController!.text,
+                                  username: usernameController!.text,
                                 );
                                 await currentUserReference!
                                     .update(usersUpdateData);
-                                setState(() {
-                                  FFAppState().username =
-                                      usernameController!.text;
-                                });
                               }
 
                               if (FFAppState().newAccount == true) {

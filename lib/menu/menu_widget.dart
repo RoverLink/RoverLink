@@ -152,10 +152,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         height: 2.5,
                                         decoration: BoxDecoration(),
                                       ),
-                                      if (FFAppState().username != null &&
-                                          FFAppState().username != '')
-                                        Text(
-                                          '@${FFAppState().username}'
+                                      AuthUserStreamWidget(
+                                        child: Text(
+                                          '@${valueOrDefault(currentUserDocument?.username, '')}'
                                               .maybeHandleOverflow(
                                             maxChars: 22,
                                             replacement: '…',
@@ -178,6 +177,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                             .bodyText1Family),
                                               ),
                                         ),
+                                      ),
                                       Container(
                                         height: 2.5,
                                         decoration: BoxDecoration(),

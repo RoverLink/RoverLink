@@ -28,5 +28,4 @@ export 'notifications_with_stuff/notifications_with_stuff_widget.dart'
     show NotificationsWithStuffWidget;
 export 'announcements/announcements_widget.dart' show AnnouncementsWidget;
 export 'form_submitted/form_submitted_widget.dart' show FormSubmittedWidget;
-export 'create_post2/create_post2_widget.dart' show CreatePost2Widget;
 export 'create_post/create_post_widget.dart' show CreatePostWidget;

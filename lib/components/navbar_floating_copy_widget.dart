@@ -7,14 +7,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class NavbarFloatingWidget extends StatefulWidget {
-  const NavbarFloatingWidget({Key? key}) : super(key: key);
+class NavbarFloatingCopyWidget extends StatefulWidget {
+  const NavbarFloatingCopyWidget({Key? key}) : super(key: key);
 
   @override
-  _NavbarFloatingWidgetState createState() => _NavbarFloatingWidgetState();
+  _NavbarFloatingCopyWidgetState createState() =>
+      _NavbarFloatingCopyWidgetState();
 }
 
-class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
+class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -147,8 +148,8 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                               borderRadius: 30,
                               borderWidth: 1,
                               buttonSize: 50,
-                              icon: FaIcon(
-                                FontAwesomeIcons.school,
+                              icon: Icon(
+                                Icons.school_rounded,
                                 color: FFAppState().currentPage == 'Schools'
                                     ? FlutterFlowTheme.of(context)
                                         .navbarActiveLink
@@ -162,7 +163,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                   });
 
                                   context.goNamed(
-                                    'Schools',
+                                    'Events',
                                     extra: <String, dynamic>{
                                       kTransitionInfoKey: TransitionInfo(
                                         hasTransition: true,

@@ -209,11 +209,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => FormSubmittedWidget(),
             ),
             FFRoute(
-              name: 'CreatePost2',
-              path: 'createPost2',
-              builder: (context, params) => CreatePost2Widget(),
-            ),
-            FFRoute(
               name: 'CreatePost',
               path: 'createPost',
               builder: (context, params) => CreatePostWidget(),

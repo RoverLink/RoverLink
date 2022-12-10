@@ -1950,63 +1950,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
-  // CreatePost2
-  {
-    'kl2t8mfa': {
-      'en': 'Post',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'rcuft53w': {
-      'en': 'Cancel',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'tsfd3zgj': {
-      'en': 'What\'s happening?',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'btch7u3y': {
-      'en': 'Field is required',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'wlz8pg9w': {
-      'en': 'Please choose an option from the dropdown',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-    'ocjjev5y': {
-      'en': 'Home',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'it': '',
-      'ja': '',
-      'zh_Hans': '',
-    },
-  },
   // CreatePost
   {
     '5yxetng1': {
