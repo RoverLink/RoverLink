@@ -76,6 +76,8 @@ Thank You with Confetti Animation - [https://lottiefiles.com/74797-thank-you-wit
 
 Success Animation - [https://lottiefiles.com/97240-success](https://lottiefiles.com/97240-success)
 
+Bulldog Pawprint Silhouette - [https://silhouettegarden.com/download/bulldog-paw-print-silhouette/](https://silhouettegarden.com/download/bulldog-paw-print-silhouette/)
+
 Software and Services Used
 --------------------------
 
