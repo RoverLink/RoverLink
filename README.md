@@ -6,7 +6,7 @@ Easton Area High School
 
 Easton, PA
 
-RoverLink is a cross platform mobile application for Android and iOS devices that serves as an all-in-one hub for the Easton Area School District. It includes a social media platform that is filterable by school, a district-wide announcement system, a calendar of district events, and a system that allows the user to report absences. 
+Welcome to RoverLink, Easton Area School District's social media app! This app is designed to connect students, teachers, and parents in the district, providing a space for educational discussions and collaboration. It is a cross platform mobile application for Android and iOS devices that serves as an all-in-one hub for the district. It includes a social media platform that is filterable by school, a district-wide announcement system, a calendar of district events, and a system that allows the user to report absences. 
 
 Features
 --------
