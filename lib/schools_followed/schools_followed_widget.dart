@@ -14,6 +14,8 @@ class SchoolsFollowedWidget extends StatefulWidget {
 }
 
 class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
+  bool? subChestonToggledOff;
+  bool? subChestonToggledOn;
   bool? subChestonValue;
   bool? subEahsValue;
   bool? subToggledOff;
@@ -159,6 +161,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'eahs',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -233,6 +241,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'eams',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -242,6 +256,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'eams',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -317,6 +337,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'palmer',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -326,6 +352,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'palmer',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -400,6 +432,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'forks',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -409,6 +447,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'forks',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -483,6 +527,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'tracy',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -492,6 +542,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'tracy',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -560,6 +616,37 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                     onChanged: (newValue) async {
                                       setState(
                                           () => subChestonValue = newValue!);
+                                      if (newValue!) {
+                                        subChestonToggledOn =
+                                            await actions.setSubscription(
+                                          context,
+                                          'cheston',
+                                          true,
+                                        );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
+
+                                        setState(() {});
+                                      } else {
+                                        subChestonToggledOff =
+                                            await actions.setSubscription(
+                                          context,
+                                          'cheston',
+                                          false,
+                                        );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
+
+                                        setState(() {});
+                                      }
                                     },
                                     activeColor: FlutterFlowTheme.of(context)
                                         .primaryColor,
@@ -632,6 +719,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'paxinosa',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -641,6 +734,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'paxinosa',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -716,6 +815,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'shawnee',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -725,6 +830,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'shawnee',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -799,6 +910,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'march',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -808,6 +925,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'march',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }
@@ -882,6 +1005,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'cyber',
                                           true,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       } else {
@@ -891,6 +1020,12 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           'cyber',
                                           false,
                                         );
+                                        setState(() {
+                                          FFAppState().subscriptions =
+                                              FFAppState()
+                                                  .subscriptions
+                                                  .toList();
+                                        });
 
                                         setState(() {});
                                       }

@@ -11,10 +11,6 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-Color transparentTest() {
-  return Color.fromRGBO(255, 255, 255, 0);
-}
-
 String humanDate(String? date) {
   return date == null ? '' : timeago.format(DateTime.parse(date));
 }
@@ -44,4 +40,20 @@ bool isElementaryOrMiddleSchool(String? schoolName) {
 
 String formatDateTime(String date) {
   return DateFormat('MMM d yyyy hh:mm a').format(DateTime.parse(date));
+}
+
+double calculateMessageCompletion(
+  String? message,
+  int? maxLen,
+) {
+  // find the ratio of message length to maxLen
+  if (message == null) return 0;
+
+  maxLen ??= 280;
+
+  double len = message.length / maxLen;
+
+  if (len > 1.0) len = 1.0;
+
+  return len;
 }

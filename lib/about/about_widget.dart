@@ -99,26 +99,29 @@ class _AboutWidgetState extends State<AboutWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          FFLocalizations.of(context).getText(
-                                            'dgv0p1hb' /* RoverLink */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1
-                                              .override(
-                                                fontFamily: 'Fira Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 32,
-                                                fontWeight: FontWeight.w600,
-                                                useGoogleFonts:
-                                                    GoogleFonts.asMap()
-                                                        .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .title1Family),
+                                        Stack(
+                                          children: [
+                                            if ((Theme.of(context).brightness ==
+                                                    Brightness.light) ==
+                                                true)
+                                              Image.asset(
+                                                'assets/images/RoverLink_Black.png',
+                                                width: 150,
+                                                fit: BoxFit.cover,
                                               ),
+                                            if ((Theme.of(context).brightness ==
+                                                    Brightness.dark) ==
+                                                true)
+                                              Hero(
+                                                tag: 'RoverLinkLogo',
+                                                transitionOnUserGestures: true,
+                                                child: Image.asset(
+                                                  'assets/images/RoverLink_hiwte.png',
+                                                  width: 150,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                          ],
                                         ),
                                         Padding(
                                           padding:

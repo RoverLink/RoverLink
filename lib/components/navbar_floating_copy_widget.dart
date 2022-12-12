@@ -7,14 +7,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class NavbarFloatingWidget extends StatefulWidget {
-  const NavbarFloatingWidget({Key? key}) : super(key: key);
+class NavbarFloatingCopyWidget extends StatefulWidget {
+  const NavbarFloatingCopyWidget({Key? key}) : super(key: key);
 
   @override
-  _NavbarFloatingWidgetState createState() => _NavbarFloatingWidgetState();
+  _NavbarFloatingCopyWidgetState createState() =>
+      _NavbarFloatingCopyWidgetState();
 }
 
-class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
+class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -64,45 +65,40 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                buttonSize: 50,
-                                icon: FaIcon(
-                                  FontAwesomeIcons.home,
-                                  color: FFAppState().currentPage == 'Home'
-                                      ? FlutterFlowTheme.of(context)
-                                          .navbarActiveLink
-                                      : FlutterFlowTheme.of(context).navbarLink,
-                                  size: 25,
-                                ),
-                                showLoadingIndicator: true,
-                                onPressed: () async {
-                                  if (FFAppState().currentPage != 'Home') {
-                                    setState(() {
-                                      FFAppState().currentPage = 'Home';
-                                    });
-
-                                    context.goNamed(
-                                      'HomePage',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 50),
-                                        ),
-                                      },
-                                    );
-                                  } else {
-                                    return;
-                                  }
-                                },
+                            FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30,
+                              borderWidth: 1,
+                              buttonSize: 60,
+                              icon: FaIcon(
+                                FontAwesomeIcons.home,
+                                color: FFAppState().currentPage == 'Home'
+                                    ? FlutterFlowTheme.of(context)
+                                        .navbarActiveLink
+                                    : FlutterFlowTheme.of(context).navbarLink,
+                                size: 25,
                               ),
+                              showLoadingIndicator: true,
+                              onPressed: () async {
+                                if (FFAppState().currentPage != 'Home') {
+                                  setState(() {
+                                    FFAppState().currentPage = 'Home';
+                                  });
+
+                                  context.goNamed(
+                                    'HomePage',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 50),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  return;
+                                }
+                              },
                             ),
                             FlutterFlowIconButton(
                               borderColor: Colors.transparent,
@@ -152,15 +148,14 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                               borderRadius: 30,
                               borderWidth: 1,
                               buttonSize: 50,
-                              icon: FaIcon(
-                                FontAwesomeIcons.school,
+                              icon: Icon(
+                                Icons.school_rounded,
                                 color: FFAppState().currentPage == 'Schools'
                                     ? FlutterFlowTheme.of(context)
                                         .navbarActiveLink
                                     : FlutterFlowTheme.of(context).navbarLink,
-                                size: 27,
+                                size: 30,
                               ),
-                              showLoadingIndicator: true,
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Schools') {
                                   setState(() {
@@ -168,7 +163,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                   });
 
                                   context.goNamed(
-                                    'Schools',
+                                    'Events',
                                     extra: <String, dynamic>{
                                       kTransitionInfoKey: TransitionInfo(
                                         hasTransition: true,
@@ -182,45 +177,39 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 }
                               },
                             ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30,
-                                borderWidth: 1,
-                                buttonSize: 50,
-                                icon: FaIcon(
-                                  FontAwesomeIcons.externalLinkSquareAlt,
-                                  color: FFAppState().currentPage == 'Links'
-                                      ? FlutterFlowTheme.of(context)
-                                          .navbarActiveLink
-                                      : FlutterFlowTheme.of(context).navbarLink,
-                                  size: 30,
-                                ),
-                                showLoadingIndicator: true,
-                                onPressed: () async {
-                                  if (FFAppState().currentPage != 'Links') {
-                                    setState(() {
-                                      FFAppState().currentPage = 'Links';
-                                    });
-
-                                    context.pushNamed(
-                                      'Links',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 50),
-                                        ),
-                                      },
-                                    );
-                                  } else {
-                                    return;
-                                  }
-                                },
+                            FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 30,
+                              borderWidth: 1,
+                              buttonSize: 50,
+                              icon: Icon(
+                                Icons.settings,
+                                color: FFAppState().currentPage == 'Settings'
+                                    ? FlutterFlowTheme.of(context)
+                                        .navbarActiveLink
+                                    : FlutterFlowTheme.of(context).navbarLink,
+                                size: 30,
                               ),
+                              onPressed: () async {
+                                if (FFAppState().currentPage != 'Settings') {
+                                  setState(() {
+                                    FFAppState().currentPage = 'Settings';
+                                  });
+
+                                  context.goNamed(
+                                    'Settings',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 50),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  return;
+                                }
+                              },
                             ),
                           ],
                         ),

@@ -92,7 +92,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                     tag: 'RoverLinkLogo',
                     transitionOnUserGestures: true,
                     child: Image.asset(
-                      'assets/images/RoverLinkDarkTheme.png',
+                      'assets/images/RoverLink_hiwte.png',
                       width: MediaQuery.of(context).size.width * 0.7,
                       height: 105,
                       fit: BoxFit.contain,

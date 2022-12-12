@@ -50,13 +50,14 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               // Links to the Terms of Use on an external page
-              FlutterFlowWebView(
-                url: 'https://roverlink.github.io/TermsOfUse',
-                bypass: false,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1,
-                verticalScroll: false,
-                horizontalScroll: false,
+              Expanded(
+                child: FlutterFlowWebView(
+                  url: 'https://roverlink.github.io/TermsOfUse',
+                  bypass: false,
+                  height: MediaQuery.of(context).size.height * 1,
+                  verticalScroll: false,
+                  horizontalScroll: false,
+                ),
               ),
             ],
           ),

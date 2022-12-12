@@ -113,16 +113,18 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                    child: Text(
-                      '@${FFAppState().username}',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 17,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
-                          ),
+                    child: AuthUserStreamWidget(
+                      child: Text(
+                        '@${valueOrDefault(currentUserDocument?.username, '')}',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 17,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
                     ),
                   ),
                   Padding(

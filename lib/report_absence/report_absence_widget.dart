@@ -9,8 +9,8 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
@@ -46,7 +46,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
     reasonController = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 2,
-      penColor: Colors.black,
+      penColor: FlutterFlowTheme.of(context).primaryText,
       exportBackgroundColor: Colors.white,
     );
   }
@@ -364,7 +364,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           elevation: 2,
                           borderColor: Colors.transparent,
                           borderWidth: 0,
-                          borderRadius: 0,
+                          borderRadius: 8,
                           margin: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
                           hidesUnderline: true,
                         ),
@@ -431,6 +431,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -457,28 +458,29 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                             child: InkWell(
                               onTap: () async {
-                                await DatePicker.showDatePicker(
-                                  context,
-                                  showTitleActions: true,
-                                  onConfirm: (date) {
-                                    setState(() => datePicked = date);
-                                  },
-                                  currentTime: getCurrentTimestamp,
-                                  minTime: DateTime(0, 0, 0),
-                                  maxTime: getCurrentTimestamp,
-                                  locale: LocaleType.values.firstWhere(
-                                    (l) =>
-                                        l.name ==
-                                        FFLocalizations.of(context)
-                                            .languageCode,
-                                    orElse: () => LocaleType.en,
-                                  ),
+                                final _datePickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: getCurrentTimestamp,
+                                  firstDate: DateTime(1900),
+                                  lastDate: DateTime(2050),
                                 );
+
+                                if (_datePickedDate != null) {
+                                  setState(
+                                    () => datePicked = DateTime(
+                                      _datePickedDate.year,
+                                      _datePickedDate.month,
+                                      _datePickedDate.day,
+                                    ),
+                                  );
+                                }
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 height: 50,
-                                decoration: BoxDecoration(),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
                               ),
                             ),
                           ),
@@ -662,24 +664,28 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                         child: Text(
                           FFLocalizations.of(context).getText(
-                            'lqihzcox' /* Sign your name below on the si... */,
+                            'lqihzcox' /* Sign your name in the box belo... */,
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 20),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: ClipRect(
-                            child: Signature(
-                              controller: signatureController,
-                              backgroundColor: Colors.white,
-                              height: 120,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: ClipRect(
+                              child: Signature(
+                                controller: signatureController,
+                                backgroundColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                height: 120,
+                              ),
                             ),
                           ),
                         ),
@@ -691,104 +697,109 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            FFButtonWidget(
-                              onPressed: () async {
-                                if (formKey.currentState == null ||
-                                    !formKey.currentState!.validate()) {
-                                  return;
-                                }
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  if (formKey.currentState == null ||
+                                      !formKey.currentState!.validate()) {
+                                    return;
+                                  }
 
-                                if (schoolValue == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'You must select a school',
-                                        style: TextStyle(),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Color(0x00000000),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                if (gradeValue == null) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'You must select a grade level',
-                                        style: TextStyle(),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Color(0x00000000),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                if (datePicked == null) {
-                                  return;
-                                }
-
-                                if (datePicked != null) {
-                                  final excusesCreateData =
-                                      createExcusesRecordData(
-                                    excuseUser: currentUserReference,
-                                    excusePhotoUrl: uploadedFileUrl,
-                                    excuseDateMissed: datePicked,
-                                  );
-                                  await ExcusesRecord.collection
-                                      .doc()
-                                      .set(excusesCreateData);
-
-                                  context.goNamed(
-                                    'FormSubmitted',
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType: PageTransitionType.fade,
-                                      ),
-                                    },
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'You must select a date of absence.',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                                  if (schoolValue == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'You must select a school',
+                                          style: TextStyle(),
                                         ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0x00000000),
                                       ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor: Color(0x00000000),
-                                    ),
-                                  );
-                                  return;
-                                }
-                              },
-                              text: FFLocalizations.of(context).getText(
-                                'bdsydx61' /* Submit Excuse */,
-                              ),
-                              options: FFButtonOptions(
-                                width: 130,
-                                height: 40,
-                                color:
-                                    FlutterFlowTheme.of(context).primaryColor,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .subtitle2Family,
-                                      color: Colors.white,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .subtitle2Family),
-                                    ),
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
+                                    );
+                                    return;
+                                  }
+                                  if (gradeValue == null) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'You must select a grade level',
+                                          style: TextStyle(),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0x00000000),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  if (datePicked == null) {
+                                    return;
+                                  }
+
+                                  if (datePicked != null) {
+                                    final excusesCreateData =
+                                        createExcusesRecordData(
+                                      excuseUser: currentUserReference,
+                                      excusePhotoUrl: uploadedFileUrl,
+                                      excuseDateMissed: datePicked,
+                                    );
+                                    await ExcusesRecord.collection
+                                        .doc()
+                                        .set(excusesCreateData);
+
+                                    context.goNamed(
+                                      'FormSubmitted',
+                                      extra: <String, dynamic>{
+                                        kTransitionInfoKey: TransitionInfo(
+                                          hasTransition: true,
+                                          transitionType:
+                                              PageTransitionType.fade,
+                                        ),
+                                      },
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          'You must select a date of absence.',
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor: Color(0x00000000),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                },
+                                text: FFLocalizations.of(context).getText(
+                                  'bdsydx61' /* Submit Excuse */,
                                 ),
-                                borderRadius: BorderRadius.circular(8),
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .subtitle2Family,
+                                        color: Colors.white,
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .subtitle2Family),
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
                               ),
                             ),
                           ],

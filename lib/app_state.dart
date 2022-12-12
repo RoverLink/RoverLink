@@ -24,7 +24,6 @@ class FFAppState extends ChangeNotifier {
         await secureStorage.getBool('ff_automaticTheme') ?? _automaticTheme;
     _isAnonymous =
         await secureStorage.getBool('ff_isAnonymous') ?? _isAnonymous;
-    _username = await secureStorage.getString('ff_username') ?? _username;
   }
 
   late FlutterSecureStorage secureStorage;
@@ -37,11 +36,6 @@ class FFAppState extends ChangeNotifier {
       return;
     }
     _selectedDate = _value;
-  }
-
-  void deleteSelectedDate() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_selectedDate');
   }
 
   bool _viewedOnboarding = false;
@@ -66,22 +60,12 @@ class FFAppState extends ChangeNotifier {
     _currentPage = _value;
   }
 
-  void deleteCurrentPage() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_currentPage');
-  }
-
   bool _newAccount = false;
   bool get newAccount => _newAccount;
   set newAccount(bool _value) {
     notifyListeners();
 
     _newAccount = _value;
-  }
-
-  void deleteNewAccount() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_newAccount');
   }
 
   List<String> _subscriptions = ['easd'];
@@ -144,25 +128,6 @@ class FFAppState extends ChangeNotifier {
     notifyListeners();
 
     _profilePicture = _value;
-  }
-
-  void deleteProfilePicture() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_profilePicture');
-  }
-
-  String _username = '';
-  String get username => _username;
-  set username(String _value) {
-    notifyListeners();
-
-    _username = _value;
-    secureStorage.setString('ff_username', _value);
-  }
-
-  void deleteUsername() {
-    notifyListeners();
-    secureStorage.delete(key: 'ff_username');
   }
 }
 
