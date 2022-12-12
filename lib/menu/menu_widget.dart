@@ -345,7 +345,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  Instabug.show();
+                                  context.pushNamed('Settings');
                                 },
                                 child: Container(
                                   width: double.infinity,
@@ -427,7 +427,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  context.pushNamed('ReportABug');
+                                  Instabug.show();
                                 },
                                 child: Container(
                                   width: double.infinity,
