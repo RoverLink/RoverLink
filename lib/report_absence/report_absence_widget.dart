@@ -46,7 +46,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
     reasonController = TextEditingController();
     signatureController = SignatureController(
       penStrokeWidth: 2,
-      penColor: FlutterFlowTheme.of(context).primaryText,
+      penColor: Color(0xFF888888),
       exportBackgroundColor: Colors.white,
     );
   }
@@ -682,8 +682,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             child: ClipRect(
                               child: Signature(
                                 controller: signatureController,
-                                backgroundColor: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
+                                backgroundColor: Colors.transparent,
                                 height: 120,
                               ),
                             ),
