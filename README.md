@@ -39,15 +39,23 @@ On the home page, you can view your feed. Hitting an image will expand it. From 
 
 **Calendar**
 
-From the home page, hit the calendar icon on the bottom navigation bar. From here you can view the events on each day by simply selecting the date on the calendar.
+From the home page, hit the calendar icon on the bottom navigation bar. From here you can view the events on each day by simply selecting the corresponding date on the calendar.
 
-**Report an Absence**
+**Schools**
 
-To report an absence, select the plus button on the bottom navigation bar and hit the "Turn in Absence Excuse" option. From there you can fill out the form and optionally submit a doctor's note as well.
+From the home page, hit the school icon on the bottom navigation bar. On this page is a list of the schools and their information. Clicking on each school will bring up a page with more information about it.
+
+**Links**
+
+From the home page, hit the arrow icon on the bottom navigation bar. Listed on that page is a variety of important links related to the districts that you can access.
 
 **View/Edit Profile**
 
 From the home page, hit your profile icon to navigate to the menu, and select the button with your profile. To edit it, select the pencil icon on the top right. From there you can change your display name, username, and profile picture.
+
+**Report an Absence**
+
+From the home page, hit your profile icon to navigate to the menu, and select the "Report Absence" option. From there you can fill out the form and optionally submit a doctor's note as well.
 
 **Report a Bug**
 
