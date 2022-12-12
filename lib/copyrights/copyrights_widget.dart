@@ -51,7 +51,7 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
             children: [
               Expanded(
                 child: FlutterFlowWebView(
-                  url: 'https://roverlink.github.io/PrivacyPolicy',
+                  url: 'https://roverlink.github.io/CopyrightAndLicensing',
                   bypass: false,
                   height: MediaQuery.of(context).size.height * 1,
                   verticalScroll: false,

@@ -92,6 +92,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'Schools',
+              path: 'schools',
+              builder: (context, params) => SchoolsWidget(),
+            ),
+            FFRoute(
+              name: 'Links',
+              path: 'links',
+              builder: (context, params) => LinksWidget(),
+            ),
+            FFRoute(
               name: 'ShowEvent',
               path: 'showEvent',
               builder: (context, params) => ShowEventWidget(
@@ -117,16 +127,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'EditProfile',
               path: 'editProfile',
               builder: (context, params) => EditProfileWidget(),
-            ),
-            FFRoute(
-              name: 'Schools',
-              path: 'schools',
-              builder: (context, params) => SchoolsWidget(),
-            ),
-            FFRoute(
-              name: 'EAHS',
-              path: 'eahs',
-              builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
               name: 'ReportABug',
@@ -169,9 +169,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginWidget(),
             ),
             FFRoute(
+              name: 'ForgotPassword',
+              path: 'forgotPassword',
+              builder: (context, params) => ForgotPasswordWidget(),
+            ),
+            FFRoute(
               name: 'Onboarding',
               path: 'onboarding',
               builder: (context, params) => OnboardingWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'PrivacyPolicy',
@@ -179,19 +189,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
-              name: 'ForgotPassword',
-              path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
-            ),
-            FFRoute(
               name: 'Copyrights',
               path: 'copyrights',
               builder: (context, params) => CopyrightsWidget(),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'NotificationsWithStuff',
@@ -207,6 +207,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'FormSubmitted',
               path: 'formSubmitted',
               builder: (context, params) => FormSubmittedWidget(),
+            ),
+            FFRoute(
+              name: 'EAHS',
+              path: 'eahs',
+              builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
               name: 'CreatePost',
@@ -388,7 +393,7 @@ class FFRoute {
                   color: Color(0xFF1A1F24),
                   child: Center(
                     child: Image.asset(
-                      'assets/images/RoverLinkDarkTheme.png',
+                      'assets/images/RoverLink_hiwte.png',
                       width: MediaQuery.of(context).size.width * 0.8,
                       fit: BoxFit.contain,
                     ),

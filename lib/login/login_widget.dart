@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -165,6 +166,7 @@ class _LoginWidgetState extends State<LoginWidget>
       ],
     ),
   };
+  AudioPlayer? soundPlayer;
   String? gravatarHashUrl;
   TextEditingController? emailAddressLoginController;
   TextEditingController? passwordLoginController;
@@ -252,42 +254,15 @@ class _LoginWidgetState extends State<LoginWidget>
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Expanded(
-                              child: Stack(
-                                children: [
-                                  if ((Theme.of(context).brightness ==
-                                          Brightness.light) ==
-                                      true)
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Image.asset(
-                                        'assets/images/RoverLinkDarkTheme.png',
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.7,
-                                        height: 105,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                  if ((Theme.of(context).brightness ==
-                                          Brightness.dark) ==
-                                      true)
-                                    Align(
-                                      alignment: AlignmentDirectional(0, 0),
-                                      child: Hero(
-                                        tag: 'RoverLinkLogo',
-                                        transitionOnUserGestures: true,
-                                        child: Image.asset(
-                                          'assets/images/RoverLinkDarkTheme.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.7,
-                                          height: 105,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                    ),
-                                ],
+                              child: Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Image.asset(
+                                  'assets/images/RoverLink_hiwte.png',
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.7,
+                                  height: 105,
+                                  fit: BoxFit.contain,
+                                ),
                               ),
                             ),
                           ],
@@ -627,6 +602,19 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 );
                                                                 HapticFeedback
                                                                     .lightImpact();
+                                                                soundPlayer ??=
+                                                                    AudioPlayer();
+                                                                if (soundPlayer!
+                                                                    .playing) {
+                                                                  await soundPlayer!
+                                                                      .stop();
+                                                                }
+
+                                                                soundPlayer!
+                                                                    .setUrl('')
+                                                                    .then((_) =>
+                                                                        soundPlayer!
+                                                                            .play());
                                                               } else {
                                                                 GoRouter.of(
                                                                         context)
@@ -1016,7 +1004,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInAnonymously(
+                                                                      await signInWithFacebook(
                                                                           context);
                                                                   if (user ==
                                                                       null) {
@@ -1053,13 +1041,34 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           0, 0),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .facebookF,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    size: 24,
+                                                                  child:
+                                                                      InkWell(
+                                                                    onTap:
+                                                                        () async {
+                                                                      GoRouter.of(
+                                                                              context)
+                                                                          .prepareAuthEvent();
+                                                                      final user =
+                                                                          await signInWithFacebook(
+                                                                              context);
+                                                                      if (user ==
+                                                                          null) {
+                                                                        return;
+                                                                      }
+
+                                                                      context.goNamedAuth(
+                                                                          'HomePage',
+                                                                          mounted);
+                                                                    },
+                                                                    child:
+                                                                        FaIcon(
+                                                                      FontAwesomeIcons
+                                                                          .facebookF,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      size: 24,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -1766,7 +1775,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInAnonymously(
+                                                                      await signInWithFacebook(
                                                                           context);
                                                                   if (user ==
                                                                       null) {

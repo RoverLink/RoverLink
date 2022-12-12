@@ -33,19 +33,39 @@ class _MenuWidgetState extends State<MenuWidget> {
           },
           child: BackButtonWidget(),
         ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'zsnpy2p2' /* RoverLink */,
-          ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
+        title: Stack(
+          children: [
+            if ((Theme.of(context).brightness == Brightness.light) == true)
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Image.asset(
+                  'assets/images/RoverLink_Black.png',
+                  width: 150,
+                  fit: BoxFit.cover,
+                ),
               ),
+            if ((Theme.of(context).brightness == Brightness.dark) == true)
+              Align(
+                alignment: AlignmentDirectional(0, 0),
+                child: Hero(
+                  tag: 'RoverLinkLogo',
+                  transitionOnUserGestures: true,
+                  child: Image.asset(
+                    'assets/images/RoverLink_hiwte.png',
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+          ],
         ),
-        actions: [],
+        actions: [
+          Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(),
+          ),
+        ],
         centerTitle: true,
         elevation: 0,
       ),
@@ -240,93 +260,6 @@ class _MenuWidgetState extends State<MenuWidget> {
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                              child: InkWell(
-                                onTap: () async {
-                                  context.pushNamed('Schools');
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x3416202A),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(12),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 8, 8, 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 2),
-                                          child: FaIcon(
-                                            FontAwesomeIcons.school,
-                                            color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 20,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 0, 0, 0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              'ovolwsh3' /* Schools */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyText1Family,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  fontSize: 15,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1Family),
-                                                ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.9, 0),
-                                            child: Icon(
-                                              Icons.arrow_forward_ios,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              size: 18,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                               child: InkWell(
                                 onTap: () async {
                                   context.pushNamed('ReportAbsence');

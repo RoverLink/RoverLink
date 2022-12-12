@@ -425,6 +425,11 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
+                              if (formKey.currentState == null ||
+                                  !formKey.currentState!.validate()) {
+                                return;
+                              }
+
                               if (uploadedFileUrl != null &&
                                   uploadedFileUrl != '') {
                                 final usersUpdateData = createUsersRecordData(
