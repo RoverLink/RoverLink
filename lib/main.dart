@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
@@ -10,6 +11,7 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
+
 import 'index.dart';
 
 void main() async {
@@ -49,6 +51,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    Instabug.start('d8bfcd37cead64895597bb66e3ecaee2', [InvocationEvent.shake]);
     _appStateNotifier = AppStateNotifier();
     _router = createRouter(_appStateNotifier);
     userStream = roverLinkFirebaseUserStream()
