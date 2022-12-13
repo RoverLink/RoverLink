@@ -104,10 +104,14 @@ class _AboutWidgetState extends State<AboutWidget> {
                                             if ((Theme.of(context).brightness ==
                                                     Brightness.light) ==
                                                 true)
-                                              Image.asset(
-                                                'assets/images/RoverLink_Black.png',
-                                                width: 150,
-                                                fit: BoxFit.cover,
+                                              Hero(
+                                                tag: 'RoverLinkLogo',
+                                                transitionOnUserGestures: true,
+                                                child: Image.asset(
+                                                  'assets/images/RoverLink_Black.png',
+                                                  width: 150,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             if ((Theme.of(context).brightness ==
                                                     Brightness.dark) ==

@@ -39,10 +39,14 @@ class _MenuWidgetState extends State<MenuWidget> {
             if ((Theme.of(context).brightness == Brightness.light) == true)
               Align(
                 alignment: AlignmentDirectional(0, 0),
-                child: Image.asset(
-                  'assets/images/RoverLink_Black.png',
-                  width: 150,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: 'RoverLinkLogo',
+                  transitionOnUserGestures: true,
+                  child: Image.asset(
+                    'assets/images/RoverLink_Black.png',
+                    width: 150,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             if ((Theme.of(context).brightness == Brightness.dark) == true)

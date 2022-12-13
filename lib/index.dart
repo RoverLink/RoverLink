@@ -21,8 +21,8 @@ export 'terms_of_use/terms_of_use_widget.dart' show TermsOfUseWidget;
 export 'login/login_widget.dart' show LoginWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'onboarding/onboarding_widget.dart' show OnboardingWidget;
-export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'privacy_policy/privacy_policy_widget.dart' show PrivacyPolicyWidget;
+export 'notifications/notifications_widget.dart' show NotificationsWidget;
 export 'copyrights/copyrights_widget.dart' show CopyrightsWidget;
 export 'notifications_with_stuff/notifications_with_stuff_widget.dart'
     show NotificationsWithStuffWidget;
