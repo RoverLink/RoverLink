@@ -753,7 +753,7 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(12),
                                       child: Image.asset(
-                                        'assets/images/ECA.png',
+                                        'assets/images/cyberacademylogo.png',
                                         width:
                                             MediaQuery.of(context).size.width,
                                         height: 100,

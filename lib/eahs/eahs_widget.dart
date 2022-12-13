@@ -103,7 +103,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                     child: Text(
                       FFLocalizations.of(context).getText(
-                        'kew24zs0' /* #EAHS */,
+                        'kew24zs0' /* #eahs */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily:

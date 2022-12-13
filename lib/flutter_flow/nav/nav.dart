@@ -179,14 +179,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => OnboardingWidget(),
             ),
             FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
-            ),
-            FFRoute(
               name: 'PrivacyPolicy',
               path: 'privacyPolicy',
               builder: (context, params) => PrivacyPolicyWidget(),
+            ),
+            FFRoute(
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'Copyrights',
