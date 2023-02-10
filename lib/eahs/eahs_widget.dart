@@ -10,6 +10,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'eahs_model.dart';
+export 'eahs_model.dart';
 
 class EahsWidget extends StatefulWidget {
   const EahsWidget({Key? key}) : super(key: key);
@@ -19,9 +21,24 @@ class EahsWidget extends StatefulWidget {
 }
 
 class _EahsWidgetState extends State<EahsWidget> {
-  Completer<ApiCallResponse>? _apiRequestCompleter1;
-  Completer<ApiCallResponse>? _apiRequestCompleter2;
+  late EahsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => EahsModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +94,7 @@ class _EahsWidgetState extends State<EahsWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -282,12 +299,14 @@ class _EahsWidgetState extends State<EahsWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           FutureBuilder<ApiCallResponse>(
-                                            future: (_apiRequestCompleter2 ??=
-                                                    Completer<ApiCallResponse>()
-                                                      ..complete(
-                                                          NotificationsCall
-                                                              .call()))
-                                                .future,
+                                            future:
+                                                (_model.apiRequestCompleter2 ??=
+                                                        Completer<
+                                                            ApiCallResponse>()
+                                                          ..complete(
+                                                              NotificationsCall
+                                                                  .call()))
+                                                    .future,
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -311,16 +330,21 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                 builder: (context) {
                                                   final announcement =
                                                       NotificationsCall
-                                                          .notifications(
-                                                    listViewNotificationsResponse
-                                                        .jsonBody,
-                                                  ).map((e) => e).toList();
+                                                                  .notifications(
+                                                            listViewNotificationsResponse
+                                                                .jsonBody,
+                                                          )
+                                                              ?.map((e) => e)
+                                                              .toList()
+                                                              ?.toList() ??
+                                                          [];
                                                   return RefreshIndicator(
                                                     onRefresh: () async {
-                                                      setState(() =>
-                                                          _apiRequestCompleter2 =
-                                                              null);
-                                                      await waitForApiRequestCompleter2();
+                                                      setState(() => _model
+                                                              .apiRequestCompleter2 =
+                                                          null);
+                                                      await _model
+                                                          .waitForApiRequestCompleter2();
                                                     },
                                                     child: ListView.builder(
                                                       padding: EdgeInsets.zero,
@@ -337,7 +361,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                                 announcementIndex];
                                                         return AnnouncementWidget(
                                                           key: Key(
-                                                              'Announcement_${announcementIndex}'),
+                                                              'Keyhzm_${announcementIndex}_of_${announcement.length}'),
                                                           announcement:
                                                               announcementItem,
                                                         );
@@ -360,11 +384,14 @@ class _EahsWidgetState extends State<EahsWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           FutureBuilder<ApiCallResponse>(
-                                            future: (_apiRequestCompleter1 ??=
-                                                    Completer<ApiCallResponse>()
-                                                      ..complete(SocialPostsCall
-                                                          .call()))
-                                                .future,
+                                            future:
+                                                (_model.apiRequestCompleter1 ??=
+                                                        Completer<
+                                                            ApiCallResponse>()
+                                                          ..complete(
+                                                              SocialPostsCall
+                                                                  .call()))
+                                                    .future,
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -388,15 +415,20 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                 builder: (context) {
                                                   final post =
                                                       SocialPostsCall.posts(
-                                                    listViewSocialPostsResponse
-                                                        .jsonBody,
-                                                  ).map((e) => e).toList();
+                                                            listViewSocialPostsResponse
+                                                                .jsonBody,
+                                                          )
+                                                              ?.map((e) => e)
+                                                              .toList()
+                                                              ?.toList() ??
+                                                          [];
                                                   return RefreshIndicator(
                                                     onRefresh: () async {
-                                                      setState(() =>
-                                                          _apiRequestCompleter1 =
-                                                              null);
-                                                      await waitForApiRequestCompleter1();
+                                                      setState(() => _model
+                                                              .apiRequestCompleter1 =
+                                                          null);
+                                                      await _model
+                                                          .waitForApiRequestCompleter1();
                                                     },
                                                     child: ListView.builder(
                                                       padding: EdgeInsets.zero,
@@ -411,7 +443,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                             post[postIndex];
                                                         return SocialPostWidget(
                                                           key: Key(
-                                                              'SocialPost_${postIndex}'),
+                                                              'Keyj9n_${postIndex}_of_${post.length}'),
                                                           post: postItem,
                                                         );
                                                       },
@@ -440,35 +472,5 @@ class _EahsWidgetState extends State<EahsWidget> {
         ),
       ),
     );
-  }
-
-  Future waitForApiRequestCompleter1({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter1?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
-  }
-
-  Future waitForApiRequestCompleter2({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter2?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

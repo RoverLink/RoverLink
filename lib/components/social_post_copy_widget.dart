@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'social_post_copy_model.dart';
+export 'social_post_copy_model.dart';
 
 class SocialPostCopyWidget extends StatefulWidget {
   const SocialPostCopyWidget({
@@ -23,7 +25,26 @@ class SocialPostCopyWidget extends StatefulWidget {
 }
 
 class _SocialPostCopyWidgetState extends State<SocialPostCopyWidget> {
-  String? imageDownload;
+  late SocialPostCopyModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SocialPostCopyModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -361,7 +382,8 @@ class _SocialPostCopyWidgetState extends State<SocialPostCopyWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                           child: InkWell(
                             onTap: () async {
-                              imageDownload = await actions.downloadImage(
+                              _model.imageDownload =
+                                  await actions.downloadImage(
                                 getJsonField(
                                   widget.post,
                                   r'''$.image''',

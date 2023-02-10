@@ -3,9 +3,12 @@ import '../components/back_button_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'menu_model.dart';
+export 'menu_model.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -15,7 +18,31 @@ class MenuWidget extends StatefulWidget {
 }
 
 class _MenuWidgetState extends State<MenuWidget> {
+  late MenuModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => MenuModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().newAccount == true) {
+        context.pushNamed('EditProfile');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +58,11 @@ class _MenuWidgetState extends State<MenuWidget> {
           onTap: () async {
             context.pop();
           },
-          child: BackButtonWidget(),
+          child: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
+          ),
         ),
         title: Stack(
           children: [
@@ -75,7 +106,7 @@ class _MenuWidgetState extends State<MenuWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -122,7 +153,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                 Align(
                                   alignment: AlignmentDirectional(0, 0),
                                   child: AuthUserStreamWidget(
-                                    child: Hero(
+                                    builder: (context) => Hero(
                                       tag: currentUserPhoto,
                                       transitionOnUserGestures: true,
                                       child: Container(
@@ -150,7 +181,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       AuthUserStreamWidget(
-                                        child: Text(
+                                        builder: (context) => Text(
                                           currentUserDisplayName
                                               .maybeHandleOverflow(
                                             maxChars: 23,
@@ -177,7 +208,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         decoration: BoxDecoration(),
                                       ),
                                       AuthUserStreamWidget(
-                                        child: Text(
+                                        builder: (context) => Text(
                                           '@${valueOrDefault(currentUserDocument?.username, '')}'
                                               .maybeHandleOverflow(
                                             maxChars: 22,
@@ -348,6 +379,89 @@ class _MenuWidgetState extends State<MenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
                               child: InkWell(
                                 onTap: () async {
+                                  context.pushNamed('Links');
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurRadius: 5,
+                                        color: Color(0x3416202A),
+                                        offset: Offset(0, 2),
+                                      )
+                                    ],
+                                    borderRadius: BorderRadius.circular(12),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 8, 8, 8),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons
+                                              .externalLinkSquareAlt,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryText,
+                                          size: 24,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  14, 0, 0, 0),
+                                          child: Text(
+                                            FFLocalizations.of(context).getText(
+                                              'ih610p99' /* Important Links */,
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  fontSize: 15,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Align(
+                                            alignment:
+                                                AlignmentDirectional(0.9, 0),
+                                            child: Icon(
+                                              Icons.arrow_forward_ios,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 18,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
+                              child: InkWell(
+                                onTap: () async {
                                   context.pushNamed('Settings');
                                 },
                                 child: Container(
@@ -384,7 +498,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                   12, 0, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              'ih610p99' /* Settings */,
+                                              '5hcqf119' /* Settings */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
@@ -468,7 +582,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  17, 0, 0, 0),
+                                                  15, 0, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'to2drrnx' /* Report a Bug */,
@@ -628,7 +742,7 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           ) ??
                                           false;
                                   if (confirmDialogResponse) {
-                                    setState(() {
+                                    FFAppState().update(() {
                                       FFAppState().isAnonymous = false;
                                     });
 

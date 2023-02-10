@@ -3,6 +3,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'add_content_selector_model.dart';
+export 'add_content_selector_model.dart';
 
 class AddContentSelectorWidget extends StatefulWidget {
   const AddContentSelectorWidget({Key? key}) : super(key: key);
@@ -13,6 +15,27 @@ class AddContentSelectorWidget extends StatefulWidget {
 }
 
 class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
+  late AddContentSelectorModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AddContentSelectorModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

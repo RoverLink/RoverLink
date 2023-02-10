@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'settings_model.dart';
+export 'settings_model.dart';
 
 class SettingsWidget extends StatefulWidget {
   const SettingsWidget({Key? key}) : super(key: key);
@@ -16,8 +18,24 @@ class SettingsWidget extends StatefulWidget {
 }
 
 class _SettingsWidgetState extends State<SettingsWidget> {
-  String? dropDownValue;
+  late SettingsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SettingsModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +47,11 @@ class _SettingsWidgetState extends State<SettingsWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'xyrn7olz' /* Settings */,
@@ -47,7 +69,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -327,25 +349,25 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                     )
                                   ],
                                   onChanged: (val) async {
-                                    setState(() => dropDownValue = val);
-                                    if (dropDownValue == 'Dark') {
+                                    setState(() => _model.dropDownValue = val);
+                                    if (_model.dropDownValue == 'Dark') {
                                       setDarkModeSetting(
                                           context, ThemeMode.dark);
-                                      setState(() {
+                                      FFAppState().update(() {
                                         FFAppState().automaticTheme = false;
                                       });
                                     }
-                                    if (dropDownValue == 'Light') {
+                                    if (_model.dropDownValue == 'Light') {
                                       setDarkModeSetting(
                                           context, ThemeMode.light);
-                                      setState(() {
+                                      FFAppState().update(() {
                                         FFAppState().automaticTheme = false;
                                       });
                                     }
-                                    if (dropDownValue == 'Automatic') {
+                                    if (_model.dropDownValue == 'Automatic') {
                                       setDarkModeSetting(
                                           context, ThemeMode.system);
-                                      setState(() {
+                                      FFAppState().update(() {
                                         FFAppState().automaticTheme = true;
                                       });
                                     }

@@ -1,11 +1,13 @@
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'custom_app_bar_copy_model.dart';
+export 'custom_app_bar_copy_model.dart';
 
 class CustomAppBarCopyWidget extends StatefulWidget {
   const CustomAppBarCopyWidget({Key? key}) : super(key: key);
@@ -15,6 +17,27 @@ class CustomAppBarCopyWidget extends StatefulWidget {
 }
 
 class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
+  late CustomAppBarCopyModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => CustomAppBarCopyModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -48,7 +71,7 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
               children: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                  child: Badge(
+                  child: badges.Badge(
                     badgeContent: Text(
                       FFLocalizations.of(context).getText(
                         'm6x8ui7t' /* 6 */,
@@ -63,12 +86,12 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
                           ),
                     ),
                     showBadge: true,
-                    shape: BadgeShape.circle,
+                    shape: badges.BadgeShape.circle,
                     badgeColor: Color(0xFFDC1313),
                     elevation: 3,
                     padding: EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
-                    position: BadgePosition.topEnd(),
-                    animationType: BadgeAnimationType.scale,
+                    position: badges.BadgePosition.topEnd(),
+                    animationType: badges.BadgeAnimationType.scale,
                     toAnimate: true,
                     child: FlutterFlowIconButton(
                       borderColor: Colors.transparent,
@@ -92,7 +115,7 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
                   children: [
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 8, 0),
-                      child: Badge(
+                      child: badges.Badge(
                         badgeContent: Text(
                           FFLocalizations.of(context).getText(
                             'i9hhqjo1' /* 6 */,
@@ -110,12 +133,12 @@ class _CustomAppBarCopyWidgetState extends State<CustomAppBarCopyWidget> {
                               ),
                         ),
                         showBadge: true,
-                        shape: BadgeShape.circle,
+                        shape: badges.BadgeShape.circle,
                         badgeColor: Color(0xFFDC1313),
                         elevation: 3,
                         padding: EdgeInsetsDirectional.fromSTEB(6, 6, 6, 6),
-                        position: BadgePosition.topEnd(),
-                        animationType: BadgeAnimationType.scale,
+                        position: badges.BadgePosition.topEnd(),
+                        animationType: badges.BadgeAnimationType.scale,
                         toAnimate: true,
                         child: FlutterFlowIconButton(
                           borderColor: Colors.transparent,

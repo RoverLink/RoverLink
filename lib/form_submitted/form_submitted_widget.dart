@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'form_submitted_model.dart';
+export 'form_submitted_model.dart';
 
 class FormSubmittedWidget extends StatefulWidget {
   const FormSubmittedWidget({Key? key}) : super(key: key);
@@ -14,7 +16,24 @@ class FormSubmittedWidget extends StatefulWidget {
 }
 
 class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
+  late FormSubmittedModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => FormSubmittedModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +44,7 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, -0.35),
             child: Padding(

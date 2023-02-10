@@ -2,13 +2,16 @@
 export 'report_absence/report_absence_widget.dart' show ReportAbsenceWidget;
 export 'home_page/home_page_widget.dart' show HomePageWidget;
 export 'events/events_widget.dart' show EventsWidget;
+export 'create_post/create_post_widget.dart' show CreatePostWidget;
+export 'explore/explore_widget.dart' show ExploreWidget;
+export 'following_copy/following_copy_widget.dart' show FollowingCopyWidget;
 export 'schools/schools_widget.dart' show SchoolsWidget;
-export 'links/links_widget.dart' show LinksWidget;
 export 'show_event/show_event_widget.dart' show ShowEventWidget;
 export 'menu/menu_widget.dart' show MenuWidget;
 export 'your_profile/your_profile_widget.dart' show YourProfileWidget;
 export 'your_profile_with_posts/your_profile_with_posts_widget.dart'
     show YourProfileWithPostsWidget;
+export 'links/links_widget.dart' show LinksWidget;
 export 'edit_profile/edit_profile_widget.dart' show EditProfileWidget;
 export 'report_a_bug/report_a_bug_widget.dart' show ReportABugWidget;
 export 'settings/settings_widget.dart' show SettingsWidget;
@@ -27,6 +30,5 @@ export 'copyrights/copyrights_widget.dart' show CopyrightsWidget;
 export 'notifications_with_stuff/notifications_with_stuff_widget.dart'
     show NotificationsWithStuffWidget;
 export 'announcements/announcements_widget.dart' show AnnouncementsWidget;
-export 'form_submitted/form_submitted_widget.dart' show FormSubmittedWidget;
 export 'eahs/eahs_widget.dart' show EahsWidget;
-export 'create_post/create_post_widget.dart' show CreatePostWidget;
+export 'form_submitted/form_submitted_widget.dart' show FormSubmittedWidget;

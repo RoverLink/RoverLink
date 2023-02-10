@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -13,8 +14,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
+import 'login_model.dart';
+export 'login_model.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({Key? key}) : super(key: key);
@@ -25,6 +27,11 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget>
     with TickerProviderStateMixin {
+  late LoginModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'textFieldOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -166,43 +173,24 @@ class _LoginWidgetState extends State<LoginWidget>
       ],
     ),
   };
-  AudioPlayer? soundPlayer;
-  String? gravatarHashUrl;
-  TextEditingController? emailAddressLoginController;
-  TextEditingController? passwordLoginController;
-
-  late bool passwordLoginVisibility;
-  String? gravatarHashUrlGuest;
-  TextEditingController? emailAddressController;
-  TextEditingController? passwordController;
-
-  late bool passwordVisibility;
-  TextEditingController? passwordConfirmController;
-
-  late bool passwordConfirmVisibility;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => LoginModel());
 
-    emailAddressController = TextEditingController();
-    passwordController = TextEditingController();
-    passwordVisibility = false;
-    passwordConfirmController = TextEditingController();
-    passwordConfirmVisibility = false;
-    emailAddressLoginController = TextEditingController();
-    passwordLoginController = TextEditingController();
-    passwordLoginVisibility = false;
+    _model.emailAddressLoginController = TextEditingController();
+    _model.passwordLoginController = TextEditingController();
+    _model.emailAddressController = TextEditingController();
+    _model.passwordController = TextEditingController();
+    _model.passwordConfirmController = TextEditingController();
   }
 
   @override
   void dispose() {
-    emailAddressController?.dispose();
-    passwordController?.dispose();
-    passwordConfirmController?.dispose();
-    emailAddressLoginController?.dispose();
-    passwordLoginController?.dispose();
+    _model.dispose();
+
+    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -214,7 +202,7 @@ class _LoginWidgetState extends State<LoginWidget>
       key: scaffoldKey,
       backgroundColor: Color(0xFF14181B),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 1,
@@ -342,8 +330,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .fromSTEB(0,
                                                                       20, 0, 0),
                                                           child: TextFormField(
-                                                            controller:
-                                                                emailAddressLoginController,
+                                                            controller: _model
+                                                                .emailAddressLoginController,
                                                             obscureText: false,
                                                             decoration:
                                                                 InputDecoration(
@@ -434,6 +422,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .bodyText1Family),
                                                                 ),
                                                             maxLines: null,
+                                                            validator: _model
+                                                                .emailAddressLoginControllerValidator
+                                                                .asValidator(
+                                                                    context),
                                                           ).animateOnPageLoad(
                                                               animationsMap[
                                                                   'textFieldOnPageLoadAnimation1']!),
@@ -444,10 +436,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .fromSTEB(0,
                                                                       12, 0, 0),
                                                           child: TextFormField(
-                                                            controller:
-                                                                passwordLoginController,
-                                                            obscureText:
-                                                                !passwordLoginVisibility,
+                                                            controller: _model
+                                                                .passwordLoginController,
+                                                            obscureText: !_model
+                                                                .passwordLoginVisibility,
                                                             decoration:
                                                                 InputDecoration(
                                                               labelText:
@@ -523,14 +515,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   InkWell(
                                                                 onTap: () =>
                                                                     setState(
-                                                                  () => passwordLoginVisibility =
-                                                                      !passwordLoginVisibility,
+                                                                  () => _model
+                                                                          .passwordLoginVisibility =
+                                                                      !_model
+                                                                          .passwordLoginVisibility,
                                                                 ),
                                                                 focusNode: FocusNode(
                                                                     skipTraversal:
                                                                         true),
                                                                 child: Icon(
-                                                                  passwordLoginVisibility
+                                                                  _model.passwordLoginVisibility
                                                                       ? Icons
                                                                           .visibility_outlined
                                                                       : Icons
@@ -557,6 +551,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           FlutterFlowTheme.of(context)
                                                                               .bodyText1Family),
                                                                 ),
+                                                            validator: _model
+                                                                .passwordLoginControllerValidator
+                                                                .asValidator(
+                                                                    context),
                                                           ).animateOnPageLoad(
                                                               animationsMap[
                                                                   'textFieldOnPageLoadAnimation2']!),
@@ -569,18 +567,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              var _shouldSetState =
-                                                                  false;
-                                                              if ((emailAddressLoginController!
+                                                              if ((_model.emailAddressLoginController
                                                                               .text ==
                                                                           null ||
-                                                                      emailAddressLoginController!
+                                                                      _model.emailAddressLoginController
                                                                               .text ==
                                                                           '') ||
-                                                                  (passwordLoginController!
+                                                                  (_model.passwordLoginController
                                                                               .text ==
                                                                           null ||
-                                                                      passwordLoginController!
+                                                                      _model.passwordLoginController
                                                                               .text ==
                                                                           '')) {
                                                                 ScaffoldMessenger.of(
@@ -606,19 +602,6 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 );
                                                                 HapticFeedback
                                                                     .lightImpact();
-                                                                soundPlayer ??=
-                                                                    AudioPlayer();
-                                                                if (soundPlayer!
-                                                                    .playing) {
-                                                                  await soundPlayer!
-                                                                      .stop();
-                                                                }
-
-                                                                soundPlayer!
-                                                                    .setUrl('')
-                                                                    .then((_) =>
-                                                                        soundPlayer!
-                                                                            .play());
                                                               } else {
                                                                 GoRouter.of(
                                                                         context)
@@ -627,9 +610,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 final user =
                                                                     await signInWithEmail(
                                                                   context,
-                                                                  emailAddressLoginController!
+                                                                  _model
+                                                                      .emailAddressLoginController
                                                                       .text,
-                                                                  passwordLoginController!
+                                                                  _model
+                                                                      .passwordLoginController
                                                                       .text,
                                                                 );
                                                                 if (user ==
@@ -641,36 +626,37 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         null ||
                                                                     currentUserPhoto ==
                                                                         '') {
-                                                                  gravatarHashUrl =
+                                                                  _model.gravatarHashUrl =
                                                                       await actions
                                                                           .gravatarHash(
                                                                     currentUserEmail,
                                                                   );
-                                                                  _shouldSetState =
-                                                                      true;
-                                                                } else {
-                                                                  if (_shouldSetState)
-                                                                    setState(
-                                                                        () {});
-                                                                  return;
-                                                                }
 
-                                                                final usersUpdateData =
-                                                                    createUsersRecordData(
-                                                                  photoUrl:
-                                                                      gravatarHashUrl,
+                                                                  final usersUpdateData =
+                                                                      createUsersRecordData(
+                                                                    photoUrl: _model
+                                                                        .gravatarHashUrl,
+                                                                  );
+                                                                  await currentUserReference!
+                                                                      .update(
+                                                                          usersUpdateData);
+                                                                }
+                                                                _model.loginNotifySyncResult =
+                                                                    await UsersGroup
+                                                                        .notifySyncCall
+                                                                        .call(
+                                                                  userId:
+                                                                      currentUserUid,
+                                                                  jwtToken:
+                                                                      currentJwtToken,
                                                                 );
-                                                                await currentUserReference!
-                                                                    .update(
-                                                                        usersUpdateData);
 
                                                                 context.pushNamedAuth(
                                                                     'HomePage',
                                                                     mounted);
                                                               }
 
-                                                              if (_shouldSetState)
-                                                                setState(() {});
+                                                              setState(() {});
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
@@ -720,7 +706,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              setState(() {
+                                                              FFAppState()
+                                                                  .update(() {
                                                                 FFAppState()
                                                                         .isAnonymous =
                                                                     true;
@@ -903,10 +890,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
+                                                                  if (valueOrDefault(
+                                                                              currentUserDocument
+                                                                                  ?.username,
+                                                                              '') ==
+                                                                          null ||
+                                                                      valueOrDefault(
+                                                                              currentUserDocument?.username,
+                                                                              '') ==
+                                                                          '') {
+                                                                    if (currentUserPhoto ==
+                                                                            null ||
+                                                                        currentUserPhoto ==
+                                                                            '') {
+                                                                      _model.gravatarHashUrlGuest1 =
+                                                                          await actions
+                                                                              .gravatarHash(
+                                                                        currentUserEmail,
+                                                                      );
 
-                                                                  context.goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
+                                                                      final usersUpdateData =
+                                                                          createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      );
+                                                                      await currentUserReference!
+                                                                          .update(
+                                                                              usersUpdateData);
+                                                                    }
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {
+                                                                      FFAppState()
+                                                                              .newAccount =
+                                                                          true;
+                                                                    });
+                                                                    _model.googleSignupNotifySyncResult =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+
+                                                                    context.pushNamedAuth(
+                                                                        'EditProfile',
+                                                                        mounted);
+                                                                  } else {
+                                                                    _model.googleLoginNotifySyncResult =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child:
                                                                     Container(
@@ -958,10 +1003,59 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         null) {
                                                                       return;
                                                                     }
+                                                                    if (valueOrDefault(currentUserDocument?.username, '') ==
+                                                                            null ||
+                                                                        valueOrDefault(currentUserDocument?.username,
+                                                                                '') ==
+                                                                            '') {
+                                                                      if (currentUserPhoto ==
+                                                                              null ||
+                                                                          currentUserPhoto ==
+                                                                              '') {
+                                                                        _model.gravatarHashUrlGuest2 =
+                                                                            await actions.gravatarHash(
+                                                                          currentUserEmail,
+                                                                        );
 
-                                                                    context.goNamedAuth(
-                                                                        'HomePage',
-                                                                        mounted);
+                                                                        final usersUpdateData =
+                                                                            createUsersRecordData(
+                                                                          photoUrl:
+                                                                              _model.gravatarHashUrlGuest,
+                                                                        );
+                                                                        await currentUserReference!
+                                                                            .update(usersUpdateData);
+                                                                      }
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {
+                                                                        FFAppState().newAccount =
+                                                                            true;
+                                                                      });
+                                                                      _model.appleSignupNotifySyncResult = await UsersGroup
+                                                                          .notifySyncCall
+                                                                          .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        jwtToken:
+                                                                            currentJwtToken,
+                                                                      );
+
+                                                                      context.pushNamedAuth(
+                                                                          'EditProfile',
+                                                                          mounted);
+                                                                    } else {
+                                                                      _model.appleLoginNotifySyncResult = await UsersGroup
+                                                                          .notifySyncCall
+                                                                          .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        jwtToken:
+                                                                            currentJwtToken,
+                                                                      );
+                                                                    }
+
+                                                                    setState(
+                                                                        () {});
                                                                   },
                                                                   child:
                                                                       Container(
@@ -1014,10 +1108,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
+                                                                  if (valueOrDefault(
+                                                                              currentUserDocument
+                                                                                  ?.username,
+                                                                              '') ==
+                                                                          null ||
+                                                                      valueOrDefault(
+                                                                              currentUserDocument?.username,
+                                                                              '') ==
+                                                                          '') {
+                                                                    if (currentUserPhoto ==
+                                                                            null ||
+                                                                        currentUserPhoto ==
+                                                                            '') {
+                                                                      _model.gravatarHashUrlGuest3 =
+                                                                          await actions
+                                                                              .gravatarHash(
+                                                                        currentUserEmail,
+                                                                      );
 
-                                                                  context.goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
+                                                                      final usersUpdateData =
+                                                                          createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      );
+                                                                      await currentUserReference!
+                                                                          .update(
+                                                                              usersUpdateData);
+                                                                    }
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {
+                                                                      FFAppState()
+                                                                              .newAccount =
+                                                                          true;
+                                                                    });
+                                                                    _model.facebookSignupNotifySyncResult =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+
+                                                                    context.pushNamedAuth(
+                                                                        'EditProfile',
+                                                                        mounted);
+                                                                  } else {
+                                                                    _model.facebookLoginNotifySyncResult =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child:
                                                                     Container(
@@ -1131,8 +1283,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .fromSTEB(0,
                                                                       20, 0, 0),
                                                           child: TextFormField(
-                                                            controller:
-                                                                emailAddressController,
+                                                            controller: _model
+                                                                .emailAddressController,
                                                             obscureText: false,
                                                             decoration:
                                                                 InputDecoration(
@@ -1223,6 +1375,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .bodyText1Family),
                                                                 ),
                                                             maxLines: null,
+                                                            validator: _model
+                                                                .emailAddressControllerValidator
+                                                                .asValidator(
+                                                                    context),
                                                           ).animateOnPageLoad(
                                                               animationsMap[
                                                                   'textFieldOnPageLoadAnimation3']!),
@@ -1233,10 +1389,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .fromSTEB(0,
                                                                       12, 0, 0),
                                                           child: TextFormField(
-                                                            controller:
-                                                                passwordController,
-                                                            obscureText:
-                                                                !passwordVisibility,
+                                                            controller: _model
+                                                                .passwordController,
+                                                            obscureText: !_model
+                                                                .passwordVisibility,
                                                             decoration:
                                                                 InputDecoration(
                                                               labelText:
@@ -1312,14 +1468,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   InkWell(
                                                                 onTap: () =>
                                                                     setState(
-                                                                  () => passwordVisibility =
-                                                                      !passwordVisibility,
+                                                                  () => _model
+                                                                          .passwordVisibility =
+                                                                      !_model
+                                                                          .passwordVisibility,
                                                                 ),
                                                                 focusNode: FocusNode(
                                                                     skipTraversal:
                                                                         true),
                                                                 child: Icon(
-                                                                  passwordVisibility
+                                                                  _model.passwordVisibility
                                                                       ? Icons
                                                                           .visibility_outlined
                                                                       : Icons
@@ -1349,6 +1507,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           FlutterFlowTheme.of(context)
                                                                               .bodyText1Family),
                                                                 ),
+                                                            validator: _model
+                                                                .passwordControllerValidator
+                                                                .asValidator(
+                                                                    context),
                                                           ).animateOnPageLoad(
                                                               animationsMap[
                                                                   'textFieldOnPageLoadAnimation4']!),
@@ -1359,10 +1521,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   .fromSTEB(0,
                                                                       12, 0, 0),
                                                           child: TextFormField(
-                                                            controller:
-                                                                passwordConfirmController,
-                                                            obscureText:
-                                                                !passwordConfirmVisibility,
+                                                            controller: _model
+                                                                .passwordConfirmController,
+                                                            obscureText: !_model
+                                                                .passwordConfirmVisibility,
                                                             decoration:
                                                                 InputDecoration(
                                                               labelText:
@@ -1438,14 +1600,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   InkWell(
                                                                 onTap: () =>
                                                                     setState(
-                                                                  () => passwordConfirmVisibility =
-                                                                      !passwordConfirmVisibility,
+                                                                  () => _model
+                                                                          .passwordConfirmVisibility =
+                                                                      !_model
+                                                                          .passwordConfirmVisibility,
                                                                 ),
                                                                 focusNode: FocusNode(
                                                                     skipTraversal:
                                                                         true),
                                                                 child: Icon(
-                                                                  passwordConfirmVisibility
+                                                                  _model.passwordConfirmVisibility
                                                                       ? Icons
                                                                           .visibility_outlined
                                                                       : Icons
@@ -1475,6 +1639,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           FlutterFlowTheme.of(context)
                                                                               .bodyText1Family),
                                                                 ),
+                                                            validator: _model
+                                                                .passwordConfirmControllerValidator
+                                                                .asValidator(
+                                                                    context),
                                                           ).animateOnPageLoad(
                                                               animationsMap[
                                                                   'textFieldOnPageLoadAnimation5']!),
@@ -1487,15 +1655,15 @@ class _LoginWidgetState extends State<LoginWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              var _shouldSetState =
-                                                                  false;
                                                               GoRouter.of(
                                                                       context)
                                                                   .prepareAuthEvent();
-                                                              if (passwordController
-                                                                      ?.text !=
-                                                                  passwordConfirmController
-                                                                      ?.text) {
+                                                              if (_model
+                                                                      .passwordController
+                                                                      .text !=
+                                                                  _model
+                                                                      .passwordConfirmController
+                                                                      .text) {
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
@@ -1512,9 +1680,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               final user =
                                                                   await createAccountWithEmail(
                                                                 context,
-                                                                emailAddressController!
+                                                                _model
+                                                                    .emailAddressController
                                                                     .text,
-                                                                passwordController!
+                                                                _model
+                                                                    .passwordController
                                                                     .text,
                                                               );
                                                               if (user ==
@@ -1526,40 +1696,42 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null ||
                                                                   currentUserPhoto ==
                                                                       '') {
-                                                                gravatarHashUrlGuest =
+                                                                _model.gravatarHashUrlGuest =
                                                                     await actions
                                                                         .gravatarHash(
                                                                   currentUserEmail,
                                                                 );
-                                                                _shouldSetState =
-                                                                    true;
-                                                              } else {
-                                                                if (_shouldSetState)
-                                                                  setState(
-                                                                      () {});
-                                                                return;
-                                                              }
 
-                                                              final usersUpdateData =
-                                                                  createUsersRecordData(
-                                                                photoUrl:
-                                                                    gravatarHashUrlGuest,
-                                                              );
-                                                              await currentUserReference!
-                                                                  .update(
-                                                                      usersUpdateData);
-                                                              setState(() {
+                                                                final usersUpdateData =
+                                                                    createUsersRecordData(
+                                                                  photoUrl: _model
+                                                                      .gravatarHashUrlGuest,
+                                                                );
+                                                                await currentUserReference!
+                                                                    .update(
+                                                                        usersUpdateData);
+                                                              }
+                                                              FFAppState()
+                                                                  .update(() {
                                                                 FFAppState()
                                                                         .newAccount =
                                                                     true;
                                                               });
+                                                              _model.signupNotifySyncResult =
+                                                                  await UsersGroup
+                                                                      .notifySyncCall
+                                                                      .call(
+                                                                userId:
+                                                                    currentUserUid,
+                                                                jwtToken:
+                                                                    currentJwtToken,
+                                                              );
 
                                                               context.pushNamedAuth(
                                                                   'EditProfile',
                                                                   mounted);
 
-                                                              if (_shouldSetState)
-                                                                setState(() {});
+                                                              setState(() {});
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
@@ -1677,10 +1849,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
+                                                                  if (valueOrDefault(
+                                                                              currentUserDocument
+                                                                                  ?.username,
+                                                                              '') ==
+                                                                          null ||
+                                                                      valueOrDefault(
+                                                                              currentUserDocument?.username,
+                                                                              '') ==
+                                                                          '') {
+                                                                    if (currentUserPhoto ==
+                                                                            null ||
+                                                                        currentUserPhoto ==
+                                                                            '') {
+                                                                      _model.gravatarHashUrlGuest4 =
+                                                                          await actions
+                                                                              .gravatarHash(
+                                                                        currentUserEmail,
+                                                                      );
 
-                                                                  context.goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
+                                                                      final usersUpdateData =
+                                                                          createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      );
+                                                                      await currentUserReference!
+                                                                          .update(
+                                                                              usersUpdateData);
+                                                                    }
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {
+                                                                      FFAppState()
+                                                                              .newAccount =
+                                                                          true;
+                                                                    });
+                                                                    _model.googleSignupNotifySyncResult2 =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+
+                                                                    context.pushNamedAuth(
+                                                                        'EditProfile',
+                                                                        mounted);
+                                                                  } else {
+                                                                    _model.googleLoginNotifySyncResult2 =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child:
                                                                     Container(
@@ -1732,10 +1962,59 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         null) {
                                                                       return;
                                                                     }
+                                                                    if (valueOrDefault(currentUserDocument?.username, '') ==
+                                                                            null ||
+                                                                        valueOrDefault(currentUserDocument?.username,
+                                                                                '') ==
+                                                                            '') {
+                                                                      if (currentUserPhoto ==
+                                                                              null ||
+                                                                          currentUserPhoto ==
+                                                                              '') {
+                                                                        _model.gravatarHashUrlGuest5 =
+                                                                            await actions.gravatarHash(
+                                                                          currentUserEmail,
+                                                                        );
 
-                                                                    context.goNamedAuth(
-                                                                        'HomePage',
-                                                                        mounted);
+                                                                        final usersUpdateData =
+                                                                            createUsersRecordData(
+                                                                          photoUrl:
+                                                                              _model.gravatarHashUrlGuest,
+                                                                        );
+                                                                        await currentUserReference!
+                                                                            .update(usersUpdateData);
+                                                                      }
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {
+                                                                        FFAppState().newAccount =
+                                                                            true;
+                                                                      });
+                                                                      _model.appleSignupNotifySyncResult2 = await UsersGroup
+                                                                          .notifySyncCall
+                                                                          .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        jwtToken:
+                                                                            currentJwtToken,
+                                                                      );
+
+                                                                      context.pushNamedAuth(
+                                                                          'EditProfile',
+                                                                          mounted);
+                                                                    } else {
+                                                                      _model.appleLoginNotifySyncResult2 = await UsersGroup
+                                                                          .notifySyncCall
+                                                                          .call(
+                                                                        userId:
+                                                                            currentUserUid,
+                                                                        jwtToken:
+                                                                            currentJwtToken,
+                                                                      );
+                                                                    }
+
+                                                                    setState(
+                                                                        () {});
                                                                   },
                                                                   child:
                                                                       Container(
@@ -1788,10 +2067,68 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       null) {
                                                                     return;
                                                                   }
+                                                                  if (valueOrDefault(
+                                                                              currentUserDocument
+                                                                                  ?.username,
+                                                                              '') ==
+                                                                          null ||
+                                                                      valueOrDefault(
+                                                                              currentUserDocument?.username,
+                                                                              '') ==
+                                                                          '') {
+                                                                    if (currentUserPhoto ==
+                                                                            null ||
+                                                                        currentUserPhoto ==
+                                                                            '') {
+                                                                      _model.gravatarHashUrlGuest6 =
+                                                                          await actions
+                                                                              .gravatarHash(
+                                                                        currentUserEmail,
+                                                                      );
 
-                                                                  context.goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
+                                                                      final usersUpdateData =
+                                                                          createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      );
+                                                                      await currentUserReference!
+                                                                          .update(
+                                                                              usersUpdateData);
+                                                                    }
+                                                                    FFAppState()
+                                                                        .update(
+                                                                            () {
+                                                                      FFAppState()
+                                                                              .newAccount =
+                                                                          true;
+                                                                    });
+                                                                    _model.facebookSignupNotifySyncResult2 =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+
+                                                                    context.pushNamedAuth(
+                                                                        'EditProfile',
+                                                                        mounted);
+                                                                  } else {
+                                                                    _model.facebookLoginNotifySyncResult2 =
+                                                                        await UsersGroup
+                                                                            .notifySyncCall
+                                                                            .call(
+                                                                      userId:
+                                                                          currentUserUid,
+                                                                      jwtToken:
+                                                                          currentJwtToken,
+                                                                    );
+                                                                  }
+
+                                                                  setState(
+                                                                      () {});
                                                                 },
                                                                 child:
                                                                     Container(
@@ -1819,13 +2156,34 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   alignment:
                                                                       AlignmentDirectional(
                                                                           0, 0),
-                                                                  child: FaIcon(
-                                                                    FontAwesomeIcons
-                                                                        .facebookF,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    size: 24,
+                                                                  child:
+                                                                      InkWell(
+                                                                    onTap:
+                                                                        () async {
+                                                                      GoRouter.of(
+                                                                              context)
+                                                                          .prepareAuthEvent();
+                                                                      final user =
+                                                                          await signInWithFacebook(
+                                                                              context);
+                                                                      if (user ==
+                                                                          null) {
+                                                                        return;
+                                                                      }
+
+                                                                      context.goNamedAuth(
+                                                                          'HomePage',
+                                                                          mounted);
+                                                                    },
+                                                                    child:
+                                                                        FaIcon(
+                                                                      FontAwesomeIcons
+                                                                          .facebookF,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryBackground,
+                                                                      size: 24,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),

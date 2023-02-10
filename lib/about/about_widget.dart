@@ -1,9 +1,13 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../components/back_button_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'about_model.dart';
+export 'about_model.dart';
 
 class AboutWidget extends StatefulWidget {
   const AboutWidget({Key? key}) : super(key: key);
@@ -13,7 +17,24 @@ class AboutWidget extends StatefulWidget {
 }
 
 class _AboutWidgetState extends State<AboutWidget> {
+  late AboutModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AboutModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +46,11 @@ class _AboutWidgetState extends State<AboutWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             '0igoc7rh' /* About */,
@@ -44,7 +69,7 @@ class _AboutWidgetState extends State<AboutWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Container(
             width: double.infinity,
             height: double.infinity,
@@ -81,13 +106,32 @@ class _AboutWidgetState extends State<AboutWidget> {
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12),
-                                  child: Image.asset(
-                                    'assets/images/bulldog.jpg',
-                                    width: 120,
-                                    height: 120,
-                                    fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () async {
+                                    var _shouldSetState = false;
+                                    _model.apiResult6x7 =
+                                        await TestJWTCallCall.call(
+                                      jwtToken: currentJwtToken,
+                                    );
+                                    _shouldSetState = true;
+                                    if ((_model.apiResult6x7?.succeeded ??
+                                        true)) {
+                                      if (_shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (_shouldSetState) setState(() {});
+                                    return;
+                                    if (_shouldSetState) setState(() {});
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.asset(
+                                      'assets/images/bulldog.jpg',
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 Expanded(

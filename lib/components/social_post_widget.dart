@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'social_post_model.dart';
+export 'social_post_model.dart';
 
 class SocialPostWidget extends StatefulWidget {
   const SocialPostWidget({
@@ -22,7 +24,26 @@ class SocialPostWidget extends StatefulWidget {
 }
 
 class _SocialPostWidgetState extends State<SocialPostWidget> {
-  String? imageDownload;
+  late SocialPostModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SocialPostModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +53,18 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
       padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
       child: Container(
         width: double.infinity,
+        constraints: BoxConstraints(
+          maxHeight: 900,
+        ),
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(15),
+          shape: BoxShape.rectangle,
         ),
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(4, 4, 4, 4),
           child: Column(
-            mainAxisSize: MainAxisSize.max,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 4),
@@ -117,7 +142,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                       4, 0, 0, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      'jqn6iwma' /* • */,
+                                      '7hjo81wt' /* • */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText2
@@ -191,46 +216,59 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                       widget.post,
                       r'''$.showImage''',
                     ))
-                      InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            PageTransition(
-                              type: PageTransitionType.fade,
-                              child: FlutterFlowExpandedImageView(
-                                image: CachedNetworkImage(
-                                  imageUrl: getJsonField(
-                                    widget.post,
-                                    r'''$.image''',
+                      Align(
+                        alignment: AlignmentDirectional(0, 0),
+                        child: Container(
+                          constraints: BoxConstraints(
+                            maxHeight: 800,
+                          ),
+                          decoration: BoxDecoration(),
+                          child: Visibility(
+                            visible: getJsonField(
+                              widget.post,
+                              r'''$.showImage''',
+                            ),
+                            child: InkWell(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: FlutterFlowExpandedImageView(
+                                      image: CachedNetworkImage(
+                                        imageUrl: getJsonField(
+                                          widget.post,
+                                          r'''$.image''',
+                                        ),
+                                        fit: BoxFit.contain,
+                                      ),
+                                      allowRotation: false,
+                                      tag: getJsonField(
+                                        widget.post,
+                                        r'''$.image''',
+                                      ),
+                                      useHeroAnimation: true,
+                                    ),
                                   ),
-                                  fit: BoxFit.contain,
-                                ),
-                                allowRotation: false,
+                                );
+                              },
+                              child: Hero(
                                 tag: getJsonField(
                                   widget.post,
                                   r'''$.image''',
                                 ),
-                                useHeroAnimation: true,
+                                transitionOnUserGestures: true,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: CachedNetworkImage(
+                                    imageUrl: getJsonField(
+                                      widget.post,
+                                      r'''$.image''',
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                        child: Hero(
-                          tag: getJsonField(
-                            widget.post,
-                            r'''$.image''',
-                          ),
-                          transitionOnUserGestures: true,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: CachedNetworkImage(
-                              imageUrl: getJsonField(
-                                widget.post,
-                                r'''$.image''',
-                              ),
-                              width: MediaQuery.of(context).size.width,
-                              height: 230,
-                              fit: BoxFit.cover,
                             ),
                           ),
                         ),
@@ -322,7 +360,8 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                             child: InkWell(
                               onTap: () async {
-                                imageDownload = await actions.downloadImage(
+                                _model.imageDownload =
+                                    await actions.downloadImage(
                                   getJsonField(
                                     widget.post,
                                     r'''$.image''',

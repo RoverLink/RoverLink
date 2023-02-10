@@ -5,6 +5,8 @@ import '../custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'schools_followed_model.dart';
+export 'schools_followed_model.dart';
 
 class SchoolsFollowedWidget extends StatefulWidget {
   const SchoolsFollowedWidget({Key? key}) : super(key: key);
@@ -14,37 +16,24 @@ class SchoolsFollowedWidget extends StatefulWidget {
 }
 
 class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
-  bool? subChestonToggledOff;
-  bool? subChestonToggledOn;
-  bool? subChestonValue;
-  bool? subEahsValue;
-  bool? subToggledOff;
-  bool? subToggledOn;
-  bool? subEamsToggledOff;
-  bool? subEamsToggledOn;
-  bool? subEamsValue;
-  bool? subPalmerToggledOff;
-  bool? subPalmerToggledOn;
-  bool? subPalmerValue;
-  bool? subForksToggledOff;
-  bool? subForksToggledOn;
-  bool? subForksValue;
-  bool? subTracyToggledOff;
-  bool? subTracyToggledOn;
-  bool? subTracyValue;
-  bool? subPaxinosaToggledOff;
-  bool? subPaxinosaToggledOn;
-  bool? subPaxinosaValue;
-  bool? subShawneeToggledOff;
-  bool? subShawneeToggledOn;
-  bool? subShawneeValue;
-  bool? subMarchToggledOff;
-  bool? subMarchToggledOn;
-  bool? subMarchValue;
-  bool? subCyberToggledOff;
-  bool? subCyberToggledOn;
-  bool? subCyberValue;
+  late SchoolsFollowedModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SchoolsFollowedModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +45,11 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'fuyx7927' /* Schools */,
@@ -74,7 +67,7 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -134,19 +127,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subEahsValue ??= FFAppState()
+                                    value: _model.subEahsValue ??= FFAppState()
                                         .subscriptions
                                         .contains('eahs'),
                                     onChanged: (newValue) async {
-                                      setState(() => subEahsValue = newValue!);
+                                      setState(() =>
+                                          _model.subEahsValue = newValue!);
                                       if (newValue!) {
-                                        subToggledOn =
+                                        _model.subToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'eahs',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -155,13 +149,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subToggledOff =
+                                        _model.subToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'eahs',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -229,19 +223,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subEamsValue ??= FFAppState()
+                                    value: _model.subEamsValue ??= FFAppState()
                                         .subscriptions
                                         .contains('eams'),
                                     onChanged: (newValue) async {
-                                      setState(() => subEamsValue = newValue!);
+                                      setState(() =>
+                                          _model.subEamsValue = newValue!);
                                       if (newValue!) {
-                                        subEamsToggledOn =
+                                        _model.subEamsToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'eams',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -250,13 +245,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subEamsToggledOff =
+                                        _model.subEamsToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'eams',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -324,20 +319,21 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subPalmerValue ??= FFAppState()
-                                        .subscriptions
-                                        .contains('palmer'),
+                                    value: _model.subPalmerValue ??=
+                                        FFAppState()
+                                            .subscriptions
+                                            .contains('palmer'),
                                     onChanged: (newValue) async {
-                                      setState(
-                                          () => subPalmerValue = newValue!);
+                                      setState(() =>
+                                          _model.subPalmerValue = newValue!);
                                       if (newValue!) {
-                                        subPalmerToggledOn =
+                                        _model.subPalmerToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'palmer',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -346,13 +342,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subPalmerToggledOff =
+                                        _model.subPalmerToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'palmer',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -420,19 +416,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subForksValue ??= FFAppState()
+                                    value: _model.subForksValue ??= FFAppState()
                                         .subscriptions
                                         .contains('forks'),
                                     onChanged: (newValue) async {
-                                      setState(() => subForksValue = newValue!);
+                                      setState(() =>
+                                          _model.subForksValue = newValue!);
                                       if (newValue!) {
-                                        subForksToggledOn =
+                                        _model.subForksToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'forks',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -441,13 +438,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subForksToggledOff =
+                                        _model.subForksToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'forks',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -515,19 +512,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subTracyValue ??= FFAppState()
+                                    value: _model.subTracyValue ??= FFAppState()
                                         .subscriptions
                                         .contains('tracy'),
                                     onChanged: (newValue) async {
-                                      setState(() => subTracyValue = newValue!);
+                                      setState(() =>
+                                          _model.subTracyValue = newValue!);
                                       if (newValue!) {
-                                        subTracyToggledOn =
+                                        _model.subTracyToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'tracy',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -536,13 +534,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subTracyToggledOff =
+                                        _model.subTracyToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'tracy',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -610,20 +608,21 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subChestonValue ??= FFAppState()
-                                        .subscriptions
-                                        .contains('cheston'),
+                                    value: _model.subChestonValue ??=
+                                        FFAppState()
+                                            .subscriptions
+                                            .contains('cheston'),
                                     onChanged: (newValue) async {
-                                      setState(
-                                          () => subChestonValue = newValue!);
+                                      setState(() =>
+                                          _model.subChestonValue = newValue!);
                                       if (newValue!) {
-                                        subChestonToggledOn =
+                                        _model.subChestonToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'cheston',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -632,13 +631,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subChestonToggledOff =
+                                        _model.subChestonToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'cheston',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -706,20 +705,21 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subPaxinosaValue ??= FFAppState()
-                                        .subscriptions
-                                        .contains('paxinosa'),
+                                    value: _model.subPaxinosaValue ??=
+                                        FFAppState()
+                                            .subscriptions
+                                            .contains('paxinosa'),
                                     onChanged: (newValue) async {
-                                      setState(
-                                          () => subPaxinosaValue = newValue!);
+                                      setState(() =>
+                                          _model.subPaxinosaValue = newValue!);
                                       if (newValue!) {
-                                        subPaxinosaToggledOn =
+                                        _model.subPaxinosaToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'paxinosa',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -728,13 +728,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subPaxinosaToggledOff =
+                                        _model.subPaxinosaToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'paxinosa',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -802,20 +802,21 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subShawneeValue ??= FFAppState()
-                                        .subscriptions
-                                        .contains('shawnee'),
+                                    value: _model.subShawneeValue ??=
+                                        FFAppState()
+                                            .subscriptions
+                                            .contains('shawnee'),
                                     onChanged: (newValue) async {
-                                      setState(
-                                          () => subShawneeValue = newValue!);
+                                      setState(() =>
+                                          _model.subShawneeValue = newValue!);
                                       if (newValue!) {
-                                        subShawneeToggledOn =
+                                        _model.subShawneeToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'shawnee',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -824,13 +825,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subShawneeToggledOff =
+                                        _model.subShawneeToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'shawnee',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -898,19 +899,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subMarchValue ??= FFAppState()
+                                    value: _model.subMarchValue ??= FFAppState()
                                         .subscriptions
                                         .contains('march'),
                                     onChanged: (newValue) async {
-                                      setState(() => subMarchValue = newValue!);
+                                      setState(() =>
+                                          _model.subMarchValue = newValue!);
                                       if (newValue!) {
-                                        subMarchToggledOn =
+                                        _model.subMarchToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'march',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -919,13 +921,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subMarchToggledOff =
+                                        _model.subMarchToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'march',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -993,19 +995,20 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
                                   child: Switch.adaptive(
-                                    value: subCyberValue ??= FFAppState()
+                                    value: _model.subCyberValue ??= FFAppState()
                                         .subscriptions
                                         .contains('cyber'),
                                     onChanged: (newValue) async {
-                                      setState(() => subCyberValue = newValue!);
+                                      setState(() =>
+                                          _model.subCyberValue = newValue!);
                                       if (newValue!) {
-                                        subCyberToggledOn =
+                                        _model.subCyberToggledOn =
                                             await actions.setSubscription(
                                           context,
                                           'cyber',
                                           true,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
@@ -1014,13 +1017,13 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
 
                                         setState(() {});
                                       } else {
-                                        subCyberToggledOff =
+                                        _model.subCyberToggledOff =
                                             await actions.setSubscription(
                                           context,
                                           'cyber',
                                           false,
                                         );
-                                        setState(() {
+                                        FFAppState().update(() {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions

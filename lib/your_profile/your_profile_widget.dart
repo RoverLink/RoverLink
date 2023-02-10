@@ -4,8 +4,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'your_profile_model.dart';
+export 'your_profile_model.dart';
 
 class YourProfileWidget extends StatefulWidget {
   const YourProfileWidget({Key? key}) : super(key: key);
@@ -15,7 +18,31 @@ class YourProfileWidget extends StatefulWidget {
 }
 
 class _YourProfileWidgetState extends State<YourProfileWidget> {
+  late YourProfileModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => YourProfileModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().newAccount == true) {
+        context.pushNamed('EditProfile');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +69,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
           },
         ),
         title: AuthUserStreamWidget(
-          child: Text(
+          builder: (context) => Text(
             currentUserDisplayName,
             style: FlutterFlowTheme.of(context).title2.override(
                   fontFamily: FlutterFlowTheme.of(context).title2Family,
@@ -74,7 +101,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -92,7 +119,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: AuthUserStreamWidget(
-                        child: Hero(
+                        builder: (context) => Hero(
                           tag: currentUserPhoto,
                           transitionOnUserGestures: true,
                           child: Container(
@@ -114,7 +141,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                     child: AuthUserStreamWidget(
-                      child: Text(
+                      builder: (context) => Text(
                         '@${valueOrDefault(currentUserDocument?.username, '')}',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily:

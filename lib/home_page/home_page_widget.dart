@@ -6,8 +6,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'home_page_model.dart';
+export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({Key? key}) : super(key: key);
@@ -17,9 +20,31 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  ApiCallResponse? apiResultbmf;
-  Completer<ApiCallResponse>? _apiRequestCompleter;
+  late HomePageModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => HomePageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().newAccount == true) {
+        context.pushNamed('EditProfile');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +64,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
       ),
       body: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -65,7 +90,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         child:
                             // ListView of aggregated twitter posts
                             FutureBuilder<ApiCallResponse>(
-                          future: (_apiRequestCompleter ??=
+                          future: (_model.apiRequestCompleter ??=
                                   Completer<ApiCallResponse>()
                                     ..complete(SocialPostsCall.call()))
                               .future,
@@ -87,17 +112,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             return Builder(
                               builder: (context) {
                                 final post = SocialPostsCall.posts(
-                                  listViewSocialPostsResponse.jsonBody,
-                                ).map((e) => e).toList();
+                                      listViewSocialPostsResponse.jsonBody,
+                                    )?.map((e) => e).toList()?.toList() ??
+                                    [];
                                 return RefreshIndicator(
                                   onRefresh: () async {
-                                    apiResultbmf = await SocialPostsCall.call();
-                                    if (!(apiResultbmf?.succeeded ?? true)) {
+                                    _model.apiResultbmf =
+                                        await SocialPostsCall.call();
+                                    if (!(_model.apiResultbmf?.succeeded ??
+                                        true)) {
                                       await Future.delayed(
                                           const Duration(milliseconds: 1000));
                                     }
-                                    setState(() => _apiRequestCompleter = null);
-                                    await waitForApiRequestCompleter();
+                                    setState(() =>
+                                        _model.apiRequestCompleter = null);
+                                    await _model.waitForApiRequestCompleter();
                                   },
                                   child: ListView.builder(
                                     padding: EdgeInsets.zero,
@@ -123,6 +152,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                             ),
                                           SocialPostWidget(
+                                            key: Key(
+                                                'Keyivv_${postIndex}_of_${post.length}'),
                                             post: postItem,
                                           ),
                                         ],
@@ -136,10 +167,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                     ),
-                    CustomAppBarWidget(),
+                    wrapWithModel(
+                      model: _model.customAppBarModel,
+                      updateCallback: () => setState(() {}),
+                      child: CustomAppBarWidget(),
+                    ),
                     Align(
                       alignment: AlignmentDirectional(0, 1),
-                      child: NavbarFloatingWidget(),
+                      child: wrapWithModel(
+                        model: _model.navbarFloatingModel,
+                        updateCallback: () => setState(() {}),
+                        child: NavbarFloatingWidget(),
+                      ),
                     ),
                   ],
                 ),
@@ -149,20 +188,5 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         ),
       ),
     );
-  }
-
-  Future waitForApiRequestCompleter({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'navbar_floating_copy_model.dart';
+export 'navbar_floating_copy_model.dart';
 
 class NavbarFloatingCopyWidget extends StatefulWidget {
   const NavbarFloatingCopyWidget({Key? key}) : super(key: key);
@@ -16,6 +18,27 @@ class NavbarFloatingCopyWidget extends StatefulWidget {
 }
 
 class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
+  late NavbarFloatingCopyModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => NavbarFloatingCopyModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -81,7 +104,7 @@ class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
                               showLoadingIndicator: true,
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Home') {
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().currentPage = 'Home';
                                   });
 
@@ -116,7 +139,7 @@ class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
                               showLoadingIndicator: true,
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Events') {
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().currentPage = 'Events';
                                   });
 
@@ -158,7 +181,7 @@ class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
                               ),
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Schools') {
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().currentPage = 'Schools';
                                   });
 
@@ -192,7 +215,7 @@ class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
                               ),
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Settings') {
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().currentPage = 'Settings';
                                   });
 

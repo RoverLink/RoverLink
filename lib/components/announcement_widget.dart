@@ -4,6 +4,8 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'announcement_model.dart';
+export 'announcement_model.dart';
 
 class AnnouncementWidget extends StatefulWidget {
   const AnnouncementWidget({
@@ -18,6 +20,27 @@ class AnnouncementWidget extends StatefulWidget {
 }
 
 class _AnnouncementWidgetState extends State<AnnouncementWidget> {
+  late AnnouncementModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => AnnouncementModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();

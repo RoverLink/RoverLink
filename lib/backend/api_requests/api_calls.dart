@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../flutter_flow/flutter_flow_util.dart';
 
@@ -7,6 +8,270 @@ import 'api_manager.dart';
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
+/// Start Users Group Code
+
+class UsersGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/users';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+  };
+  static GetUsersCall getUsersCall = GetUsersCall();
+  static GetUserCall getUserCall = GetUserCall();
+  static GetUserProfileCall getUserProfileCall = GetUserProfileCall();
+  static GetUserProfileDetailedCall getUserProfileDetailedCall =
+      GetUserProfileDetailedCall();
+  static ChangeUsernameCall changeUsernameCall = ChangeUsernameCall();
+  static NotifySyncCall notifySyncCall = NotifySyncCall();
+  static ChangeDisplayNameCall changeDisplayNameCall = ChangeDisplayNameCall();
+  static ChangeProfilePhotoUrlCall changeProfilePhotoUrlCall =
+      ChangeProfilePhotoUrlCall();
+  static UsernameExistsCall usernameExistsCall = UsernameExistsCall();
+}
+
+class GetUsersCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+  }) {
+    final body = '''
+{
+  "id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUsers',
+      apiUrl: '${UsersGroup.baseUrl}/?k=0',
+      callType: ApiCallType.POST,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+    );
+  }
+}
+
+class GetUserCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUser',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+    );
+  }
+}
+
+class GetUserProfileCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUserProfile',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/profile',
+      callType: ApiCallType.GET,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+    );
+  }
+}
+
+class GetUserProfileDetailedCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUserProfileDetailed',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/profile/detailed',
+      callType: ApiCallType.GET,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+    );
+  }
+}
+
+class ChangeUsernameCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+    String? username = '',
+  }) {
+    final body = '''
+{
+  "id": "${userId}",
+  "username": "${username}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangeUsername',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/name',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+    );
+  }
+}
+
+class NotifySyncCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+  }) {
+    final body = '''
+{
+  "id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: ' NotifySync',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/sync',
+      callType: ApiCallType.POST,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ChangeDisplayNameCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+    String? displayName = '',
+  }) {
+    final body = '''
+{
+  "id": "${userId}",
+  "displayName": "${displayName}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangeDisplayName',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class ChangeProfilePhotoUrlCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+    String? profilePhotoUrl = '',
+  }) {
+    final body = '''
+{
+  "id": "${userId}",
+  "profilePhotoUrl": "${profilePhotoUrl}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'ChangeProfilePhotoUrl',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}',
+      callType: ApiCallType.PUT,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class UsernameExistsCall {
+  Future<ApiCallResponse> call({
+    String? jwtToken = '',
+    String? username = '',
+    bool? suggestAlternative = true,
+  }) {
+    final body = '''
+{
+  "username": "${username}",
+  "suggestAlternative": ${suggestAlternative}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UsernameExists',
+      apiUrl: '${UsersGroup.baseUrl}/exists',
+      callType: ApiCallType.POST,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+/// End Users Group Code
 
 class SocialPostsCall {
   static Future<ApiCallResponse> call() {
@@ -17,6 +282,8 @@ class SocialPostsCall {
       headers: {},
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -37,6 +304,8 @@ class CalendarCall {
       headers: {},
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: true,
     );
   }
@@ -59,6 +328,8 @@ class NotificationsCall {
         'tags': "easd",
       },
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -79,6 +350,8 @@ class TagsCall {
       headers: {},
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -99,6 +372,8 @@ class NavigationItemsCall {
       headers: {},
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }
@@ -123,6 +398,8 @@ class TestJWTCallCall {
       },
       params: {},
       returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
       cache: false,
     );
   }

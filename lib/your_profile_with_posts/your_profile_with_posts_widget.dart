@@ -7,8 +7,11 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'your_profile_with_posts_model.dart';
+export 'your_profile_with_posts_model.dart';
 
 class YourProfileWithPostsWidget extends StatefulWidget {
   const YourProfileWithPostsWidget({Key? key}) : super(key: key);
@@ -20,8 +23,31 @@ class YourProfileWithPostsWidget extends StatefulWidget {
 
 class _YourProfileWithPostsWidgetState
     extends State<YourProfileWithPostsWidget> {
-  Completer<ApiCallResponse>? _apiRequestCompleter;
+  late YourProfileWithPostsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => YourProfileWithPostsModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().newAccount == true) {
+        context.pushNamed('EditProfile');
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +74,7 @@ class _YourProfileWithPostsWidgetState
           },
         ),
         title: AuthUserStreamWidget(
-          child: Text(
+          builder: (context) => Text(
             currentUserDisplayName,
             style: FlutterFlowTheme.of(context).title2.override(
                   fontFamily: FlutterFlowTheme.of(context).title2Family,
@@ -80,7 +106,7 @@ class _YourProfileWithPostsWidgetState
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -99,7 +125,7 @@ class _YourProfileWithPostsWidgetState
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                         child: AuthUserStreamWidget(
-                          child: Hero(
+                          builder: (context) => Hero(
                             tag: currentUserPhoto,
                             transitionOnUserGestures: true,
                             child: Container(
@@ -121,7 +147,7 @@ class _YourProfileWithPostsWidgetState
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                       child: AuthUserStreamWidget(
-                        child: Text(
+                        builder: (context) => Text(
                           '@${valueOrDefault(currentUserDocument?.username, '')}',
                           style: FlutterFlowTheme.of(context)
                               .bodyText1
@@ -244,10 +270,10 @@ class _YourProfileWithPostsWidgetState
                       ),
                     ),
                     FutureBuilder<ApiCallResponse>(
-                      future:
-                          (_apiRequestCompleter ??= Completer<ApiCallResponse>()
+                      future: (_model.apiRequestCompleter ??=
+                              Completer<ApiCallResponse>()
                                 ..complete(SocialPostsCall.call()))
-                              .future,
+                          .future,
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -266,12 +292,14 @@ class _YourProfileWithPostsWidgetState
                         return Builder(
                           builder: (context) {
                             final post = SocialPostsCall.posts(
-                              listViewSocialPostsResponse.jsonBody,
-                            ).map((e) => e).toList();
+                                  listViewSocialPostsResponse.jsonBody,
+                                )?.map((e) => e).toList()?.toList() ??
+                                [];
                             return RefreshIndicator(
                               onRefresh: () async {
-                                setState(() => _apiRequestCompleter = null);
-                                await waitForApiRequestCompleter();
+                                setState(
+                                    () => _model.apiRequestCompleter = null);
+                                await _model.waitForApiRequestCompleter();
                               },
                               child: ListView.builder(
                                 padding: EdgeInsets.zero,
@@ -282,7 +310,8 @@ class _YourProfileWithPostsWidgetState
                                 itemBuilder: (context, postIndex) {
                                   final postItem = post[postIndex];
                                   return SocialPostWidget(
-                                    key: Key('SocialPost_${postIndex}'),
+                                    key: Key(
+                                        'Keyqr1_${postIndex}_of_${post.length}'),
                                     post: postItem,
                                   );
                                 },
@@ -300,20 +329,5 @@ class _YourProfileWithPostsWidgetState
         ),
       ),
     );
-  }
-
-  Future waitForApiRequestCompleter({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

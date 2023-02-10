@@ -14,6 +14,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:signature/signature.dart';
+import 'report_absence_model.dart';
+export 'report_absence_model.dart';
 
 class ReportAbsenceWidget extends StatefulWidget {
   const ReportAbsenceWidget({Key? key}) : super(key: key);
@@ -23,41 +25,27 @@ class ReportAbsenceWidget extends StatefulWidget {
 }
 
 class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
+  late ReportAbsenceModel _model;
 
-  DateTime? datePicked;
-  TextEditingController? absenceDateController;
-  String? gradeValue;
-  String? schoolValue;
-  TextEditingController? studentNameController;
-  TextEditingController? teacherController;
-  TextEditingController? reasonController;
-  late SignatureController signatureController;
-  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    absenceDateController = TextEditingController();
-    studentNameController = TextEditingController();
-    teacherController = TextEditingController();
-    reasonController = TextEditingController();
-    signatureController = SignatureController(
-      penStrokeWidth: 2,
-      penColor: Color(0xFF888888),
-      exportBackgroundColor: Colors.white,
-    );
+    _model = createModel(context, () => ReportAbsenceModel());
+
+    _model.studentNameController = TextEditingController();
+    _model.teacherController = TextEditingController();
+    _model.absenceDateController = TextEditingController();
+    _model.reasonController = TextEditingController();
   }
 
   @override
   void dispose() {
-    absenceDateController?.dispose();
-    studentNameController?.dispose();
-    teacherController?.dispose();
-    reasonController?.dispose();
-    signatureController.dispose();
+    _model.dispose();
+
+    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -71,7 +59,11 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'ig4pe40x' /* Report an Absence  */,
@@ -90,7 +82,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -101,7 +93,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
               ),
               decoration: BoxDecoration(),
               child: Form(
-                key: formKey,
+                key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: SingleChildScrollView(
                   child: Column(
@@ -111,7 +103,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                         child: TextFormField(
-                          controller: studentNameController,
+                          controller: _model.studentNameController,
                           autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
@@ -153,27 +145,14 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                           keyboardType: TextInputType.name,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return FFLocalizations.of(context).getText(
-                                '6qrnuoul' /* Please enter full name of stud... */,
-                              );
-                            }
-
-                            if (val.length < 5) {
-                              return FFLocalizations.of(context).getText(
-                                'yl7jmd83' /* Please enter full name of stud... */,
-                              );
-                            }
-
-                            return null;
-                          },
+                          validator: _model.studentNameControllerValidator
+                              .asValidator(context),
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                         child: FlutterFlowDropDown<String>(
-                          initialOption: schoolValue ??= '',
+                          initialOption: _model.schoolValue ??= '',
                           options: [
                             'eahs',
                             'eams',
@@ -218,7 +197,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               '2lrlcmws' /* Easton Cyber Academy */,
                             )
                           ],
-                          onChanged: (val) => setState(() => schoolValue = val),
+                          onChanged: (val) =>
+                              setState(() => _model.schoolValue = val),
                           width: MediaQuery.of(context).size.width,
                           height: 50,
                           textStyle: FlutterFlowTheme.of(context).bodyText1,
@@ -235,12 +215,13 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           hidesUnderline: true,
                         ),
                       ),
-                      if (functions.isElementaryOrMiddleSchool(schoolValue))
+                      if (functions
+                          .isElementaryOrMiddleSchool(_model.schoolValue))
                         Padding(
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                           child: TextFormField(
-                            controller: teacherController,
+                            controller: _model.teacherController,
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: FFLocalizations.of(context).getText(
@@ -281,12 +262,14 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             ),
                             style: FlutterFlowTheme.of(context).bodyText1,
                             keyboardType: TextInputType.name,
+                            validator: _model.teacherControllerValidator
+                                .asValidator(context),
                           ),
                         ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                         child: FlutterFlowDropDown<String>(
-                          initialOption: gradeValue ??= '',
+                          initialOption: _model.gradeValue ??= '',
                           options: [
                             'K',
                             '1',
@@ -343,7 +326,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               '730k1onl' /* 12th Grade */,
                             )
                           ],
-                          onChanged: (val) => setState(() => gradeValue = val),
+                          onChanged: (val) =>
+                              setState(() => _model.gradeValue = val),
                           width: MediaQuery.of(context).size.width,
                           height: 50,
                           textStyle: FlutterFlowTheme.of(context)
@@ -376,7 +360,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                               child: TextFormField(
-                                controller: absenceDateController,
+                                controller: _model.absenceDateController,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText:
@@ -418,6 +402,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                       .secondaryBackground,
                                 ),
                                 style: FlutterFlowTheme.of(context).bodyText1,
+                                validator: _model.absenceDateControllerValidator
+                                    .asValidator(context),
                               ),
                             ),
                           Align(
@@ -440,7 +426,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                     valueOrDefault<String>(
                                       dateTimeFormat(
                                         'MMMMEEEEd',
-                                        datePicked,
+                                        _model.datePicked,
                                         locale: FFLocalizations.of(context)
                                             .languageCode,
                                       ),
@@ -466,13 +452,13 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 );
 
                                 if (_datePickedDate != null) {
-                                  setState(
-                                    () => datePicked = DateTime(
+                                  setState(() {
+                                    _model.datePicked = DateTime(
                                       _datePickedDate.year,
                                       _datePickedDate.month,
                                       _datePickedDate.day,
-                                    ),
-                                  );
+                                    );
+                                  });
                                 }
                               },
                               child: Container(
@@ -489,7 +475,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                         child: TextFormField(
-                          controller: reasonController,
+                          controller: _model.reasonController,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: FFLocalizations.of(context).getText(
@@ -531,15 +517,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           style: FlutterFlowTheme.of(context).bodyText1,
                           maxLines: 5,
                           keyboardType: TextInputType.multiline,
-                          validator: (val) {
-                            if (val == null || val.isEmpty) {
-                              return FFLocalizations.of(context).getText(
-                                'mlgmzzoo' /* A reason for student's absence... */,
-                              );
-                            }
-
-                            return null;
-                          },
+                          validator: _model.reasonControllerValidator
+                              .asValidator(context),
                         ),
                       ),
                       Padding(
@@ -559,7 +538,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
                                     m.storagePath, context))) {
-                              setState(() => isMediaUploading = true);
+                              setState(() => _model.isMediaUploading = true);
+                              var selectedUploadedFiles = <FFUploadedFile>[];
                               var downloadUrls = <String>[];
                               try {
                                 showUploadMessage(
@@ -567,6 +547,15 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   'Uploading file...',
                                   showLoading: true,
                                 );
+                                selectedUploadedFiles = selectedMedia
+                                    .map((m) => FFUploadedFile(
+                                          name: m.storagePath.split('/').last,
+                                          bytes: m.bytes,
+                                          height: m.dimensions?.height,
+                                          width: m.dimensions?.width,
+                                        ))
+                                    .toList();
+
                                 downloadUrls = (await Future.wait(
                                   selectedMedia.map(
                                     (m) async => await uploadData(
@@ -579,11 +568,16 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               } finally {
                                 ScaffoldMessenger.of(context)
                                     .hideCurrentSnackBar();
-                                isMediaUploading = false;
+                                _model.isMediaUploading = false;
                               }
-                              if (downloadUrls.length == selectedMedia.length) {
-                                setState(
-                                    () => uploadedFileUrl = downloadUrls.first);
+                              if (selectedUploadedFiles.length ==
+                                      selectedMedia.length &&
+                                  downloadUrls.length == selectedMedia.length) {
+                                setState(() {
+                                  _model.uploadedLocalFile =
+                                      selectedUploadedFiles.first;
+                                  _model.uploadedFileUrl = downloadUrls.first;
+                                });
                                 showUploadMessage(context, 'Success!');
                               } else {
                                 setState(() {});
@@ -593,8 +587,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               }
                             }
 
-                            if (uploadedFileUrl != null &&
-                                uploadedFileUrl != '') {
+                            if (_model.uploadedFileUrl != null &&
+                                _model.uploadedFileUrl != '') {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -681,7 +675,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             ),
                             child: ClipRect(
                               child: Signature(
-                                controller: signatureController,
+                                controller: _model.signatureController,
                                 backgroundColor: Colors.transparent,
                                 height: 120,
                               ),
@@ -701,12 +695,12 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if (formKey.currentState == null ||
-                                      !formKey.currentState!.validate()) {
+                                  if (_model.formKey.currentState == null ||
+                                      !_model.formKey.currentState!
+                                          .validate()) {
                                     return;
                                   }
-
-                                  if (schoolValue == null) {
+                                  if (_model.schoolValue == null) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -719,7 +713,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                     );
                                     return;
                                   }
-                                  if (gradeValue == null) {
+                                  if (_model.gradeValue == null) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -732,16 +726,15 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                     );
                                     return;
                                   }
-                                  if (datePicked == null) {
+                                  if (_model.datePicked == null) {
                                     return;
                                   }
-
-                                  if (datePicked != null) {
+                                  if (_model.datePicked != null) {
                                     final excusesCreateData =
                                         createExcusesRecordData(
                                       excuseUser: currentUserReference,
-                                      excusePhotoUrl: uploadedFileUrl,
-                                      excuseDateMissed: datePicked,
+                                      excusePhotoUrl: _model.uploadedFileUrl,
+                                      excuseDateMissed: _model.datePicked,
                                     );
                                     await ExcusesRecord.collection
                                         .doc()

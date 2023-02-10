@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'show_event_model.dart';
+export 'show_event_model.dart';
 
 class ShowEventWidget extends StatefulWidget {
   const ShowEventWidget({
@@ -21,7 +23,24 @@ class ShowEventWidget extends StatefulWidget {
 }
 
 class _ShowEventWidgetState extends State<ShowEventWidget> {
+  late ShowEventModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => ShowEventModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +52,11 @@ class _ShowEventWidgetState extends State<ShowEventWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'z2rye3bx' /* Announcement */,
@@ -52,7 +75,7 @@ class _ShowEventWidgetState extends State<ShowEventWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 1,

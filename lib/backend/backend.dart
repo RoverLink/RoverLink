@@ -1,6 +1,7 @@
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
 
@@ -17,6 +18,16 @@ export 'schema/users_record.dart';
 export 'schema/excuses_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
+Future<int> queryUsersRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UsersRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<UsersRecord>> queryUsersRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -59,6 +70,16 @@ Future<FFFirestorePage<UsersRecord>> queryUsersRecordPage({
     );
 
 /// Functions to query ExcusesRecords (as a Stream and as a Future).
+Future<int> queryExcusesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ExcusesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
 Stream<List<ExcusesRecord>> queryExcusesRecord({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -99,6 +120,22 @@ Future<FFFirestorePage<ExcusesRecord>> queryExcusesRecordPage({
       pageSize: pageSize,
       isStream: isStream,
     );
+
+Future<int> queryCollectionCount(
+  Query collection, {
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) {
+  final builder = queryBuilder ?? (q) => q;
+  var query = builder(collection);
+  if (limit > 0) {
+    query = query.limit(limit);
+  }
+
+  return query.count().get().catchError((err) {
+    print('Error querying $collection: $err');
+  }).then((value) => value.count);
+}
 
 Stream<List<T>> queryCollection<T>(Query collection, Serializer<T> serializer,
     {Query Function(Query)? queryBuilder,
@@ -210,6 +247,7 @@ Future maybeCreateUser(User user) async {
   final userRecord = UsersRecord.collection.doc(user.uid);
   final userExists = await userRecord.get().then((u) => u.exists);
   if (userExists) {
+    currentUserDocument = await UsersRecord.getDocumentOnce(userRecord);
     return;
   }
 
@@ -223,4 +261,6 @@ Future maybeCreateUser(User user) async {
   );
 
   await userRecord.set(userData);
+  currentUserDocument =
+      serializers.deserializeWith(UsersRecord.serializer, userData);
 }

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'schools_model.dart';
+export 'schools_model.dart';
 
 class SchoolsWidget extends StatefulWidget {
   const SchoolsWidget({Key? key}) : super(key: key);
@@ -15,7 +17,24 @@ class SchoolsWidget extends StatefulWidget {
 }
 
 class _SchoolsWidgetState extends State<SchoolsWidget> {
+  late SchoolsModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => SchoolsModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +55,7 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Stack(
             children: [
               Align(
@@ -867,10 +886,18 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
                   ),
                 ),
               ),
-              CustomAppBarWidget(),
+              wrapWithModel(
+                model: _model.customAppBarModel,
+                updateCallback: () => setState(() {}),
+                child: CustomAppBarWidget(),
+              ),
               Align(
                 alignment: AlignmentDirectional(0, 1),
-                child: NavbarFloatingWidget(),
+                child: wrapWithModel(
+                  model: _model.navbarFloatingModel,
+                  updateCallback: () => setState(() {}),
+                  child: NavbarFloatingWidget(),
+                ),
               ),
             ],
           ),

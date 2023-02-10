@@ -7,6 +7,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'notifications_with_stuff_model.dart';
+export 'notifications_with_stuff_model.dart';
 
 class NotificationsWithStuffWidget extends StatefulWidget {
   const NotificationsWithStuffWidget({Key? key}) : super(key: key);
@@ -18,8 +20,24 @@ class NotificationsWithStuffWidget extends StatefulWidget {
 
 class _NotificationsWithStuffWidgetState
     extends State<NotificationsWithStuffWidget> {
-  Completer<ApiCallResponse>? _apiRequestCompleter;
+  late NotificationsWithStuffModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => NotificationsWithStuffModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +49,11 @@ class _NotificationsWithStuffWidgetState
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'ic7yfb2d' /* Notifications */,
@@ -50,14 +72,15 @@ class _NotificationsWithStuffWidgetState
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
                 FutureBuilder<ApiCallResponse>(
-                  future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
-                        ..complete(NotificationsCall.call()))
+                  future: (_model.apiRequestCompleter ??=
+                          Completer<ApiCallResponse>()
+                            ..complete(NotificationsCall.call()))
                       .future,
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -76,12 +99,13 @@ class _NotificationsWithStuffWidgetState
                     return Builder(
                       builder: (context) {
                         final announcement = NotificationsCall.notifications(
-                          listViewNotificationsResponse.jsonBody,
-                        ).map((e) => e).toList();
+                              listViewNotificationsResponse.jsonBody,
+                            )?.map((e) => e).toList()?.toList() ??
+                            [];
                         return RefreshIndicator(
                           onRefresh: () async {
-                            setState(() => _apiRequestCompleter = null);
-                            await waitForApiRequestCompleter();
+                            setState(() => _model.apiRequestCompleter = null);
+                            await _model.waitForApiRequestCompleter();
                           },
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
@@ -93,7 +117,8 @@ class _NotificationsWithStuffWidgetState
                               final announcementItem =
                                   announcement[announcementIndex];
                               return AnnouncementWidget(
-                                key: Key('Announcement_${announcementIndex}'),
+                                key: Key(
+                                    'Keyqgh_${announcementIndex}_of_${announcement.length}'),
                                 announcement: announcementItem,
                               );
                             },
@@ -109,20 +134,5 @@ class _NotificationsWithStuffWidgetState
         ),
       ),
     );
-  }
-
-  Future waitForApiRequestCompleter({
-    double minWait = 0,
-    double maxWait = double.infinity,
-  }) async {
-    final stopwatch = Stopwatch()..start();
-    while (true) {
-      await Future.delayed(Duration(milliseconds: 50));
-      final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = _apiRequestCompleter?.isCompleted ?? false;
-      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
-        break;
-      }
-    }
   }
 }

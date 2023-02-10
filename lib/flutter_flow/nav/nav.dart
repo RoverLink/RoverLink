@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
+
 import '../../auth/firebase_user_provider.dart';
 
 import '../../index.dart';
@@ -92,14 +93,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'CreatePost',
+              path: 'createPost',
+              builder: (context, params) => CreatePostWidget(),
+            ),
+            FFRoute(
+              name: 'Explore',
+              path: 'explore',
+              builder: (context, params) => ExploreWidget(),
+            ),
+            FFRoute(
+              name: 'FollowingCopy',
+              path: 'followingCopy',
+              builder: (context, params) => FollowingCopyWidget(),
+            ),
+            FFRoute(
               name: 'Schools',
               path: 'schools',
               builder: (context, params) => SchoolsWidget(),
-            ),
-            FFRoute(
-              name: 'Links',
-              path: 'links',
-              builder: (context, params) => LinksWidget(),
             ),
             FFRoute(
               name: 'ShowEvent',
@@ -122,6 +133,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'YourProfileWithPosts',
               path: 'yourProfileWithPosts',
               builder: (context, params) => YourProfileWithPostsWidget(),
+            ),
+            FFRoute(
+              name: 'Links',
+              path: 'links',
+              builder: (context, params) => LinksWidget(),
             ),
             FFRoute(
               name: 'EditProfile',
@@ -204,19 +220,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => AnnouncementsWidget(),
             ),
             FFRoute(
-              name: 'FormSubmitted',
-              path: 'formSubmitted',
-              builder: (context, params) => FormSubmittedWidget(),
-            ),
-            FFRoute(
               name: 'EAHS',
               path: 'eahs',
               builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
-              name: 'CreatePost',
-              path: 'createPost',
-              builder: (context, params) => CreatePostWidget(),
+              name: 'FormSubmitted',
+              path: 'formSubmitted',
+              builder: (context, params) => FormSubmittedWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -329,7 +340,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
-    String? collectionName,
+    List<String>? collectionNamePath,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -343,7 +354,7 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionName);
+    return deserializeParam<T>(param, type, isList, collectionNamePath);
   }
 }
 

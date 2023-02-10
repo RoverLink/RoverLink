@@ -1,5 +1,5 @@
 import '../auth/auth_util.dart';
-import '../backend/backend.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -7,10 +7,12 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'edit_profile_model.dart';
+export 'edit_profile_model.dart';
 
 class EditProfileWidget extends StatefulWidget {
   const EditProfileWidget({Key? key}) : super(key: key);
@@ -20,26 +22,27 @@ class EditProfileWidget extends StatefulWidget {
 }
 
 class _EditProfileWidgetState extends State<EditProfileWidget> {
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
+  late EditProfileModel _model;
 
-  TextEditingController? displayNameController;
-  TextEditingController? usernameController;
-  final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
-    displayNameController = TextEditingController(text: currentUserDisplayName);
-    usernameController = TextEditingController(
+    _model = createModel(context, () => EditProfileModel());
+
+    _model.displayNameController =
+        TextEditingController(text: currentUserDisplayName);
+    _model.usernameController = TextEditingController(
         text: valueOrDefault(currentUserDocument?.username, ''));
   }
 
   @override
   void dispose() {
-    displayNameController?.dispose();
-    usernameController?.dispose();
+    _model.dispose();
+
+    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -88,7 +91,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Container(
@@ -99,7 +102,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
               ),
               decoration: BoxDecoration(),
               child: Form(
-                key: formKey,
+                key: _model.formKey,
                 autovalidateMode: AutovalidateMode.disabled,
                 child: Align(
                   alignment: AlignmentDirectional(0, 0),
@@ -115,7 +118,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               Align(
                                 alignment: AlignmentDirectional(0, 0),
                                 child: AuthUserStreamWidget(
-                                  child: Hero(
+                                  builder: (context) => Hero(
                                     tag: currentUserPhoto,
                                     transitionOnUserGestures: true,
                                     child: Container(
@@ -167,7 +170,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           selectedMedia.every((m) =>
                                               validateFileFormat(
                                                   m.storagePath, context))) {
-                                        setState(() => isMediaUploading = true);
+                                        setState(() =>
+                                            _model.isMediaUploading = true);
+                                        var selectedUploadedFiles =
+                                            <FFUploadedFile>[];
                                         var downloadUrls = <String>[];
                                         try {
                                           showUploadMessage(
@@ -175,6 +181,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             'Uploading file...',
                                             showLoading: true,
                                           );
+                                          selectedUploadedFiles = selectedMedia
+                                              .map((m) => FFUploadedFile(
+                                                    name: m.storagePath
+                                                        .split('/')
+                                                        .last,
+                                                    bytes: m.bytes,
+                                                    height:
+                                                        m.dimensions?.height,
+                                                    width: m.dimensions?.width,
+                                                  ))
+                                              .toList();
+
                                           downloadUrls = (await Future.wait(
                                             selectedMedia.map(
                                               (m) async => await uploadData(
@@ -187,12 +205,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         } finally {
                                           ScaffoldMessenger.of(context)
                                               .hideCurrentSnackBar();
-                                          isMediaUploading = false;
+                                          _model.isMediaUploading = false;
                                         }
-                                        if (downloadUrls.length ==
-                                            selectedMedia.length) {
-                                          setState(() => uploadedFileUrl =
-                                              downloadUrls.first);
+                                        if (selectedUploadedFiles.length ==
+                                                selectedMedia.length &&
+                                            downloadUrls.length ==
+                                                selectedMedia.length) {
+                                          setState(() {
+                                            _model.uploadedLocalFile =
+                                                selectedUploadedFiles.first;
+                                            _model.uploadedFileUrl =
+                                                downloadUrls.first;
+                                          });
                                           showUploadMessage(
                                               context, 'Success!');
                                         } else {
@@ -203,17 +227,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         }
                                       }
 
-                                      if (uploadedFileUrl != null &&
-                                          uploadedFileUrl != '') {
-                                        setState(() {
+                                      if (_model.uploadedFileUrl != null &&
+                                          _model.uploadedFileUrl != '') {
+                                        FFAppState().update(() {
                                           FFAppState().profilePicture =
-                                              uploadedFileUrl;
+                                              _model.uploadedFileUrl;
                                         });
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              uploadedFileUrl,
+                                              _model.uploadedFileUrl,
                                               style: TextStyle(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -256,8 +280,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                           padding:
                               EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                           child: AuthUserStreamWidget(
-                            child: TextFormField(
-                              controller: displayNameController,
+                            builder: (context) => TextFormField(
+                              controller: _model.displayNameController,
                               obscureText: false,
                               decoration: InputDecoration(
                                 labelText: FFLocalizations.of(context).getText(
@@ -298,6 +322,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     .secondaryBackground,
                               ),
                               style: FlutterFlowTheme.of(context).bodyText1,
+                              validator: _model.displayNameControllerValidator
+                                  .asValidator(context),
                             ),
                           ),
                         ),
@@ -333,8 +359,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 ),
                                 Expanded(
                                   child: AuthUserStreamWidget(
-                                    child: TextFormField(
-                                      controller: usernameController,
+                                    builder: (context) => TextFormField(
+                                      controller: _model.usernameController,
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
@@ -385,35 +411,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
-                                      validator: (val) {
-                                        if (val == null || val.isEmpty) {
-                                          return FFLocalizations.of(context)
-                                              .getText(
-                                            'zw001qap' /* Username is required */,
-                                          );
-                                        }
-
-                                        if (val.length < 5) {
-                                          return FFLocalizations.of(context)
-                                              .getText(
-                                            'qz53miub' /* Username should be at least 5 ... */,
-                                          );
-                                        }
-                                        if (val.length > 15) {
-                                          return FFLocalizations.of(context)
-                                              .getText(
-                                            'rqm8092b' /* Username can have at most 15 c... */,
-                                          );
-                                        }
-                                        if (!RegExp(r"[a-zA-Z0-9_]{5,15}$")
-                                            .hasMatch(val)) {
-                                          return FFLocalizations.of(context)
-                                              .getText(
-                                            'oxx5e4zi' /* Usernames can only contain let... */,
-                                          );
-                                        }
-                                        return null;
-                                      },
+                                      validator: _model
+                                          .usernameControllerValidator
+                                          .asValidator(context),
                                     ),
                                   ),
                                 ),
@@ -421,35 +421,232 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                             ),
                           ),
                         ),
+                        if (getJsonField(
+                              (_model.usernameExistsResult?.jsonBody ?? ''),
+                              r'''$.exists''',
+                            ) ==
+                            true)
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Text(
+                                  FFLocalizations.of(context).getText(
+                                    'auqp7erv' /* This username already exists. ... */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyText1
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .bodyText1Family,
+                                        color: Color(0xFFFF0000),
+                                        useGoogleFonts: GoogleFonts.asMap()
+                                            .containsKey(
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1Family),
+                                      ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 5, 0, 0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Clipboard.setData(ClipboardData(
+                                          text: getJsonField(
+                                        (_model.usernameExistsResult
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.suggestion''',
+                                      ).toString()));
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Username copied to clipboard',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor: Color(0x00000000),
+                                        ),
+                                      );
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .grayIcon,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            3, 3, 3, 3),
+                                        child: Text(
+                                          getJsonField(
+                                            (_model.usernameExistsResult
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.suggestion''',
+                                          ).toString(),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1Family,
+                                                color: Colors.black,
+                                                useGoogleFonts: GoogleFonts
+                                                        .asMap()
+                                                    .containsKey(
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1Family),
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              if (formKey.currentState == null ||
-                                  !formKey.currentState!.validate()) {
+                              var _shouldSetState = false;
+                              if (_model.formKey.currentState == null ||
+                                  !_model.formKey.currentState!.validate()) {
+                                return;
+                              }
+                              _model.usernameExistsResult =
+                                  await UsersGroup.usernameExistsCall.call(
+                                jwtToken: currentJwtToken,
+                                username: _model.usernameController.text,
+                                suggestAlternative: true,
+                              );
+                              _shouldSetState = true;
+                              var confirmDialogResponse =
+                                  await showDialog<bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title:
+                                                Text('whydontitwork (Exists)'),
+                                            content: Text((_model
+                                                        .usernameExistsResult
+                                                        ?.jsonBody ??
+                                                    '')
+                                                .toString()),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('ok'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
+                              if (getJsonField(
+                                    (_model.usernameExistsResult?.jsonBody ??
+                                        ''),
+                                    r'''$.exists''',
+                                  ) ==
+                                  true) {
+                                if (_shouldSetState) setState(() {});
                                 return;
                               }
 
-                              if (uploadedFileUrl != null &&
-                                  uploadedFileUrl != '') {
-                                final usersUpdateData = createUsersRecordData(
-                                  photoUrl: FFAppState().profilePicture,
-                                  displayName: displayNameController!.text,
-                                  username: usernameController!.text,
+                              _model.changeUsernameResult =
+                                  await UsersGroup.changeUsernameCall.call(
+                                userId: currentUserUid,
+                                jwtToken: currentJwtToken,
+                                username: _model.usernameController.text,
+                              );
+                              _shouldSetState = true;
+                              if ((_model.uploadedFileUrl != null &&
+                                      _model.uploadedFileUrl != '') &&
+                                  (_model.uploadedFileUrl != '')) {
+                                _model.updateUserResultWithPFP =
+                                    await UsersGroup.changeDisplayNameCall.call(
+                                  userId: currentUserUid,
+                                  jwtToken: currentJwtToken,
+                                  displayName:
+                                      _model.displayNameController.text,
                                 );
-                                await currentUserReference!
-                                    .update(usersUpdateData);
+                                _shouldSetState = true;
+                                confirmDialogResponse = await showDialog<bool>(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('whydontitwork (PFP)'),
+                                          content: Text('haha test'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, false),
+                                              child: Text('ok'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, true),
+                                              child: Text('ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ) ??
+                                    false;
                               } else {
-                                final usersUpdateData = createUsersRecordData(
-                                  displayName: displayNameController!.text,
-                                  username: usernameController!.text,
+                                _model.updateUserResultNoPFP =
+                                    await UsersGroup.changeDisplayNameCall.call(
+                                  userId: currentUserUid,
+                                  jwtToken: currentJwtToken,
+                                  displayName:
+                                      _model.displayNameController.text,
                                 );
-                                await currentUserReference!
-                                    .update(usersUpdateData);
+                                _shouldSetState = true;
+                                confirmDialogResponse = await showDialog<bool>(
+                                      context: context,
+                                      builder: (alertDialogContext) {
+                                        return AlertDialog(
+                                          title: Text('whydontitwork (NoPFP)'),
+                                          content: Text((_model
+                                                      .updateUserResultNoPFP
+                                                      ?.jsonBody ??
+                                                  '')
+                                              .toString()),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, false),
+                                              child: Text('ok'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  alertDialogContext, true),
+                                              child: Text('ok'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    ) ??
+                                    false;
                               }
 
                               if (FFAppState().newAccount == true) {
-                                setState(() {
+                                FFAppState().update(() {
                                   FFAppState().currentPage = 'Home';
                                 });
 
@@ -468,7 +665,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     backgroundColor: Color(0x00000000),
                                   ),
                                 );
-                                setState(() {
+                                FFAppState().update(() {
                                   FFAppState().newAccount = false;
                                 });
                               } else {
@@ -487,6 +684,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   ),
                                 );
                               }
+
+                              if (_shouldSetState) setState(() {});
+                              return;
+                              if (_shouldSetState) setState(() {});
                             },
                             text: FFLocalizations.of(context).getText(
                               '4eqfcqb2' /* Save */,

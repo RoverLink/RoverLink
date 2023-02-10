@@ -8,6 +8,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'signing_out_model.dart';
+export 'signing_out_model.dart';
 
 class SigningOutWidget extends StatefulWidget {
   const SigningOutWidget({Key? key}) : super(key: key);
@@ -18,6 +20,11 @@ class SigningOutWidget extends StatefulWidget {
 
 class _SigningOutWidgetState extends State<SigningOutWidget>
     with TickerProviderStateMixin {
+  late SigningOutModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
   final animationsMap = {
     'textOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -85,16 +92,16 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
       ],
     ),
   };
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => SigningOutModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 4000));
-      setState(() {
+      FFAppState().update(() {
         FFAppState().currentPage = '';
       });
       GoRouter.of(context).prepareAuthEvent();
@@ -114,6 +121,14 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
   }
 
   @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
@@ -122,7 +137,7 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Align(
             alignment: AlignmentDirectional(0, 0),
             child: Column(

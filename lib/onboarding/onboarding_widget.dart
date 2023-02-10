@@ -10,6 +10,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'onboarding_model.dart';
+export 'onboarding_model.dart';
 
 class OnboardingWidget extends StatefulWidget {
   const OnboardingWidget({Key? key}) : super(key: key);
@@ -20,6 +22,10 @@ class OnboardingWidget extends StatefulWidget {
 
 class _OnboardingWidgetState extends State<OnboardingWidget>
     with TickerProviderStateMixin {
+  late OnboardingModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
@@ -42,12 +48,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
       ],
     ),
   };
-  PageController? pageViewController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    _model = createModel(context, () => OnboardingModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -59,6 +64,13 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
         return;
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
   }
 
   @override
@@ -114,7 +126,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                           child: PageView(
-                            controller: pageViewController ??=
+                            controller: _model.pageViewController ??=
                                 PageController(initialPage: 0),
                             scrollDirection: Axis.horizontal,
                             children: [
@@ -418,12 +430,12 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                             child: smooth_page_indicator.SmoothPageIndicator(
-                              controller: pageViewController ??=
+                              controller: _model.pageViewController ??=
                                   PageController(initialPage: 0),
                               count: 3,
                               axisDirection: Axis.horizontal,
                               onDotClicked: (i) {
-                                pageViewController!.animateToPage(
+                                _model.pageViewController!.animateToPage(
                                   i,
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.ease,

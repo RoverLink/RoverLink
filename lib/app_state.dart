@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:csv/csv.dart';
 import 'flutter_flow/lat_lng.dart';
+import 'dart:convert';
 
 class FFAppState extends ChangeNotifier {
   static final FFAppState _instance = FFAppState._internal();
@@ -26,108 +27,106 @@ class FFAppState extends ChangeNotifier {
         await secureStorage.getBool('ff_isAnonymous') ?? _isAnonymous;
   }
 
+  void update(VoidCallback callback) {
+    callback();
+    notifyListeners();
+  }
+
   late FlutterSecureStorage secureStorage;
 
   DateTime? _selectedDate = DateTime.fromMillisecondsSinceEpoch(946702800000);
   DateTime? get selectedDate => _selectedDate;
   set selectedDate(DateTime? _value) {
-    notifyListeners();
-    if (_value == null) {
-      return;
-    }
     _selectedDate = _value;
   }
 
   bool _viewedOnboarding = false;
   bool get viewedOnboarding => _viewedOnboarding;
   set viewedOnboarding(bool _value) {
-    notifyListeners();
-
     _viewedOnboarding = _value;
     secureStorage.setBool('ff_viewedOnboarding', _value);
   }
 
   void deleteViewedOnboarding() {
-    notifyListeners();
     secureStorage.delete(key: 'ff_viewedOnboarding');
   }
 
   String _currentPage = '';
   String get currentPage => _currentPage;
   set currentPage(String _value) {
-    notifyListeners();
-
     _currentPage = _value;
   }
 
   bool _newAccount = false;
   bool get newAccount => _newAccount;
   set newAccount(bool _value) {
-    notifyListeners();
-
     _newAccount = _value;
   }
 
   List<String> _subscriptions = ['easd'];
   List<String> get subscriptions => _subscriptions;
   set subscriptions(List<String> _value) {
-    notifyListeners();
-
     _subscriptions = _value;
     secureStorage.setStringList('ff_subscriptions', _value);
   }
 
   void deleteSubscriptions() {
-    notifyListeners();
     secureStorage.delete(key: 'ff_subscriptions');
   }
 
   void addToSubscriptions(String _value) {
-    notifyListeners();
     _subscriptions.add(_value);
     secureStorage.setStringList('ff_subscriptions', _subscriptions);
   }
 
   void removeFromSubscriptions(String _value) {
-    notifyListeners();
     _subscriptions.remove(_value);
+    secureStorage.setStringList('ff_subscriptions', _subscriptions);
+  }
+
+  void removeAtIndexFromSubscriptions(int _index) {
+    _subscriptions.removeAt(_index);
     secureStorage.setStringList('ff_subscriptions', _subscriptions);
   }
 
   bool _automaticTheme = true;
   bool get automaticTheme => _automaticTheme;
   set automaticTheme(bool _value) {
-    notifyListeners();
-
     _automaticTheme = _value;
     secureStorage.setBool('ff_automaticTheme', _value);
   }
 
   void deleteAutomaticTheme() {
-    notifyListeners();
     secureStorage.delete(key: 'ff_automaticTheme');
   }
 
   bool _isAnonymous = false;
   bool get isAnonymous => _isAnonymous;
   set isAnonymous(bool _value) {
-    notifyListeners();
-
     _isAnonymous = _value;
     secureStorage.setBool('ff_isAnonymous', _value);
   }
 
   void deleteIsAnonymous() {
-    notifyListeners();
     secureStorage.delete(key: 'ff_isAnonymous');
   }
 
   String _profilePicture = '';
   String get profilePicture => _profilePicture;
   set profilePicture(String _value) {
-    notifyListeners();
-
     _profilePicture = _value;
+  }
+
+  bool _formattingExpanded = false;
+  bool get formattingExpanded => _formattingExpanded;
+  set formattingExpanded(bool _value) {
+    _formattingExpanded = _value;
+  }
+
+  dynamic _editProfileTemp;
+  dynamic get editProfileTemp => _editProfileTemp;
+  set editProfileTemp(dynamic _value) {
+    _editProfileTemp = _value;
   }
 }
 
@@ -142,6 +141,8 @@ LatLng? _latLngFromString(String? val) {
 }
 
 extension FlutterSecureStorageExtensions on FlutterSecureStorage {
+  void remove(String key) => delete(key: key);
+
   Future<String?> getString(String key) async => await read(key: key);
   Future<void> setString(String key, String value) async =>
       await write(key: key, value: value);

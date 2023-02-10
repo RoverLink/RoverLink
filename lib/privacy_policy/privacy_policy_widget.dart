@@ -5,6 +5,8 @@ import '../flutter_flow/flutter_flow_web_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'privacy_policy_model.dart';
+export 'privacy_policy_model.dart';
 
 class PrivacyPolicyWidget extends StatefulWidget {
   const PrivacyPolicyWidget({Key? key}) : super(key: key);
@@ -14,7 +16,24 @@ class PrivacyPolicyWidget extends StatefulWidget {
 }
 
 class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
+  late PrivacyPolicyModel _model;
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  final _unfocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => PrivacyPolicyModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    _unfocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +45,11 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
       appBar: AppBar(
         backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
         automaticallyImplyLeading: false,
-        leading: BackButtonWidget(),
+        leading: wrapWithModel(
+          model: _model.backButtonModel,
+          updateCallback: () => setState(() {}),
+          child: BackButtonWidget(),
+        ),
         title: Text(
           FFLocalizations.of(context).getText(
             'yjmnhfal' /* Privacy Policy */,
@@ -45,7 +68,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
       ),
       body: SafeArea(
         child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
+          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'navbar_floating_model.dart';
+export 'navbar_floating_model.dart';
 
 class NavbarFloatingWidget extends StatefulWidget {
   const NavbarFloatingWidget({Key? key}) : super(key: key);
@@ -15,6 +17,27 @@ class NavbarFloatingWidget extends StatefulWidget {
 }
 
 class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
+  late NavbarFloatingModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => NavbarFloatingModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
@@ -83,7 +106,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 showLoadingIndicator: true,
                                 onPressed: () async {
                                   if (FFAppState().currentPage != 'Home') {
-                                    setState(() {
+                                    FFAppState().update(() {
                                       FFAppState().currentPage = 'Home';
                                     });
 
@@ -120,7 +143,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                               showLoadingIndicator: true,
                               onPressed: () async {
                                 if (FFAppState().currentPage != 'Events') {
-                                  setState(() {
+                                  FFAppState().update(() {
                                     FFAppState().currentPage = 'Events';
                                   });
 
@@ -152,23 +175,23 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                               borderRadius: 30,
                               borderWidth: 1,
                               buttonSize: 50,
-                              icon: FaIcon(
-                                FontAwesomeIcons.school,
-                                color: FFAppState().currentPage == 'Schools'
+                              icon: Icon(
+                                Icons.explore,
+                                color: FFAppState().currentPage == 'Explore'
                                     ? FlutterFlowTheme.of(context)
                                         .navbarActiveLink
                                     : FlutterFlowTheme.of(context).navbarLink,
-                                size: 27,
+                                size: 33,
                               ),
                               showLoadingIndicator: true,
                               onPressed: () async {
-                                if (FFAppState().currentPage != 'Schools') {
-                                  setState(() {
-                                    FFAppState().currentPage = 'Schools';
+                                if (FFAppState().currentPage != 'Links') {
+                                  FFAppState().update(() {
+                                    FFAppState().currentPage = 'Explore';
                                   });
 
-                                  context.goNamed(
-                                    'Schools',
+                                  context.pushNamed(
+                                    'Explore',
                                     extra: <String, dynamic>{
                                       kTransitionInfoKey: TransitionInfo(
                                         hasTransition: true,
@@ -191,22 +214,22 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 borderWidth: 1,
                                 buttonSize: 50,
                                 icon: FaIcon(
-                                  FontAwesomeIcons.externalLinkSquareAlt,
-                                  color: FFAppState().currentPage == 'Links'
+                                  FontAwesomeIcons.school,
+                                  color: FFAppState().currentPage == 'Schools'
                                       ? FlutterFlowTheme.of(context)
                                           .navbarActiveLink
                                       : FlutterFlowTheme.of(context).navbarLink,
-                                  size: 30,
+                                  size: 27,
                                 ),
                                 showLoadingIndicator: true,
                                 onPressed: () async {
-                                  if (FFAppState().currentPage != 'Links') {
-                                    setState(() {
-                                      FFAppState().currentPage = 'Links';
+                                  if (FFAppState().currentPage != 'Schools') {
+                                    FFAppState().update(() {
+                                      FFAppState().currentPage = 'Schools';
                                     });
 
-                                    context.pushNamed(
-                                      'Links',
+                                    context.goNamed(
+                                      'Schools',
                                       extra: <String, dynamic>{
                                         kTransitionInfoKey: TransitionInfo(
                                           hasTransition: true,
