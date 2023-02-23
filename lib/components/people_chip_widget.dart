@@ -37,7 +37,7 @@ class _PeopleChipWidgetState extends State<PeopleChipWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

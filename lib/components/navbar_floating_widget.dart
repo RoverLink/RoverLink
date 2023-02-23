@@ -33,7 +33,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

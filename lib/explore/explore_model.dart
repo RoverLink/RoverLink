@@ -28,7 +28,10 @@ class ExploreModel extends FlutterFlowModel {
     navbarFloatingModel = createModel(context, () => NavbarFloatingModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    exploreAppBarModel.dispose();
+    navbarFloatingModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

@@ -30,7 +30,10 @@ class EventsModel extends FlutterFlowModel {
     navbarFloatingModel = createModel(context, () => NavbarFloatingModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    customAppBarModel.dispose();
+    navbarFloatingModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

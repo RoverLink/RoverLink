@@ -41,7 +41,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

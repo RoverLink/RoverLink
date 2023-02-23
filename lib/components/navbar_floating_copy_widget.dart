@@ -34,7 +34,7 @@ class _NavbarFloatingCopyWidgetState extends State<NavbarFloatingCopyWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

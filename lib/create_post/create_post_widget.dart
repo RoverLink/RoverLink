@@ -63,7 +63,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
       }
     });
 
-    _model.textController = TextEditingController();
+    _model.textController ??= TextEditingController();
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -660,43 +660,44 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                         },
                       ),
                     ),
-                    FlutterFlowIconButton(
-                      borderColor: Colors.transparent,
-                      borderRadius: 30,
-                      buttonSize: 50,
-                      icon: Icon(
-                        Icons.text_fields,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 32,
+                    if (false)
+                      FlutterFlowIconButton(
+                        borderColor: Colors.transparent,
+                        borderRadius: 30,
+                        buttonSize: 50,
+                        icon: Icon(
+                          Icons.text_fields,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 32,
+                        ),
+                        onPressed: () async {
+                          if (FFAppState().formattingExpanded == false) {
+                            if (animationsMap[
+                                    'containerOnActionTriggerAnimation'] !=
+                                null) {
+                              await animationsMap[
+                                      'containerOnActionTriggerAnimation']!
+                                  .controller
+                                  .forward(from: 0.0);
+                            }
+                            FFAppState().update(() {
+                              FFAppState().formattingExpanded = true;
+                            });
+                          } else {
+                            if (animationsMap[
+                                    'containerOnActionTriggerAnimation'] !=
+                                null) {
+                              await animationsMap[
+                                      'containerOnActionTriggerAnimation']!
+                                  .controller
+                                  .reverse();
+                            }
+                            FFAppState().update(() {
+                              FFAppState().formattingExpanded = false;
+                            });
+                          }
+                        },
                       ),
-                      onPressed: () async {
-                        if (FFAppState().formattingExpanded == false) {
-                          if (animationsMap[
-                                  'containerOnActionTriggerAnimation'] !=
-                              null) {
-                            await animationsMap[
-                                    'containerOnActionTriggerAnimation']!
-                                .controller
-                                .forward(from: 0.0);
-                          }
-                          FFAppState().update(() {
-                            FFAppState().formattingExpanded = true;
-                          });
-                        } else {
-                          if (animationsMap[
-                                  'containerOnActionTriggerAnimation'] !=
-                              null) {
-                            await animationsMap[
-                                    'containerOnActionTriggerAnimation']!
-                                .controller
-                                .reverse();
-                          }
-                          FFAppState().update(() {
-                            FFAppState().formattingExpanded = false;
-                          });
-                        }
-                      },
-                    ),
                     Expanded(
                       child: Row(
                         mainAxisSize: MainAxisSize.max,

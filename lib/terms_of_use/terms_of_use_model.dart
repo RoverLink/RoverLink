@@ -18,7 +18,9 @@ class TermsOfUseModel extends FlutterFlowModel {
     backButtonModel = createModel(context, () => BackButtonModel());
   }
 
-  void dispose() {}
+  void dispose() {
+    backButtonModel.dispose();
+  }
 
   /// Additional helper methods are added here.
 

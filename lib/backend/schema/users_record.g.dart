@@ -76,6 +76,13 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
             specifiedType:
                 const FullType(BuiltList, const [const FullType(String)])));
     }
+    value = object.compatibilityReliabilityAvailabilityandPerformanceTest;
+    if (value != null) {
+      result
+        ..add('CompatibilityReliabilityAvailabilityandPerformanceTest')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -132,6 +139,11 @@ class _$UsersRecordSerializer implements StructuredSerializer<UsersRecord> {
                       BuiltList, const [const FullType(String)]))!
               as BuiltList<Object?>);
           break;
+        case 'CompatibilityReliabilityAvailabilityandPerformanceTest':
+          result.compatibilityReliabilityAvailabilityandPerformanceTest =
+              serializers.deserialize(value,
+                  specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -163,6 +175,8 @@ class _$UsersRecord extends UsersRecord {
   @override
   final BuiltList<String>? roles;
   @override
+  final String? compatibilityReliabilityAvailabilityandPerformanceTest;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$UsersRecord([void Function(UsersRecordBuilder)? updates]) =>
@@ -177,6 +191,7 @@ class _$UsersRecord extends UsersRecord {
       this.phoneNumber,
       this.username,
       this.roles,
+      this.compatibilityReliabilityAvailabilityandPerformanceTest,
       this.ffRef})
       : super._();
 
@@ -199,6 +214,8 @@ class _$UsersRecord extends UsersRecord {
         phoneNumber == other.phoneNumber &&
         username == other.username &&
         roles == other.roles &&
+        compatibilityReliabilityAvailabilityandPerformanceTest ==
+            other.compatibilityReliabilityAvailabilityandPerformanceTest &&
         ffRef == other.ffRef;
   }
 
@@ -211,14 +228,16 @@ class _$UsersRecord extends UsersRecord {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, email.hashCode),
-                                    displayName.hashCode),
-                                photoUrl.hashCode),
-                            uid.hashCode),
-                        createdTime.hashCode),
-                    phoneNumber.hashCode),
-                username.hashCode),
-            roles.hashCode),
+                                $jc(
+                                    $jc($jc(0, email.hashCode),
+                                        displayName.hashCode),
+                                    photoUrl.hashCode),
+                                uid.hashCode),
+                            createdTime.hashCode),
+                        phoneNumber.hashCode),
+                    username.hashCode),
+                roles.hashCode),
+            compatibilityReliabilityAvailabilityandPerformanceTest.hashCode),
         ffRef.hashCode));
   }
 
@@ -233,6 +252,8 @@ class _$UsersRecord extends UsersRecord {
           ..add('phoneNumber', phoneNumber)
           ..add('username', username)
           ..add('roles', roles)
+          ..add('compatibilityReliabilityAvailabilityandPerformanceTest',
+              compatibilityReliabilityAvailabilityandPerformanceTest)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -273,6 +294,14 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
   ListBuilder<String> get roles => _$this._roles ??= new ListBuilder<String>();
   set roles(ListBuilder<String>? roles) => _$this._roles = roles;
 
+  String? _compatibilityReliabilityAvailabilityandPerformanceTest;
+  String? get compatibilityReliabilityAvailabilityandPerformanceTest =>
+      _$this._compatibilityReliabilityAvailabilityandPerformanceTest;
+  set compatibilityReliabilityAvailabilityandPerformanceTest(
+          String? compatibilityReliabilityAvailabilityandPerformanceTest) =>
+      _$this._compatibilityReliabilityAvailabilityandPerformanceTest =
+          compatibilityReliabilityAvailabilityandPerformanceTest;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -292,6 +321,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
       _phoneNumber = $v.phoneNumber;
       _username = $v.username;
       _roles = $v.roles?.toBuilder();
+      _compatibilityReliabilityAvailabilityandPerformanceTest =
+          $v.compatibilityReliabilityAvailabilityandPerformanceTest;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -325,6 +356,8 @@ class UsersRecordBuilder implements Builder<UsersRecord, UsersRecordBuilder> {
               phoneNumber: phoneNumber,
               username: username,
               roles: _roles?.build(),
+              compatibilityReliabilityAvailabilityandPerformanceTest:
+                  compatibilityReliabilityAvailabilityandPerformanceTest,
               ffRef: ffRef);
     } catch (_) {
       late String _$failedField;

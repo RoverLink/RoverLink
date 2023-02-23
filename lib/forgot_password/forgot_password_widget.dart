@@ -54,7 +54,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
     super.initState();
     _model = createModel(context, () => ForgotPasswordModel());
 
-    _model.emailAddressForgotPasswordController = TextEditingController();
+    _model.emailAddressForgotPasswordController ??= TextEditingController();
   }
 
   @override

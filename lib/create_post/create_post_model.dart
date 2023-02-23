@@ -40,6 +40,7 @@ class CreatePostModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    backButtonModel.dispose();
     textController?.dispose();
   }
 

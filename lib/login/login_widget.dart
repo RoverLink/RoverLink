@@ -179,11 +179,11 @@ class _LoginWidgetState extends State<LoginWidget>
     super.initState();
     _model = createModel(context, () => LoginModel());
 
-    _model.emailAddressLoginController = TextEditingController();
-    _model.passwordLoginController = TextEditingController();
-    _model.emailAddressController = TextEditingController();
-    _model.passwordController = TextEditingController();
-    _model.passwordConfirmController = TextEditingController();
+    _model.emailAddressLoginController ??= TextEditingController();
+    _model.passwordLoginController ??= TextEditingController();
+    _model.emailAddressController ??= TextEditingController();
+    _model.passwordController ??= TextEditingController();
+    _model.passwordConfirmController ??= TextEditingController();
   }
 
   @override

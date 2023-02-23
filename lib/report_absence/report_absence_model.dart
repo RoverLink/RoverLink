@@ -91,6 +91,7 @@ class ReportAbsenceModel extends FlutterFlowModel {
     absenceDateController?.dispose();
     reasonController?.dispose();
     signatureController.dispose();
+    backButtonModel.dispose();
   }
 
   /// Additional helper methods are added here.

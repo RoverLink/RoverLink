@@ -36,7 +36,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

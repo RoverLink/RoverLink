@@ -35,10 +35,10 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
     super.initState();
     _model = createModel(context, () => ReportAbsenceModel());
 
-    _model.studentNameController = TextEditingController();
-    _model.teacherController = TextEditingController();
-    _model.absenceDateController = TextEditingController();
-    _model.reasonController = TextEditingController();
+    _model.studentNameController ??= TextEditingController();
+    _model.teacherController ??= TextEditingController();
+    _model.absenceDateController ??= TextEditingController();
+    _model.reasonController ??= TextEditingController();
   }
 
   @override

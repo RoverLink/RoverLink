@@ -34,11 +34,16 @@ T valueOrDefault<T>(T? value, T defaultValue) =>
 
 void _setTimeagoLocales() {
   timeago.setLocaleMessages('en', timeago.EnMessages());
+  timeago.setLocaleMessages('en_short', timeago.EnShortMessages());
   timeago.setLocaleMessages('es', timeago.EsMessages());
+  timeago.setLocaleMessages('es_short', timeago.EsShortMessages());
   timeago.setLocaleMessages('ja', timeago.JaMessages());
   timeago.setLocaleMessages('fr', timeago.FrMessages());
+  timeago.setLocaleMessages('fr_short', timeago.FrShortMessages());
   timeago.setLocaleMessages('de', timeago.DeMessages());
+  timeago.setLocaleMessages('de_short', timeago.DeShortMessages());
   timeago.setLocaleMessages('it', timeago.ItMessages());
+  timeago.setLocaleMessages('it_short', timeago.ItShortMessages());
   timeago.setLocaleMessages('zh_Hans', timeago.ZhCnMessages());
 }
 

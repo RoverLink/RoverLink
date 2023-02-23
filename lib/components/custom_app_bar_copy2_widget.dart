@@ -36,7 +36,7 @@ class _CustomAppBarCopy2WidgetState extends State<CustomAppBarCopy2Widget> {
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

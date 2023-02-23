@@ -33,12 +33,12 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
     super.initState();
     _model = createModel(context, () => ExploreAppBarModel());
 
-    _model.searchFieldController = TextEditingController();
+    _model.searchFieldController ??= TextEditingController();
   }
 
   @override
   void dispose() {
-    _model.dispose();
+    _model.maybeDispose();
 
     super.dispose();
   }

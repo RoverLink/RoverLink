@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -7,6 +8,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -32,9 +34,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
 
-    _model.displayNameController =
+    _model.displayNameController ??=
         TextEditingController(text: currentUserDisplayName);
-    _model.usernameController = TextEditingController(
+    _model.usernameController ??= TextEditingController(
         text: valueOrDefault(currentUserDocument?.username, ''));
   }
 
@@ -535,13 +537,16 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title:
-                                                Text('whydontitwork (Exists)'),
-                                            content: Text((_model
-                                                        .usernameExistsResult
-                                                        ?.jsonBody ??
-                                                    '')
-                                                .toString()),
+                                            title: Text(
+                                                'C.R.A.P. Test (UsernameExists)'),
+                                            content:
+                                                Text(valueOrDefault<String>(
+                                              (_model.usernameExistsResult
+                                                          ?.jsonBody ??
+                                                      '')
+                                                  .toString(),
+                                              'UsernameExistsResult was null or empty',
+                                            )),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
@@ -558,6 +563,17 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         },
                                       ) ??
                                       false;
+
+                              final usersUpdateData = createUsersRecordData(
+                                compatibilityReliabilityAvailabilityandPerformanceTest:
+                                    valueOrDefault<String>(
+                                  (_model.usernameExistsResult?.jsonBody ?? '')
+                                      .toString(),
+                                  'UsernameExistsResult was null or empty',
+                                ),
+                              );
+                              await currentUserReference!
+                                  .update(usersUpdateData);
                               if (getJsonField(
                                     (_model.usernameExistsResult?.jsonBody ??
                                         ''),
@@ -586,28 +602,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       _model.displayNameController.text,
                                 );
                                 _shouldSetState = true;
-                                confirmDialogResponse = await showDialog<bool>(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('whydontitwork (PFP)'),
-                                          content: Text('haha test'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, false),
-                                              child: Text('ok'),
-                                            ),
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, true),
-                                              child: Text('ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ) ??
-                                    false;
                               } else {
                                 _model.updateUserResultNoPFP =
                                     await UsersGroup.changeDisplayNameCall.call(
@@ -617,32 +611,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       _model.displayNameController.text,
                                 );
                                 _shouldSetState = true;
-                                confirmDialogResponse = await showDialog<bool>(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('whydontitwork (NoPFP)'),
-                                          content: Text((_model
-                                                      .updateUserResultNoPFP
-                                                      ?.jsonBody ??
-                                                  '')
-                                              .toString()),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, false),
-                                              child: Text('ok'),
-                                            ),
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext, true),
-                                              child: Text('ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ) ??
-                                    false;
                               }
 
                               if (FFAppState().newAccount == true) {
