@@ -15,6 +15,7 @@ class UsersGroup {
   static String baseUrl = 'https://archimedes.jalex.io/users';
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
+    'Host': 'archimedes.jalex.io',
   };
   static GetUsersCall getUsersCall = GetUsersCall();
   static GetUserCall getUserCall = GetUserCall();
