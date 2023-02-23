@@ -16,6 +16,7 @@ class UsersGroup {
   static Map<String, String> headers = {
     'Content-Type': 'application/json',
     'Host': 'archimedes.jalex.io',
+    'Accept': 'application/json',
   };
   static GetUsersCall getUsersCall = GetUsersCall();
   static GetUserCall getUserCall = GetUserCall();
