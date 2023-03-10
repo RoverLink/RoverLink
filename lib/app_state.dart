@@ -111,18 +111,6 @@ class FFAppState extends ChangeNotifier {
     secureStorage.delete(key: 'ff_isAnonymous');
   }
 
-  String _profilePicture = '';
-  String get profilePicture => _profilePicture;
-  set profilePicture(String _value) {
-    _profilePicture = _value;
-  }
-
-  bool _formattingExpanded = false;
-  bool get formattingExpanded => _formattingExpanded;
-  set formattingExpanded(bool _value) {
-    _formattingExpanded = _value;
-  }
-
   dynamic _editProfileTemp;
   dynamic get editProfileTemp => _editProfileTemp;
   set editProfileTemp(dynamic _value) {

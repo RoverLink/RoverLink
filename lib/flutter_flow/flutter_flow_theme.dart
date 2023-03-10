@@ -151,49 +151,49 @@ class MobileTypography extends Typography {
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 24.0,
       );
   String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 22,
+        fontSize: 22.0,
       );
   String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 20,
+        fontSize: 20.0,
       );
   String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 18,
+        fontSize: 18.0,
       );
   String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 16,
+        fontSize: 16.0,
       );
   String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 14,
+        fontSize: 14.0,
       );
   String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 12,
+        fontSize: 12.0,
       );
 }
 
@@ -207,49 +207,49 @@ class TabletTypography extends Typography {
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 24.0,
       );
   String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 22,
+        fontSize: 22.0,
       );
   String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 20,
+        fontSize: 20.0,
       );
   String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 18,
+        fontSize: 18.0,
       );
   String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 16,
+        fontSize: 16.0,
       );
   String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 14,
+        fontSize: 14.0,
       );
   String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 12,
+        fontSize: 12.0,
       );
 }
 
@@ -263,49 +263,49 @@ class DesktopTypography extends Typography {
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 24.0,
       );
   String get title2Family => 'Fira Sans';
   TextStyle get title2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 22,
+        fontSize: 22.0,
       );
   String get title3Family => 'Fira Sans';
   TextStyle get title3 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 20,
+        fontSize: 20.0,
       );
   String get subtitle1Family => 'Fira Sans';
   TextStyle get subtitle1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 18,
+        fontSize: 18.0,
       );
   String get subtitle2Family => 'Fira Sans';
   TextStyle get subtitle2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.w600,
-        fontSize: 16,
+        fontSize: 16.0,
       );
   String get bodyText1Family => 'Fira Sans';
   TextStyle get bodyText1 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.primaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 14,
+        fontSize: 14.0,
       );
   String get bodyText2Family => 'Fira Sans';
   TextStyle get bodyText2 => GoogleFonts.getFont(
         'Fira Sans',
         color: theme.secondaryText,
         fontWeight: FontWeight.normal,
-        fontSize: 12,
+        fontSize: 12.0,
       );
 }
 

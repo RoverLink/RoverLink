@@ -93,9 +93,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'AbsenceExpandedOld',
+              path: 'absenceExpandedOld',
+              builder: (context, params) => AbsenceExpandedOldWidget(),
+            ),
+            FFRoute(
               name: 'CreatePost',
               path: 'createPost',
               builder: (context, params) => CreatePostWidget(),
+            ),
+            FFRoute(
+              name: 'Absences',
+              path: 'absences',
+              builder: (context, params) => AbsencesWidget(),
             ),
             FFRoute(
               name: 'Explore',
@@ -103,9 +113,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => ExploreWidget(),
             ),
             FFRoute(
-              name: 'FollowingCopy',
-              path: 'followingCopy',
-              builder: (context, params) => FollowingCopyWidget(),
+              name: 'ExplorePeople',
+              path: 'explorePeople',
+              builder: (context, params) => ExplorePeopleWidget(),
             ),
             FFRoute(
               name: 'Schools',
@@ -165,14 +175,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SchoolsFollowedWidget(),
             ),
             FFRoute(
-              name: 'About',
-              path: 'about',
-              builder: (context, params) => AboutWidget(),
-            ),
-            FFRoute(
               name: 'SigningOut',
               path: 'signingOut',
               builder: (context, params) => SigningOutWidget(),
+            ),
+            FFRoute(
+              name: 'About',
+              path: 'about',
+              builder: (context, params) => AboutWidget(),
             ),
             FFRoute(
               name: 'TermsOfUse',
@@ -225,13 +235,27 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
+              name: 'EditAbsence',
+              path: 'editAbsence',
+              builder: (context, params) => EditAbsenceWidget(
+                absence: params.getParam('absence', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
+              name: 'AbsenceExpanded',
+              path: 'absenceExpanded',
+              builder: (context, params) => AbsenceExpandedWidget(
+                absence: params.getParam('absence', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
               name: 'FormSubmitted',
               path: 'formSubmitted',
               builder: (context, params) => FormSubmittedWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
-        ).toRoute(appStateNotifier),
-      ],
+        ),
+      ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
     );
 
@@ -277,6 +301,16 @@ extension NavigationExtensions on BuildContext {
               queryParams: queryParams,
               extra: extra,
             );
+
+  void safePop() {
+    // If there is only one route on the stack, navigate to the initial
+    // page instead of popping.
+    if (GoRouter.of(this).routerDelegate.matches.length <= 1) {
+      go('/');
+    } else {
+      pop();
+    }
+  }
 }
 
 extension GoRouterExtensions on GoRouter {
