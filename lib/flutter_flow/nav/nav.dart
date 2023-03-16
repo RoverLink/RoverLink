@@ -252,6 +252,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'FormSubmitted',
               path: 'formSubmitted',
               builder: (context, params) => FormSubmittedWidget(),
+            ),
+            FFRoute(
+              name: 'lemmeOUTTTTTTTTTTTTT',
+              path: 'lemmeOUTTTTTTTTTTTTT',
+              builder: (context, params) => LemmeOUTTTTTTTTTTTTTWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),

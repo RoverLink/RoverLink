@@ -5,9 +5,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_media.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -31,13 +31,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EditProfileModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.previewURL = currentUserPhoto;
-      });
-    });
 
     _model.displayNameController ??=
         TextEditingController(text: currentUserDisplayName);
@@ -123,25 +116,44 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               0.0, 20.0, 0.0, 0.0),
                           child: Stack(
                             children: [
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Hero(
-                                  tag: _model.previewURL!,
-                                  transitionOnUserGestures: true,
-                                  child: Container(
-                                    width: 130.0,
-                                    height: 130.0,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: CachedNetworkImage(
-                                      imageUrl: _model.previewURL!,
-                                      fit: BoxFit.cover,
+                              if (_model.newPFP == null || _model.newPFP == '')
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: AuthUserStreamWidget(
+                                    builder: (context) => Hero(
+                                      tag: currentUserPhoto,
+                                      transitionOnUserGestures: true,
+                                      child: Container(
+                                        width: 130.0,
+                                        height: 130.0,
+                                        clipBehavior: Clip.antiAlias,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: CachedNetworkImage(
+                                          imageUrl: currentUserPhoto,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              if (_model.newPFP != null && _model.newPFP != '')
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Container(
+                                    width: 130.0,
+                                    height: 130.0,
+                                    child: custom_widgets.DisplayUploadedImage(
+                                      width: 130.0,
+                                      height: 130.0,
+                                      isCircle: true,
+                                      defaultImageUrl:
+                                          'https://roverlink.github.io/img/empty.png',
+                                      image: _model.uploadedLocalFile,
+                                    ),
+                                  ),
+                                ),
                               Align(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
@@ -217,6 +229,24 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         media: _model.uploadedLocalFile,
                                         jwtToken: currentJwtToken,
                                       );
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            content: Text(
+                                                (_model.uploadPFP?.jsonBody ??
+                                                        '')
+                                                    .toString()),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
                                       if (getJsonField(
                                             (_model.uploadPFP?.jsonBody ?? ''),
                                             r'''$.responseStatus.message''',
@@ -232,6 +262,26 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             r'''$.attachmentId''',
                                           ).toString();
                                         });
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              content: Text(getJsonField(
+                                                (_model.uploadPFP?.jsonBody ??
+                                                    ''),
+                                                r'''$.mediaUrl''',
+                                              ).toString()),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(

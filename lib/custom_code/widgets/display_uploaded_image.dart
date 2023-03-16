@@ -42,7 +42,7 @@ class _DisplayUploadedImageState extends State<DisplayUploadedImage> {
         shape: widget.isCircle == true ? BoxShape.circle : BoxShape.rectangle,
       ),
       child: widget.image != null
-          ? Image.memory(widget.image!.bytes!)
+          ? Image.memory(widget.image!.bytes!, fit: BoxFit.cover)
           : widget.defaultImageUrl != null
               ? CachedNetworkImage(
                   imageUrl: widget.defaultImageUrl!,

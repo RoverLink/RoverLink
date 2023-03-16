@@ -50,3 +50,5 @@ export '/pages/menu/absence/absence_expanded/absence_expanded_widget.dart'
     show AbsenceExpandedWidget;
 export '/pages/menu/absence/form_submitted/form_submitted_widget.dart'
     show FormSubmittedWidget;
+export '/lemme_o_u_t_t_t_t_t_t_t_t_t_t_t_t_t/lemme_o_u_t_t_t_t_t_t_t_t_t_t_t_t_t_widget.dart'
+    show LemmeOUTTTTTTTTTTTTTWidget;

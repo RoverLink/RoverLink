@@ -616,7 +616,20 @@ class PostsGroup {
 class CreatePostCall {
   Future<ApiCallResponse> call({
     String? jwtToken = '',
+    String? audience = '',
+    String? feedTarget = '',
+    List<String>? attachmentIdsList,
+    String? text = '',
   }) {
+    final attachmentIds = _serializeList(attachmentIdsList);
+
+    final body = '''
+{
+  "audience": "${audience}",
+  "feedTarget": "${feedTarget}",
+  "text": "${text}",
+  "attachmentIds": "${attachmentIds}"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreatePost',
       apiUrl: '${PostsGroup.baseUrl}/?k=0',
@@ -626,6 +639,7 @@ class CreatePostCall {
         'Authorization': 'Bearer ${jwtToken}',
       },
       params: {},
+      body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
@@ -674,6 +688,135 @@ class CreateAttachmentCall {
 }
 
 /// End Media Group Code
+
+/// Start Announcements Group Code
+
+class AnnouncementsGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/announcements';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Host': 'archimedes.jalex.io',
+    'Accept': 'application/json',
+  };
+  static CreateAnnouncementCall createAnnouncementCall =
+      CreateAnnouncementCall();
+  static GetAnnouncementCall getAnnouncementCall = GetAnnouncementCall();
+  static GetAnnouncementsCall getAnnouncementsCall = GetAnnouncementsCall();
+}
+
+class CreateAnnouncementCall {
+  Future<ApiCallResponse> call({
+    String? groupId = '',
+    String? scheduleDate = '',
+    String? jwtToken = '',
+    String? announcementBody = '',
+  }) {
+    final body = '''
+{
+  "groupId": "${groupId}",
+  "body": "${announcementBody}",
+  "scheduleDate": "${scheduleDate}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'CreateAnnouncement',
+      apiUrl: '${AnnouncementsGroup.baseUrl}/?k=0',
+      callType: ApiCallType.POST,
+      headers: {
+        ...AnnouncementsGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetAnnouncementCall {
+  Future<ApiCallResponse> call({
+    String? announcementId = '',
+    bool? includeDeleted,
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetAnnouncement',
+      apiUrl: '${AnnouncementsGroup.baseUrl}/${announcementId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AnnouncementsGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetAnnouncementsCall {
+  Future<ApiCallResponse> call({
+    String? groupId = '',
+    bool? includeDeleted,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetAnnouncements',
+      apiUrl: '${AnnouncementsGroup.baseUrl}/?k=0',
+      callType: ApiCallType.GET,
+      headers: {
+        ...AnnouncementsGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+/// End Announcements Group Code
+
+/// Start Feed Group Code
+
+class FeedGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/feed';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Host': 'archimedes.jalex.io',
+    'Accept': 'application/json',
+  };
+  static GetUserFeedCall getUserFeedCall = GetUserFeedCall();
+}
+
+class GetUserFeedCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    int? page,
+    String? cultureKey = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUserFeed',
+      apiUrl: '${FeedGroup.baseUrl}/user/${userId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FeedGroup.headers,
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+/// End Feed Group Code
 
 class SocialPostsCall {
   static Future<ApiCallResponse> call() {
