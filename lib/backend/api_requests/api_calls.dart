@@ -604,7 +604,7 @@ class GetBuildingCall {
 /// Start Posts Group Code
 
 class PostsGroup {
-  static String baseUrl = 'archimedes.jalex.io/posts';
+  static String baseUrl = 'https://archimedes.jalex.io';
   static Map<String, String> headers = {
     'Host': 'archimedes.jalex.io',
     'Content-Type': 'application/json',
@@ -617,22 +617,25 @@ class CreatePostCall {
   Future<ApiCallResponse> call({
     String? jwtToken = '',
     String? audience = '',
-    String? feedTarget = '',
     List<String>? attachmentIdsList,
     String? text = '',
+    String? feedType = 'user',
+    String? feedId = '',
   }) {
     final attachmentIds = _serializeList(attachmentIdsList);
 
     final body = '''
 {
   "audience": "${audience}",
-  "feedTarget": "${feedTarget}",
+  "feedTarget": "${feedType}:${feedId}",
   "text": "${text}",
-  "attachmentIds": "${attachmentIds}"
+  "attachmentIds": [
+    ${attachmentIds}
+  ]
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreatePost',
-      apiUrl: '${PostsGroup.baseUrl}/?k=0',
+      apiUrl: '${PostsGroup.baseUrl}/posts/',
       callType: ApiCallType.POST,
       headers: {
         ...PostsGroup.headers,
@@ -799,6 +802,7 @@ class GetUserFeedCall {
     String? userId = '',
     int? page,
     String? cultureKey = '',
+    String? jwtToken = '',
   }) {
     return ApiManager.instance.makeApiCall(
       callName: 'GetUserFeed',
@@ -806,6 +810,7 @@ class GetUserFeedCall {
       callType: ApiCallType.GET,
       headers: {
         ...FeedGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
       },
       params: {},
       returnBody: true,
@@ -814,6 +819,22 @@ class GetUserFeedCall {
       cache: false,
     );
   }
+
+  dynamic posts(dynamic response) => getJsonField(
+        response,
+        r'''$.feed.posts''',
+        true,
+      );
+  dynamic attachments(dynamic response) => getJsonField(
+        response,
+        r'''$.feed.posts[:].attachments''',
+        true,
+      );
+  dynamic textspans(dynamic response) => getJsonField(
+        response,
+        r'''$.feed.posts[:].entities.textSpans''',
+        true,
+      );
 }
 
 /// End Feed Group Code

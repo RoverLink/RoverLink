@@ -27,7 +27,7 @@ class AnnouncementsModel extends FlutterFlowModel {
 
   /// Additional helper methods are added here.
 
-  Future waitForApiRequestCompleter({
+  Future waitForApiRequestCompleted({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {

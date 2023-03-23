@@ -92,7 +92,7 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                     child: badges.Badge(
                       badgeContent: Text(
                         FFLocalizations.of(context).getText(
-                          '9thtv05f' /* 2 */,
+                          'iqiw73pl' /* 2 */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily:
@@ -138,7 +138,7 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                         child: badges.Badge(
                           badgeContent: Text(
                             FFLocalizations.of(context).getText(
-                              'em6rbqio' /* 6 */,
+                              '03fvnxzc' /* 6 */,
                             ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyText1
@@ -190,6 +190,8 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                                 tag: currentUserPhoto,
                                 transitionOnUserGestures: true,
                                 child: Container(
+                                  width: 30.0,
+                                  height: 30.0,
                                   clipBehavior: Clip.antiAlias,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,

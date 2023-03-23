@@ -126,7 +126,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     }
                                     setState(() =>
                                         _model.apiRequestCompleter = null);
-                                    await _model.waitForApiRequestCompleter();
+                                    await _model.waitForApiRequestCompleted();
                                   },
                                   child: ListView.builder(
                                     padding: EdgeInsets.zero,

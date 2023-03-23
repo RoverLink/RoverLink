@@ -985,13 +985,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Se déconnecter',
       'zh_Hans': '登出',
     },
-    '66awyfiq': {
-      'en': 'Tets',
-      'de': 'Ausloggen',
-      'es': 'Cerrar sesión',
-      'fr': 'Se déconnecter',
-      'zh_Hans': '登出',
-    },
     'jk2shv6o': {
       'en': 'Home',
       'de': 'Heim',
@@ -1016,45 +1009,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Vos publications',
       'zh_Hans': '你的帖子',
     },
-    'c6d9mukv': {
-      'en': 'You haven\'t posted anything yet.',
-      'de': 'Du hast noch nichts gepostet.',
-      'es': 'Aún no has publicado nada.',
-      'fr': 'Vous n\'avez encore rien posté.',
-      'zh_Hans': '您还没有发布任何内容。',
-    },
     '3eryex94': {
-      'en': 'Home',
-      'de': 'Heim',
-      'es': 'Hogar',
-      'fr': 'Maison',
-      'zh_Hans': '家',
-    },
-  },
-  // YourProfileWithPosts
-  {
-    '27y4wq9u': {
-      'en': 'Student',
-      'de': 'Student',
-      'es': 'Alumno',
-      'fr': 'Étudiant',
-      'zh_Hans': '学生',
-    },
-    '8crp5dhl': {
-      'en': 'Developer',
-      'de': 'Entwickler',
-      'es': 'Desarrollador',
-      'fr': 'Développeur',
-      'zh_Hans': '开发商',
-    },
-    '0l3jeb0s': {
-      'en': 'Your Posts',
-      'de': 'Deine Posts',
-      'es': 'Tus publicaciones',
-      'fr': 'Vos publications',
-      'zh_Hans': '你的帖子',
-    },
-    'lr0gyjii': {
       'en': 'Home',
       'de': 'Heim',
       'es': 'Hogar',
@@ -2531,28 +2486,35 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
-  // lemmeOUTTTTTTTTTTTTT
+  // OtherProfile
   {
-    '9b3y9efv': {
-      'en': 'Button',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+    'j0a4t3m3': {
+      'en': 'Student',
+      'de': 'Student',
+      'es': 'Alumno',
+      'fr': 'Étudiant',
+      'zh_Hans': '学生',
     },
-    'yto0nwmf': {
-      'en': 'Page Title',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+    '27zs3wa5': {
+      'en': 'Follow',
+      'de': 'Folgen',
+      'es': 'Seguir',
+      'fr': 'Suivre',
+      'zh_Hans': '跟随',
     },
-    '90n7msuz': {
+    'qjaixdvc': {
+      'en': 'Posts',
+      'de': 'Deine Posts',
+      'es': 'Tus publicaciones',
+      'fr': 'Vos publications',
+      'zh_Hans': '你的帖子',
+    },
+    'xyra545r': {
       'en': 'Home',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
     },
   },
   // AddContentSelector
@@ -2574,6 +2536,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': '•',
       'zh_Hans': '•',
     },
+    'zogww4od': {
+      'en': 'Expand v',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'a002w5ri': {
+      'en': 'Collapse ^',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
   },
   // CustomAppBar
   {
@@ -2594,14 +2570,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ExploreAppBar
   {
-    '9thtv05f': {
+    'iqiw73pl': {
       'en': '2',
       'de': '2',
       'es': '2',
       'fr': '2',
       'zh_Hans': '2个',
     },
-    'em6rbqio': {
+    '03fvnxzc': {
       'en': '6',
       'de': '6',
       'es': '6',
@@ -2623,23 +2599,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '搜索...',
     },
   },
-  // CustomAppBarCopy
-  {
-    'm6x8ui7t': {
-      'en': '6',
-      'de': '6',
-      'es': '6',
-      'fr': '6',
-      'zh_Hans': '6个',
-    },
-    'i9hhqjo1': {
-      'en': '6',
-      'de': '6',
-      'es': '6',
-      'fr': '6',
-      'zh_Hans': '6个',
-    },
-  },
   // SocialPostCopy
   {
     'l8uxyhmh': {
@@ -2648,23 +2607,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': '•',
       'fr': '•',
       'zh_Hans': '•',
-    },
-  },
-  // CustomAppBarCopy2
-  {
-    '558saoxe': {
-      'en': '12',
-      'de': '12',
-      'es': '12',
-      'fr': '12',
-      'zh_Hans': '12',
-    },
-    'k1s3mbjb': {
-      'en': '6',
-      'de': '6',
-      'es': '6',
-      'fr': '6',
-      'zh_Hans': '6个',
     },
   },
   // SocialPostCopy2
@@ -2687,50 +2629,62 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '跟随',
     },
   },
-  // Absense
+  // SocialPostCopy3
   {
-    'huqkgg8e': {
-      'en': 'Alexander Harrison',
-      'de': 'Alexander Harrison',
-      'es': 'alexander harrison',
-      'fr': 'Alexandre Harrisson',
-      'zh_Hans': '亚历山大·哈里森',
-    },
-    '7z38tr1g': {
-      'en':
-          'He has a scheduled appointment with his dentist that day and will need to miss his classes. He had been suffering from a severe toothache for a week and could not bear it any longer. He hoped that he would not miss anything important in his classes and that he would recover soon.',
-      'de':
-          'Er hat an diesem Tag einen Termin bei seinem Zahnarzt und muss seinen Unterricht verpassen. Er litt seit einer Woche unter starken Zahnschmerzen und konnte es nicht länger ertragen. Er hoffte, dass er in seinem Unterricht nichts Wichtiges verpassen würde und dass er sich bald erholen würde.',
-      'es':
-          'Tiene una cita programada con su dentista ese día y tendrá que faltar a sus clases. Llevaba una semana sufriendo de un fuerte dolor de muelas y no podía soportarlo más. Esperaba no perderse nada importante en sus clases y recuperarse pronto.',
-      'fr':
-          'Il a un rendez-vous avec son dentiste ce jour-là et devra manquer ses cours. Il souffrait d\'un mal de dents sévère depuis une semaine et ne pouvait plus le supporter. Il espérait qu\'il ne manquerait rien d\'important dans ses cours et qu\'il se remettrait bientôt.',
-      'zh_Hans':
-          '那天他和牙医有预约，需要缺课。他牙痛得厉害已经一个星期了，再也忍不住了。他希望他不会错过课堂上任何重要的事情，并希望他能尽快康复。',
-    },
-    'gp1rxbi5': {
-      'en': 'For: 11-18-2006',
-      'de': 'Für: 18.11.2006',
-      'es': 'Para: 18-11-2006',
-      'fr': 'Pour : 18-11-2006',
-      'zh_Hans': '对于：2006 年 11 月 18 日',
-    },
-    'jsk6dcdx': {
-      'en': 'Approved',
-      'de': 'Genehmigt',
-      'es': 'Aprobado',
-      'fr': 'Approuvé',
-      'zh_Hans': '得到正式认可的',
+    '3yza8993': {
+      'en': '•',
+      'de': '•',
+      'es': '•',
+      'fr': '•',
+      'zh_Hans': '•',
     },
   },
-  // NoAbsences
+  // SocialPostCopy4
   {
-    'c9tfy1xl': {
-      'en': 'You haven\'t submitted any absences yet.',
-      'de': 'Sie haben noch keine Abwesenheiten eingereicht.',
-      'es': 'Todavía no ha enviado ninguna ausencia.',
-      'fr': 'Vous n\'avez pas encore soumis d\'absences.',
-      'zh_Hans': '您还没有提交任何缺勤。',
+    'befcpenm': {
+      'en': '•',
+      'de': '•',
+      'es': '•',
+      'fr': '•',
+      'zh_Hans': '•',
+    },
+    'mkvzjumi': {
+      'en': 'Expand v',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '23uyqiwk': {
+      'en': 'Collapse ^',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+  },
+  // SocialPostCopy5
+  {
+    'mk91k3wp': {
+      'en': '•',
+      'de': '•',
+      'es': '•',
+      'fr': '•',
+      'zh_Hans': '•',
+    },
+    'yvm44zxm': {
+      'en': 'Expand v',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '465eb9ft': {
+      'en': 'Collapse ^',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
   },
   // Miscellaneous

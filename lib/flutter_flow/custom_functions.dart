@@ -72,3 +72,7 @@ String toJsonDate(DateTime? date) {
 bool? imageIsSet(String? image) {
   return image != null;
 }
+
+dynamic returnFirstItem(List<dynamic> input) {
+  return input.first;
+}

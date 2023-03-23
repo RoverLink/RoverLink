@@ -140,11 +140,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => YourProfileWidget(),
             ),
             FFRoute(
-              name: 'YourProfileWithPosts',
-              path: 'yourProfileWithPosts',
-              builder: (context, params) => YourProfileWithPostsWidget(),
-            ),
-            FFRoute(
               name: 'Links',
               path: 'links',
               builder: (context, params) => LinksWidget(),
@@ -254,9 +249,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => FormSubmittedWidget(),
             ),
             FFRoute(
-              name: 'lemmeOUTTTTTTTTTTTTT',
-              path: 'lemmeOUTTTTTTTTTTTTT',
-              builder: (context, params) => LemmeOUTTTTTTTTTTTTTWidget(),
+              name: 'OtherProfile',
+              path: 'otherProfile',
+              builder: (context, params) => OtherProfileWidget(
+                user: params.getParam('user', ParamType.JSON),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
@@ -327,6 +324,7 @@ extension GoRouterExtensions on GoRouter {
           : appState.updateNotifyOnAuthChange(false);
   bool shouldRedirect(bool ignoreRedirect) =>
       !ignoreRedirect && appState.hasRedirect();
+  void clearRedirectLocation() => appState.clearRedirectLocation();
   void setRedirectLocationIfUnset(String location) =>
       (routerDelegate.refreshListenable as AppStateNotifier)
           .updateNotifyOnAuthChange(false);

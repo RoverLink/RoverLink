@@ -42,7 +42,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
 
     return Container(
       width: double.infinity,
-      height: 85.3,
+      height: 85.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
       ),

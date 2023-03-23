@@ -105,7 +105,7 @@ class _NotificationsWithStuffWidgetState
                         return RefreshIndicator(
                           onRefresh: () async {
                             setState(() => _model.apiRequestCompleter = null);
-                            await _model.waitForApiRequestCompleter();
+                            await _model.waitForApiRequestCompleted();
                           },
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
