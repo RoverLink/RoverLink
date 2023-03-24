@@ -306,13 +306,13 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                             text: 'You haven\'t posted anything yet.',
                           ),
                         ),
-                        itemBuilder: (context, _, postIndex) {
-                          final postItem =
-                              _model.pagingController!.itemList![postIndex];
+                        itemBuilder: (context, _, profilePostIndex) {
+                          final profilePostItem = _model
+                              .pagingController!.itemList![profilePostIndex];
                           return SocialPostWidget(
                             key: Key(
-                                'Keyt6v_${postIndex}_of_${_model.pagingController!.itemList!.length}'),
-                            post: postItem,
+                                'Keyt6v_${profilePostIndex}_of_${_model.pagingController!.itemList!.length}'),
+                            post: profilePostItem,
                           );
                         },
                       ),
