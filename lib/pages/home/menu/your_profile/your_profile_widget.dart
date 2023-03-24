@@ -9,7 +9,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'your_profile_model.dart';
 export 'your_profile_model.dart';
@@ -241,81 +240,59 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                             ),
                       ),
                     ),
-                    PagedListView<ApiPagingParams, dynamic>(
-                      pagingController: () {
-                        if (_model.pagingController != null) {
-                          return _model.pagingController!;
-                        }
-
-                        _model.pagingController = PagingController(
-                          firstPageKey: ApiPagingParams(
-                            nextPageNumber: 0,
-                            numItems: 0,
-                            lastResponse: null,
-                          ),
-                        );
-                        _model.pagingController!
-                            .addPageRequestListener((nextPageMarker) {
-                          FeedGroup.getUserFeedCall
-                              .call(
-                            userId: currentUserUid,
-                            page: nextPageMarker.nextPageNumber,
-                            cultureKey:
-                                FFLocalizations.of(context).languageCode,
-                            jwtToken: currentJwtToken,
-                          )
-                              .then((listViewGetUserFeedResponse) {
-                            final pageItems = FeedGroup.getUserFeedCall
-                                .posts(
-                                  listViewGetUserFeedResponse.jsonBody,
-                                )!
-                                .map((e) => e)
-                                .toList() as List;
-                            final newNumItems =
-                                nextPageMarker.numItems + pageItems.length;
-                            _model.pagingController!.appendPage(
-                              pageItems,
-                              (pageItems.length > 0)
-                                  ? ApiPagingParams(
-                                      nextPageNumber:
-                                          nextPageMarker.nextPageNumber + 1,
-                                      numItems: newNumItems,
-                                      lastResponse: listViewGetUserFeedResponse,
-                                    )
-                                  : null,
-                            );
-                          });
-                        });
-                        return _model.pagingController!;
-                      }(),
-                      padding: EdgeInsets.zero,
-                      primary: false,
-                      shrinkWrap: true,
-                      reverse: false,
-                      scrollDirection: Axis.vertical,
-                      builderDelegate: PagedChildBuilderDelegate<dynamic>(
-                        // Customize what your widget looks like when it's loading the first page.
-                        firstPageProgressIndicatorBuilder: (_) => Center(
-                          child: LinearProgressIndicator(
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                          ),
-                        ),
-                        noItemsFoundIndicatorBuilder: (_) => Container(
-                          height: 300.0,
-                          child: EmptyListWidget(
-                            text: 'You haven\'t posted anything yet.',
-                          ),
-                        ),
-                        itemBuilder: (context, _, profilePostIndex) {
-                          final profilePostItem = _model
-                              .pagingController!.itemList![profilePostIndex];
-                          return SocialPostWidget(
-                            key: Key(
-                                'Keyt6v_${profilePostIndex}_of_${_model.pagingController!.itemList!.length}'),
-                            post: profilePostItem,
-                          );
-                        },
+                    FutureBuilder<ApiCallResponse>(
+                      future: FeedGroup.getUserFeedCall.call(
+                        userId: currentUserUid,
+                        cultureKey: FFLocalizations.of(context).languageCode,
+                        jwtToken: currentJwtToken,
                       ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: LinearProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          );
+                        }
+                        final listViewGetUserFeedResponse = snapshot.data!;
+                        return Builder(
+                          builder: (context) {
+                            final profilePost = FeedGroup.getUserFeedCall
+                                    .posts(
+                                      listViewGetUserFeedResponse.jsonBody,
+                                    )
+                                    ?.map((e) => e)
+                                    .toList()
+                                    ?.toList() ??
+                                [];
+                            if (profilePost.isEmpty) {
+                              return Container(
+                                height: 300.0,
+                                child: EmptyListWidget(
+                                  text: 'You haven\'t posted anything yet.',
+                                ),
+                              );
+                            }
+                            return ListView.builder(
+                              padding: EdgeInsets.zero,
+                              primary: false,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: profilePost.length,
+                              itemBuilder: (context, profilePostIndex) {
+                                final profilePostItem =
+                                    profilePost[profilePostIndex];
+                                return SocialPostWidget(
+                                  key: Key(
+                                      'Keyt6v_${profilePostIndex}_of_${profilePost.length}'),
+                                  post: profilePostItem,
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
                     ),
                   ],
                 ),

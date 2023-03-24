@@ -215,106 +215,89 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (getJsonField(
-                            widget.post,
-                            r'''$.description''',
-                          ) !=
-                          '')
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              5.0, 0.0, 5.0, 8.0),
-                          child: custom_widgets.PostTextViewer(
-                            width: MediaQuery.of(context).size.width * 1.0,
-                            height: 100.0,
-                            linkTextColor:
-                                FlutterFlowTheme.of(context).primaryColor,
-                            truncate: false,
-                            maxLines: 10,
-                            viewMoreText: FFLocalizations.of(context).getText(
-                              'zogww4od' /* Expand v */,
-                            ),
-                            viewLessText: FFLocalizations.of(context).getText(
-                              'a002w5ri' /* Collapse ^ */,
-                            ),
-                            textScaleFactor: 1.2,
-                            post: widget.post!,
-                            urlHandler: () async {},
-                            emailHandler: () async {},
-                            phoneHandler: () async {},
-                            mentionHandler: () async {
-                              await showDialog(
-                                context: context,
-                                builder: (alertDialogContext) {
-                                  return AlertDialog(
-                                    content:
-                                        Text(FFAppState().selectedPostEntity),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () =>
-                                            Navigator.pop(alertDialogContext),
-                                        child: Text('Ok'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                              _model.getMentionedUser =
-                                  await UsersGroup.getUserProfileCall.call(
-                                userId: FFAppState().selectedPostEntity,
-                                jwtToken: currentJwtToken,
-                              );
-
-                              context.pushNamed(
-                                'OtherProfile',
-                                queryParams: {
-                                  'user': serializeParam(
-                                    (_model.getMentionedUser?.jsonBody ?? ''),
-                                    ParamType.JSON,
-                                  ),
-                                }.withoutNulls,
-                              );
-
-                              setState(() {});
-                            },
-                            hashtagHandler: () async {},
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 8.0),
+                        child: custom_widgets.PostTextViewer(
+                          width: MediaQuery.of(context).size.width * 1.0,
+                          height: 100.0,
+                          linkTextColor:
+                              FlutterFlowTheme.of(context).primaryColor,
+                          truncate: false,
+                          maxLines: 10,
+                          viewMoreText: FFLocalizations.of(context).getText(
+                            'zogww4od' /* Expand v */,
                           ),
+                          viewLessText: FFLocalizations.of(context).getText(
+                            'a002w5ri' /* Collapse ^ */,
+                          ),
+                          textScaleFactor: 1.2,
+                          post: widget.post!,
+                          urlHandler: () async {},
+                          emailHandler: () async {},
+                          phoneHandler: () async {},
+                          mentionHandler: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (alertDialogContext) {
+                                return AlertDialog(
+                                  content:
+                                      Text(FFAppState().selectedPostEntity),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(alertDialogContext),
+                                      child: Text('Ok'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                            _model.getMentionedUser =
+                                await UsersGroup.getUserProfileCall.call(
+                              userId: FFAppState().selectedPostEntity,
+                              jwtToken: currentJwtToken,
+                            );
+
+                            context.pushNamed(
+                              'OtherProfile',
+                              queryParams: {
+                                'user': serializeParam(
+                                  (_model.getMentionedUser?.jsonBody ?? ''),
+                                  ParamType.JSON,
+                                ),
+                              }.withoutNulls,
+                            );
+
+                            setState(() {});
+                          },
+                          hashtagHandler: () async {},
                         ),
-                      if (getJsonField(
-                        widget.post,
-                        r'''$.showImage''',
+                      ),
+                      if (valueOrDefault<bool>(
+                        getJsonField(
+                              widget.post,
+                              r'''$.attachments[?(@.attachmentType=='Image')]''',
+                            ) !=
+                            null,
+                        true,
                       ))
                         Align(
                           alignment: AlignmentDirectional(0.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(),
-                            child: Visibility(
-                              visible: getJsonField(
-                                widget.post,
-                                r'''$.showImage''',
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 8.0),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.fade,
-                                        child: FlutterFlowExpandedImageView(
-                                          image: CachedNetworkImage(
-                                            imageUrl: getJsonField(
-                                              functions
-                                                  .returnFirstItem(getJsonField(
-                                                widget.post,
-                                                r'''$.attachments''',
-                                              )),
-                                              r'''$.link''',
-                                            ),
-                                            fit: BoxFit.contain,
-                                          ),
-                                          allowRotation: false,
-                                          tag: getJsonField(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 8.0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      type: PageTransitionType.fade,
+                                      child: FlutterFlowExpandedImageView(
+                                        image: CachedNetworkImage(
+                                          imageUrl: getJsonField(
                                             functions
                                                 .returnFirstItem(getJsonField(
                                               widget.post,
@@ -322,24 +305,10 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                             )),
                                             r'''$.link''',
                                           ),
-                                          useHeroAnimation: true,
+                                          fit: BoxFit.contain,
                                         ),
-                                      ),
-                                    );
-                                  },
-                                  child: Hero(
-                                    tag: getJsonField(
-                                      functions.returnFirstItem(getJsonField(
-                                        widget.post,
-                                        r'''$.attachments''',
-                                      )),
-                                      r'''$.link''',
-                                    ),
-                                    transitionOnUserGestures: true,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      child: CachedNetworkImage(
-                                        imageUrl: getJsonField(
+                                        allowRotation: false,
+                                        tag: getJsonField(
                                           functions
                                               .returnFirstItem(getJsonField(
                                             widget.post,
@@ -347,8 +316,31 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                           )),
                                           r'''$.link''',
                                         ),
-                                        fit: BoxFit.cover,
+                                        useHeroAnimation: true,
                                       ),
+                                    ),
+                                  );
+                                },
+                                child: Hero(
+                                  tag: getJsonField(
+                                    functions.returnFirstItem(getJsonField(
+                                      widget.post,
+                                      r'''$.attachments''',
+                                    )),
+                                    r'''$.link''',
+                                  ),
+                                  transitionOnUserGestures: true,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: CachedNetworkImage(
+                                      imageUrl: getJsonField(
+                                        functions.returnFirstItem(getJsonField(
+                                          widget.post,
+                                          r'''$.attachments''',
+                                        )),
+                                        r'''$.link''',
+                                      ),
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),

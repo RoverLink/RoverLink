@@ -112,7 +112,7 @@ class _PostTextViewerState extends State<PostTextViewer> {
             widget.post,
             r'''$.text''',
             false,
-          ).ToString(),
+          ),
           maxLines: widget.maxLines,
           truncate: widget.truncate,
           viewMoreText: widget.viewMoreText ?? 'more',

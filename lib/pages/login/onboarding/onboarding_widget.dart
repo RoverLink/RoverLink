@@ -157,8 +157,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                     .height *
                                                 0.3,
                                             decoration: BoxDecoration(),
-                                            child: Lottie.network(
-                                              'https://assets9.lottiefiles.com/packages/lf20_4djadzzo.json',
+                                            child: Lottie.asset(
+                                              'assets/lottie_animations/onboarding1.json',
                                               width: 200.0,
                                               height: 200.0,
                                               fit: BoxFit.contain,
@@ -263,8 +263,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                   .height *
                                               0.3,
                                           decoration: BoxDecoration(),
-                                          child: Lottie.network(
-                                            'https://assets1.lottiefiles.com/packages/lf20_ilp95ggh.json',
+                                          child: Lottie.asset(
+                                            'assets/lottie_animations/onboarding2.json',
                                             width: 200.0,
                                             height: 200.0,
                                             fit: BoxFit.contain,
@@ -354,8 +354,8 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                   .height *
                                               0.3,
                                           decoration: BoxDecoration(),
-                                          child: Lottie.network(
-                                            'https://assets10.lottiefiles.com/packages/lf20_NFGsCh.json',
+                                          child: Lottie.asset(
+                                            'assets/lottie_animations/onboarding3.json',
                                             width: 200.0,
                                             height: 200.0,
                                             fit: BoxFit.contain,
