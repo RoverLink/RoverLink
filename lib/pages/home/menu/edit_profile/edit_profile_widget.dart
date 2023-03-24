@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -192,7 +192,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                               validateFileFormat(
                                                   m.storagePath, context))) {
                                         setState(() =>
-                                            _model.isMediaUploading = true);
+                                            _model.isDataUploading = true);
                                         var selectedUploadedFiles =
                                             <FFUploadedFile>[];
 
@@ -209,7 +209,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                   ))
                                               .toList();
                                         } finally {
-                                          _model.isMediaUploading = false;
+                                          _model.isDataUploading = false;
                                         }
                                         if (selectedUploadedFiles.length ==
                                             selectedMedia.length) {

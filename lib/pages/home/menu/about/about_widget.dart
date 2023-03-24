@@ -84,8 +84,8 @@ class _AboutWidgetState extends State<AboutWidget> {
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          FlutterFlowTheme.of(context).primaryBackground,
-                          FlutterFlowTheme.of(context).secondaryBackground
+                          FlutterFlowTheme.of(context).gray600,
+                          Color(0xFF34343B)
                         ],
                         stops: [0.0, 1.0],
                         begin: AlignmentDirectional(0.0, -1.0),
@@ -167,7 +167,20 @@ class _AboutWidgetState extends State<AboutWidget> {
                                               '489rrs9d' /* By Alexander Harrison, Andrew ... */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyText1Family,
+                                                  color: Colors.white,
+                                                  useGoogleFonts: GoogleFonts
+                                                          .asMap()
+                                                      .containsKey(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1Family),
+                                                ),
                                           ),
                                         ),
                                       ],

@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class EditProfileModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
-  bool isMediaUploading = false;
+  bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
 

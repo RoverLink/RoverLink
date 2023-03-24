@@ -291,6 +291,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                       padding: EdgeInsets.zero,
                       primary: false,
                       shrinkWrap: true,
+                      reverse: false,
                       scrollDirection: Axis.vertical,
                       builderDelegate: PagedChildBuilderDelegate<dynamic>(
                         // Customize what your widget looks like when it's loading the first page.

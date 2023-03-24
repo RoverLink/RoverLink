@@ -7,7 +7,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
@@ -32,7 +32,7 @@ class CreatePostModel extends FlutterFlowModel {
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
-  bool isMediaUploading = false;
+  bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
   String uploadedFileUrl = '';

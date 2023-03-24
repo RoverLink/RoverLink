@@ -402,6 +402,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   margin: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 4.0, 13.0, 4.0),
                                   hidesUnderline: true,
+                                  isSearchable: false,
                                 ),
                               ),
                             ),

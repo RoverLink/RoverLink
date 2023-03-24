@@ -6,7 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
-import '/flutter_flow/upload_media.dart';
+import '/flutter_flow/upload_data.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -270,6 +270,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                               margin: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 4.0, 12.0, 4.0),
                               hidesUnderline: true,
+                              isSearchable: false,
                             );
                           },
                         ),
@@ -402,6 +403,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                           margin: EdgeInsetsDirectional.fromSTEB(
                               12.0, 4.0, 12.0, 4.0),
                           hidesUnderline: true,
+                          isSearchable: false,
                         ),
                       ),
                       Stack(
@@ -512,6 +514,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                           margin: EdgeInsetsDirectional.fromSTEB(
                               12.0, 4.0, 12.0, 4.0),
                           hidesUnderline: true,
+                          isSearchable: false,
                         ),
                       ),
                       if (_model.reasonValue == 'Other')
@@ -585,7 +588,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                             if (selectedMedia != null &&
                                 selectedMedia.every((m) => validateFileFormat(
                                     m.storagePath, context))) {
-                              setState(() => _model.isMediaUploading = true);
+                              setState(() => _model.isDataUploading = true);
                               var selectedUploadedFiles = <FFUploadedFile>[];
 
                               try {
@@ -605,7 +608,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                               } finally {
                                 ScaffoldMessenger.of(context)
                                     .hideCurrentSnackBar();
-                                _model.isMediaUploading = false;
+                                _model.isDataUploading = false;
                               }
                               if (selectedUploadedFiles.length ==
                                   selectedMedia.length) {
@@ -617,7 +620,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                               } else {
                                 setState(() {});
                                 showUploadMessage(
-                                    context, 'Failed to upload media');
+                                    context, 'Failed to upload data');
                                 return;
                               }
                             }

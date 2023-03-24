@@ -136,6 +136,7 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
                         return _model.pagingController!;
                       }(),
                       padding: EdgeInsets.zero,
+                      reverse: false,
                       scrollDirection: Axis.vertical,
                       builderDelegate: PagedChildBuilderDelegate<dynamic>(
                         // Customize what your widget looks like when it's loading the first page.

@@ -666,19 +666,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Écrivez ici...',
       'zh_Hans': '在此输入...',
     },
-    'c4kuko6g': {
+    'jx8880hw': {
       'en': 'Field is required',
-      'de': 'Feld ist erforderlich',
-      'es': 'Se requiere campo',
-      'fr': 'Champ requis',
-      'zh_Hans': '字段是必需的',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
-    'usxnx0h5': {
+    'u9c33q5h': {
       'en': 'Please choose an option from the dropdown',
-      'de': 'Bitte wählen Sie eine Option aus der Dropdown-Liste',
-      'es': 'Por favor, elija una opción del menú desplegable',
-      'fr': 'Veuillez choisir une option dans la liste déroulante',
-      'zh_Hans': '请从下拉列表中选择一个选项',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
     'pvh8cex1': {
       'en': 'Post',
