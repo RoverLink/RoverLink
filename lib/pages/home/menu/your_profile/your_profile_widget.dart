@@ -296,12 +296,8 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                       builderDelegate: PagedChildBuilderDelegate<dynamic>(
                         // Customize what your widget looks like when it's loading the first page.
                         firstPageProgressIndicatorBuilder: (_) => Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                            ),
+                          child: LinearProgressIndicator(
+                            color: FlutterFlowTheme.of(context).primaryColor,
                           ),
                         ),
                         noItemsFoundIndicatorBuilder: (_) => Container(
