@@ -71,12 +71,12 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(30, 10, 30, 30),
+                      padding: EdgeInsetsDirectional.fromSTEB(30, 30, 30, 30),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'bxeung14' /* Your child's absence has been ... */,
                         ),
-                        textAlign: TextAlign.start,
+                        textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).subtitle1.override(
                               fontFamily:
                                   FlutterFlowTheme.of(context).subtitle1Family,

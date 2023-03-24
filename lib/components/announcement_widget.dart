@@ -52,13 +52,6 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                         ParamType.JSON,
                       ),
                     }.withoutNulls,
-                    extra: <String, dynamic>{
-                      kTransitionInfoKey: TransitionInfo(
-                        hasTransition: true,
-                        transitionType: PageTransitionType.fade,
-                        duration: Duration(milliseconds: 400),
-                      ),
-                    },
                   );
                 },
                 child: Container(

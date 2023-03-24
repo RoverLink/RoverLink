@@ -77,9 +77,29 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               appStateNotifier.loggedIn ? HomePageWidget() : OnboardingWidget(),
           routes: [
             FFRoute(
+              name: 'ReportAbsence',
+              path: 'reportAbsence',
+              builder: (context, params) => ReportAbsenceWidget(),
+            ),
+            FFRoute(
               name: 'HomePage',
               path: 'homePage',
               builder: (context, params) => HomePageWidget(),
+            ),
+            FFRoute(
+              name: 'Events',
+              path: 'events',
+              builder: (context, params) => EventsWidget(),
+            ),
+            FFRoute(
+              name: 'Schools',
+              path: 'schools',
+              builder: (context, params) => SchoolsWidget(),
+            ),
+            FFRoute(
+              name: 'Links',
+              path: 'links',
+              builder: (context, params) => LinksWidget(),
             ),
             FFRoute(
               name: 'ShowEvent',
@@ -89,19 +109,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
-              name: 'Events',
-              path: 'events',
-              builder: (context, params) => EventsWidget(),
-            ),
-            FFRoute(
               name: 'Menu',
               path: 'menu',
               builder: (context, params) => MenuWidget(),
-            ),
-            FFRoute(
-              name: 'ReportAbsence',
-              path: 'reportAbsence',
-              builder: (context, params) => ReportAbsenceWidget(),
             ),
             FFRoute(
               name: 'YourProfile',
@@ -159,6 +169,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => LoginWidget(),
             ),
             FFRoute(
+              name: 'ForgotPassword',
+              path: 'forgotPassword',
+              builder: (context, params) => ForgotPasswordWidget(),
+            ),
+            FFRoute(
               name: 'Onboarding',
               path: 'onboarding',
               builder: (context, params) => OnboardingWidget(),
@@ -169,24 +184,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => PrivacyPolicyWidget(),
             ),
             FFRoute(
-              name: 'ForgotPassword',
-              path: 'forgotPassword',
-              builder: (context, params) => ForgotPasswordWidget(),
+              name: 'Notifications',
+              path: 'notifications',
+              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'Copyrights',
               path: 'copyrights',
               builder: (context, params) => CopyrightsWidget(),
-            ),
-            FFRoute(
-              name: 'Theme',
-              path: 'theme',
-              builder: (context, params) => ThemeWidget(),
-            ),
-            FFRoute(
-              name: 'Notifications',
-              path: 'notifications',
-              builder: (context, params) => NotificationsWidget(),
             ),
             FFRoute(
               name: 'NotificationsWithStuff',
@@ -202,6 +207,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'FormSubmitted',
               path: 'formSubmitted',
               builder: (context, params) => FormSubmittedWidget(),
+            ),
+            FFRoute(
+              name: 'EAHS',
+              path: 'eahs',
+              builder: (context, params) => EahsWidget(),
+            ),
+            FFRoute(
+              name: 'CreatePost',
+              path: 'createPost',
+              builder: (context, params) => CreatePostWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),
@@ -378,7 +393,7 @@ class FFRoute {
                   color: Color(0xFF1A1F24),
                   child: Center(
                     child: Image.asset(
-                      'assets/images/RoverLinkDarkTheme.png',
+                      'assets/images/RoverLink_hiwte.png',
                       width: MediaQuery.of(context).size.width * 0.8,
                       fit: BoxFit.contain,
                     ),

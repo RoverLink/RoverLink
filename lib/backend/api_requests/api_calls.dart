@@ -56,7 +56,7 @@ class NotificationsCall {
       callType: ApiCallType.GET,
       headers: {},
       params: {
-        'stags': "easd",
+        'tags': "easd",
       },
       returnBody: true,
       cache: false,

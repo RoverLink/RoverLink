@@ -165,15 +165,19 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                FaIcon(
-                                  FontAwesomeIcons.school,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  size: 20,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 2),
+                                  child: FaIcon(
+                                    FontAwesomeIcons.school,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    size: 20,
+                                  ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      12, 2, 0, 0),
+                                      12, 0, 0, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'pfrajaiz' /* Followed Schools */,
@@ -364,13 +368,14 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                   hintText: FFLocalizations.of(context).getText(
                                     '9ju6f8ep' /* Theme */,
                                   ),
-                                  fillColor: Colors.white,
+                                  fillColor: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
                                   elevation: 2,
                                   borderColor: Colors.transparent,
                                   borderWidth: 0,
                                   borderRadius: 0,
                                   margin: EdgeInsetsDirectional.fromSTEB(
-                                      12, 4, 12, 4),
+                                      12, 4, 13, 4),
                                   hidesUnderline: true,
                                 ),
                               ),

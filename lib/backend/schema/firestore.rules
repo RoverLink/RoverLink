@@ -9,10 +9,10 @@ service cloud.firestore {
     }
 
     match /excuses/{document} {
-      allow create: if true;
-      allow read: if true;
-      allow write: if true;
-      allow delete: if true;
+      allow create: if request.auth != null;
+      allow read: if resource.data.excuse_user == /databases/$(database)/documents/users/$(request.auth.uid);
+      allow write: if request.auth != null;
+      allow delete: if false;
     }
   }
 }

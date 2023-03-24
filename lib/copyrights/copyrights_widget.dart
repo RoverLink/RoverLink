@@ -49,13 +49,14 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FlutterFlowWebView(
-                url: 'https://roverlink.github.io/PrivacyPolicy',
-                bypass: false,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height * 1,
-                verticalScroll: false,
-                horizontalScroll: false,
+              Expanded(
+                child: FlutterFlowWebView(
+                  url: 'https://roverlink.github.io/CopyrightAndLicensing',
+                  bypass: false,
+                  height: MediaQuery.of(context).size.height * 1,
+                  verticalScroll: false,
+                  horizontalScroll: false,
+                ),
               ),
             ],
           ),

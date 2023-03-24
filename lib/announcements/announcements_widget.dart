@@ -46,19 +46,22 @@ class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
         centerTitle: true,
         elevation: 0,
       ),
+      /// Adds indentation so that intrusions such as status bar will not be covered
       body: SafeArea(
+        /// Allows for scrolling
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
+            /// Main Column showing the announcements
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                FutureBuilder<ApiCallResponse>(
-                  future: (_apiRequestCompleter ??= Completer<ApiCallResponse>()
+                FutureBuilder<ApiCallResponse>( /// calling the api to pull calendar events
+                  future: (_apiRequestCompleter ??= Completer<ApiCallResponse>() // async
                         ..complete(NotificationsCall.call()))
                       .future,
                   builder: (context, snapshot) {
-                    // Customize what your widget looks like when it's loading.
+                    /// Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
                       return Center(
                         child: SizedBox(
@@ -71,6 +74,7 @@ class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
                       );
                     }
                     final listViewNotificationsResponse = snapshot.data!;
+                    /// returning the listview widget
                     return Builder(
                       builder: (context) {
                         final announcement = NotificationsCall.notifications(
@@ -81,6 +85,7 @@ class _AnnouncementsWidgetState extends State<AnnouncementsWidget> {
                             setState(() => _apiRequestCompleter = null);
                             await waitForApiRequestCompleter();
                           },
+                          /// builds the individual announcements
                           child: ListView.builder(
                             padding: EdgeInsets.zero,
                             primary: false,

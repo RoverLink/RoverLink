@@ -95,8 +95,8 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  'https://picsum.photos/seed/347/600',
+                                child: Image.asset(
+                                  'assets/images/112646072-removebg-preview.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -105,7 +105,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                     EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'ldalnzak' /* @imsocool */,
+                                    'ldalnzak' /* @andwoo */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
@@ -166,8 +166,8 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  'https://picsum.photos/200',
+                                child: Image.asset(
+                                  'assets/images/face-holding-back-tears_1f979.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -176,7 +176,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                     EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '5hys2oib' /* @omgwow */,
+                                    '5hys2oib' /* @matty */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
@@ -237,8 +237,8 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  'https://i.picsum.photos/id/165/200/200.jpg?hmac=tQGrY9pm5ze9soSsZ5CNBt87zqnHfFwdPv_khau12Sw',
+                                child: Image.asset(
+                                  'assets/images/bulldog.jpg',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -247,78 +247,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                     EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'el9cr2cv' /* @idk */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 15,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
-                                      ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.9, 0),
-                                  child: Icon(
-                                    Icons.remove_circle,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 5,
-                              color: Color(0x3416202A),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  'https://i.picsum.photos/id/1047/200/200.jpg?hmac=kudT4eT6oVe4zhN1SEkQl9MN_AWC771kb2QAUgLjlmc',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'qronr77l' /* @coolperson */,
+                                    'el9cr2cv' /* @tanczosm */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
@@ -355,7 +284,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(16, 20, 0, 0),
                       child: Text(
                         FFLocalizations.of(context).getText(
-                          'tsf7osq8' /* Tags */,
+                          'tsf7osq8' /* Groups */,
                         ),
                         style: FlutterFlowTheme.of(context).subtitle1,
                       ),
@@ -388,8 +317,8 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  'https://picsum.photos/seed/347/600',
+                                child: Image.asset(
+                                  'assets/images/stock.jpg',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -398,7 +327,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                     EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    'mrrftrni' /* #groupssocool */,
+                                    'mrrftrni' /* #eahsband */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1
@@ -459,8 +388,8 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
-                                child: Image.network(
-                                  'https://picsum.photos/200',
+                                child: Image.asset(
+                                  'assets/images/home_logo.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -469,149 +398,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
                                     EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
-                                    '15u9x8w4' /* #omgwow */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 15,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
-                                      ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.9, 0),
-                                  child: Icon(
-                                    Icons.remove_circle,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 5,
-                              color: Color(0x3416202A),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  'https://i.picsum.photos/id/165/200/200.jpg?hmac=tQGrY9pm5ze9soSsZ5CNBt87zqnHfFwdPv_khau12Sw',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'kct1z0sz' /* #idk */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        fontSize: 15,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
-                                      ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.9, 0),
-                                  child: Icon(
-                                    Icons.remove_circle,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                      child: Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          boxShadow: [
-                            BoxShadow(
-                              blurRadius: 5,
-                              color: Color(0x3416202A),
-                              offset: Offset(0, 2),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                          shape: BoxShape.rectangle,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(16, 8, 8, 8),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Container(
-                                clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Image.network(
-                                  'https://i.picsum.photos/id/1047/200/200.jpg?hmac=kudT4eT6oVe4zhN1SEkQl9MN_AWC771kb2QAUgLjlmc',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'psh7zy7l' /* #coolgroup */,
+                                    '15u9x8w4' /* #eastonfootball */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyText1

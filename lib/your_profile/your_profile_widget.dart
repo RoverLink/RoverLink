@@ -113,16 +113,18 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                    child: Text(
-                      '@${FFAppState().username}',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            fontSize: 17,
-                            useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
-                          ),
+                    child: AuthUserStreamWidget(
+                      child: Text(
+                        '@${valueOrDefault(currentUserDocument?.username, '')}',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).bodyText1Family,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              fontSize: 17,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context).bodyText1Family),
+                            ),
+                      ),
                     ),
                   ),
                   Padding(
@@ -159,39 +161,6 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'f3lrbddq' /* Student */,
-                                ),
-                                textAlign: TextAlign.center,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryBackground,
-                                      fontSize: 12,
-                                      useGoogleFonts: GoogleFonts.asMap()
-                                          .containsKey(
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              borderRadius: BorderRadius.circular(20),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(4, 2, 4, 2),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  'g5djk00i' /* Developer */,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)

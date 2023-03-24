@@ -7,7 +7,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -106,11 +105,21 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SvgPicture.asset(
-                              'assets/images/roverdog.svg',
-                              width: 160,
-                              height: 105,
-                              fit: BoxFit.contain,
+                            Expanded(
+                              child: Align(
+                                alignment: AlignmentDirectional(0, 0),
+                                child: Hero(
+                                  tag: 'RoverLinkLogo',
+                                  transitionOnUserGestures: true,
+                                  child: Image.asset(
+                                    'assets/images/RoverLink_hiwte.png',
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.7,
+                                    height: 105,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
