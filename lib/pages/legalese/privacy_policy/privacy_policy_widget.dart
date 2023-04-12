@@ -39,36 +39,36 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'yjmnhfal' /* Privacy Policy */,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22.0,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'yjmnhfal' /* Privacy Policy */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [

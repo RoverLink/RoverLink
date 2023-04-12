@@ -109,7 +109,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                   replacement: '…',
                                 ),
                             style: FlutterFlowTheme.of(context)
-                                .subtitle1
+                                .titleMedium
                                 .override(
                                   fontFamily: 'Fira Sans',
                                   color:
@@ -118,7 +118,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                   fontWeight: FontWeight.w500,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle1Family),
+                                          .titleMediumFamily),
                                 ),
                           ),
                           Padding(
@@ -133,7 +133,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                     r'''$.authorScreenName''',
                                   ).toString()}',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: Color(0xFF57636C),
@@ -142,7 +142,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                                 Padding(
@@ -153,7 +153,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                       '3yza8993' /* • */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: Color(0xFF57636C),
@@ -162,7 +162,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -175,7 +175,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                       r'''$.publishDate''',
                                     ).toString()),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: Color(0xFF57636C),
@@ -184,7 +184,7 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -211,13 +211,14 @@ class _SocialPostCopy3WidgetState extends State<SocialPostCopy3Widget> {
                           widget.post,
                           r'''$.description''',
                         ).toString(),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Fira Sans',
                               color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                       ),
                     ),

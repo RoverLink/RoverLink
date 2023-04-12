@@ -91,13 +91,14 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                         FFLocalizations.of(context).getText(
                           'd6o0mmr4' /* 2 */,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               color: Colors.white,
                               fontSize: 12.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                       ),
                       showBadge: false,
@@ -138,15 +139,15 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
                               'avox4qrx' /* 6 */,
                             ),
                             style: FlutterFlowTheme.of(context)
-                                .bodyText1
+                                .bodyMedium
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
+                                      .bodyMediumFamily,
                                   color: Colors.white,
                                   fontSize: 12.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText1Family),
+                                          .bodyMediumFamily),
                                 ),
                           ),
                           showBadge: false,

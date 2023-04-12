@@ -44,35 +44,35 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'aayi2oyc' /* View Absence */,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'aayi2oyc' /* View Absence */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -119,8 +119,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       '87jd2exx' /* Child */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -128,7 +128,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -163,8 +163,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'o56z8dlq' /* School */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -172,7 +172,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -207,8 +207,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'aedhtyol' /* Teacher */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -216,7 +216,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -251,8 +251,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'od06e5o6' /* Grade */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -260,7 +260,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -295,8 +295,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       '0x4losxl' /* Absent On */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -304,7 +304,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -339,8 +339,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'l3wz0i3v' /* Submitted On */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -348,7 +348,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -384,8 +384,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'e0svq97e' /* Reason */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Text(
                                     FFLocalizations.of(context).getText(
@@ -393,7 +393,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     ),
                                     textAlign: TextAlign.center,
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ],
                               ),
@@ -428,8 +428,8 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     FFLocalizations.of(context).getText(
                                       'cqsofh01' /* Doctor's Note */,
                                     ),
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle1,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleMedium,
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -501,16 +501,16 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                       '0wmlh8q8' /* Approved */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
-                                        .subtitle1
+                                        .titleMedium
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
-                                                  .subtitle1Family,
+                                                  .titleMediumFamily,
                                           color: Color(0xFF206B00),
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle1Family),
+                                                      .titleMediumFamily),
                                         ),
                                   ),
                                 ],

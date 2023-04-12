@@ -80,6 +80,16 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(0.0),
+        child: AppBar(
+          backgroundColor: Color(0xFF430000),
+          automaticallyImplyLeading: false,
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+      ),
       body: Container(
         width: MediaQuery.of(context).size.width * 1.0,
         height: MediaQuery.of(context).size.height * 1.0,
@@ -94,6 +104,37 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                    child: InkWell(
+                      onTap: () async {
+                        context.goNamed('Login');
+                      },
+                      child: Text(
+                        FFLocalizations.of(context).getText(
+                          'bgfgyvji' /* Skip */,
+                        ),
+                        style: FlutterFlowTheme.of(context).titleSmall.override(
+                              fontFamily:
+                                  FlutterFlowTheme.of(context).titleSmallFamily,
+                              fontWeight: FontWeight.normal,
+                              useGoogleFonts: GoogleFonts.asMap().containsKey(
+                                  FlutterFlowTheme.of(context)
+                                      .titleSmallFamily),
+                            ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
               child: Row(
@@ -183,19 +224,19 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title1
+                                                      .displaySmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title1Family,
+                                                                .displaySmallFamily,
                                                         color: Colors.white,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title1Family),
+                                                                    .displaySmallFamily),
                                                       ),
                                             ),
                                           ),
@@ -217,12 +258,12 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2Family,
+                                                                .titleSmallFamily,
                                                         color:
                                                             Color(0xFF747C83),
                                                         useGoogleFonts: GoogleFonts
@@ -230,7 +271,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family),
+                                                                    .titleSmallFamily),
                                                       ),
                                             ),
                                           ),
@@ -288,19 +329,19 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title1
+                                                      .displaySmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title1Family,
+                                                                .displaySmallFamily,
                                                         color: Colors.white,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title1Family),
+                                                                    .displaySmallFamily),
                                                       ),
                                             ),
                                           ),
@@ -322,7 +363,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2,
+                                                      .titleSmall,
                                             ),
                                           ),
                                         ],
@@ -379,19 +420,19 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .title1
+                                                      .displaySmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .title1Family,
+                                                                .displaySmallFamily,
                                                         color: Colors.white,
                                                         useGoogleFonts: GoogleFonts
                                                                 .asMap()
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .title1Family),
+                                                                    .displaySmallFamily),
                                                       ),
                                             ),
                                           ),
@@ -413,7 +454,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                                               textAlign: TextAlign.center,
                                               style:
                                                   FlutterFlowTheme.of(context)
-                                                      .subtitle2,
+                                                      .titleSmall,
                                             ),
                                           ),
                                         ],
@@ -472,7 +513,15 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('Login');
+                        if ((_model.pageViewController?.page?.round() ?? 0) ==
+                            2) {
+                          context.goNamed('Login');
+                        } else {
+                          await _model.pageViewController?.nextPage(
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.ease,
+                          );
+                        }
                       },
                       text: FFLocalizations.of(context).getText(
                         '9y5crtlg' /* Continue */,
@@ -484,23 +533,24 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primaryColor,
-                        textStyle: FlutterFlowTheme.of(context)
-                            .subtitle1
-                            .override(
-                              fontFamily: 'Lexend Deca',
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle1Family),
-                            ),
+                        color: FlutterFlowTheme.of(context).primary,
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: 'Lexend Deca',
+                                  color: Colors.white,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.w500,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleMediumFamily),
+                                ),
                         elevation: 2.0,
                         borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
                       ),
+                      showLoadingIndicator: false,
                     ),
                   ),
                 ],

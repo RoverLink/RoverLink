@@ -486,7 +486,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'de': 'Abwesenheit melden',
       'es': 'Reportar Ausencia',
       'fr': 'Signaler une absence',
-      'zh_Hans': '报告缺勤',
+      'zh_Hans': '报告缺席',
     },
     'gj776w48': {
       'en': 'Home',
@@ -498,6 +498,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // HomePage
   {
+    '8lea1q8j': {
+      'en': 'You haven\'t followed anyone yet.',
+      'de': 'Du hast noch niemandem gefolgt.',
+      'es': 'Aún no has seguido a nadie.',
+      'fr': 'Vous n\'avez encore suivi personne.',
+      'zh_Hans': '你还没有关注任何人。',
+    },
     'k73poz8k': {
       'en': 'Home',
       'de': 'Heim',
@@ -508,6 +515,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Events
   {
+    'gjlh74jx': {
+      'en': 'In:',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'mjf6ba1a': {
+      'en': 'There aren\'t any events for this day.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
     'vqrob0gm': {
       'en': 'Home',
       'de': 'Heim',
@@ -659,22 +680,71 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Créer une publication',
       'zh_Hans': '创建帖子',
     },
-    'lu1w8fti': {
+    'i3nhkyw9': {
       'en': 'Type here...',
       'de': 'Geben Sie hier ein ...',
       'es': 'Escriba aquí...',
       'fr': 'Écrivez ici...',
       'zh_Hans': '在此输入...',
     },
-    'jx8880hw': {
-      'en': 'Field is required',
+    '4d1fcn94': {
+      'en': 'Visibility',
       'de': '',
       'es': '',
       'fr': '',
       'zh_Hans': '',
     },
-    'u9c33q5h': {
-      'en': 'Please choose an option from the dropdown',
+    'q8bywbon': {
+      'en': 'Public',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'a0rsaf9e': {
+      'en': 'Organization Only',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '2hdow91z': {
+      'en': 'Group Only',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'yppanxc5': {
+      'en': 'Friends Only',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '3gaqvias': {
+      'en': 'Private',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '8mkwna5p': {
+      'en': 'Group',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'c3b7y3y3': {
+      'en': 'No Group',
+      'de': 'matt',
+      'es': 'matty',
+      'fr': 'matty',
+      'zh_Hans': '马蒂',
+    },
+    '42m375k1': {
+      'en': 'You can\'t post to any groups.',
       'de': '',
       'es': '',
       'fr': '',
@@ -697,6 +767,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Absences
   {
+    'gcmxvm5m': {
+      'en': 'You haven\'t submitted any absences yet.',
+      'de': 'Sie haben noch keine Abwesenheiten eingereicht.',
+      'es': 'Todavía no ha enviado ninguna ausencia.',
+      'fr': 'Vous n\'avez pas encore soumis d\'absences.',
+      'zh_Hans': '您还没有提交任何缺勤。',
+    },
     '252c3uhe': {
       'en': 'Submit New Absence',
       'de': 'Neue Abwesenheit übermitteln',
@@ -742,6 +819,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Des postes',
       'zh_Hans': '帖子',
     },
+    'h832vw6v': {
+      'en': 'Follow someone to see reccomended people.',
+      'de': 'Folgen Sie jemandem, um empfohlene Personen zu sehen.',
+      'es': 'Sigue a alguien para ver personas recomendadas.',
+      'fr': 'Suivez quelqu\'un pour voir les personnes recommandées.',
+      'zh_Hans': '关注某人以查看推荐的人。',
+    },
     'wu407zmm': {
       'en': 'Home',
       'de': 'Heim',
@@ -752,75 +836,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // ExplorePeople
   {
-    'sn20mup7': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
+    't8b08ye1': {
+      'en': '',
+      'de': 'Anzeigename',
+      'es': 'Nombre para mostrar',
+      'fr': 'Afficher un nom',
+      'zh_Hans': '显示名称',
     },
-    'hthcgg9m': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'gqf175w3': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'juyaflnw': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'xbyv8ei6': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    '4pdxin49': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    '2v7rtcz9': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'seyclgd2': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'z6ulj8yo': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'dkopqkoh': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
+    'o0t6wt99': {
+      'en': 'Search...',
+      'de': 'Suchen...',
+      'es': 'Buscar...',
+      'fr': 'Recherche...',
+      'zh_Hans': '搜索...',
     },
     'jw8tsx2p': {
       'en': 'People',
@@ -924,10 +952,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
-  // ShowEvent
+  // ViewEvent
   {
+    'f1ls76oh': {
+      'en': 'In:',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'v9eiyi2l': {
+      'en': 'By:',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
     'z2rye3bx': {
-      'en': 'Announcement',
+      'en': 'View Event',
       'de': 'Bekanntmachung',
       'es': 'Anuncio',
       'fr': 'Annonce',
@@ -995,19 +1037,19 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // YourProfile
   {
-    'f3lrbddq': {
-      'en': 'Student',
-      'de': 'Student',
-      'es': 'Alumno',
-      'fr': 'Étudiant',
-      'zh_Hans': '学生',
-    },
     'h2m279q1': {
       'en': 'Your Posts',
       'de': 'Deine Posts',
       'es': 'Tus publicaciones',
       'fr': 'Vos publications',
       'zh_Hans': '你的帖子',
+    },
+    'hbppjp1d': {
+      'en': 'You haven\'t posted anything yet.',
+      'de': 'Du hast noch nichts gepostet.',
+      'es': 'Aún no has publicado nada.',
+      'fr': 'Vous n\'avez encore rien posté.',
+      'zh_Hans': '您还没有发布任何内容。',
     },
     '3eryex94': {
       'en': 'Home',
@@ -1248,13 +1290,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Suivant',
       'zh_Hans': '下列的',
     },
-    'pfrajaiz': {
-      'en': 'Followed Schools',
-      'de': 'Gefolgte Schulen',
-      'es': 'Escuelas seguidas',
-      'fr': 'Ecoles suivies',
-      'zh_Hans': '关注的学校',
-    },
     'pz832rs4': {
       'en': 'Automatic',
       'de': 'Automatisch',
@@ -1291,121 +1326,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '设置',
     },
     'vl0g7v2s': {
-      'en': 'Home',
-      'de': 'Heim',
-      'es': 'Hogar',
-      'fr': 'Maison',
-      'zh_Hans': '家',
-    },
-  },
-  // Following
-  {
-    'zn5h7pni': {
-      'en': 'Profiles',
-      'de': 'Profile',
-      'es': 'Perfiles',
-      'fr': 'Profils',
-      'zh_Hans': '简介',
-    },
-    'vtnb76lz': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    '6mpb1oa5': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'rfrtigg1': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'pk330i40': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'vurpoq4y': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'x9jle51k': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'tsf7osq8': {
-      'en': 'Groups',
-      'de': 'Gruppen',
-      'es': 'Grupos',
-      'fr': 'Groupes',
-      'zh_Hans': '团体',
-    },
-    '2w07z0ms': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    'v2s2lsbo': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'ucmmch4q': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    '7wv6pzc1': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    'kqpfn8ot': {
-      'en': 'matty',
-      'de': 'matt',
-      'es': 'matty',
-      'fr': 'matty',
-      'zh_Hans': '马蒂',
-    },
-    '5gs9sef2': {
-      'en': '@matty',
-      'de': '@matte',
-      'es': '@matty',
-      'fr': '@matty',
-      'zh_Hans': '@马蒂',
-    },
-    '1kmx6ks8': {
-      'en': 'Following',
-      'de': 'Folgend',
-      'es': 'Siguiente',
-      'fr': 'Suivant',
-      'zh_Hans': '下列的',
-    },
-    'ffea97fo': {
       'en': 'Home',
       'de': 'Heim',
       'es': 'Hogar',
@@ -1764,6 +1684,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Onboarding
   {
+    'bgfgyvji': {
+      'en': 'Skip',
+      'de': 'Überspringen',
+      'es': 'Saltar',
+      'fr': 'Sauter',
+      'zh_Hans': '跳过',
+    },
     'nwm3x2ci': {
       'en': 'Connect With Peers',
       'de': 'Verbinde dich mit Gleichgesinnten',
@@ -1852,12 +1779,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Avis',
       'zh_Hans': '通知',
     },
-    '2hest3cb': {
-      'en': 'You haven\'t recived any notifications yet.',
-      'de': 'Du hast noch keine Benachrichtigungen erhalten.',
-      'es': 'Aún no has recibido ninguna notificación.',
-      'fr': 'Vous n\'avez pas encore reçu de notifications.',
-      'zh_Hans': '您还没有收到任何通知。',
+    '12stb0js': {
+      'en': 'You haven\'t received any notifications yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
     'itr8nwq2': {
       'en': 'Home',
@@ -1934,13 +1861,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': '#eahs',
       'zh_Hans': '#eahs',
     },
-    'yw0df01t': {
-      'en': 'Follow',
-      'de': 'Folgen',
-      'es': 'Seguir',
-      'fr': 'Suivre',
-      'zh_Hans': '跟随',
-    },
     '313i98wx': {
       'en': 'Information',
       'de': 'Information',
@@ -1973,6 +1893,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Publicaciones',
       'fr': 'Des postes',
       'zh_Hans': '帖子',
+    },
+    '7answsl2': {
+      'en': 'This group hasn\'t posted anything yet.',
+      'de': 'Diese Gruppe hat noch nichts gepostet.',
+      'es': 'Este grupo aún no ha publicado nada.',
+      'fr': 'Ce groupe n\'a encore rien publié.',
+      'zh_Hans': '该小组尚未发布任何内容。',
     },
     'gscnvrjq': {
       'en': 'Home',
@@ -2488,28 +2415,135 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // OtherProfile
   {
-    'j0a4t3m3': {
-      'en': 'Student',
-      'de': 'Student',
-      'es': 'Alumno',
-      'fr': 'Étudiant',
-      'zh_Hans': '学生',
-    },
-    '27zs3wa5': {
-      'en': 'Follow',
-      'de': 'Folgen',
-      'es': 'Seguir',
-      'fr': 'Suivre',
-      'zh_Hans': '跟随',
-    },
     'qjaixdvc': {
       'en': 'Posts',
-      'de': 'Deine Posts',
-      'es': 'Tus publicaciones',
-      'fr': 'Vos publications',
-      'zh_Hans': '你的帖子',
+      'de': 'Beiträge',
+      'es': 'Publicaciones',
+      'fr': 'Des postes',
+      'zh_Hans': '帖子',
+    },
+    '08qpza5x': {
+      'en': 'This person hasn\'t posted anything yet.',
+      'de': 'Diese Person hat noch nichts gepostet.',
+      'es': 'Esta persona aún no ha publicado nada.',
+      'fr': 'Cette personne n\'a encore rien posté.',
+      'zh_Hans': '此人尚未发布任何内容。',
     },
     'xyra545r': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
+    },
+  },
+  // GroupProfile
+  {
+    '9jbvbomx': {
+      'en': 'Information',
+      'de': 'Information',
+      'es': 'Información',
+      'fr': 'Information',
+      'zh_Hans': '信息',
+    },
+    'l5yaqxof': {
+      'en': 'Announcements',
+      'de': 'Ankündigungen',
+      'es': 'Anuncios',
+      'fr': 'Annonces',
+      'zh_Hans': '公告',
+    },
+    '8dv3lm20': {
+      'en': 'Posts',
+      'de': 'Beiträge',
+      'es': 'Publicaciones',
+      'fr': 'Des postes',
+      'zh_Hans': '帖子',
+    },
+    '0epdog56': {
+      'en': 'This group hasn\'t posted anything yet.',
+      'de': 'Diese Gruppe hat noch nichts gepostet.',
+      'es': 'Este grupo aún no ha publicado nada.',
+      'fr': 'Ce groupe n\'a encore rien publié.',
+      'zh_Hans': '该小组尚未发布任何内容。',
+    },
+    'iu0vowae': {
+      'en': 'Members',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    's2lwebya': {
+      'en': 'There are no members in this group.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'zc61hqgk': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
+    },
+  },
+  // Following
+  {
+    'klt9t08p': {
+      'en': 'Following',
+      'de': 'Menschen',
+      'es': 'Gente',
+      'fr': 'Personnes',
+      'zh_Hans': '人们',
+    },
+    'ewyoxm39': {
+      'en': 'People',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'bfxvopxw': {
+      'en': 'You haven\'t followed anyone yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'd9refqz4': {
+      'en': 'Groups',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'azg71tso': {
+      'en': 'You haven\'t followed any groups yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'm4dxp2gj': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
+    },
+  },
+  // ViewAnnouncement
+  {
+    'pi6rjryl': {
+      'en': 'View Announcement',
+      'de': 'Bekanntmachung',
+      'es': 'Anuncio',
+      'fr': 'Annonce',
+      'zh_Hans': '公告',
+    },
+    '64jnttpj': {
       'en': 'Home',
       'de': 'Heim',
       'es': 'Hogar',
@@ -2523,7 +2557,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add Post',
       'de': 'Beitrag hinzufügen',
       'es': 'Añadir publicación',
-      'fr': 'Ajouter un article',
+      'fr': 'Ajouter un message',
       'zh_Hans': '添加帖子',
     },
   },
@@ -2537,18 +2571,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '•',
     },
     'zogww4od': {
-      'en': 'Expand v',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'en': 'Read More',
+      'de': 'Erweitern V',
+      'es': 'Ampliar v',
+      'fr': 'Développer v',
+      'zh_Hans': '展开 v',
     },
     'a002w5ri': {
-      'en': 'Collapse ^',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'en': 'Read Less',
+      'de': 'Reduzieren ^',
+      'es': 'Contraer ^',
+      'fr': 'Réduire ^',
+      'zh_Hans': '收起^',
     },
   },
   // CustomAppBar
@@ -2619,16 +2653,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '•',
     },
   },
-  // PeopleChip
-  {
-    '0trp5c09': {
-      'en': 'Follow',
-      'de': 'Folgen',
-      'es': 'Seguir',
-      'fr': 'Suivre',
-      'zh_Hans': '跟随',
-    },
-  },
   // SocialPostCopy3
   {
     '3yza8993': {
@@ -2650,17 +2674,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'mkvzjumi': {
       'en': 'Expand v',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'de': 'Erweitern V',
+      'es': 'Ampliar v',
+      'fr': 'Développer v',
+      'zh_Hans': '展开 v',
     },
     '23uyqiwk': {
       'en': 'Collapse ^',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'de': 'Reduzieren ^',
+      'es': 'Contraer ^',
+      'fr': 'Réduire ^',
+      'zh_Hans': '收起^',
     },
   },
   // SocialPostCopy5
@@ -2674,17 +2698,41 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'yvm44zxm': {
       'en': 'Expand v',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'de': 'Erweitern V',
+      'es': 'Ampliar v',
+      'fr': 'Développer v',
+      'zh_Hans': '展开 v',
     },
     '465eb9ft': {
       'en': 'Collapse ^',
-      'de': '',
-      'es': '',
-      'fr': '',
-      'zh_Hans': '',
+      'de': 'Reduzieren ^',
+      'es': 'Contraer ^',
+      'fr': 'Réduire ^',
+      'zh_Hans': '收起^',
+    },
+  },
+  // SocialPostCopy6
+  {
+    'eo0fd8w9': {
+      'en': '•',
+      'de': '•',
+      'es': '•',
+      'fr': '•',
+      'zh_Hans': '•',
+    },
+    'wkatpzex': {
+      'en': 'Expand v',
+      'de': 'Erweitern V',
+      'es': 'Ampliar v',
+      'fr': 'Développer v',
+      'zh_Hans': '展开 v',
+    },
+    'tlqt764i': {
+      'en': 'Collapse ^',
+      'de': 'Reduzieren ^',
+      'es': 'Contraer ^',
+      'fr': 'Réduire ^',
+      'zh_Hans': '收起^',
     },
   },
   // Miscellaneous
@@ -2816,6 +2864,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '',
     },
     'yfl28dcy': {
+      'en': '',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'dujbyse7': {
       'en': '',
       'de': '',
       'es': '',

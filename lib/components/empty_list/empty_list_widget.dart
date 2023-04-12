@@ -68,7 +68,7 @@ class _EmptyListWidgetState extends State<EmptyListWidget> {
                 child: Text(
                   widget.text,
                   textAlign: TextAlign.center,
-                  style: FlutterFlowTheme.of(context).title2,
+                  style: FlutterFlowTheme.of(context).headlineMedium,
                 ),
               ),
             ),

@@ -38,45 +38,45 @@ class _LinksWidgetState extends State<LinksWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.chevron_left,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 35.0,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.chevron_left,
+              color: FlutterFlowTheme.of(context).primaryText,
+              size: 35.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
           ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'fty9hn99' /* Important Links */,
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'fty9hn99' /* Important Links */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22.0,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -126,18 +126,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'oloia419' /* EASD Website */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -192,18 +192,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'g1jn5uak' /* Safe 2 Say (Reporting) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -258,18 +258,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         '6feru26r' /* Powerschool (Grades) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -324,18 +324,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'tjanqjqr' /* Schoology (Assignments) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -390,18 +390,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'xzv3424f' /* E-hallpass */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -456,18 +456,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'i4pl95fa' /* Google Drive */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -523,18 +523,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'n6ghu275' /* FD MealPlanner (Cafeteria Menu... */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -589,18 +589,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'q0tcbl2n' /* SchoolCafé (Cafeteria Info) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -656,18 +656,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         '6286tnv1' /* Library Catalog */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -723,18 +723,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'qs7rdxvy' /* EASD Board Meetings */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -790,18 +790,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'ouwg0nnr' /* More Links (EASD Website) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],
@@ -856,18 +856,18 @@ class _LinksWidgetState extends State<LinksWidget> {
                                         'tkzxsjla' /* More Links (Clever) */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1
+                                          .bodyMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family,
+                                                    .bodyMediumFamily,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryText,
                                             fontSize: 15.0,
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family),
+                                                        .bodyMediumFamily),
                                           ),
                                     ),
                                   ],

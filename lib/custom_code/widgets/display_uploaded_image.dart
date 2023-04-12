@@ -35,8 +35,8 @@ class _DisplayUploadedImageState extends State<DisplayUploadedImage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: widget.height,
-      width: widget.width,
+      //height: widget.height,
+      //width: widget.width,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         shape: widget.isCircle == true ? BoxShape.circle : BoxShape.rectangle,

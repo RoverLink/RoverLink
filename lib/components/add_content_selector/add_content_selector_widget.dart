@@ -90,7 +90,7 @@ class _AddContentSelectorWidgetState extends State<AddContentSelectorWidget> {
                               FFLocalizations.of(context).getText(
                                 't7nb2xmc' /* Add Post */,
                               ),
-                              style: FlutterFlowTheme.of(context).subtitle2,
+                              style: FlutterFlowTheme.of(context).titleSmall,
                             ),
                           ],
                         ),

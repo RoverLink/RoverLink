@@ -115,7 +115,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ExplorePeople',
               path: 'explorePeople',
-              builder: (context, params) => ExplorePeopleWidget(),
+              builder: (context, params) => ExplorePeopleWidget(
+                users: params.getParam('users', ParamType.JSON),
+                query: params.getParam('query', ParamType.String),
+              ),
             ),
             FFRoute(
               name: 'Schools',
@@ -123,9 +126,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SchoolsWidget(),
             ),
             FFRoute(
-              name: 'ShowEvent',
-              path: 'showEvent',
-              builder: (context, params) => ShowEventWidget(
+              name: 'ViewEvent',
+              path: 'viewEvent',
+              builder: (context, params) => ViewEventWidget(
                 event: params.getParam('event', ParamType.JSON),
               ),
             ),
@@ -158,11 +161,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'Settings',
               path: 'settings',
               builder: (context, params) => SettingsWidget(),
-            ),
-            FFRoute(
-              name: 'Following',
-              path: 'following',
-              builder: (context, params) => FollowingWidget(),
             ),
             FFRoute(
               name: 'SchoolsFollowed',
@@ -252,7 +250,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               name: 'OtherProfile',
               path: 'otherProfile',
               builder: (context, params) => OtherProfileWidget(
-                user: params.getParam('user', ParamType.JSON),
+                user: params.getParam('user', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'GroupProfile',
+              path: 'groupProfile',
+              builder: (context, params) => GroupProfileWidget(
+                group: params.getParam('group', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'Following',
+              path: 'following',
+              builder: (context, params) => FollowingWidget(),
+            ),
+            FFRoute(
+              name: 'ViewAnnouncement',
+              path: 'viewAnnouncement',
+              builder: (context, params) => ViewAnnouncementWidget(
+                event: params.getParam('event', ParamType.JSON),
               ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),

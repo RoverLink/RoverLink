@@ -50,48 +50,48 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: Visibility(
-          visible: FFAppState().newAccount == false,
-          child: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.chevron_left,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 35.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'r9459w4x' /* Edit Profile */,
-          ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: Visibility(
+            visible: FFAppState().newAccount == false,
+            child: FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: Icon(
+                Icons.chevron_left,
                 color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22.0,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
+                size: 35.0,
               ),
+              onPressed: () async {
+                context.pop();
+              },
+            ),
+          ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'r9459w4x' /* Edit Profile */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -223,6 +223,24 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         }
                                       }
 
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            'Uploading image...',
+                                            style: TextStyle(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                            ),
+                                          ),
+                                          duration:
+                                              Duration(milliseconds: 4000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                        ),
+                                      );
                                       _model.uploadPFP = await MediaGroup
                                           .createAttachmentCall
                                           .call(
@@ -246,6 +264,8 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         });
                                       } else {
                                         ScaffoldMessenger.of(context)
+                                            .clearSnackBars();
+                                        ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
@@ -258,7 +278,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             ),
                                             duration:
                                                 Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0x00000000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondaryBackground,
                                           ),
                                         );
                                       }
@@ -283,7 +305,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   '2rhr4how' /* Display Name */,
                                 ),
                                 hintStyle:
-                                    FlutterFlowTheme.of(context).bodyText2,
+                                    FlutterFlowTheme.of(context).bodySmall,
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Color(0x00000000),
@@ -316,7 +338,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                 fillColor: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
                               ),
-                              style: FlutterFlowTheme.of(context).bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                               validator: _model.displayNameControllerValidator
                                   .asValidator(context),
                             ),
@@ -348,7 +370,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         'hpd4j8lo' /* @ */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                     ),
                                   ),
                                 ),
@@ -363,7 +385,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           '0tn91lqy' /* Username */,
                                         ),
                                         hintStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2,
+                                            .bodySmall,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -405,7 +427,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                 0.0, 12.0, 12.0, 12.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText1,
+                                          .bodyMedium,
                                       validator: _model
                                           .usernameControllerValidator
                                           .asValidator(context),
@@ -432,15 +454,15 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     'auqp7erv' /* This username already exists. ... */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText1
+                                      .bodyMedium
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
+                                            .bodyMediumFamily,
                                         color: Color(0xFFFF0000),
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
+                                                    .bodyMediumFamily),
                                       ),
                                 ),
                                 Padding(
@@ -490,18 +512,18 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                             r'''$.suggestion''',
                                           ).toString(),
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyText1
+                                              .bodyMedium
                                               .override(
                                                 fontFamily:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1Family,
+                                                        .bodyMediumFamily,
                                                 color: Colors.black,
                                                 useGoogleFonts: GoogleFonts
                                                         .asMap()
                                                     .containsKey(
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .bodyText1Family),
+                                                            .bodyMediumFamily),
                                               ),
                                         ),
                                       ),
@@ -617,9 +639,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   0.0, 0.0, 0.0, 0.0),
                               iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
+                                  .titleSmall
                                   .override(
                                     fontFamily: 'Fira Sans',
                                     color: FlutterFlowTheme.of(context)
@@ -629,7 +651,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
+                                                .titleSmallFamily),
                                   ),
                               elevation: 5.0,
                               borderSide: BorderSide(

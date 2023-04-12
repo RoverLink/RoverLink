@@ -1,41 +1,67 @@
 import '/auth/auth_util.dart';
-import '/backend/firebase_storage/storage.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
+import '/components/empty_list/empty_list_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
+import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class CreatePostModel extends FlutterFlowModel {
   ///  Local state fields for this page.
 
-  bool formattingExpanded = false;
+  String currentlyExpanded = 'Nothing';
+
+  List<String> uploadedImageID = [];
+  void addToUploadedImageID(String item) => uploadedImageID.add(item);
+  void removeFromUploadedImageID(String item) => uploadedImageID.remove(item);
+  void removeAtIndexFromUploadedImageID(int index) =>
+      uploadedImageID.removeAt(index);
+
+  String visibility = 'Public';
+
+  bool useDate = false;
+
+  String? group;
+
+  String? groupName;
+
+  String groupPFP = 'https://roverlink.github.io/img/empty.png';
+
+  double progressBar = 0.0;
 
   ///  State fields for stateful widgets in this page.
 
-  final formKey = GlobalKey<FormState>();
   // Model for BackButton component.
   late BackButtonModel backButtonModel;
   // State field(s) for TextField widget.
   TextEditingController? textController;
   String? Function(BuildContext, String?)? textControllerValidator;
+  DateTime? datePicked;
+  // State field(s) for ListView widget.
+  PagingController<ApiPagingParams, dynamic>? pagingController;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+
+  // Stores action output result for [Backend Call - API (CreateAttachment)] action in IconButton widget.
+  ApiCallResponse? uploadPostAttachment;
+  // Stores action output result for [Backend Call - API (CreatePost)] action in Button widget.
+  ApiCallResponse? createPostResult;
 
   /// Initialization and disposal methods.
 

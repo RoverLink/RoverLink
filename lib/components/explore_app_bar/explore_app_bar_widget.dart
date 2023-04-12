@@ -1,4 +1,5 @@
 import '/auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -94,13 +95,14 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                         FFLocalizations.of(context).getText(
                           'iqiw73pl' /* 2 */,
                         ),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               color: Colors.white,
                               fontSize: 12.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                       ),
                       showBadge: false,
@@ -141,15 +143,15 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                               '03fvnxzc' /* 6 */,
                             ),
                             style: FlutterFlowTheme.of(context)
-                                .bodyText1
+                                .bodyMedium
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyText1Family,
+                                      .bodyMediumFamily,
                                   color: Colors.white,
                                   fontSize: 12.0,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .bodyText1Family),
+                                          .bodyMediumFamily),
                                 ),
                           ),
                           showBadge: false,
@@ -254,17 +256,43 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                   Duration(milliseconds: 2000),
                   () => setState(() {}),
                 ),
+                onFieldSubmitted: (_) async {
+                  _model.searchResult = await UsersGroup.getUsersCall.call(
+                    jwtToken: currentJwtToken,
+                    query: _model.searchFieldController.text,
+                  );
+
+                  context.pushNamed(
+                    'ExplorePeople',
+                    queryParams: {
+                      'users': serializeParam(
+                        (_model.searchResult?.jsonBody ?? ''),
+                        ParamType.JSON,
+                      ),
+                      'query': serializeParam(
+                        _model.searchFieldController.text,
+                        ParamType.String,
+                      ),
+                    }.withoutNulls,
+                  );
+
+                  setState(() {
+                    _model.searchFieldController?.clear();
+                  });
+
+                  setState(() {});
+                },
                 obscureText: false,
                 decoration: InputDecoration(
                   hintText: FFLocalizations.of(context).getText(
                     'f87s9ke8' /* Search... */,
                   ),
-                  hintStyle: FlutterFlowTheme.of(context).bodyText2.override(
+                  hintStyle: FlutterFlowTheme.of(context).bodySmall.override(
                         fontFamily:
-                            FlutterFlowTheme.of(context).bodyText2Family,
+                            FlutterFlowTheme.of(context).bodySmallFamily,
                         fontSize: 14.0,
                         useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyText2Family),
+                            FlutterFlowTheme.of(context).bodySmallFamily),
                       ),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -315,7 +343,7 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                         )
                       : null,
                 ),
-                style: FlutterFlowTheme.of(context).bodyText1,
+                style: FlutterFlowTheme.of(context).bodyMedium,
                 validator:
                     _model.searchFieldControllerValidator.asValidator(context),
               ),

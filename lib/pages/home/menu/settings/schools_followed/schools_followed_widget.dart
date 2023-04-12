@@ -39,35 +39,35 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'fuyx7927' /* Schools */,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'fuyx7927' /* Schools */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -111,17 +111,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'm9qxt4fu' /* Easton Area High School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -166,8 +166,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -208,17 +208,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'vlqitd1o' /* Easton Area Middle School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -263,8 +263,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -305,17 +305,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'wc8rlbyt' /* Palmer Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -361,8 +361,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -403,17 +403,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   '04c1x7v4' /* Forks Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -458,8 +458,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -500,17 +500,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   '0bn319g5' /* Tracy Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -555,8 +555,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -597,17 +597,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'hdkpi7im' /* Cheston Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -653,8 +653,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -695,17 +695,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'jf9llyjv' /* Paxinosa Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -751,8 +751,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -793,17 +793,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'aggkinoa' /* Shawnee Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -849,8 +849,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -891,17 +891,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   '5s7gnv81' /* March Elementary School */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -946,8 +946,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,
@@ -988,17 +988,17 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                   'dcfvvtq2' /* Easton Cyber Academy */,
                                 ),
                                 style: FlutterFlowTheme.of(context)
-                                    .bodyText1
+                                    .bodyMedium
                                     .override(
                                       fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyText1Family,
+                                          .bodyMediumFamily,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryText,
                                       fontSize: 15.0,
                                       useGoogleFonts: GoogleFonts.asMap()
                                           .containsKey(
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText1Family),
+                                                  .bodyMediumFamily),
                                     ),
                               ),
                               Expanded(
@@ -1043,8 +1043,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                         setState(() {});
                                       }
                                     },
-                                    activeColor: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    activeColor:
+                                        FlutterFlowTheme.of(context).primary,
                                     inactiveTrackColor:
                                         FlutterFlowTheme.of(context)
                                             .secondaryText,

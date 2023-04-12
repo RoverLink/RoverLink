@@ -76,3 +76,29 @@ bool? imageIsSet(String? image) {
 dynamic returnFirstItem(List<dynamic> input) {
   return input.first;
 }
+
+String? toJsonList(List<String> strings) {
+  return "[\"" + strings.join('\",\"') + "\"]";
+}
+
+int? doIntCalculation(
+  int num1,
+  String operation,
+  int num2,
+) {
+  if (operation == "+" || operation == "add") {
+    return num1 + num2;
+  } else if (operation == "-" || operation == "subtract") {
+    return num1 - num2;
+  } else if (operation == "x" ||
+      operation == "X" ||
+      operation == "*" ||
+      operation == "multiply") {
+    return num1 * num2;
+  }
+  return null;
+}
+
+int stringLength(String input) {
+  return input.length;
+}

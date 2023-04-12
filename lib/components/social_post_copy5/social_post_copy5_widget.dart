@@ -115,7 +115,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                     replacement: '…',
                                   ),
                               style: FlutterFlowTheme.of(context)
-                                  .subtitle1
+                                  .titleMedium
                                   .override(
                                     fontFamily: 'Fira Sans',
                                     color: FlutterFlowTheme.of(context)
@@ -125,7 +125,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .subtitle1Family),
+                                                .titleMediumFamily),
                                   ),
                             ),
                             Padding(
@@ -140,7 +140,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                       r'''$.author.userName''',
                                     ).toString()}',
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: Color(0xFF57636C),
@@ -149,7 +149,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                   Padding(
@@ -160,7 +160,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                         'mk91k3wp' /* • */,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText2
+                                          .bodySmall
                                           .override(
                                             fontFamily: 'Fira Sans',
                                             color: Color(0xFF57636C),
@@ -169,7 +169,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2Family),
+                                                        .bodySmallFamily),
                                           ),
                                     ),
                                   ),
@@ -187,7 +187,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                             .languageCode,
                                       ),
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyText2
+                                          .bodySmall
                                           .override(
                                             fontFamily: 'Fira Sans',
                                             color: Color(0xFF57636C),
@@ -196,7 +196,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                                             useGoogleFonts: GoogleFonts.asMap()
                                                 .containsKey(
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText2Family),
+                                                        .bodySmallFamily),
                                           ),
                                     ),
                                   ),
@@ -226,8 +226,7 @@ class _SocialPostCopy5WidgetState extends State<SocialPostCopy5Widget> {
                           child: custom_widgets.PostTextViewer(
                             width: MediaQuery.of(context).size.width * 1.0,
                             height: 100.0,
-                            linkTextColor:
-                                FlutterFlowTheme.of(context).primaryColor,
+                            linkTextColor: FlutterFlowTheme.of(context).primary,
                             truncate: false,
                             maxLines: 10,
                             viewMoreText: FFLocalizations.of(context).getText(

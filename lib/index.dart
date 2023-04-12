@@ -12,7 +12,7 @@ export '/pages/home/explore/explore_widget.dart' show ExploreWidget;
 export '/pages/home/explore_people/explore_people_widget.dart'
     show ExplorePeopleWidget;
 export '/pages/home/schools/schools_widget.dart' show SchoolsWidget;
-export '/pages/home/show_event/show_event_widget.dart' show ShowEventWidget;
+export '/pages/home/view_event/view_event_widget.dart' show ViewEventWidget;
 export '/pages/home/menu/menu/menu_widget.dart' show MenuWidget;
 export '/pages/home/menu/your_profile/your_profile_widget.dart'
     show YourProfileWidget;
@@ -23,8 +23,6 @@ export '/pages/home/menu/report_a_bug/report_a_bug_widget.dart'
     show ReportABugWidget;
 export '/pages/home/menu/settings/settings/settings_widget.dart'
     show SettingsWidget;
-export '/pages/home/menu/settings/following/following_widget.dart'
-    show FollowingWidget;
 export '/pages/home/menu/settings/schools_followed/schools_followed_widget.dart'
     show SchoolsFollowedWidget;
 export '/pages/home/menu/signing_out/signing_out_widget.dart'
@@ -46,7 +44,7 @@ export '/pages/home/notifications_with_stuff/notifications_with_stuff_widget.dar
     show NotificationsWithStuffWidget;
 export '/pages/home/announcements/announcements_widget.dart'
     show AnnouncementsWidget;
-export '/pages/home/menu/eahs/eahs_widget.dart' show EahsWidget;
+export '/pages/home/eahs/eahs_widget.dart' show EahsWidget;
 export '/pages/home/menu/absences/edit_absence/edit_absence_widget.dart'
     show EditAbsenceWidget;
 export '/pages/home/menu/absences/absence_expanded/absence_expanded_widget.dart'
@@ -55,3 +53,9 @@ export '/pages/home/menu/absences/form_submitted/form_submitted_widget.dart'
     show FormSubmittedWidget;
 export '/pages/home/menu/other_profile/other_profile_widget.dart'
     show OtherProfileWidget;
+export '/pages/home/menu/group_profile/group_profile_widget.dart'
+    show GroupProfileWidget;
+export '/pages/home/menu/settings/following/following_widget.dart'
+    show FollowingWidget;
+export '/pages/home/view_announcement/view_announcement_widget.dart'
+    show ViewAnnouncementWidget;

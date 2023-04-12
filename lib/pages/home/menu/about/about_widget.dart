@@ -39,36 +39,36 @@ class _AboutWidgetState extends State<AboutWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            '0igoc7rh' /* About */,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22.0,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              '0igoc7rh' /* About */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Container(
             width: double.infinity,
             height: double.infinity,
@@ -115,7 +115,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(15.0),
                                   child: Image.asset(
-                                    'assets/images/bulldog.jpg',
+                                    'assets/images/for_now_2.1.png',
                                     width: 120.0,
                                     height: 120.0,
                                     fit: BoxFit.cover,
@@ -130,33 +130,14 @@ class _AboutWidgetState extends State<AboutWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Stack(
-                                          children: [
-                                            if ((Theme.of(context).brightness ==
-                                                    Brightness.light) ==
-                                                true)
-                                              Hero(
-                                                tag: 'RoverLinkLogo',
-                                                transitionOnUserGestures: true,
-                                                child: Image.asset(
-                                                  'assets/images/RoverLink_Black.png',
-                                                  width: 150.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            if ((Theme.of(context).brightness ==
-                                                    Brightness.dark) ==
-                                                true)
-                                              Hero(
-                                                tag: 'RoverLinkLogo',
-                                                transitionOnUserGestures: true,
-                                                child: Image.asset(
-                                                  'assets/images/RoverLink_hiwte.png',
-                                                  width: 150.0,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                          ],
+                                        Hero(
+                                          tag: 'RoverLinkLogo',
+                                          transitionOnUserGestures: true,
+                                          child: Image.asset(
+                                            'assets/images/RoverLink_hiwte.png',
+                                            width: 150.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         Padding(
                                           padding:
@@ -167,19 +148,19 @@ class _AboutWidgetState extends State<AboutWidget> {
                                               '489rrs9d' /* By Alexander Harrison, Andrew ... */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: Colors.white,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                         ),
@@ -203,7 +184,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                         FFLocalizations.of(context).getText(
                           'd0tkfia3' /* About the App */,
                         ),
-                        style: FlutterFlowTheme.of(context).title3,
+                        style: FlutterFlowTheme.of(context).headlineSmall,
                       ),
                     ),
                   ),
@@ -214,7 +195,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                       FFLocalizations.of(context).getText(
                         'mag9q2g4' /* RoverLink is a mobile applicat... */,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
+                      style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
                   ),
                   Align(
@@ -224,7 +205,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                           20.0, 10.0, 20.0, 10.0),
                       child: Text(
                         '© ${functions.formatDateTime(functions.toJsonDate(getCurrentTimestamp), 'y')} Easton Area School District',
-                        style: FlutterFlowTheme.of(context).bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
                     ),
                   ),
@@ -274,7 +255,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                     '12k6y5w4' /* Copyright and Licensing */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
@@ -284,7 +265,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                               ),
@@ -351,7 +332,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                     'vsmag9zy' /* Terms of Use */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
@@ -361,7 +342,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                               ),
@@ -428,7 +409,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                     'm53kjfoe' /* Privacy Policy */,
                                   ),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
@@ -438,7 +419,7 @@ class _AboutWidgetState extends State<AboutWidget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                               ),

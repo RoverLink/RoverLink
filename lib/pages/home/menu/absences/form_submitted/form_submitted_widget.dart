@@ -39,12 +39,12 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, -0.35),
             child: Padding(
@@ -58,12 +58,13 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
                       FFLocalizations.of(context).getText(
                         'sltw2h07' /* Thank You! */,
                       ),
-                      style: FlutterFlowTheme.of(context).title1.override(
+                      style: FlutterFlowTheme.of(context).displaySmall.override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).title1Family,
+                                FlutterFlowTheme.of(context).displaySmallFamily,
                             fontSize: 50.0,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).title1Family),
+                                FlutterFlowTheme.of(context)
+                                    .displaySmallFamily),
                           ),
                     ),
                     Align(
@@ -98,13 +99,15 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
                           'bxeung14' /* Your child's absence has been ... */,
                         ),
                         textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).subtitle1.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).subtitle1Family,
-                              fontWeight: FontWeight.normal,
-                              useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).subtitle1Family),
-                            ),
+                        style:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .titleMediumFamily,
+                                  fontWeight: FontWeight.normal,
+                                  useGoogleFonts: GoogleFonts.asMap()
+                                      .containsKey(FlutterFlowTheme.of(context)
+                                          .titleMediumFamily),
+                                ),
                       ),
                     ),
                     Padding(
@@ -124,16 +127,16 @@ class _FormSubmittedWidgetState extends State<FormSubmittedWidget> {
                               0.0, 0.0, 0.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primaryColor,
+                          color: FlutterFlowTheme.of(context).primary,
                           textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
+                              .titleSmall
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
+                                    .titleSmallFamily,
                                 color: Colors.white,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .subtitle2Family),
+                                        .titleSmallFamily),
                               ),
                           elevation: 3.0,
                           borderSide: BorderSide(

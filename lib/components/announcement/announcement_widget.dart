@@ -61,7 +61,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
               child: InkWell(
                 onTap: () async {
                   context.pushNamed(
-                    'ShowEvent',
+                    'ViewAnnouncement',
                     queryParams: {
                       'event': serializeParam(
                         widget.announcement,
@@ -102,7 +102,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                     r'''$.englishSnippet''',
                                   ).toString(),
                                   style: FlutterFlowTheme.of(context)
-                                      .subtitle1
+                                      .titleMedium
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
@@ -112,7 +112,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle1Family),
+                                                    .titleMediumFamily),
                                       ),
                                 ),
                                 Text(
@@ -121,7 +121,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                     r'''$.scheduledTime''',
                                   ).toString()),
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: FlutterFlowTheme.of(context)
@@ -131,7 +131,7 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                               ],

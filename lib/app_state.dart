@@ -36,12 +36,6 @@ class FFAppState extends ChangeNotifier {
 
   late FlutterSecureStorage secureStorage;
 
-  DateTime? _selectedDate = DateTime.fromMillisecondsSinceEpoch(946702800000);
-  DateTime? get selectedDate => _selectedDate;
-  set selectedDate(DateTime? _value) {
-    _selectedDate = _value;
-  }
-
   bool _viewedOnboarding = false;
   bool get viewedOnboarding => _viewedOnboarding;
   set viewedOnboarding(bool _value) {

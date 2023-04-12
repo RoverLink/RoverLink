@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 
 class LoginModel extends FlutterFlowModel {
@@ -26,6 +27,7 @@ class LoginModel extends FlutterFlowModel {
   TextEditingController? passwordLoginController;
   late bool passwordLoginVisibility;
   String? Function(BuildContext, String?)? passwordLoginControllerValidator;
+  AudioPlayer? soundPlayer;
   // Stores action output result for [Custom Action - gravatarHash] action in Button-Login widget.
   String? gravatarHashUrl;
   // Stores action output result for [Backend Call - API ( NotifySync)] action in Button-Login widget.

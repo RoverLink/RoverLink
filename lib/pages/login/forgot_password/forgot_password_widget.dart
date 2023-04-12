@@ -70,12 +70,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Color(0xFF14181B),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Stack(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFF14181B),
+        body: Stack(
           children: [
             Container(
               width: MediaQuery.of(context).size.width * 1.0,
@@ -176,19 +176,19 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                 ),
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .bodyText1
+                                                        .bodyMedium
                                                         .override(
                                                           fontFamily:
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .bodyText1Family,
+                                                                  .bodyMediumFamily,
                                                           color: Colors.white,
                                                           useGoogleFonts: GoogleFonts
                                                                   .asMap()
                                                               .containsKey(
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1Family),
+                                                                      .bodyMediumFamily),
                                                         ),
                                               ),
                                               Padding(
@@ -262,12 +262,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                   ),
                                                   style: FlutterFlowTheme.of(
                                                           context)
-                                                      .subtitle2
+                                                      .titleSmall
                                                       .override(
                                                         fontFamily:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .subtitle2Family,
+                                                                .titleSmallFamily,
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -277,7 +277,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2Family),
+                                                                    .titleSmallFamily),
                                                       ),
                                                   maxLines: null,
                                                   validator: _model
@@ -338,12 +338,12 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                     textStyle:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .subtitle2
+                                                            .titleSmall
                                                             .override(
                                                               fontFamily:
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2Family,
+                                                                      .titleSmallFamily,
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .secondaryBackground,
@@ -352,7 +352,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                                   .containsKey(
                                                                       FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2Family),
+                                                                          .titleSmallFamily),
                                                             ),
                                                     elevation: 3.0,
                                                     borderSide: BorderSide(

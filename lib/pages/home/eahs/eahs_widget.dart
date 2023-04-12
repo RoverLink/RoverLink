@@ -1,11 +1,13 @@
+import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/announcement/announcement_widget.dart';
+import '/components/empty_list/empty_list_widget.dart';
+import '/components/follow_button/follow_button_widget.dart';
 import '/components/social_post/social_post_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,57 +46,57 @@ class _EahsWidgetState extends State<EahsWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(150.0),
-        child: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: Visibility(
-            visible: FFAppState().newAccount == false,
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.chevron_left,
-                color: Colors.white,
-                size: 35.0,
-              ),
-              onPressed: () async {
-                context.pop();
-              },
-            ),
-          ),
-          actions: [],
-          flexibleSpace: FlexibleSpaceBar(
-            background: Hero(
-              tag: 'SchoolBanner',
-              transitionOnUserGestures: true,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(12.0),
-                  bottomRight: Radius.circular(12.0),
-                  topLeft: Radius.circular(0.0),
-                  topRight: Radius.circular(0.0),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(150.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: Visibility(
+              visible: FFAppState().newAccount == false,
+              child: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.chevron_left,
+                  color: Colors.white,
+                  size: 35.0,
                 ),
-                child: Image.asset(
-                  'assets/images/EAHS.png',
-                  fit: BoxFit.cover,
-                ),
+                onPressed: () async {
+                  context.pop();
+                },
               ),
             ),
+            actions: [],
+            flexibleSpace: FlexibleSpaceBar(
+              background: Hero(
+                tag: 'SchoolBanner',
+                transitionOnUserGestures: true,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12.0),
+                    bottomRight: Radius.circular(12.0),
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
+                  ),
+                  child: Image.asset(
+                    'assets/images/EAHS.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            centerTitle: true,
+            elevation: 0.0,
           ),
-          centerTitle: true,
-          elevation: 0.0,
         ),
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -114,7 +116,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                       FFLocalizations.of(context).getText(
                         'bct7slbk' /* Easton Area High School */,
                       ),
-                      style: FlutterFlowTheme.of(context).title1,
+                      style: FlutterFlowTheme.of(context).displaySmall,
                     ),
                   ),
                   Padding(
@@ -123,56 +125,50 @@ class _EahsWidgetState extends State<EahsWidget> {
                       FFLocalizations.of(context).getText(
                         'kew24zs0' /* #eahs */,
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily:
-                                FlutterFlowTheme.of(context).bodyText1Family,
+                                FlutterFlowTheme.of(context).bodyMediumFamily,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                FlutterFlowTheme.of(context).bodyText1Family),
+                                FlutterFlowTheme.of(context).bodyMediumFamily),
                           ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 5.0,
-                            color: Color(0x3416202A),
-                            offset: Offset(0.0, 2.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(50.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                    child: FutureBuilder<ApiCallResponse>(
+                      future: GroupGroup.getGroupCall.call(
+                        groupId: 'q6gmy78mqn777',
+                        jwtToken: currentJwtToken,
                       ),
-                      child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
-                        text: FFLocalizations.of(context).getText(
-                          'yw0df01t' /* Follow */,
-                        ),
-                        options: FFButtonOptions(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              15.0, 0.0, 15.0, 0.0),
-                          iconPadding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          textStyle: FlutterFlowTheme.of(context)
-                              .subtitle2
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .subtitle2Family,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                    FlutterFlowTheme.of(context)
-                                        .subtitle2Family),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                color: FlutterFlowTheme.of(context).primary,
                               ),
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                      ),
+                            ),
+                          );
+                        }
+                        final followButtonGetGroupResponse = snapshot.data!;
+                        return wrapWithModel(
+                          model: _model.followButtonModel,
+                          updateCallback: () => setState(() {}),
+                          child: FollowButtonWidget(
+                            followState: getJsonField(
+                              followButtonGetGroupResponse.jsonBody,
+                              r'''$.group.followState''',
+                            ).toString(),
+                            id: 'q6gmy78mqn777',
+                            minimized: false,
+                            isGroup: true,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Expanded(
@@ -190,16 +186,16 @@ class _EahsWidgetState extends State<EahsWidget> {
                               unselectedLabelColor:
                                   FlutterFlowTheme.of(context).secondaryText,
                               labelStyle: FlutterFlowTheme.of(context)
-                                  .subtitle2
+                                  .titleSmall
                                   .override(
                                     fontFamily: FlutterFlowTheme.of(context)
-                                        .subtitle2Family,
+                                        .titleSmallFamily,
                                     fontSize: 11.0,
                                     fontWeight: FontWeight.w900,
                                     useGoogleFonts: GoogleFonts.asMap()
                                         .containsKey(
                                             FlutterFlowTheme.of(context)
-                                                .subtitle2Family),
+                                                .titleSmallFamily),
                                   ),
                               indicatorColor:
                                   FlutterFlowTheme.of(context).primaryText,
@@ -223,6 +219,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                             ),
                             Expanded(
                               child: TabBarView(
+                                physics: const NeverScrollableScrollPhysics(),
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -244,12 +241,12 @@ class _EahsWidgetState extends State<EahsWidget> {
                                             ),
                                             textAlign: TextAlign.center,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle2
+                                                .titleSmall
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .subtitle2Family,
+                                                          .titleSmallFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryText,
@@ -258,7 +255,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2Family),
+                                                              .titleSmallFamily),
                                                 ),
                                           ),
                                         ),
@@ -326,7 +323,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                     ),
                                                   ),
                                                 );
@@ -391,14 +388,20 @@ class _EahsWidgetState extends State<EahsWidget> {
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           FutureBuilder<ApiCallResponse>(
-                                            future:
-                                                (_model.apiRequestCompleter1 ??=
-                                                        Completer<
-                                                            ApiCallResponse>()
-                                                          ..complete(
-                                                              SocialPostsCall
-                                                                  .call()))
-                                                    .future,
+                                            future: (_model
+                                                        .apiRequestCompleter1 ??=
+                                                    Completer<ApiCallResponse>()
+                                                      ..complete(FeedGroup
+                                                          .getUserTimelineCall
+                                                          .call(
+                                                        jwtToken:
+                                                            currentJwtToken,
+                                                        cultureKey:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .languageCode,
+                                                      )))
+                                                .future,
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
                                               if (!snapshot.hasData) {
@@ -411,24 +414,38 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                       color:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
+                                                              .primary,
                                                     ),
                                                   ),
                                                 );
                                               }
-                                              final listViewSocialPostsResponse =
+                                              final listViewGetUserTimelineResponse =
                                                   snapshot.data!;
                                               return Builder(
                                                 builder: (context) {
-                                                  final post =
-                                                      SocialPostsCall.posts(
-                                                            listViewSocialPostsResponse
+                                                  final post = FeedGroup
+                                                          .getUserTimelineCall
+                                                          .posts(
+                                                            listViewGetUserTimelineResponse
                                                                 .jsonBody,
                                                           )
-                                                              ?.map((e) => e)
-                                                              .toList()
-                                                              ?.toList() ??
-                                                          [];
+                                                          ?.map((e) => e)
+                                                          .toList()
+                                                          ?.toList() ??
+                                                      [];
+                                                  if (post.isEmpty) {
+                                                    return Container(
+                                                      height: 300.0,
+                                                      child: EmptyListWidget(
+                                                        text:
+                                                            FFLocalizations.of(
+                                                                    context)
+                                                                .getText(
+                                                          '7answsl2' /* This group hasn't posted anyth... */,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
                                                   return RefreshIndicator(
                                                     onRefresh: () async {
                                                       setState(() => _model
@@ -452,6 +469,7 @@ class _EahsWidgetState extends State<EahsWidget> {
                                                           key: Key(
                                                               'Keyj9n_${postIndex}_of_${post.length}'),
                                                           post: postItem,
+                                                          allowPFPClick: true,
                                                         );
                                                       },
                                                     ),

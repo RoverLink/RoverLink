@@ -50,65 +50,65 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            '2lfx0pk9' /* View Absence */,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
-        ),
-        actions: [
-          Visibility(
-            visible: getJsonField(
-                  widget.absence,
-                  r'''$.state''',
-                ) !=
-                'Approved',
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 60.0,
-              icon: Icon(
-                Icons.mode_edit,
-                color: FlutterFlowTheme.of(context).primaryText,
-                size: 25.0,
-              ),
-              onPressed: () async {
-                context.pushNamed(
-                  'EditAbsence',
-                  queryParams: {
-                    'absence': serializeParam(
-                      widget.absence,
-                      ParamType.JSON,
-                    ),
-                  }.withoutNulls,
-                );
-              },
+          title: Text(
+            FFLocalizations.of(context).getText(
+              '2lfx0pk9' /* View Absence */,
             ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
           ),
-        ],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          actions: [
+            Visibility(
+              visible: getJsonField(
+                    widget.absence,
+                    r'''$.state''',
+                  ) !=
+                  'Approved',
+              child: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
+                  Icons.mode_edit,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  size: 25.0,
+                ),
+                onPressed: () async {
+                  context.pushNamed(
+                    'EditAbsence',
+                    queryParams: {
+                      'absence': serializeParam(
+                        widget.absence,
+                        ParamType.JSON,
+                      ),
+                    }.withoutNulls,
+                  );
+                },
+              ),
+            ),
+          ],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -203,10 +203,10 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                               }
                             }(),
                             style: FlutterFlowTheme.of(context)
-                                .subtitle1
+                                .titleMedium
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .subtitle1Family,
+                                      .titleMediumFamily,
                                   color: () {
                                     if (getJsonField(
                                           widget.absence,
@@ -226,7 +226,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                   }(),
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle1Family),
+                                          .titleMediumFamily),
                                 ),
                           ),
                         ],
@@ -280,12 +280,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'mblsx3de' /* Child */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -295,7 +295,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -305,7 +305,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                             ).toString(),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .titleMedium,
                                           ),
                                         ],
                                       ),
@@ -347,12 +347,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'k1q8mp06' /* School */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -362,7 +362,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           FutureBuilder<ApiCallResponse>(
@@ -394,7 +394,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                 textAlign: TextAlign.start,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .subtitle1,
+                                                        .titleMedium,
                                               );
                                             },
                                           ),
@@ -438,12 +438,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'qyj8c9a3' /* Teacher */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -453,7 +453,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -463,7 +463,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                             ).toString(),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .titleMedium,
                                           ),
                                         ],
                                       ),
@@ -501,12 +501,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'zcdlcbo5' /* Grade */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -516,7 +516,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -526,7 +526,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                             ).toString(),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .titleMedium,
                                           ),
                                         ],
                                       ),
@@ -564,12 +564,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               '8kek4ity' /* Absent On */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -579,7 +579,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -591,7 +591,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                 'M-d-y'),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .titleMedium,
                                           ),
                                         ],
                                       ),
@@ -629,12 +629,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'wkgzo3u8' /* Submitted On */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -644,7 +644,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -656,7 +656,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                 'M-d-y'),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
+                                                .titleMedium,
                                           ),
                                         ],
                                       ),
@@ -694,12 +694,12 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                               'w5j5x0gp' /* Reason */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
@@ -709,7 +709,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                           Text(
@@ -728,19 +728,19 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                   ).toString(),
                                             textAlign: TextAlign.start,
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText1
+                                                .bodyMedium
                                                 .override(
                                                   fontFamily:
                                                       FlutterFlowTheme.of(
                                                               context)
-                                                          .bodyText1Family,
+                                                          .bodyMediumFamily,
                                                   fontWeight: FontWeight.w600,
                                                   useGoogleFonts: GoogleFonts
                                                           .asMap()
                                                       .containsKey(
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .bodyText1Family),
+                                                              .bodyMediumFamily),
                                                 ),
                                           ),
                                         ],
@@ -792,7 +792,8 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                   FFLocalizations.of(context).getText(
                                     'v0tefyej' /* Doctor's Note */,
                                   ),
-                                  style: FlutterFlowTheme.of(context).subtitle1,
+                                  style:
+                                      FlutterFlowTheme.of(context).titleMedium,
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -820,23 +821,24 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                                .primary,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2
+                                                    .titleSmall
                                                     .override(
                                                       fontFamily:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .subtitle2Family,
+                                                              .titleSmallFamily,
                                                       color: Colors.white,
                                                       useGoogleFonts: GoogleFonts
                                                               .asMap()
                                                           .containsKey(
                                                               FlutterFlowTheme.of(
                                                                       context)
-                                                                  .subtitle2Family),
+                                                                  .titleSmallFamily),
                                                     ),
+                                            elevation: 2.0,
                                             borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,

@@ -86,36 +86,36 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
-        backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
-        automaticallyImplyLeading: false,
-        leading: wrapWithModel(
-          model: _model.backButtonModel,
-          updateCallback: () => setState(() {}),
-          child: BackButtonWidget(),
-        ),
-        title: Text(
-          FFLocalizations.of(context).getText(
-            'ig4pe40x' /* Report Absence  */,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).transparentBackground,
+          automaticallyImplyLeading: false,
+          leading: wrapWithModel(
+            model: _model.backButtonModel,
+            updateCallback: () => setState(() {}),
+            child: BackButtonWidget(),
           ),
-          style: FlutterFlowTheme.of(context).title2.override(
-                fontFamily: FlutterFlowTheme.of(context).title2Family,
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontSize: 22.0,
-                useGoogleFonts: GoogleFonts.asMap()
-                    .containsKey(FlutterFlowTheme.of(context).title2Family),
-              ),
+          title: Text(
+            FFLocalizations.of(context).getText(
+              'ig4pe40x' /* Report Absence  */,
+            ),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: FlutterFlowTheme.of(context).headlineMediumFamily,
+                  color: FlutterFlowTheme.of(context).primaryText,
+                  fontSize: 22.0,
+                  useGoogleFonts: GoogleFonts.asMap().containsKey(
+                      FlutterFlowTheme.of(context).headlineMediumFamily),
+                ),
+          ),
+          actions: [],
+          centerTitle: true,
+          elevation: 0.0,
         ),
-        actions: [],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -144,7 +144,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             labelText: FFLocalizations.of(context).getText(
                               'jwwhxy1w' /* Student's Full Name */,
                             ),
-                            hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                            hintStyle: FlutterFlowTheme.of(context).bodySmall,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0x00000000),
@@ -177,7 +177,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                           keyboardType: TextInputType.name,
                           validator: _model.studentNameControllerValidator
                               .asValidator(context),
@@ -199,8 +199,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   width: 50.0,
                                   height: 50.0,
                                   child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryColor,
+                                    color: FlutterFlowTheme.of(context).primary,
                                   ),
                                 ),
                               );
@@ -237,7 +236,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   setState(() => _model.schoolValue = val),
                               width: MediaQuery.of(context).size.width * 1.0,
                               height: 50.0,
-                              textStyle: FlutterFlowTheme.of(context).bodyText1,
+                              textStyle:
+                                  FlutterFlowTheme.of(context).bodyMedium,
                               hintText: FFLocalizations.of(context).getText(
                                 'k5ogbgzy' /* Please select a School */,
                               ),
@@ -265,7 +265,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             labelText: FFLocalizations.of(context).getText(
                               'a472bdc8' /* Teacher */,
                             ),
-                            hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                            hintStyle: FlutterFlowTheme.of(context).bodySmall,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0x00000000),
@@ -298,7 +298,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             fillColor: FlutterFlowTheme.of(context)
                                 .secondaryBackground,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                           keyboardType: TextInputType.name,
                           validator: _model.teacherControllerValidator
                               .asValidator(context),
@@ -357,14 +357,14 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           width: MediaQuery.of(context).size.width * 1.0,
                           height: 50.0,
                           textStyle: FlutterFlowTheme.of(context)
-                              .bodyText1
+                              .bodyMedium
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyText1Family,
+                                    .bodyMediumFamily,
                                 color: FlutterFlowTheme.of(context).primaryText,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .bodyText1Family),
+                                        .bodyMediumFamily),
                               ),
                           hintText: FFLocalizations.of(context).getText(
                             'cibsn1fo' /* Please select a grade level */,
@@ -410,7 +410,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                       'Select Date of Absence',
                                     ),
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).bodyMedium,
                                   ),
                                 ),
                               ),
@@ -463,7 +463,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               setState(() => _model.reasonValue = val),
                           width: MediaQuery.of(context).size.width * 1.0,
                           height: 50.0,
-                          textStyle: FlutterFlowTheme.of(context).bodyText1,
+                          textStyle: FlutterFlowTheme.of(context).bodyMedium,
                           hintText: FFLocalizations.of(context).getText(
                             'r2rf8lbi' /* Please select a Reason */,
                           ),
@@ -490,7 +490,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               labelText: FFLocalizations.of(context).getText(
                                 'xrqv4ouh' /* Reason for Absence */,
                               ),
-                              hintStyle: FlutterFlowTheme.of(context).bodyText2,
+                              hintStyle: FlutterFlowTheme.of(context).bodySmall,
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
@@ -523,7 +523,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                               fillColor: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
                             ),
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyMedium,
                             maxLines: 5,
                             keyboardType: TextInputType.multiline,
                             validator: _model.otherReasonControllerValidator
@@ -599,15 +599,16 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).secondaryText,
                             textStyle: FlutterFlowTheme.of(context)
-                                .subtitle2
+                                .titleSmall
                                 .override(
                                   fontFamily: FlutterFlowTheme.of(context)
-                                      .subtitle2Family,
+                                      .titleSmallFamily,
                                   color: Colors.white,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle2Family),
+                                          .titleSmallFamily),
                                 ),
+                            elevation: 2.0,
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
@@ -623,7 +624,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           FFLocalizations.of(context).getText(
                             '3c4nk704' /* Parent or Guardian Signature */,
                           ),
-                          style: FlutterFlowTheme.of(context).subtitle1,
+                          style: FlutterFlowTheme.of(context).titleMedium,
                         ),
                       ),
                       Padding(
@@ -633,7 +634,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                           FFLocalizations.of(context).getText(
                             'lqihzcox' /* Sign your name in the box belo... */,
                           ),
-                          style: FlutterFlowTheme.of(context).bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyMedium,
                         ),
                       ),
                       Padding(
@@ -774,7 +775,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Sorry! There as an error.'),
+                                                          'Sorry! There was an error.'),
                                                       content:
                                                           Text(getJsonField(
                                                         (_model.createAbsenceResultOtherReason
@@ -846,7 +847,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                                       (alertDialogContext) {
                                                     return AlertDialog(
                                                       title: Text(
-                                                          'Sorry! There as an error.'),
+                                                          'Sorry! There was an error.'),
                                                       content:
                                                           Text(getJsonField(
                                                         (_model.createAbsenceResultNoOtherReason
@@ -931,19 +932,19 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                       0.0, 0.0, 0.0, 0.0),
                                   iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryColor,
+                                  color: FlutterFlowTheme.of(context).primary,
                                   textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
+                                      .titleSmall
                                       .override(
                                         fontFamily: FlutterFlowTheme.of(context)
-                                            .subtitle2Family,
+                                            .titleSmallFamily,
                                         color: Colors.white,
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .subtitle2Family),
+                                                    .titleSmallFamily),
                                       ),
+                                  elevation: 2.0,
                                   borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,

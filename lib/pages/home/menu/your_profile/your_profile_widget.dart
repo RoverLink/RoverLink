@@ -51,60 +51,61 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-      appBar: AppBar(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        automaticallyImplyLeading: false,
-        leading: FlutterFlowIconButton(
-          borderColor: Colors.transparent,
-          borderRadius: 30.0,
-          borderWidth: 1.0,
-          buttonSize: 60.0,
-          icon: Icon(
-            Icons.chevron_left,
-            color: FlutterFlowTheme.of(context).primaryText,
-            size: 35.0,
-          ),
-          onPressed: () async {
-            context.pop();
-          },
-        ),
-        title: AuthUserStreamWidget(
-          builder: (context) => Text(
-            currentUserDisplayName,
-            style: FlutterFlowTheme.of(context).title2.override(
-                  fontFamily: FlutterFlowTheme.of(context).title2Family,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 22.0,
-                  useGoogleFonts: GoogleFonts.asMap()
-                      .containsKey(FlutterFlowTheme.of(context).title2Family),
-                ),
-          ),
-        ),
-        actions: [
-          FlutterFlowIconButton(
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
             icon: Icon(
-              Icons.mode_edit,
+              Icons.chevron_left,
               color: FlutterFlowTheme.of(context).primaryText,
-              size: 25.0,
+              size: 35.0,
             ),
             onPressed: () async {
-              context.pushNamed('EditProfile');
+              context.pop();
             },
           ),
-        ],
-        centerTitle: true,
-        elevation: 0.0,
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          title: AuthUserStreamWidget(
+            builder: (context) => Text(
+              currentUserDisplayName,
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily:
+                        FlutterFlowTheme.of(context).headlineMediumFamily,
+                    color: FlutterFlowTheme.of(context).primaryText,
+                    fontSize: 22.0,
+                    useGoogleFonts: GoogleFonts.asMap().containsKey(
+                        FlutterFlowTheme.of(context).headlineMediumFamily),
+                  ),
+            ),
+          ),
+          actions: [
+            FlutterFlowIconButton(
+              borderColor: Colors.transparent,
+              borderRadius: 30.0,
+              borderWidth: 1.0,
+              buttonSize: 60.0,
+              icon: Icon(
+                Icons.mode_edit,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 25.0,
+              ),
+              onPressed: () async {
+                context.pushNamed('EditProfile');
+              },
+            ),
+          ],
+          centerTitle: true,
+          elevation: 0.0,
+        ),
+        body: SafeArea(
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -145,82 +146,39 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: AuthUserStreamWidget(
                         builder: (context) => Text(
                           '@${valueOrDefault(currentUserDocument?.username, '')}',
                           style: FlutterFlowTheme.of(context)
-                              .bodyText1
+                              .bodyMedium
                               .override(
                                 fontFamily: FlutterFlowTheme.of(context)
-                                    .bodyText1Family,
+                                    .bodyMediumFamily,
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
                                 fontSize: 17.0,
                                 useGoogleFonts: GoogleFonts.asMap().containsKey(
                                     FlutterFlowTheme.of(context)
-                                        .bodyText1Family),
+                                        .bodyMediumFamily),
                               ),
                         ),
                       ),
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                       child: Text(
                         currentUserEmail,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               fontSize: 17.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 5.0, 0.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                borderRadius: BorderRadius.circular(20.0),
-                                shape: BoxShape.rectangle,
-                              ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    4.0, 2.0, 4.0, 2.0),
-                                child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    'f3lrbddq' /* Student */,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyText1Family,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        fontSize: 12.0,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1Family),
-                                      ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
                     Padding(
@@ -231,36 +189,38 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                           'h2m279q1' /* Your Posts */,
                         ),
                         textAlign: TextAlign.start,
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
-                                  FlutterFlowTheme.of(context).bodyText1Family,
+                                  FlutterFlowTheme.of(context).bodyMediumFamily,
                               fontSize: 20.0,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                       ),
                     ),
                     FutureBuilder<ApiCallResponse>(
-                      future: FeedGroup.getUserFeedCall.call(
-                        userId: currentUserUid,
+                      future: FeedGroup.getFeedCall.call(
+                        id: currentUserUid,
                         cultureKey: FFLocalizations.of(context).languageCode,
                         jwtToken: currentJwtToken,
+                        feedType: 'user',
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
                           return Center(
                             child: LinearProgressIndicator(
-                              color: FlutterFlowTheme.of(context).primaryColor,
+                              color: FlutterFlowTheme.of(context).primary,
                             ),
                           );
                         }
-                        final listViewGetUserFeedResponse = snapshot.data!;
+                        final listViewGetFeedResponse = snapshot.data!;
                         return Builder(
                           builder: (context) {
-                            final profilePost = FeedGroup.getUserFeedCall
+                            final profilePost = FeedGroup.getFeedCall
                                     .posts(
-                                      listViewGetUserFeedResponse.jsonBody,
+                                      listViewGetFeedResponse.jsonBody,
                                     )
                                     ?.map((e) => e)
                                     .toList()
@@ -270,7 +230,9 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                               return Container(
                                 height: 300.0,
                                 child: EmptyListWidget(
-                                  text: 'You haven\'t posted anything yet.',
+                                  text: FFLocalizations.of(context).getText(
+                                    'hbppjp1d' /* You haven't posted anything ye... */,
+                                  ),
                                 ),
                               );
                             }
@@ -287,6 +249,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                                   key: Key(
                                       'Keyt6v_${profilePostIndex}_of_${profilePost.length}'),
                                   post: profilePostItem,
+                                  allowPFPClick: false,
                                 );
                               },
                             );

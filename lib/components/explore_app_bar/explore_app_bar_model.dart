@@ -1,4 +1,5 @@
 import '/auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -16,6 +17,8 @@ class ExploreAppBarModel extends FlutterFlowModel {
   // State field(s) for SearchField widget.
   TextEditingController? searchFieldController;
   String? Function(BuildContext, String?)? searchFieldControllerValidator;
+  // Stores action output result for [Backend Call - API (GetUsers)] action in SearchField widget.
+  ApiCallResponse? searchResult;
 
   /// Initialization and disposal methods.
 

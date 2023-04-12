@@ -1,5 +1,7 @@
+import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
+import '/components/empty_list/empty_list_widget.dart';
 import '/components/navbar_floating/navbar_floating_widget.dart';
 import '/components/social_post/social_post_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -13,8 +15,6 @@ import 'package:provider/provider.dart';
 class HomePageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
-  // Stores action output result for [Backend Call - API (SocialPosts)] action in ListView widget.
-  ApiCallResponse? apiResultbmf;
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Model for CustomAppBar component.
   late CustomAppBarModel customAppBarModel;

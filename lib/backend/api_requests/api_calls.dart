@@ -31,16 +31,20 @@ class UsersGroup {
   static ChangeProfilePhotoUrlCall changeProfilePhotoUrlCall =
       ChangeProfilePhotoUrlCall();
   static UsernameExistsCall usernameExistsCall = UsernameExistsCall();
+  static GetUserGroupMembershipsCall getUserGroupMembershipsCall =
+      GetUserGroupMembershipsCall();
+  static GetUserCalendarEventsCall getUserCalendarEventsCall =
+      GetUserCalendarEventsCall();
 }
 
 class GetUsersCall {
   Future<ApiCallResponse> call({
-    String? userId = '',
     String? jwtToken = '',
+    String? query = '',
   }) {
     final body = '''
 {
-  "id": "${userId}"
+    "query": "${query}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetUsers',
@@ -59,6 +63,12 @@ class GetUsersCall {
       cache: false,
     );
   }
+
+  dynamic users(dynamic response) => getJsonField(
+        response,
+        r'''$.users''',
+        true,
+      );
 }
 
 class GetUserCall {
@@ -303,6 +313,70 @@ class UsernameExistsCall {
       cache: false,
     );
   }
+}
+
+class GetUserGroupMembershipsCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+    int? page,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: ' GetUserGroupMemberships',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/memberships',
+      callType: ApiCallType.GET,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'page': page,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic groups(dynamic response) => getJsonField(
+        response,
+        r'''$.groups''',
+        true,
+      );
+}
+
+class GetUserCalendarEventsCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? jwtToken = '',
+    String? startDate = '',
+    bool? currentMonthOnly,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUserCalendarEvents',
+      apiUrl: '${UsersGroup.baseUrl}/${userId}/calendar/',
+      callType: ApiCallType.GET,
+      headers: {
+        ...UsersGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'StartDate': startDate,
+        'CurrentMonthOnly': currentMonthOnly,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic events(dynamic response) => getJsonField(
+        response,
+        r'''$.events''',
+        true,
+      );
 }
 
 /// End Users Group Code
@@ -617,21 +691,17 @@ class CreatePostCall {
   Future<ApiCallResponse> call({
     String? jwtToken = '',
     String? audience = '',
-    List<String>? attachmentIdsList,
+    String? attachmentIdsfromtoJsonList = '',
     String? text = '',
     String? feedType = 'user',
     String? feedId = '',
   }) {
-    final attachmentIds = _serializeList(attachmentIdsList);
-
     final body = '''
 {
   "audience": "${audience}",
   "feedTarget": "${feedType}:${feedId}",
   "text": "${text}",
-  "attachmentIds": [
-    ${attachmentIds}
-  ]
+  "attachmentIds": ${attachmentIdsfromtoJsonList}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreatePost',
@@ -643,7 +713,7 @@ class CreatePostCall {
       },
       params: {},
       body: body,
-      bodyType: BodyType.JSON,
+      bodyType: BodyType.TEXT,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -794,25 +864,29 @@ class FeedGroup {
     'Host': 'archimedes.jalex.io',
     'Accept': 'application/json',
   };
-  static GetUserFeedCall getUserFeedCall = GetUserFeedCall();
+  static GetFeedCall getFeedCall = GetFeedCall();
+  static GetUserTimelineCall getUserTimelineCall = GetUserTimelineCall();
 }
 
-class GetUserFeedCall {
+class GetFeedCall {
   Future<ApiCallResponse> call({
-    String? userId = '',
+    String? id = '',
     int? page,
     String? cultureKey = '',
     String? jwtToken = '',
+    String? feedType = '',
   }) {
     return ApiManager.instance.makeApiCall(
-      callName: 'GetUserFeed',
-      apiUrl: '${FeedGroup.baseUrl}/user/${userId}',
+      callName: 'GetFeed',
+      apiUrl: '${FeedGroup.baseUrl}/${feedType}/${id}',
       callType: ApiCallType.GET,
       headers: {
         ...FeedGroup.headers,
         'Authorization': 'Bearer ${jwtToken}',
       },
-      params: {},
+      params: {
+        'CultureKey': cultureKey,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
@@ -837,7 +911,233 @@ class GetUserFeedCall {
       );
 }
 
+class GetUserTimelineCall {
+  Future<ApiCallResponse> call({
+    String? jwtToken = '',
+    String? cultureKey = '',
+    int? page,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetUserTimeline',
+      apiUrl: '${FeedGroup.baseUrl}/timeline',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FeedGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'CultureKey': cultureKey,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic posts(dynamic response) => getJsonField(
+        response,
+        r'''$.feed.posts''',
+        true,
+      );
+}
+
 /// End Feed Group Code
+
+/// Start Follow Group Code
+
+class FollowGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/follow';
+  static Map<String, String> headers = {
+    'Content-Type': 'application/json',
+    'Host': 'archimedes.jalex.io',
+    'Accept': 'application/json',
+  };
+  static FollowFeedCall followFeedCall = FollowFeedCall();
+  static GetFollowsCall getFollowsCall = GetFollowsCall();
+}
+
+class FollowFeedCall {
+  Future<ApiCallResponse> call({
+    String? jwtToken = '',
+    String? id = '',
+    String? action = '',
+    String? feedType = '',
+  }) {
+    final body = '''
+{
+  "id": "${id}",
+  "action": "${action}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: ' FollowFeed',
+      apiUrl: '${FollowGroup.baseUrl}/${feedType}/${id}',
+      callType: ApiCallType.POST,
+      headers: {
+        ...FollowGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetFollowsCall {
+  Future<ApiCallResponse> call({
+    String? jwtToken = '',
+    String? id = '',
+    String? page = '',
+    String? feedType = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetFollows',
+      apiUrl: '${FollowGroup.baseUrl}/${feedType}/follows/${id}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...FollowGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'Id': id,
+        'Page': page,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic follows(dynamic response) => getJsonField(
+        response,
+        r'''$.follows''',
+        true,
+      );
+}
+
+/// End Follow Group Code
+
+/// Start Group Group Code
+
+class GroupGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/group';
+  static Map<String, String> headers = {
+    'Accept': 'application/json',
+    'Host': 'archimedes.jalex.io',
+    'Content-Type': 'application/json',
+  };
+  static GetGroupCall getGroupCall = GetGroupCall();
+  static GetGroupMembersCall getGroupMembersCall = GetGroupMembersCall();
+}
+
+class GetGroupCall {
+  Future<ApiCallResponse> call({
+    String? groupId = '',
+    String? jwtToken = '',
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetGroup',
+      apiUrl: '${GroupGroup.baseUrl}/${groupId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...GroupGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+}
+
+class GetGroupMembersCall {
+  Future<ApiCallResponse> call({
+    String? groupId = '',
+    String? jwtToken = '',
+    int? page,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: ' GetGroupMembers',
+      apiUrl: '${GroupGroup.baseUrl}/${groupId}/members',
+      callType: ApiCallType.GET,
+      headers: {
+        ...GroupGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'Page': page,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic members(dynamic response) => getJsonField(
+        response,
+        r'''$.members''',
+        true,
+      );
+}
+
+/// End Group Group Code
+
+/// Start Calendar Group Code
+
+class CalendarGroup {
+  static String baseUrl = 'https://archimedes.jalex.io/calendar';
+  static Map<String, String> headers = {
+    'Accept': 'application/json',
+    'Host': 'archimedes.jalex.io',
+    'Content-Type': 'application/json',
+  };
+  static GetGroupCalendarEventsCall getGroupCalendarEventsCall =
+      GetGroupCalendarEventsCall();
+}
+
+class GetGroupCalendarEventsCall {
+  Future<ApiCallResponse> call({
+    String? groupId = '',
+    String? jwtToken = '',
+    String? startDate = '',
+    bool? currentMonthOnly,
+  }) {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetGroupCalendarEvents',
+      apiUrl: '${CalendarGroup.baseUrl}/group/${groupId}',
+      callType: ApiCallType.GET,
+      headers: {
+        ...CalendarGroup.headers,
+        'Authorization': 'Bearer ${jwtToken}',
+      },
+      params: {
+        'StartDate': startDate,
+        'CurrentMonthOnly': currentMonthOnly,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+    );
+  }
+
+  dynamic events(dynamic response) => getJsonField(
+        response,
+        r'''$.events''',
+        true,
+      );
+}
+
+/// End Calendar Group Code
 
 class SocialPostsCall {
   static Future<ApiCallResponse> call() {

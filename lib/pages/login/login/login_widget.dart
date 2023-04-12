@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'login_model.dart';
 export 'login_model.dart';
@@ -198,12 +199,12 @@ class _LoginWidgetState extends State<LoginWidget>
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: Color(0xFF14181B),
-      body: GestureDetector(
-        onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
-        child: Container(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFF14181B),
+        body: Container(
           width: MediaQuery.of(context).size.width * 1.0,
           height: MediaQuery.of(context).size.height * 1.0,
           decoration: BoxDecoration(
@@ -271,7 +272,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 isScrollable: true,
                                 labelColor: Colors.white,
                                 labelStyle:
-                                    FlutterFlowTheme.of(context).subtitle1,
+                                    FlutterFlowTheme.of(context).titleMedium,
                                 indicatorColor: Colors.white,
                                 tabs: [
                                   Tab(
@@ -345,6 +346,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       .getText(
                                                                 '5uknzhia' /* Email Address */,
                                                               ),
+                                                              labelStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
                                                               enabledBorder:
                                                                   OutlineInputBorder(
                                                                 borderSide:
@@ -411,11 +416,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1Family,
+                                                                      .bodyMediumFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
@@ -423,7 +428,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                             maxLines: null,
                                                             validator: _model
@@ -455,6 +460,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       .getText(
                                                                 't3a5dj0t' /* Password */,
                                                               ),
+                                                              labelStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium,
                                                               enabledBorder:
                                                                   OutlineInputBorder(
                                                                 borderSide:
@@ -544,11 +553,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1Family,
+                                                                      .bodyMediumFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
@@ -556,7 +565,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                             validator: _model
                                                                 .passwordLoginControllerValidator
@@ -612,6 +621,26 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                 );
                                                                 HapticFeedback
                                                                     .lightImpact();
+                                                                _model.soundPlayer ??=
+                                                                    AudioPlayer();
+                                                                if (_model
+                                                                    .soundPlayer!
+                                                                    .playing) {
+                                                                  await _model
+                                                                      .soundPlayer!
+                                                                      .stop();
+                                                                }
+                                                                _model
+                                                                    .soundPlayer!
+                                                                    .setVolume(
+                                                                        1.0);
+                                                                _model
+                                                                    .soundPlayer!
+                                                                    .setAsset(
+                                                                        'assets/audios/Sad-Trombone-B1-www.fesliyanstudios.com.mp3')
+                                                                    .then((_) => _model
+                                                                        .soundPlayer!
+                                                                        .play());
                                                               } else {
                                                                 GoRouter.of(
                                                                         context)
@@ -693,11 +722,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryColor,
+                                                                  .primary,
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2
+                                                                      .titleSmall
                                                                       .override(
                                                                         fontFamily:
                                                                             'Fira Sans',
@@ -708,7 +737,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontWeight:
                                                                             FontWeight.normal,
                                                                         useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                       ),
                                                               elevation: 5.0,
                                                               borderSide:
@@ -787,7 +816,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2
+                                                                      .titleSmall
                                                                       .override(
                                                                         fontFamily:
                                                                             'Fira Sans',
@@ -798,7 +827,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontWeight:
                                                                             FontWeight.normal,
                                                                         useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                       ),
                                                               elevation: 5.0,
                                                               borderSide:
@@ -854,16 +883,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle1
+                                                                      .titleMedium
                                                                       .override(
                                                                         fontFamily:
-                                                                            FlutterFlowTheme.of(context).subtitle1Family,
+                                                                            FlutterFlowTheme.of(context).titleMediumFamily,
                                                                         color: Colors
                                                                             .white,
                                                                         fontSize:
                                                                             15.0,
                                                                         useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle1Family),
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleMediumFamily),
                                                                       ),
                                                               elevation: 0.0,
                                                               borderSide:
@@ -907,10 +936,10 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2
+                                                                      .titleSmall
                                                                       .override(
                                                                         fontFamily:
-                                                                            FlutterFlowTheme.of(context).subtitle2Family,
+                                                                            FlutterFlowTheme.of(context).titleSmallFamily,
                                                                         color: Colors
                                                                             .white,
                                                                         fontSize:
@@ -918,7 +947,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontWeight:
                                                                             FontWeight.w500,
                                                                         useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                       ),
                                                                 ),
                                                               ),
@@ -1432,11 +1461,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1Family,
+                                                                      .bodyMediumFamily,
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryText,
@@ -1444,7 +1473,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                             maxLines: null,
                                                             validator: _model
@@ -1565,7 +1594,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Fira Sans',
@@ -1581,7 +1610,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                             validator: _model
                                                                 .passwordControllerValidator
@@ -1701,7 +1730,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                             ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
-                                                                .bodyText1
+                                                                .bodyMedium
                                                                 .override(
                                                                   fontFamily:
                                                                       'Fira Sans',
@@ -1717,7 +1746,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           .asMap()
                                                                       .containsKey(
                                                                           FlutterFlowTheme.of(context)
-                                                                              .bodyText1Family),
+                                                                              .bodyMediumFamily),
                                                                 ),
                                                             validator: _model
                                                                 .passwordConfirmControllerValidator
@@ -1841,11 +1870,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0),
                                                               color: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .primaryColor,
+                                                                  .primary,
                                                               textStyle:
                                                                   FlutterFlowTheme.of(
                                                                           context)
-                                                                      .subtitle2
+                                                                      .titleSmall
                                                                       .override(
                                                                         fontFamily:
                                                                             'Fira Sans',
@@ -1856,7 +1885,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         fontWeight:
                                                                             FontWeight.normal,
                                                                         useGoogleFonts:
-                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                            GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                       ),
                                                               elevation: 3.0,
                                                               borderSide:
@@ -1905,14 +1934,14 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                             .center,
                                                                     style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .subtitle2
+                                                                        .titleSmall
                                                                         .override(
                                                                           fontFamily:
-                                                                              FlutterFlowTheme.of(context).subtitle2Family,
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily,
                                                                           color:
                                                                               Colors.white,
                                                                           useGoogleFonts:
-                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                              GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                         ),
                                                                   ),
                                                                 ),
@@ -2319,11 +2348,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         .center,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .subtitle2
+                                                                    .titleSmall
                                                                     .override(
                                                                       fontFamily:
                                                                           FlutterFlowTheme.of(context)
-                                                                              .subtitle2Family,
+                                                                              .titleSmallFamily,
                                                                       color: Colors
                                                                           .white,
                                                                       fontSize:
@@ -2331,7 +2360,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       useGoogleFonts: GoogleFonts
                                                                               .asMap()
                                                                           .containsKey(
-                                                                              FlutterFlowTheme.of(context).subtitle2Family),
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily),
                                                                     ),
                                                               ),
                                                               Row(
@@ -2359,16 +2388,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .center,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2
+                                                                          .titleSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle2Family,
+                                                                                FlutterFlowTheme.of(context).titleSmallFamily,
                                                                             color:
                                                                                 FlutterFlowTheme.of(context).alternate,
                                                                             fontSize:
                                                                                 13.0,
                                                                             useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                           ),
                                                                     ),
                                                                   ),
@@ -2390,16 +2419,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .center,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2
+                                                                          .titleSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle2Family,
+                                                                                FlutterFlowTheme.of(context).titleSmallFamily,
                                                                             color:
                                                                                 Colors.white,
                                                                             fontSize:
                                                                                 13.0,
                                                                             useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                           ),
                                                                     ),
                                                                   ),
@@ -2420,16 +2449,16 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                               .center,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .subtitle2
+                                                                          .titleSmall
                                                                           .override(
                                                                             fontFamily:
-                                                                                FlutterFlowTheme.of(context).subtitle2Family,
+                                                                                FlutterFlowTheme.of(context).titleSmallFamily,
                                                                             color:
                                                                                 Color(0xFFFF5959),
                                                                             fontSize:
                                                                                 13.0,
                                                                             useGoogleFonts:
-                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).subtitle2Family),
+                                                                                GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).titleSmallFamily),
                                                                           ),
                                                                     ),
                                                                   ),

@@ -106,7 +106,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                   replacement: '…',
                                 ),
                             style: FlutterFlowTheme.of(context)
-                                .subtitle1
+                                .titleMedium
                                 .override(
                                   fontFamily: 'Fira Sans',
                                   color:
@@ -115,7 +115,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                   fontWeight: FontWeight.w500,
                                   useGoogleFonts: GoogleFonts.asMap()
                                       .containsKey(FlutterFlowTheme.of(context)
-                                          .subtitle1Family),
+                                          .titleMediumFamily),
                                 ),
                           ),
                           Padding(
@@ -130,7 +130,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                     r'''$.authorScreenName''',
                                   ).toString()}',
                                   style: FlutterFlowTheme.of(context)
-                                      .bodyText2
+                                      .bodySmall
                                       .override(
                                         fontFamily: 'Fira Sans',
                                         color: Color(0xFF57636C),
@@ -139,7 +139,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                         useGoogleFonts: GoogleFonts.asMap()
                                             .containsKey(
                                                 FlutterFlowTheme.of(context)
-                                                    .bodyText2Family),
+                                                    .bodySmallFamily),
                                       ),
                                 ),
                                 Padding(
@@ -150,7 +150,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                       '01oc5sv9' /* • */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: Color(0xFF57636C),
@@ -159,7 +159,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -172,7 +172,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                       r'''$.publishDate''',
                                     ).toString()),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: Color(0xFF57636C),
@@ -181,7 +181,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -208,13 +208,14 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                           widget.post,
                           r'''$.description''',
                         ).toString(),
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Fira Sans',
                               color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500,
                               useGoogleFonts: GoogleFonts.asMap().containsKey(
-                                  FlutterFlowTheme.of(context).bodyText1Family),
+                                  FlutterFlowTheme.of(context)
+                                      .bodyMediumFamily),
                             ),
                       ),
                     ),
@@ -295,7 +296,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                   child: Text(
                                     random_data.randomInteger(0, 25).toString(),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: FlutterFlowTheme.of(context)
@@ -305,7 +306,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),
@@ -334,7 +335,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                   child: Text(
                                     random_data.randomInteger(0, 5).toString(),
                                     style: FlutterFlowTheme.of(context)
-                                        .bodyText2
+                                        .bodySmall
                                         .override(
                                           fontFamily: 'Fira Sans',
                                           color: FlutterFlowTheme.of(context)
@@ -344,7 +345,7 @@ class _SocialPostCopy2WidgetState extends State<SocialPostCopy2Widget> {
                                           useGoogleFonts: GoogleFonts.asMap()
                                               .containsKey(
                                                   FlutterFlowTheme.of(context)
-                                                      .bodyText2Family),
+                                                      .bodySmallFamily),
                                         ),
                                   ),
                                 ),

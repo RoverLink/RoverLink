@@ -148,7 +148,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                     FFAppState().currentPage = 'Explore';
                                   });
 
-                                  context.pushNamed(
+                                  context.goNamed(
                                     'Explore',
                                     extra: <String, dynamic>{
                                       kTransitionInfoKey: TransitionInfo(
@@ -262,7 +262,7 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
             width: 80.0,
             height: 80.0,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primaryColor,
+              color: FlutterFlowTheme.of(context).primary,
               shape: BoxShape.circle,
             ),
             child: FlutterFlowIconButton(
