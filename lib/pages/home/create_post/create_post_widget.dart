@@ -2,10 +2,12 @@ import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
+import '/components/loading_wheel/loading_wheel_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_video_player.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/upload_data.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
@@ -166,87 +168,320 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                   maxWidth: 600.0,
                 ),
                 decoration: BoxDecoration(),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 70.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15.0),
-                          child: Container(
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 10.0,
-                                  color: Color(0x3416202A),
-                                )
-                              ],
-                              borderRadius: BorderRadius.circular(15.0),
-                              shape: BoxShape.rectangle,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  4.0, 4.0, 4.0, 4.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 8.0, 4.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        AuthUserStreamWidget(
-                                          builder: (context) => Hero(
-                                            tag: currentUserPhoto,
-                                            transitionOnUserGestures: true,
-                                            child: Container(
-                                              width: 50.0,
-                                              height: 50.0,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl: currentUserPhoto,
-                                                fit: BoxFit.cover,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 70.0),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 10.0, 10.0, 10.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 10.0,
+                                    color: Color(0x3416202A),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(15.0),
+                                shape: BoxShape.rectangle,
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    4.0, 4.0, 4.0, 4.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 8.0, 8.0, 4.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          AuthUserStreamWidget(
+                                            builder: (context) => Hero(
+                                              tag: currentUserPhoto,
+                                              transitionOnUserGestures: true,
+                                              child: Container(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: CachedNetworkImage(
+                                                  imageUrl: currentUserPhoto,
+                                                  fit: BoxFit.cover,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 4.0, 0.0, 4.0),
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              AuthUserStreamWidget(
-                                                builder: (context) => Text(
-                                                  currentUserDisplayName
-                                                      .maybeHandleOverflow(
-                                                    maxChars: 30,
-                                                    replacement: '…',
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 4.0, 0.0, 4.0),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                AuthUserStreamWidget(
+                                                  builder: (context) => Text(
+                                                    currentUserDisplayName
+                                                        .maybeHandleOverflow(
+                                                      maxChars: 30,
+                                                      replacement: '…',
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Fira Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleMediumFamily),
+                                                        ),
                                                   ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleMedium
-                                                      .override(
-                                                        fontFamily: 'Fira Sans',
-                                                        color:
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 4.0, 0.0, 0.0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    children: [
+                                                      AuthUserStreamWidget(
+                                                        builder: (context) =>
+                                                            Text(
+                                                          '@${valueOrDefault(currentUserDocument?.username, '')}',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodySmall
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Fira Sans',
+                                                                color: Color(
+                                                                    0xFF57636C),
+                                                                fontSize: 14.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                                useGoogleFonts: GoogleFonts
+                                                                        .asMap()
+                                                                    .containsKey(
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodySmallFamily),
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Align(
+                                              alignment: AlignmentDirectional(
+                                                  0.95, 0.0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 0.0, 0.0, 10.0),
+                                                child: CircularPercentIndicator(
+                                                  percent: _model.progressBar,
+                                                  radius: 15.0,
+                                                  lineWidth: 3.0,
+                                                  animation: false,
+                                                  progressColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryText,
+                                                  backgroundColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 8.0, 8.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5.0, 18.0, 5.0, 0.0),
+                                            child: TextFormField(
+                                              controller: _model.textController,
+                                              onChanged: (_) =>
+                                                  EasyDebounce.debounce(
+                                                '_model.textController',
+                                                Duration(milliseconds: 0),
+                                                () async {
+                                                  setState(() {
+                                                    _model.progressBar = functions
+                                                        .calculateMessageCompletion(
+                                                            _model
+                                                                .textController
+                                                                .text,
+                                                            280);
+                                                  });
+                                                  if (functions.stringLength(
+                                                          _model.textController
+                                                              .text) >
+                                                      280) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .clearSnackBars();
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Posts can only contain 280 characters.',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryText,
-                                                        fontSize: 16.0,
+                                                                .primary,
+                                                      ),
+                                                    );
+                                                    return;
+                                                  }
+                                                },
+                                              ),
+                                              autofocus: true,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                hintText:
+                                                    FFLocalizations.of(context)
+                                                        .getText(
+                                                  'i3nhkyw9' /* Type here... */,
+                                                ),
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      const BorderRadius.only(
+                                                    topLeft:
+                                                        Radius.circular(4.0),
+                                                    topRight:
+                                                        Radius.circular(4.0),
+                                                  ),
+                                                ),
+                                                contentPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(0.0, 0.0, 0.0,
+                                                            15.0),
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
                                                         fontWeight:
                                                             FontWeight.w500,
                                                         useGoogleFonts: GoogleFonts
@@ -254,236 +489,15 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                             .containsKey(
                                                                 FlutterFlowTheme.of(
                                                                         context)
-                                                                    .titleMediumFamily),
+                                                                    .bodyMediumFamily),
                                                       ),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 4.0, 0.0, 0.0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    AuthUserStreamWidget(
-                                                      builder: (context) =>
-                                                          Text(
-                                                        '@${valueOrDefault(currentUserDocument?.username, '')}',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodySmall
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Fira Sans',
-                                                                  color: Color(
-                                                                      0xFF57636C),
-                                                                  fontSize:
-                                                                      14.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  useGoogleFonts: GoogleFonts
-                                                                          .asMap()
-                                                                      .containsKey(
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodySmallFamily),
-                                                                ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.95, 0.0),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 10.0),
-                                              child: CircularPercentIndicator(
-                                                percent: _model.progressBar,
-                                                radius: 15.0,
-                                                lineWidth: 3.0,
-                                                animation: false,
-                                                progressColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                backgroundColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                              ),
+                                              textAlign: TextAlign.start,
+                                              maxLines: null,
+                                              validator: _model
+                                                  .textControllerValidator
+                                                  .asValidator(context),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 0.0, 8.0, 8.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  5.0, 18.0, 5.0, 0.0),
-                                          child: TextFormField(
-                                            controller: _model.textController,
-                                            onChanged: (_) =>
-                                                EasyDebounce.debounce(
-                                              '_model.textController',
-                                              Duration(milliseconds: 0),
-                                              () async {
-                                                setState(() {
-                                                  _model.progressBar = functions
-                                                      .calculateMessageCompletion(
-                                                          _model.textController
-                                                              .text,
-                                                          280);
-                                                });
-                                                if (functions.stringLength(
-                                                        _model.textController
-                                                            .text) >
-                                                    280) {
-                                                  ScaffoldMessenger.of(context)
-                                                      .clearSnackBars();
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Posts can only contain 280 characters.',
-                                                        style: TextStyle(
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                    ),
-                                                  );
-                                                  return;
-                                                }
-                                              },
-                                            ),
-                                            autofocus: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              hintText:
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                'i3nhkyw9' /* Type here... */,
-                                              ),
-                                              hintStyle: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .secondaryText,
-                                                    fontWeight: FontWeight.w500,
-                                                    useGoogleFonts: GoogleFonts
-                                                            .asMap()
-                                                        .containsKey(
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily),
-                                                  ),
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              errorBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedErrorBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              contentPadding:
-                                                  EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 15.0),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  fontWeight: FontWeight.w500,
-                                                  useGoogleFonts: GoogleFonts
-                                                          .asMap()
-                                                      .containsKey(
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMediumFamily),
-                                                ),
-                                            textAlign: TextAlign.start,
-                                            maxLines: null,
-                                            validator: _model
-                                                .textControllerValidator
-                                                .asValidator(context),
-                                          ),
-                                        ),
-                                        if (_model.uploadedImageID.length > 0)
                                           Align(
                                             alignment:
                                                 AlignmentDirectional(0.0, 0.0),
@@ -506,35 +520,69 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      custom_widgets
-                                                          .DisplayUploadedImage(
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            1.0,
-                                                        height: 200.0,
-                                                        isCircle: false,
-                                                        defaultImageUrl: null,
-                                                        image: _model
-                                                            .uploadedLocalFile,
-                                                      ),
+                                                      if ((_model.uploadedImageID
+                                                                  .length >
+                                                              0) &&
+                                                          !_model.uploading &&
+                                                          (_model.uploadedVideos
+                                                                  .length ==
+                                                              0))
+                                                        custom_widgets
+                                                            .DisplayUploadedImage(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              1.0,
+                                                          height: 200.0,
+                                                          isCircle: false,
+                                                          defaultImageUrl: null,
+                                                          image: _model
+                                                              .uploadedLocalFile1,
+                                                        ),
+                                                      if ((_model.uploadedImageID
+                                                                  .length >
+                                                              0) &&
+                                                          !_model.uploading &&
+                                                          (_model.uploadedVideos
+                                                                  .length >
+                                                              0))
+                                                        FlutterFlowVideoPlayer(
+                                                          path: _model
+                                                              .uploadedVideos
+                                                              .first,
+                                                          videoType:
+                                                              VideoType.network,
+                                                          autoPlay: false,
+                                                          looping: true,
+                                                          showControls: true,
+                                                          allowFullScreen: true,
+                                                          allowPlaybackSpeedMenu:
+                                                              false,
+                                                        ),
                                                     ],
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                        if (_model.uploading)
+                          wrapWithModel(
+                            model: _model.loadingWheelModel,
+                            updateCallback: () => setState(() {}),
+                            child: LoadingWheelWidget(),
+                          ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -1483,7 +1531,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                           if (selectedMedia != null &&
                               selectedMedia.every((m) =>
                                   validateFileFormat(m.storagePath, context))) {
-                            setState(() => _model.isDataUploading = true);
+                            setState(() => _model.isDataUploading1 = true);
                             var selectedUploadedFiles = <FFUploadedFile>[];
 
                             try {
@@ -1496,12 +1544,12 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                       ))
                                   .toList();
                             } finally {
-                              _model.isDataUploading = false;
+                              _model.isDataUploading1 = false;
                             }
                             if (selectedUploadedFiles.length ==
                                 selectedMedia.length) {
                               setState(() {
-                                _model.uploadedLocalFile =
+                                _model.uploadedLocalFile1 =
                                     selectedUploadedFiles.first;
                               });
                             } else {
@@ -1510,10 +1558,13 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                             }
                           }
 
+                          setState(() {
+                            _model.uploading = true;
+                          });
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Uploading image...',
+                                'Uploading Image...',
                                 style: TextStyle(
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
@@ -1526,7 +1577,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                           );
                           _model.uploadPostAttachment =
                               await MediaGroup.createAttachmentCall.call(
-                            media: _model.uploadedLocalFile,
+                            media: _model.uploadedLocalFile1,
                             jwtToken: currentJwtToken,
                           );
                           if (getJsonField(
@@ -1536,6 +1587,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                               'Success') {
                             setState(() {
                               _model.uploadedImageID = [];
+                              _model.uploadedVideos = [];
                             });
                             setState(() {
                               _model.addToUploadedImageID(getJsonField(
@@ -1561,9 +1613,129 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                             );
                           }
 
+                          setState(() {
+                            _model.uploading = false;
+                          });
+
                           setState(() {});
                         },
                       ),
+                    ),
+                    FlutterFlowIconButton(
+                      borderColor: Colors.transparent,
+                      borderRadius: 30.0,
+                      buttonSize: 50.0,
+                      icon: Icon(
+                        Icons.video_call,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 32.0,
+                      ),
+                      onPressed: () async {
+                        final selectedMedia =
+                            await selectMediaWithSourceBottomSheet(
+                          context: context,
+                          allowPhoto: false,
+                          allowVideo: true,
+                          includeDimensions: true,
+                          backgroundColor:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          textColor: FlutterFlowTheme.of(context).secondaryText,
+                          pickerFontFamily: 'Fira Sans',
+                        );
+                        if (selectedMedia != null &&
+                            selectedMedia.every((m) =>
+                                validateFileFormat(m.storagePath, context))) {
+                          setState(() => _model.isDataUploading2 = true);
+                          var selectedUploadedFiles = <FFUploadedFile>[];
+
+                          try {
+                            selectedUploadedFiles = selectedMedia
+                                .map((m) => FFUploadedFile(
+                                      name: m.storagePath.split('/').last,
+                                      bytes: m.bytes,
+                                      height: m.dimensions?.height,
+                                      width: m.dimensions?.width,
+                                    ))
+                                .toList();
+                          } finally {
+                            _model.isDataUploading2 = false;
+                          }
+                          if (selectedUploadedFiles.length ==
+                              selectedMedia.length) {
+                            setState(() {
+                              _model.uploadedLocalFile2 =
+                                  selectedUploadedFiles.first;
+                            });
+                          } else {
+                            setState(() {});
+                            return;
+                          }
+                        }
+
+                        setState(() {
+                          _model.uploading = true;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Uploading Video...',
+                              style: TextStyle(
+                                color: FlutterFlowTheme.of(context).primaryText,
+                              ),
+                            ),
+                            duration: Duration(milliseconds: 4000),
+                            backgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                          ),
+                        );
+                        _model.uploadPostAttachment2 =
+                            await MediaGroup.createAttachmentCall.call(
+                          media: _model.uploadedLocalFile2,
+                          jwtToken: currentJwtToken,
+                        );
+                        if (getJsonField(
+                              (_model.uploadPostAttachment2?.jsonBody ?? ''),
+                              r'''$.responseStatus.message''',
+                            ) ==
+                            'Success') {
+                          setState(() {
+                            _model.uploadedImageID = [];
+                            _model.uploadedVideos = [];
+                          });
+                          setState(() {
+                            _model.addToUploadedImageID(getJsonField(
+                              (_model.uploadPostAttachment2?.jsonBody ?? ''),
+                              r'''$.attachmentId''',
+                            ).toString());
+                            _model.addToUploadedVideos(getJsonField(
+                              (_model.uploadPostAttachment2?.jsonBody ?? ''),
+                              r'''$.mediaUrl''',
+                            ));
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'There was a problem uploading your video. Make sure you uploaded a supported format.',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                            ),
+                          );
+                        }
+
+                        setState(() {
+                          _model.uploading = false;
+                        });
+
+                        setState(() {});
+                      },
                     ),
                     if (false)
                       FlutterFlowIconButton(
@@ -2444,6 +2616,25 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                             child: FFButtonWidget(
                               onPressed: () async {
                                 var _shouldSetState = false;
+                                if (_model.uploading) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        'Please wait for your files to finish uploading.',
+                                        style: TextStyle(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                        ),
+                                      ),
+                                      duration: Duration(milliseconds: 4000),
+                                      backgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                    ),
+                                  );
+                                  if (_shouldSetState) setState(() {});
+                                  return;
+                                }
                                 if (!((_model.textController.text != null &&
                                         _model.textController.text != '') ||
                                     (_model.uploadedImageID.length > 0))) {

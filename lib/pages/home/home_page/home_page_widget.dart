@@ -10,6 +10,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
@@ -96,19 +97,72 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                           child:
                               // ListView of aggregated twitter posts
-                              FutureBuilder<ApiCallResponse>(
-                            future: (_model.apiRequestCompleter ??= Completer<
-                                    ApiCallResponse>()
-                                  ..complete(FeedGroup.getUserTimelineCall.call(
+                              RefreshIndicator(
+                            onRefresh: () async {
+                              setState(
+                                  () => _model.pagingController?.refresh());
+                              await _model.waitForOnePage();
+                            },
+                            child: PagedListView<ApiPagingParams, dynamic>(
+                              pagingController: () {
+                                if (_model.pagingController != null) {
+                                  return _model.pagingController!;
+                                }
+
+                                _model.pagingController = PagingController(
+                                  firstPageKey: ApiPagingParams(
+                                    nextPageNumber: 0,
+                                    numItems: 0,
+                                    lastResponse: null,
+                                  ),
+                                );
+                                _model.pagingController!
+                                    .addPageRequestListener((nextPageMarker) {
+                                  FeedGroup.getUserTimelineCall
+                                      .call(
                                     jwtToken: currentJwtToken,
                                     cultureKey: FFLocalizations.of(context)
                                         .languageCode,
-                                  )))
-                                .future,
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
+                                    page: nextPageMarker.nextPageNumber,
+                                  )
+                                      .then((listViewGetUserTimelineResponse) {
+                                    final pageItems =
+                                        FeedGroup.getUserTimelineCall
+                                            .posts(
+                                              listViewGetUserTimelineResponse
+                                                  .jsonBody,
+                                            )!
+                                            .map((e) => e)
+                                            .toList() as List;
+                                    final newNumItems =
+                                        nextPageMarker.numItems +
+                                            pageItems.length;
+                                    _model.pagingController!.appendPage(
+                                      pageItems,
+                                      (pageItems.length > 0)
+                                          ? ApiPagingParams(
+                                              nextPageNumber: nextPageMarker
+                                                      .nextPageNumber +
+                                                  1,
+                                              numItems: newNumItems,
+                                              lastResponse:
+                                                  listViewGetUserTimelineResponse,
+                                            )
+                                          : null,
+                                    );
+                                  });
+                                });
+                                return _model.pagingController!;
+                              }(),
+                              padding: EdgeInsets.zero,
+                              shrinkWrap: true,
+                              reverse: false,
+                              scrollDirection: Axis.vertical,
+                              builderDelegate:
+                                  PagedChildBuilderDelegate<dynamic>(
+                                // Customize what your widget looks like when it's loading the first page.
+                                firstPageProgressIndicatorBuilder: (_) =>
+                                    Center(
                                   child: SizedBox(
                                     width: 50.0,
                                     height: 50.0,
@@ -117,72 +171,43 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           FlutterFlowTheme.of(context).primary,
                                     ),
                                   ),
-                                );
-                              }
-                              final listViewGetUserTimelineResponse =
-                                  snapshot.data!;
-                              return Builder(
-                                builder: (context) {
-                                  final post = FeedGroup.getUserTimelineCall
-                                          .posts(
-                                            listViewGetUserTimelineResponse
-                                                .jsonBody,
-                                          )
-                                          ?.map((e) => e)
-                                          .toList()
-                                          ?.toList() ??
-                                      [];
-                                  if (post.isEmpty) {
-                                    return EmptyListWidget(
-                                      text: FFLocalizations.of(context).getText(
-                                        '8lea1q8j' /* You haven't followed anyone ye... */,
+                                ),
+                                noItemsFoundIndicatorBuilder: (_) =>
+                                    EmptyListWidget(
+                                  text: FFLocalizations.of(context).getText(
+                                    '8lea1q8j' /* You haven't followed anyone ye... */,
+                                  ),
+                                ),
+                                itemBuilder: (context, _, postIndex) {
+                                  final postItem = _model
+                                      .pagingController!.itemList![postIndex];
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      // Because of the Appbar we don't want to start the posts directly underneath so on the very first post we want to introduce some spacing
+                                      if (postIndex == 0)
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1.0,
+                                          height: 54.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .appbarSpacer,
+                                          ),
+                                        ),
+                                      SocialPostWidget(
+                                        key: Key(
+                                            'Keyivv_${postIndex}_of_${_model.pagingController!.itemList!.length}'),
+                                        post: postItem,
+                                        allowPFPClick: true,
                                       ),
-                                    );
-                                  }
-                                  return RefreshIndicator(
-                                    onRefresh: () async {
-                                      setState(() =>
-                                          _model.apiRequestCompleter = null);
-                                      await _model.waitForApiRequestCompleted();
-                                    },
-                                    child: ListView.builder(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      itemCount: post.length,
-                                      itemBuilder: (context, postIndex) {
-                                        final postItem = post[postIndex];
-                                        return Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            // Because of the Appbar we don't want to start the posts directly underneath so on the very first post we want to introduce some spacing
-                                            if (postIndex == 0)
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    1.0,
-                                                height: 54.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .appbarSpacer,
-                                                ),
-                                              ),
-                                            SocialPostWidget(
-                                              key: Key(
-                                                  'Keyivv_${postIndex}_of_${post.length}'),
-                                              post: postItem,
-                                              allowPFPClick: true,
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    ),
+                                    ],
                                   );
                                 },
-                              );
-                            },
+                              ),
+                            ),
                           ),
                         ),
                       ),

@@ -1,5 +1,6 @@
 import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/loading_wheel/loading_wheel_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -19,9 +20,13 @@ class EditProfileModel extends FlutterFlowModel {
 
   String? newPFP;
 
+  bool uploading = false;
+
   ///  State fields for stateful widgets in this page.
 
   final formKey = GlobalKey<FormState>();
+  // Model for LoadingWheel component.
+  late LoadingWheelModel loadingWheelModel;
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -71,10 +76,12 @@ class EditProfileModel extends FlutterFlowModel {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
+    loadingWheelModel = createModel(context, () => LoadingWheelModel());
     usernameControllerValidator = _usernameControllerValidator;
   }
 
   void dispose() {
+    loadingWheelModel.dispose();
     displayNameController?.dispose();
     usernameController?.dispose();
   }

@@ -299,9 +299,16 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                       1.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
+                                                                    color:
+                                                                        colorFromCssString(
+                                                                      getJsonField(
+                                                                        eventslistItem,
+                                                                        r'''$.accentColor''',
+                                                                      ).toString(),
+                                                                      defaultColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primary,
+                                                                    ),
                                                                     boxShadow: [
                                                                       BoxShadow(
                                                                         blurRadius:
@@ -312,7 +319,7 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                     ],
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            15.0),
+                                                                            8.0),
                                                                     shape: BoxShape
                                                                         .rectangle,
                                                                   ),
@@ -320,139 +327,130 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                       Padding(
                                                                     padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
-                                                                            10.0,
-                                                                            10.0,
-                                                                            40.0,
-                                                                            10.0),
-                                                                    child: Row(
-                                                                      mainAxisSize:
-                                                                          MainAxisSize
-                                                                              .max,
-                                                                      children: [
-                                                                        Expanded(
-                                                                          child:
-                                                                              Padding(
-                                                                            padding: EdgeInsetsDirectional.fromSTEB(
-                                                                                8.0,
-                                                                                8.0,
-                                                                                8.0,
-                                                                                8.0),
-                                                                            child:
-                                                                                Column(
+                                                                            4.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Container(
+                                                                      width: MediaQuery.of(context)
+                                                                              .size
+                                                                              .width *
+                                                                          1.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(8.0),
+                                                                      ),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            8.0,
+                                                                            8.0,
+                                                                            8.0,
+                                                                            8.0),
+                                                                        child:
+                                                                            Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.center,
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.start,
+                                                                          children: [
+                                                                            Row(
                                                                               mainAxisSize: MainAxisSize.max,
-                                                                              mainAxisAlignment: MainAxisAlignment.center,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
                                                                               children: [
-                                                                                Row(
-                                                                                  mainAxisSize: MainAxisSize.max,
-                                                                                  children: [
-                                                                                    Padding(
-                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 7.0, 0.0),
-                                                                                      child: Container(
-                                                                                        width: 25.0,
-                                                                                        height: 25.0,
-                                                                                        decoration: BoxDecoration(
-                                                                                          color: colorFromCssString(
-                                                                                            getJsonField(
-                                                                                              eventslistItem,
-                                                                                              r'''$.accentColor''',
-                                                                                            ).toString(),
-                                                                                            defaultColor: FlutterFlowTheme.of(context).primary,
-                                                                                          ),
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                      ),
-                                                                                    ),
-                                                                                    Expanded(
-                                                                                      child: Text(
-                                                                                        getJsonField(
-                                                                                          eventslistItem,
-                                                                                          r'''$.subject''',
-                                                                                        ).toString(),
-                                                                                        textAlign: TextAlign.start,
-                                                                                        style: FlutterFlowTheme.of(context).titleLarge,
-                                                                                      ),
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
-                                                                                  child: Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: [
-                                                                                      Text(
-                                                                                        FFLocalizations.of(context).getText(
-                                                                                          'gjlh74jx' /* In: */,
-                                                                                        ),
-                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                              fontSize: 16.0,
-                                                                                              fontWeight: FontWeight.bold,
-                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                            ),
-                                                                                      ),
-                                                                                      Padding(
-                                                                                        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                        child: Hero(
-                                                                                          tag: getJsonField(
-                                                                                            eventslistItem,
-                                                                                            r'''$.group.profilePhotoUrl''',
-                                                                                          ),
-                                                                                          transitionOnUserGestures: true,
-                                                                                          child: Container(
-                                                                                            width: 24.0,
-                                                                                            height: 24.0,
-                                                                                            clipBehavior: Clip.antiAlias,
-                                                                                            decoration: BoxDecoration(
-                                                                                              shape: BoxShape.circle,
-                                                                                            ),
-                                                                                            child: Image.network(
-                                                                                              getJsonField(
-                                                                                                eventslistItem,
-                                                                                                r'''$.group.profilePhotoUrl''',
-                                                                                              ),
-                                                                                              fit: BoxFit.cover,
-                                                                                            ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      Expanded(
-                                                                                        child: Padding(
-                                                                                          padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                          child: Text(
-                                                                                            '${getJsonField(
-                                                                                              eventslistItem,
-                                                                                              r'''$.group.name''',
-                                                                                            ).toString()} #${getJsonField(
-                                                                                              eventslistItem,
-                                                                                              r'''$.group.slug''',
-                                                                                            ).toString()}',
-                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                  useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                                ),
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                                Padding(
-                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                                                                                Expanded(
                                                                                   child: Text(
                                                                                     getJsonField(
                                                                                       eventslistItem,
-                                                                                      r'''$.description''',
+                                                                                      r'''$.subject''',
                                                                                     ).toString(),
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                                    textAlign: TextAlign.start,
+                                                                                    style: FlutterFlowTheme.of(context).titleMedium,
                                                                                   ),
                                                                                 ),
                                                                               ],
                                                                             ),
-                                                                          ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    FFLocalizations.of(context).getText(
+                                                                                      'gjlh74jx' /* In: */,
+                                                                                    ),
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                          fontSize: 16.0,
+                                                                                          fontWeight: FontWeight.bold,
+                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                        ),
+                                                                                  ),
+                                                                                  Padding(
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                    child: Hero(
+                                                                                      tag: getJsonField(
+                                                                                        eventslistItem,
+                                                                                        r'''$.group.profilePhotoUrl''',
+                                                                                      ),
+                                                                                      transitionOnUserGestures: true,
+                                                                                      child: Container(
+                                                                                        width: 24.0,
+                                                                                        height: 24.0,
+                                                                                        clipBehavior: Clip.antiAlias,
+                                                                                        decoration: BoxDecoration(
+                                                                                          shape: BoxShape.circle,
+                                                                                        ),
+                                                                                        child: Image.network(
+                                                                                          getJsonField(
+                                                                                            eventslistItem,
+                                                                                            r'''$.group.profilePhotoUrl''',
+                                                                                          ),
+                                                                                          fit: BoxFit.cover,
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  Expanded(
+                                                                                    child: Padding(
+                                                                                      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                                                                                      child: Text(
+                                                                                        '${getJsonField(
+                                                                                          eventslistItem,
+                                                                                          r'''$.group.name''',
+                                                                                        ).toString()} #${getJsonField(
+                                                                                          eventslistItem,
+                                                                                          r'''$.group.slug''',
+                                                                                        ).toString()}',
+                                                                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                              fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                              useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
+                                                                                            ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 0.0, 0.0),
+                                                                              child: Text(
+                                                                                getJsonField(
+                                                                                  eventslistItem,
+                                                                                  r'''$.description''',
+                                                                                ).toString(),
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
-                                                                      ],
+                                                                      ),
                                                                     ),
                                                                   ),
                                                                 ),

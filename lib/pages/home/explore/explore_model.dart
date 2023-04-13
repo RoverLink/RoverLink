@@ -10,11 +10,14 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 class ExploreModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  // State field(s) for ListView widget.
+  PagingController<ApiPagingParams, dynamic>? pagingController;
   // Model for ExploreAppBar component.
   late ExploreAppBarModel exploreAppBarModel;
   // Model for NavbarFloating component.

@@ -1,6 +1,5 @@
 import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/components/announcement/announcement_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/follow_button/follow_button_widget.dart';
 import '/components/people_chip_large/people_chip_large_widget.dart';
@@ -13,7 +12,6 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 import 'group_profile_model.dart';
 export 'group_profile_model.dart';
@@ -170,51 +168,43 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 50.0, 0.0, 0.0),
                               child: Container(
-                                width: 130.0,
-                                height: 130.0,
+                                width: 138.0,
+                                height: 138.0,
                                 decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 5.0,
-                                      color: Color(0x3416202A),
-                                      spreadRadius: 2.0,
-                                    )
-                                  ],
+                                  color: FlutterFlowTheme.of(context)
+                                      .primaryBackground,
                                   shape: BoxShape.circle,
                                 ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 50.0, 0.0, 0.0),
-                              child: Hero(
-                                tag: valueOrDefault<String>(
-                                  getJsonField(
-                                    groupProfileGetGroupResponse.jsonBody,
-                                    r'''$.group.profilePhotoUrl''',
-                                  ),
-                                  'https://em-content.zobj.net/thumbs/320/microsoft/319/loudly-crying-face_1f62d.png',
-                                ),
-                                transitionOnUserGestures: true,
-                                child: Container(
-                                  width: 130.0,
-                                  height: 130.0,
-                                  clipBehavior: Clip.antiAlias,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: valueOrDefault<String>(
+                                child: Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Hero(
+                                    tag: valueOrDefault<String>(
                                       getJsonField(
                                         groupProfileGetGroupResponse.jsonBody,
                                         r'''$.group.profilePhotoUrl''',
                                       ),
                                       'https://em-content.zobj.net/thumbs/320/microsoft/319/loudly-crying-face_1f62d.png',
                                     ),
-                                    fit: BoxFit.cover,
+                                    transitionOnUserGestures: true,
+                                    child: Container(
+                                      width: 130.0,
+                                      height: 130.0,
+                                      clipBehavior: Clip.antiAlias,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: valueOrDefault<String>(
+                                          getJsonField(
+                                            groupProfileGetGroupResponse
+                                                .jsonBody,
+                                            r'''$.group.profilePhotoUrl''',
+                                          ),
+                                          'https://em-content.zobj.net/thumbs/320/microsoft/319/loudly-crying-face_1f62d.png',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -383,81 +373,22 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                                           ],
                                         ),
                                       ),
-                                      FutureBuilder<ApiCallResponse>(
-                                        future: (_model.apiRequestCompleter3 ??=
-                                                Completer<ApiCallResponse>()
-                                                  ..complete(
-                                                      NotificationsCall.call()))
-                                            .future,
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50.0,
-                                                height: 50.0,
-                                                child:
-                                                    CircularProgressIndicator(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          final listViewNotificationsResponse =
-                                              snapshot.data!;
-                                          return Builder(
-                                            builder: (context) {
-                                              final announcement =
-                                                  NotificationsCall
-                                                              .notifications(
-                                                        listViewNotificationsResponse
-                                                            .jsonBody,
-                                                      )
-                                                          ?.map((e) => e)
-                                                          .toList()
-                                                          ?.toList() ??
-                                                      [];
-                                              if (announcement.isEmpty) {
-                                                return EmptyListWidget(
-                                                  text:
-                                                      'This group hasn\'t made any announcements yet.',
-                                                );
-                                              }
-                                              return RefreshIndicator(
-                                                onRefresh: () async {
-                                                  setState(() => _model
-                                                          .apiRequestCompleter3 =
-                                                      null);
-                                                  await _model
-                                                      .waitForApiRequestCompleted3();
-                                                },
-                                                child: ListView.builder(
-                                                  padding: EdgeInsets.zero,
-                                                  primary: false,
-                                                  shrinkWrap: true,
-                                                  scrollDirection:
-                                                      Axis.vertical,
-                                                  itemCount:
-                                                      announcement.length,
-                                                  itemBuilder: (context,
-                                                      announcementIndex) {
-                                                    final announcementItem =
-                                                        announcement[
-                                                            announcementIndex];
-                                                    return AnnouncementWidget(
-                                                      key: Key(
-                                                          'Keyzrc_${announcementIndex}_of_${announcement.length}'),
-                                                      announcement:
-                                                          announcementItem,
-                                                    );
-                                                  },
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                      Container(
+                                        width: 100.0,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                1.0,
+                                        decoration: BoxDecoration(),
+                                        child: wrapWithModel(
+                                          model: _model.emptyListModel,
+                                          updateCallback: () => setState(() {}),
+                                          child: EmptyListWidget(
+                                            text: FFLocalizations.of(context)
+                                                .getText(
+                                              '574c022r' /* This group hasn't made any ann... */,
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                       FutureBuilder<ApiCallResponse>(
                                         future: (_model.apiRequestCompleter2 ??=
@@ -472,6 +403,7 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                                                             .languageCode,
                                                     jwtToken: currentJwtToken,
                                                     feedType: 'group',
+                                                    page: 0,
                                                   )))
                                             .future,
                                         builder: (context, snapshot) {
@@ -547,80 +479,21 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                                           );
                                         },
                                       ),
-                                      RefreshIndicator(
-                                        onRefresh: () async {
-                                          setState(() => _model.pagingController
-                                              ?.refresh());
-                                          await _model.waitForOnePage();
-                                        },
-                                        child: PagedListView<ApiPagingParams,
-                                            dynamic>(
-                                          pagingController: () {
-                                            if (_model.pagingController !=
-                                                null) {
-                                              return _model.pagingController!;
-                                            }
-
-                                            _model.pagingController =
-                                                PagingController(
-                                              firstPageKey: ApiPagingParams(
-                                                nextPageNumber: 0,
-                                                numItems: 0,
-                                                lastResponse: null,
-                                              ),
-                                            );
-                                            _model.pagingController!
-                                                .addPageRequestListener(
-                                                    (nextPageMarker) {
-                                              GroupGroup.getGroupMembersCall
-                                                  .call(
-                                                groupId: widget.group,
-                                                jwtToken: currentJwtToken,
-                                                page: nextPageMarker
-                                                    .nextPageNumber,
-                                              )
-                                                  .then(
-                                                      (listViewGetGroupMembersResponse) {
-                                                final pageItems = GroupGroup
-                                                    .getGroupMembersCall
-                                                    .members(
-                                                      listViewGetGroupMembersResponse
-                                                          .jsonBody,
-                                                    )!
-                                                    .map((e) => e)
-                                                    .toList() as List;
-                                                final newNumItems =
-                                                    nextPageMarker.numItems +
-                                                        pageItems.length;
-                                                _model.pagingController!
-                                                    .appendPage(
-                                                  pageItems,
-                                                  (pageItems.length > 0)
-                                                      ? ApiPagingParams(
-                                                          nextPageNumber:
-                                                              nextPageMarker
-                                                                      .nextPageNumber +
-                                                                  1,
-                                                          numItems: newNumItems,
-                                                          lastResponse:
-                                                              listViewGetGroupMembersResponse,
-                                                        )
-                                                      : null,
-                                                );
-                                              });
-                                            });
-                                            return _model.pagingController!;
-                                          }(),
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          reverse: false,
-                                          scrollDirection: Axis.vertical,
-                                          builderDelegate:
-                                              PagedChildBuilderDelegate<
-                                                  dynamic>(
-                                            // Customize what your widget looks like when it's loading the first page.
-                                            firstPageProgressIndicatorBuilder:
-                                                (_) => Center(
+                                      FutureBuilder<ApiCallResponse>(
+                                        future: (_model.apiRequestCompleter1 ??=
+                                                Completer<ApiCallResponse>()
+                                                  ..complete(GroupGroup
+                                                      .getGroupMembersCall
+                                                      .call(
+                                                    groupId: widget.group,
+                                                    jwtToken: currentJwtToken,
+                                                    page: 0,
+                                                  )))
+                                            .future,
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
                                               child: SizedBox(
                                                 width: 50.0,
                                                 height: 50.0,
@@ -631,55 +504,91 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                                                       .primary,
                                                 ),
                                               ),
-                                            ),
-                                            noItemsFoundIndicatorBuilder: (_) =>
-                                                Container(
-                                              height: 300.0,
-                                              child: EmptyListWidget(
-                                                text:
-                                                    FFLocalizations.of(context)
+                                            );
+                                          }
+                                          final listViewGetGroupMembersResponse =
+                                              snapshot.data!;
+                                          return Builder(
+                                            builder: (context) {
+                                              final members =
+                                                  GroupGroup.getGroupMembersCall
+                                                          .members(
+                                                            listViewGetGroupMembersResponse
+                                                                .jsonBody,
+                                                          )
+                                                          ?.map((e) => e)
+                                                          .toList()
+                                                          ?.toList() ??
+                                                      [];
+                                              if (members.isEmpty) {
+                                                return Container(
+                                                  height: 300.0,
+                                                  child: EmptyListWidget(
+                                                    text: FFLocalizations.of(
+                                                            context)
                                                         .getText(
-                                                  's2lwebya' /* There are no members in this g... */,
-                                                ),
-                                              ),
-                                            ),
-                                            itemBuilder:
-                                                (context, _, membersIndex) {
-                                              final membersItem = _model
-                                                  .pagingController!
-                                                  .itemList![membersIndex];
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  if (membersIndex == 0)
-                                                    Container(
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              1.0,
-                                                      height: 12.0,
-                                                      decoration:
-                                                          BoxDecoration(),
-                                                    ),
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 0.0,
-                                                                0.0, 12.0),
-                                                    child:
-                                                        PeopleChipLargeWidget(
-                                                      key: Key(
-                                                          'Key6ml_${membersIndex}_of_${_model.pagingController!.itemList!.length}'),
-                                                      user: membersItem,
-                                                      isGroup: false,
+                                                      's2lwebya' /* There are no members in this g... */,
                                                     ),
                                                   ),
-                                                ],
+                                                );
+                                              }
+                                              return RefreshIndicator(
+                                                onRefresh: () async {
+                                                  setState(() => _model
+                                                          .apiRequestCompleter1 =
+                                                      null);
+                                                  await _model
+                                                      .waitForApiRequestCompleted1();
+                                                },
+                                                child: ListView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  shrinkWrap: true,
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount: members.length,
+                                                  itemBuilder:
+                                                      (context, membersIndex) {
+                                                    final membersItem =
+                                                        members[membersIndex];
+                                                    return Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        if (membersIndex == 0)
+                                                          Container(
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                1.0,
+                                                            height: 12.0,
+                                                            decoration:
+                                                                BoxDecoration(),
+                                                          ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      0.0,
+                                                                      12.0),
+                                                          child:
+                                                              PeopleChipLargeWidget(
+                                                            key: Key(
+                                                                'Key6ml_${membersIndex}_of_${members.length}'),
+                                                            user: membersItem,
+                                                            isGroup: false,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ),
                                               );
                                             },
-                                          ),
-                                        ),
+                                          );
+                                        },
                                       ),
                                     ],
                                   ),

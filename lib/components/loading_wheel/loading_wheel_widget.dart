@@ -43,7 +43,8 @@ class _LoadingWheelWidgetState extends State<LoadingWheelWidget> {
     return Stack(
       children: [
         FlutterFlowWebView(
-          url: 'https://roverlink.github.io/loading.html',
+          url:
+              'https://roverlink.github.io/loading.html?darkMode=${(Theme.of(context).brightness == Brightness.dark).toString()}',
           bypass: false,
           width: 73.0,
           height: 73.0,

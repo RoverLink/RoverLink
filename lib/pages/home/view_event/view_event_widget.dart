@@ -373,7 +373,8 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
                                 children: [
                                   Icon(
                                     Icons.location_on_outlined,
-                                    color: Colors.black,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
                                     size: 24.0,
                                   ),
                                   Expanded(
@@ -404,7 +405,8 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
                                         1.0, 0.0, 0.0, 0.0),
                                     child: Icon(
                                       Icons.access_time,
-                                      color: Colors.black,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       size: 24.0,
                                     ),
                                   ),

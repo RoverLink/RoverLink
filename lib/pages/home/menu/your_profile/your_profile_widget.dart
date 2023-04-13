@@ -205,6 +205,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
                         cultureKey: FFLocalizations.of(context).languageCode,
                         jwtToken: currentJwtToken,
                         feedType: 'user',
+                        page: 0,
                       ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.

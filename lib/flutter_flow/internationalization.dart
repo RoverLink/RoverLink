@@ -985,6 +985,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Menu
   {
+    '2uz6uzd3': {
+      'en': 'Following',
+      'de': 'Folgend',
+      'es': 'Siguiente',
+      'fr': 'Suivant',
+      'zh_Hans': '下列的',
+    },
     'xys770o4': {
       'en': 'Absences',
       'de': 'Abwesenheiten',
@@ -1283,13 +1290,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Settings
   {
-    'iib8bwfn': {
-      'en': 'Following',
-      'de': 'Folgend',
-      'es': 'Siguiente',
-      'fr': 'Suivant',
-      'zh_Hans': '下列的',
-    },
     'pz832rs4': {
       'en': 'Automatic',
       'de': 'Automatisch',
@@ -1534,12 +1534,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Adresse e-mail',
       'zh_Hans': '电子邮件地址',
     },
+    'iqgfxiwt': {
+      'en': 'judge@fbla.com',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
     't3a5dj0t': {
       'en': 'Password',
       'de': 'Passwort',
       'es': 'Contraseña',
       'fr': 'Mot de passe',
       'zh_Hans': '密码',
+    },
+    'z3cmmn8n': {
+      'en': 'judgefbla',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
     'hy0koxex': {
       'en': 'Login',
@@ -2452,6 +2466,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Anuncios',
       'fr': 'Annonces',
       'zh_Hans': '公告',
+    },
+    '574c022r': {
+      'en': 'This group hasn\'t made any announcements yet.',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
     '8dv3lm20': {
       'en': 'Posts',

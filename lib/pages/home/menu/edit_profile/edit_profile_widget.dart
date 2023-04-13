@@ -1,5 +1,6 @@
 import '/auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/components/loading_wheel/loading_wheel_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -116,7 +117,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                               0.0, 20.0, 0.0, 0.0),
                           child: Stack(
                             children: [
-                              if (_model.newPFP == null || _model.newPFP == '')
+                              if ((_model.newPFP == null ||
+                                      _model.newPFP == '') &&
+                                  !_model.uploading)
                                 Align(
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: AuthUserStreamWidget(
@@ -138,7 +141,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                     ),
                                   ),
                                 ),
-                              if (_model.newPFP != null && _model.newPFP != '')
+                              if ((_model.newPFP != null &&
+                                      _model.newPFP != '') &&
+                                  !_model.uploading)
                                 Align(
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Container(
@@ -151,6 +156,19 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                       defaultImageUrl:
                                           'https://roverlink.github.io/img/empty.png',
                                       image: _model.uploadedLocalFile,
+                                    ),
+                                  ),
+                                ),
+                              if (_model.uploading)
+                                Align(
+                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 30.0, 0.0, 0.0),
+                                    child: wrapWithModel(
+                                      model: _model.loadingWheelModel,
+                                      updateCallback: () => setState(() {}),
+                                      child: LoadingWheelWidget(),
                                     ),
                                   ),
                                 ),
@@ -223,6 +241,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                         }
                                       }
 
+                                      setState(() {
+                                        _model.uploading = true;
+                                      });
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -284,6 +305,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           ),
                                         );
                                       }
+
+                                      setState(() {
+                                        _model.uploading = false;
+                                      });
 
                                       setState(() {});
                                     },

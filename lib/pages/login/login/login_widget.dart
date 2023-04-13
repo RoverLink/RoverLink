@@ -185,6 +185,17 @@ class _LoginWidgetState extends State<LoginWidget>
     _model.emailAddressController ??= TextEditingController();
     _model.passwordController ??= TextEditingController();
     _model.passwordConfirmController ??= TextEditingController();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {
+          _model.emailAddressLoginController?.text =
+              FFLocalizations.of(context).getText(
+            'iqgfxiwt' /* judge@fbla.com */,
+          );
+          _model.passwordLoginController?.text =
+              FFLocalizations.of(context).getText(
+            'z3cmmn8n' /* judgefbla */,
+          );
+        }));
   }
 
   @override

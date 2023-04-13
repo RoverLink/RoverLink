@@ -41,10 +41,12 @@ class GetUsersCall {
   Future<ApiCallResponse> call({
     String? jwtToken = '',
     String? query = '',
+    int? page,
   }) {
     final body = '''
 {
-    "query": "${query}"
+  "query": "${query}",
+  "page": "${page}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetUsers',
@@ -886,6 +888,7 @@ class GetFeedCall {
       },
       params: {
         'CultureKey': cultureKey,
+        'Page': page,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -927,6 +930,7 @@ class GetUserTimelineCall {
       },
       params: {
         'CultureKey': cultureKey,
+        'Page': page,
       },
       returnBody: true,
       encodeBodyUtf8: false,

@@ -2,6 +2,7 @@ import '/auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_video_player.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -323,32 +324,32 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                           hashtagHandler: () async {},
                         ),
                       ),
-                      if (valueOrDefault<bool>(
-                        getJsonField(
-                              widget.post,
-                              r'''$.attachments[?(@.attachmentType=='Image')]''',
-                            ) !=
-                            null,
-                        true,
-                      ))
-                        Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 10.0),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15.0),
-                              child: Container(
-                                constraints: BoxConstraints(
-                                  maxHeight: 600.0,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
+                      Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 10.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15.0),
+                            child: Container(
+                              constraints: BoxConstraints(
+                                maxHeight: 600.0,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15.0),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  if (valueOrDefault<bool>(
+                                    getJsonField(
+                                          widget.post,
+                                          r'''$.attachments[?(@.attachmentType=='Image')]''',
+                                        ) !=
+                                        null,
+                                    true,
+                                  ))
                                     InkWell(
                                       onTap: () async {
                                         await Navigator.push(
@@ -357,63 +358,111 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                             type: PageTransitionType.fade,
                                             child: FlutterFlowExpandedImageView(
                                               image: CachedNetworkImage(
-                                                imageUrl: getJsonField(
+                                                imageUrl: '${getJsonField(
                                                   functions.returnFirstItem(
                                                       getJsonField(
                                                     widget.post,
                                                     r'''$.attachments''',
                                                   )),
                                                   r'''$.link''',
-                                                ),
+                                                ).toString()}?width=${valueOrDefault<String>(
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .width
+                                                      .toString(),
+                                                  '480',
+                                                )}',
                                                 fit: BoxFit.contain,
                                               ),
                                               allowRotation: false,
-                                              tag: getJsonField(
+                                              tag: '${getJsonField(
                                                 functions.returnFirstItem(
                                                     getJsonField(
                                                   widget.post,
                                                   r'''$.attachments''',
                                                 )),
                                                 r'''$.link''',
-                                              ),
+                                              ).toString()}?width=${valueOrDefault<String>(
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .width
+                                                    .toString(),
+                                                '480',
+                                              )}',
                                               useHeroAnimation: true,
                                             ),
                                           ),
                                         );
                                       },
                                       child: Hero(
-                                        tag: getJsonField(
+                                        tag: '${getJsonField(
                                           functions
                                               .returnFirstItem(getJsonField(
                                             widget.post,
                                             r'''$.attachments''',
                                           )),
                                           r'''$.link''',
-                                        ),
+                                        ).toString()}?width=${valueOrDefault<String>(
+                                          MediaQuery.of(context)
+                                              .size
+                                              .width
+                                              .toString(),
+                                          '480',
+                                        )}',
                                         transitionOnUserGestures: true,
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(15.0),
                                           child: CachedNetworkImage(
-                                            imageUrl: getJsonField(
+                                            imageUrl: '${getJsonField(
                                               functions
                                                   .returnFirstItem(getJsonField(
                                                 widget.post,
                                                 r'''$.attachments''',
                                               )),
                                               r'''$.link''',
-                                            ),
+                                            ).toString()}?width=${valueOrDefault<String>(
+                                              MediaQuery.of(context)
+                                                  .size
+                                                  .width
+                                                  .toString(),
+                                              '480',
+                                            )}',
                                             fit: BoxFit.contain,
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  if (valueOrDefault<bool>(
+                                    getJsonField(
+                                          widget.post,
+                                          r'''$.attachments[?(@.attachmentType=='Video')]''',
+                                        ) !=
+                                        null,
+                                    true,
+                                  ))
+                                    FlutterFlowVideoPlayer(
+                                      path: getJsonField(
+                                        functions.returnFirstItem(getJsonField(
+                                          widget.post,
+                                          r'''$.attachments''',
+                                        )),
+                                        r'''$.link''',
+                                      ),
+                                      videoType: VideoType.network,
+                                      autoPlay: false,
+                                      looping: false,
+                                      showControls: true,
+                                      allowFullScreen: true,
+                                      allowPlaybackSpeedMenu: false,
+                                      lazyLoad: false,
+                                    ),
+                                ],
                               ),
                             ),
                           ),
                         ),
+                      ),
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(4.0, 0.0, 4.0, 0.0),
