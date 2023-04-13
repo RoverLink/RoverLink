@@ -347,10 +347,10 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                       child:
                                                                           Padding(
                                                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            8.0,
-                                                                            8.0,
-                                                                            8.0,
-                                                                            8.0),
+                                                                            12.0,
+                                                                            12.0,
+                                                                            35.0,
+                                                                            12.0),
                                                                         child:
                                                                             Column(
                                                                           mainAxisSize:
@@ -380,39 +380,37 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                               child: Row(
                                                                                 mainAxisSize: MainAxisSize.max,
                                                                                 children: [
-                                                                                  Text(
-                                                                                    FFLocalizations.of(context).getText(
-                                                                                      'gjlh74jx' /* In: */,
-                                                                                    ),
-                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                          fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                          fontSize: 16.0,
-                                                                                          fontWeight: FontWeight.bold,
-                                                                                          useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
-                                                                                        ),
-                                                                                  ),
-                                                                                  Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
-                                                                                    child: Hero(
-                                                                                      tag: getJsonField(
-                                                                                        eventslistItem,
-                                                                                        r'''$.group.profilePhotoUrl''',
+                                                                                  if (false)
+                                                                                    Text(
+                                                                                      FFLocalizations.of(context).getText(
+                                                                                        'gjlh74jx' /* In: */,
                                                                                       ),
-                                                                                      transitionOnUserGestures: true,
-                                                                                      child: Container(
-                                                                                        width: 24.0,
-                                                                                        height: 24.0,
-                                                                                        clipBehavior: Clip.antiAlias,
-                                                                                        decoration: BoxDecoration(
-                                                                                          shape: BoxShape.circle,
-                                                                                        ),
-                                                                                        child: Image.network(
-                                                                                          getJsonField(
-                                                                                            eventslistItem,
-                                                                                            r'''$.group.profilePhotoUrl''',
+                                                                                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                            fontSize: 16.0,
+                                                                                            fontWeight: FontWeight.bold,
+                                                                                            useGoogleFonts: GoogleFonts.asMap().containsKey(FlutterFlowTheme.of(context).bodyMediumFamily),
                                                                                           ),
-                                                                                          fit: BoxFit.cover,
+                                                                                    ),
+                                                                                  Hero(
+                                                                                    tag: getJsonField(
+                                                                                      eventslistItem,
+                                                                                      r'''$.group.profilePhotoUrl''',
+                                                                                    ),
+                                                                                    transitionOnUserGestures: true,
+                                                                                    child: Container(
+                                                                                      width: 24.0,
+                                                                                      height: 24.0,
+                                                                                      clipBehavior: Clip.antiAlias,
+                                                                                      decoration: BoxDecoration(
+                                                                                        shape: BoxShape.circle,
+                                                                                      ),
+                                                                                      child: Image.network(
+                                                                                        getJsonField(
+                                                                                          eventslistItem,
+                                                                                          r'''$.group.profilePhotoUrl''',
                                                                                         ),
+                                                                                        fit: BoxFit.cover,
                                                                                       ),
                                                                                     ),
                                                                                   ),
