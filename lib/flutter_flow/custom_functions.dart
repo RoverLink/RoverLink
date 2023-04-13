@@ -31,6 +31,10 @@ bool isSameDay(
       date1.year == date2.year;
 }
 
+DateTime fromJsonDate(String date) {
+  return DateTime.parse(date);
+}
+
 bool isElementaryOrMiddleSchool(String? schoolName) {
   // checks if string contains "Elementary" or "Middle School"
   if (schoolName == null) return false;
@@ -38,8 +42,11 @@ bool isElementaryOrMiddleSchool(String? schoolName) {
       schoolName.toLowerCase().contains("middle school");
 }
 
-String formatDateTime(String date) {
-  return DateFormat('MMM d yyyy hh:mm a').format(DateTime.parse(date));
+String formatDateTime(
+  String date,
+  String format,
+) {
+  return DateFormat(format).format(DateTime.parse(date));
 }
 
 double calculateMessageCompletion(
@@ -56,4 +63,42 @@ double calculateMessageCompletion(
   if (len > 1.0) len = 1.0;
 
   return len;
+}
+
+String toJsonDate(DateTime? date) {
+  return date?.toIso8601String() ?? DateTime.now().toIso8601String();
+}
+
+bool? imageIsSet(String? image) {
+  return image != null;
+}
+
+dynamic returnFirstItem(List<dynamic> input) {
+  return input.first;
+}
+
+String? toJsonList(List<String> strings) {
+  return "[\"" + strings.join('\",\"') + "\"]";
+}
+
+int? doIntCalculation(
+  int num1,
+  String operation,
+  int num2,
+) {
+  if (operation == "+" || operation == "add") {
+    return num1 + num2;
+  } else if (operation == "-" || operation == "subtract") {
+    return num1 - num2;
+  } else if (operation == "x" ||
+      operation == "X" ||
+      operation == "*" ||
+      operation == "multiply") {
+    return num1 * num2;
+  }
+  return null;
+}
+
+int stringLength(String input) {
+  return input.length;
 }

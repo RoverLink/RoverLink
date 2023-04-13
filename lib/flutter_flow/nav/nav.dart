@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 import '../flutter_flow_theme.dart';
 import '../../backend/backend.dart';
+
 import '../../auth/firebase_user_provider.dart';
 
 import '../../index.dart';
@@ -92,19 +93,42 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => EventsWidget(),
             ),
             FFRoute(
+              name: 'AbsenceExpandedOld',
+              path: 'absenceExpandedOld',
+              builder: (context, params) => AbsenceExpandedOldWidget(),
+            ),
+            FFRoute(
+              name: 'CreatePost',
+              path: 'createPost',
+              builder: (context, params) => CreatePostWidget(),
+            ),
+            FFRoute(
+              name: 'Absences',
+              path: 'absences',
+              builder: (context, params) => AbsencesWidget(),
+            ),
+            FFRoute(
+              name: 'Explore',
+              path: 'explore',
+              builder: (context, params) => ExploreWidget(),
+            ),
+            FFRoute(
+              name: 'ExplorePeople',
+              path: 'explorePeople',
+              builder: (context, params) => ExplorePeopleWidget(
+                users: params.getParam('users', ParamType.JSON),
+                query: params.getParam('query', ParamType.String),
+              ),
+            ),
+            FFRoute(
               name: 'Schools',
               path: 'schools',
               builder: (context, params) => SchoolsWidget(),
             ),
             FFRoute(
-              name: 'Links',
-              path: 'links',
-              builder: (context, params) => LinksWidget(),
-            ),
-            FFRoute(
-              name: 'ShowEvent',
-              path: 'showEvent',
-              builder: (context, params) => ShowEventWidget(
+              name: 'ViewEvent',
+              path: 'viewEvent',
+              builder: (context, params) => ViewEventWidget(
                 event: params.getParam('event', ParamType.JSON),
               ),
             ),
@@ -119,9 +143,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => YourProfileWidget(),
             ),
             FFRoute(
-              name: 'YourProfileWithPosts',
-              path: 'yourProfileWithPosts',
-              builder: (context, params) => YourProfileWithPostsWidget(),
+              name: 'Links',
+              path: 'links',
+              builder: (context, params) => LinksWidget(),
             ),
             FFRoute(
               name: 'EditProfile',
@@ -139,24 +163,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => SettingsWidget(),
             ),
             FFRoute(
-              name: 'Following',
-              path: 'following',
-              builder: (context, params) => FollowingWidget(),
-            ),
-            FFRoute(
               name: 'SchoolsFollowed',
               path: 'schoolsFollowed',
               builder: (context, params) => SchoolsFollowedWidget(),
             ),
             FFRoute(
-              name: 'About',
-              path: 'about',
-              builder: (context, params) => AboutWidget(),
-            ),
-            FFRoute(
               name: 'SigningOut',
               path: 'signingOut',
               builder: (context, params) => SigningOutWidget(),
+            ),
+            FFRoute(
+              name: 'About',
+              path: 'about',
+              builder: (context, params) => AboutWidget(),
             ),
             FFRoute(
               name: 'TermsOfUse',
@@ -204,23 +223,58 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => AnnouncementsWidget(),
             ),
             FFRoute(
-              name: 'FormSubmitted',
-              path: 'formSubmitted',
-              builder: (context, params) => FormSubmittedWidget(),
-            ),
-            FFRoute(
               name: 'EAHS',
               path: 'eahs',
               builder: (context, params) => EahsWidget(),
             ),
             FFRoute(
-              name: 'CreatePost',
-              path: 'createPost',
-              builder: (context, params) => CreatePostWidget(),
+              name: 'EditAbsence',
+              path: 'editAbsence',
+              builder: (context, params) => EditAbsenceWidget(
+                absence: params.getParam('absence', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
+              name: 'AbsenceExpanded',
+              path: 'absenceExpanded',
+              builder: (context, params) => AbsenceExpandedWidget(
+                absence: params.getParam('absence', ParamType.JSON),
+              ),
+            ),
+            FFRoute(
+              name: 'FormSubmitted',
+              path: 'formSubmitted',
+              builder: (context, params) => FormSubmittedWidget(),
+            ),
+            FFRoute(
+              name: 'OtherProfile',
+              path: 'otherProfile',
+              builder: (context, params) => OtherProfileWidget(
+                user: params.getParam('user', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'GroupProfile',
+              path: 'groupProfile',
+              builder: (context, params) => GroupProfileWidget(
+                group: params.getParam('group', ParamType.String),
+              ),
+            ),
+            FFRoute(
+              name: 'Following',
+              path: 'following',
+              builder: (context, params) => FollowingWidget(),
+            ),
+            FFRoute(
+              name: 'ViewAnnouncement',
+              path: 'viewAnnouncement',
+              builder: (context, params) => ViewAnnouncementWidget(
+                event: params.getParam('event', ParamType.JSON),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
-        ).toRoute(appStateNotifier),
-      ],
+        ),
+      ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
     );
 
@@ -266,6 +320,16 @@ extension NavigationExtensions on BuildContext {
               queryParams: queryParams,
               extra: extra,
             );
+
+  void safePop() {
+    // If there is only one route on the stack, navigate to the initial
+    // page instead of popping.
+    if (GoRouter.of(this).routerDelegate.matches.length <= 1) {
+      go('/');
+    } else {
+      pop();
+    }
+  }
 }
 
 extension GoRouterExtensions on GoRouter {
@@ -277,6 +341,7 @@ extension GoRouterExtensions on GoRouter {
           : appState.updateNotifyOnAuthChange(false);
   bool shouldRedirect(bool ignoreRedirect) =>
       !ignoreRedirect && appState.hasRedirect();
+  void clearRedirectLocation() => appState.clearRedirectLocation();
   void setRedirectLocationIfUnset(String location) =>
       (routerDelegate.refreshListenable as AppStateNotifier)
           .updateNotifyOnAuthChange(false);
@@ -329,7 +394,7 @@ class FFParameters {
     String paramName,
     ParamType type, [
     bool isList = false,
-    String? collectionName,
+    List<String>? collectionNamePath,
   ]) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
@@ -343,7 +408,7 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList, collectionName);
+    return deserializeParam<T>(param, type, isList, collectionNamePath);
   }
 }
 
