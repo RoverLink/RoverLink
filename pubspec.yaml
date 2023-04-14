@@ -112,6 +112,7 @@ dependencies:
   webviewx_plus: 
     git:
       url: https://github.com/FlutterFlow/webviewx_plus.git
+  instabug_flutter:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -124,10 +125,11 @@ dependency_overrides:
   webview_flutter_platform_interface: 1.9.5
   webview_flutter_wkwebview: 2.9.5
 
+
 dev_dependencies:
   build_runner: 2.3.3
   built_value_generator: 8.4.3
-  flutter_launcher_icons: 0.12.0
+  flutter_launcher_icons: ^0.13.0
 
   flutter_test:
     sdk: flutter
@@ -138,6 +140,8 @@ flutter_icons:
   ios: true
   remove_alpha_ios: true
   image_path: 'assets/images/app_launcher_icon.png'
+#  adaptive_icon_background: 'assets/images/istockphoto-952009680-170667a.jpg'
+#  adaptive_icon_foreground: 'assets/images/face-holding-back-tears.png'
 
 
 # For information on the generic Dart part of this file, see the
