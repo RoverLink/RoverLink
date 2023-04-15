@@ -7,12 +7,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD:lib/menu/menu_widget.dart
-import 'package:instabug_flutter/instabug_flutter.dart';
-=======
 import 'menu_model.dart';
 export 'menu_model.dart';
->>>>>>> flutterflow:lib/pages/home/menu/menu/menu_widget.dart
+import 'package:instabug_flutter/instabug_flutter.dart';
 
 class MenuWidget extends StatefulWidget {
   const MenuWidget({Key? key}) : super(key: key);
@@ -533,38 +530,12 @@ class _MenuWidgetState extends State<MenuWidget> {
                               ),
                             ),
                             Padding(
-<<<<<<< HEAD:lib/menu/menu_widget.dart
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 12, 16, 0),
-                              child: InkWell(
-                                onTap: () async {
-                                  Instabug.show();
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurRadius: 5,
-                                        color: Color(0x3416202A),
-                                        offset: Offset(0, 2),
-                                      )
-                                    ],
-                                    borderRadius: BorderRadius.circular(12),
-                                    shape: BoxShape.rectangle,
-                                  ),
-                                  child: Padding(
-=======
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 12.0, 0.0, 0.0),
                               child: Stack(
                                 alignment: AlignmentDirectional(0.0, 0.0),
                                 children: [
                                   Padding(
->>>>>>> flutterflow:lib/pages/home/menu/menu/menu_widget.dart
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
@@ -754,7 +725,8 @@ class _MenuWidgetState extends State<MenuWidget> {
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
                                       onTap: () async {
-                                        context.pushNamed('ReportABug');
+                                        Instabug.show();
+                                        // context.pushNamed('ReportABug');
                                       },
                                       child: Container(
                                         width: double.infinity,

@@ -15,6 +15,7 @@ import 'flutter_flow/internationalization.dart';
 import 'flutter_flow/nav/nav.dart';
 
 import 'index.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

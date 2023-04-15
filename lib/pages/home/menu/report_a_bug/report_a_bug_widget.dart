@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'report_a_bug_model.dart';
 export 'report_a_bug_model.dart';
+import 'package:instabug_flutter/instabug_flutter.dart';
 
 class ReportABugWidget extends StatefulWidget {
   const ReportABugWidget({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
 
   @override
   void initState() {
+    Instabug.show();
     super.initState();
     _model = createModel(context, () => ReportABugModel());
   }
@@ -30,7 +32,7 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
   @override
   void dispose() {
     _model.dispose();
-
+    
     _unfocusNode.dispose();
     super.dispose();
   }
@@ -39,7 +41,9 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
   Widget build(BuildContext context) {
     context.watch<FFAppState>();
 
-    return GestureDetector(
+
+    return Container();
+    /*return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
@@ -86,5 +90,6 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
         ),
       ),
     );
+    */
   }
 }

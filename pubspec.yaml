@@ -104,10 +104,6 @@ dependencies:
   table_calendar: 3.0.6
   timeago: 3.2.2
   url_launcher: 6.1.5
-<<<<<<< HEAD
-  webviewx: 0.2.1
-  instabug_flutter: 11.5.0
-=======
   video_player: 2.4.5
   video_player_android: 2.3.8
   video_player_avfoundation: 2.3.5
@@ -116,7 +112,7 @@ dependencies:
   webviewx_plus: 
     git:
       url: https://github.com/FlutterFlow/webviewx_plus.git
->>>>>>> flutterflow
+  instabug_flutter:
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -129,10 +125,11 @@ dependency_overrides:
   webview_flutter_platform_interface: 1.9.5
   webview_flutter_wkwebview: 2.9.5
 
+
 dev_dependencies:
   build_runner: 2.3.3
   built_value_generator: 8.4.3
-  flutter_launcher_icons: 0.12.0
+  flutter_launcher_icons: ^0.13.0
 
   flutter_test:
     sdk: flutter
@@ -143,6 +140,8 @@ flutter_icons:
   ios: true
   remove_alpha_ios: true
   image_path: 'assets/images/app_launcher_icon.png'
+  adaptive_icon_background: 'assets/images/app_launcher_icon_background.png'
+  adaptive_icon_foreground: 'assets/images/app_launcher_icon_paw_only.png'
 
 
 # For information on the generic Dart part of this file, see the
