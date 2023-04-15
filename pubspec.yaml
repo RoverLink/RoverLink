@@ -140,8 +140,8 @@ flutter_icons:
   ios: true
   remove_alpha_ios: true
   image_path: 'assets/images/app_launcher_icon.png'
-#  adaptive_icon_background: 'assets/images/istockphoto-952009680-170667a.jpg'
-#  adaptive_icon_foreground: 'assets/images/face-holding-back-tears.png'
+  adaptive_icon_background: 'assets/images/app_launcher_icon_background.png'
+  adaptive_icon_foreground: 'assets/images/app_launcher_icon_paw_only.png'
 
 
 # For information on the generic Dart part of this file, see the
