@@ -321,9 +321,12 @@ class MobileTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Fira Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Fira Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Fira Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(
@@ -430,9 +433,12 @@ class TabletTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Fira Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Fira Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Fira Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(
@@ -539,9 +545,12 @@ class DesktopTypography extends Typography {
         fontWeight: FontWeight.w500,
         fontSize: 11.0,
       );
-  String get bodyLargeFamily => '';
+  String get bodyLargeFamily => 'Fira Sans';
   TextStyle get bodyLarge => GoogleFonts.getFont(
-        'Roboto',
+        'Fira Sans',
+        color: theme.primaryText,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get bodyMediumFamily => 'Fira Sans';
   TextStyle get bodyMedium => GoogleFonts.getFont(

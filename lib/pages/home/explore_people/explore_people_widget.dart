@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -30,7 +30,6 @@ class _ExplorePeopleWidgetState extends State<ExplorePeopleWidget> {
   late ExplorePeopleModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _ExplorePeopleWidgetState extends State<ExplorePeopleWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -53,7 +51,7 @@ class _ExplorePeopleWidgetState extends State<ExplorePeopleWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -81,6 +79,7 @@ class _ExplorePeopleWidgetState extends State<ExplorePeopleWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -171,7 +170,7 @@ class _ExplorePeopleWidgetState extends State<ExplorePeopleWidget> {
                               }
                               context.pushNamed(
                                 'ExplorePeople',
-                                queryParams: {
+                                queryParameters: {
                                   'users': serializeParam(
                                     (_model.searchResult?.jsonBody ?? ''),
                                     ParamType.JSON,

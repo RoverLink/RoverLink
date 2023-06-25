@@ -22,7 +22,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   late SettingsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -34,7 +33,6 @@ class _SettingsWidgetState extends State<SettingsWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -43,7 +41,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -71,6 +69,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -185,7 +184,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     1.0, 5.0, 3.0, 5.0),
                                 child: FlutterFlowDropDown<String>(
-                                  controller: _model.dropDownController ??=
+                                  controller: _model.dropDownValueController ??=
                                       FormFieldController<String>(null),
                                   options: [
                                     FFLocalizations.of(context).getText(

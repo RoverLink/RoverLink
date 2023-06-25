@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -25,7 +25,6 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
   late AbsencesModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -46,7 +44,7 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -74,6 +72,7 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -112,11 +111,13 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
                             page: nextPageMarker.nextPageNumber,
                           )
                               .then((listViewGetAbsencesResponse) {
-                            final pageItems = AbsencesGroup.getAbsencesCall
-                                .absences(
-                                  listViewGetAbsencesResponse.jsonBody,
-                                )!
-                                .map((e) => e)
+                            final pageItems = (AbsencesGroup.getAbsencesCall
+                                        .absences(
+                                          listViewGetAbsencesResponse.jsonBody,
+                                        )!
+                                        .map((e) => e)
+                                        .toList() ??
+                                    [])
                                 .toList() as List;
                             final newNumItems =
                                 nextPageMarker.numItems + pageItems.length;
@@ -177,10 +178,14 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 15.0, 15.0),
                                 child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     context.pushNamed(
                                       'AbsenceExpanded',
-                                      queryParams: {
+                                      queryParameters: {
                                         'absence': serializeParam(
                                           absencesItem,
                                           ParamType.JSON,
@@ -488,6 +493,10 @@ class _AbsencesWidgetState extends State<AbsencesWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed('ReportAbsence');
                       },

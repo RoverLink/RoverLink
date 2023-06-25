@@ -19,7 +19,6 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
   late SchoolsFollowedModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -68,6 +66,7 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -145,7 +144,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -160,7 +160,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -242,7 +243,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -257,7 +259,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -340,7 +343,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -355,7 +359,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -437,7 +442,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -452,7 +458,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -534,7 +541,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -549,7 +557,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -632,7 +641,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -647,7 +657,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -730,7 +741,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -745,7 +757,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -828,7 +841,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -843,7 +857,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -925,7 +940,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -940,7 +956,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -1022,7 +1039,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});
@@ -1037,7 +1055,8 @@ class _SchoolsFollowedWidgetState extends State<SchoolsFollowedWidget> {
                                           FFAppState().subscriptions =
                                               FFAppState()
                                                   .subscriptions
-                                                  .toList();
+                                                  .toList()
+                                                  .cast<String>();
                                         });
 
                                         setState(() {});

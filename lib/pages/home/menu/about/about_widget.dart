@@ -19,7 +19,6 @@ class _AboutWidgetState extends State<AboutWidget> {
   late AboutModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _AboutWidgetState extends State<AboutWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _AboutWidgetState extends State<AboutWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,6 +67,7 @@ class _AboutWidgetState extends State<AboutWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Container(
             width: double.infinity,
             height: double.infinity,
@@ -213,6 +212,10 @@ class _AboutWidgetState extends State<AboutWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed('Copyrights');
                       },
@@ -290,6 +293,10 @@ class _AboutWidgetState extends State<AboutWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed('TermsOfUse');
                       },
@@ -367,6 +374,10 @@ class _AboutWidgetState extends State<AboutWidget> {
                     padding:
                         EdgeInsetsDirectional.fromSTEB(20.0, 12.0, 20.0, 0.0),
                     child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
                       onTap: () async {
                         context.pushNamed('PrivacyPolicy');
                       },

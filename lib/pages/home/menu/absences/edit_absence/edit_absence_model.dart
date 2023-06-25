@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -22,14 +22,19 @@ class EditAbsenceModel extends FlutterFlowModel {
   void addToReasonIDs(String item) => reasonIDs.add(item);
   void removeFromReasonIDs(String item) => reasonIDs.remove(item);
   void removeAtIndexFromReasonIDs(int index) => reasonIDs.removeAt(index);
+  void updateReasonIDsAtIndex(int index, Function(String) updateFn) =>
+      reasonIDs[index] = updateFn(reasonIDs[index]);
 
   List<String> reasons = [];
   void addToReasons(String item) => reasons.add(item);
   void removeFromReasons(String item) => reasons.remove(item);
   void removeAtIndexFromReasons(int index) => reasons.removeAt(index);
+  void updateReasonsAtIndex(int index, Function(String) updateFn) =>
+      reasons[index] = updateFn(reasons[index]);
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Stores action output result for [Backend Call - API (GetAbsenceReasons)] action in EditAbsence widget.
   ApiCallResponse? getAbsenceReasonsResult;
@@ -54,7 +59,7 @@ class EditAbsenceModel extends FlutterFlowModel {
 
   // State field(s) for School widget.
   String? schoolValue;
-  FormFieldController<String>? schoolController;
+  FormFieldController<String>? schoolValueController;
   // State field(s) for Teacher widget.
   TextEditingController? teacherController;
   String? Function(BuildContext, String?)? teacherControllerValidator;
@@ -70,11 +75,11 @@ class EditAbsenceModel extends FlutterFlowModel {
 
   // State field(s) for Grade widget.
   int? gradeValue;
-  FormFieldController<int>? gradeController;
+  FormFieldController<int>? gradeValueController;
   DateTime? datePicked;
   // State field(s) for Reason widget.
   String? reasonValue;
-  FormFieldController<String>? reasonController;
+  FormFieldController<String>? reasonValueController;
   // State field(s) for OtherReason widget.
   TextEditingController? otherReasonController;
   String? Function(BuildContext, String?)? otherReasonControllerValidator;
@@ -93,7 +98,7 @@ class EditAbsenceModel extends FlutterFlowModel {
       FFUploadedFile(bytes: Uint8List.fromList([]));
 
   // State field(s) for Signature widget.
-  late SignatureController signatureController;
+  SignatureController? signatureController;
   // Stores action output result for [Backend Call - API (CreateAttachment)] action in Button widget.
   ApiCallResponse? doctorsNoteAttachment2;
   // Stores action output result for [Backend Call - API (UpdateAbsence)] action in Button widget.
@@ -109,22 +114,19 @@ class EditAbsenceModel extends FlutterFlowModel {
     studentNameControllerValidator = _studentNameControllerValidator;
     teacherControllerValidator = _teacherControllerValidator;
     otherReasonControllerValidator = _otherReasonControllerValidator;
-    signatureController = SignatureController(
-      penStrokeWidth: 2.0,
-      penColor: Color(0xFF888888),
-      exportBackgroundColor: Colors.white,
-    );
     backButtonModel = createModel(context, () => BackButtonModel());
   }
 
   void dispose() {
+    unfocusNode.dispose();
     studentNameController?.dispose();
     teacherController?.dispose();
     otherReasonController?.dispose();
-    signatureController.dispose();
+    signatureController?.dispose();
     backButtonModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

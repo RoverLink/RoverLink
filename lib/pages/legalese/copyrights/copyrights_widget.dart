@@ -19,7 +19,6 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
   late CopyrightsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,12 +67,13 @@ class _CopyrightsWidgetState extends State<CopyrightsWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Expanded(
                 child: FlutterFlowWebView(
-                  url: 'https://roverlink.github.io/CopyrightAndLicensing',
+                  content: 'https://roverlink.github.io/CopyrightAndLicensing',
                   bypass: false,
                   height: MediaQuery.of(context).size.height * 1.0,
                   verticalScroll: false,

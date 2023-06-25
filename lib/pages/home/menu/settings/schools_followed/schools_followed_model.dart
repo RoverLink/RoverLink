@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 class SchoolsFollowedModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for subEahs widget.
   bool? subEahsValue;
   // Stores action output result for [Custom Action - setSubscription] action in subEahs widget.
@@ -79,9 +80,11 @@ class SchoolsFollowedModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     backButtonModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

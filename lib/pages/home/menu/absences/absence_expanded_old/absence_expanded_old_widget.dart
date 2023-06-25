@@ -24,7 +24,6 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
   late AbsenceExpandedOldModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -36,7 +35,6 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -45,7 +43,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -73,6 +71,7 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -435,6 +434,10 @@ class _AbsenceExpandedOldWidgetState extends State<AbsenceExpandedOldWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         await Navigator.push(
                                           context,

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -23,7 +23,6 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
   late SigningOutModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'textOnPageLoadAnimation': AnimationInfo(
@@ -48,8 +47,8 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 2000.ms,
-          begin: 0.8,
-          end: 1.5,
+          begin: Offset(0.8, 0.8),
+          end: Offset(1.5, 1.5),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -67,8 +66,8 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 3000.ms,
-          begin: 1.0,
-          end: 0.6,
+          begin: Offset(1.0, 1.0),
+          end: Offset(0.6, 0.6),
         ),
         RotateEffect(
           curve: Curves.easeInOut,
@@ -106,12 +105,12 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
         FFAppState().isAnonymous = false;
       });
       GoRouter.of(context).prepareAuthEvent();
-      await signOut();
+      await authManager.signOut();
       GoRouter.of(context).clearRedirectLocation();
 
       context.goNamedAuth(
         'Onboarding',
-        mounted,
+        context.mounted,
         extra: <String, dynamic>{
           kTransitionInfoKey: TransitionInfo(
             hasTransition: true,
@@ -126,7 +125,6 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -135,11 +133,12 @@ class _SigningOutWidgetState extends State<SigningOutWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Column(

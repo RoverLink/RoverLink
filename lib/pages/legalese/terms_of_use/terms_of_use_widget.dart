@@ -19,7 +19,6 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
   late TermsOfUseModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,13 +67,14 @@ class _TermsOfUseWidgetState extends State<TermsOfUseWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               // Links to the Terms of Use on an external page
               Expanded(
                 child: FlutterFlowWebView(
-                  url: 'https://roverlink.github.io/TermsOfUse',
+                  content: 'https://roverlink.github.io/TermsOfUse',
                   bypass: false,
                   height: MediaQuery.of(context).size.height * 1.0,
                   verticalScroll: false,

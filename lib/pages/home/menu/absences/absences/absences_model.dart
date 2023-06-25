@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 class AbsencesModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for ListView widget.
   PagingController<ApiPagingParams, dynamic>? pagingController;
   // Model for BackButton component.
@@ -27,8 +28,11 @@ class AbsencesModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     backButtonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

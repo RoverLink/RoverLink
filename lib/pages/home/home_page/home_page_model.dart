@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 class HomePageModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for ListView widget.
   PagingController<ApiPagingParams, dynamic>? pagingController;
   // Model for CustomAppBar component.
@@ -31,9 +32,12 @@ class HomePageModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     customAppBarModel.dispose();
     navbarFloatingModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

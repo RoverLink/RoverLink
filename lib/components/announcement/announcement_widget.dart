@@ -59,10 +59,14 @@ class _AnnouncementWidgetState extends State<AnnouncementWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
               child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
                 onTap: () async {
                   context.pushNamed(
                     'ViewAnnouncement',
-                    queryParams: {
+                    queryParameters: {
                       'event': serializeParam(
                         widget.announcement,
                         ParamType.JSON,

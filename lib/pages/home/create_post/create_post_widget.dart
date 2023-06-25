@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -157,6 +157,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
         elevation: 0.0,
       ),
       body: SafeArea(
+        top: true,
         child: Stack(
           children: [
             Align(
@@ -701,6 +702,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () async {
                             final _datePickedDate = await showDatePicker(
                               context: context,
@@ -773,6 +778,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 setState(() {
                                   _model.useDate = false;
@@ -826,6 +835,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           setState(() {
                             _model.visibility = 'Public';
@@ -876,6 +889,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           setState(() {
                             _model.visibility = 'Organization';
@@ -927,6 +944,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
                           onTap: () async {
                             setState(() {
                               _model.visibility = 'Group';
@@ -977,6 +998,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           setState(() {
                             _model.visibility = 'Friends';
@@ -1027,6 +1052,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           setState(() {
                             _model.visibility = 'OnlyMe';
@@ -1134,12 +1163,14 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   .then(
                                       (listViewGetUserGroupMembershipsResponse) {
                                 final pageItems =
-                                    UsersGroup.getUserGroupMembershipsCall
-                                        .groups(
-                                          listViewGetUserGroupMembershipsResponse
-                                              .jsonBody,
-                                        )!
-                                        .map((e) => e)
+                                    (UsersGroup.getUserGroupMembershipsCall
+                                                .groups(
+                                                  listViewGetUserGroupMembershipsResponse
+                                                      .jsonBody,
+                                                )!
+                                                .map((e) => e)
+                                                .toList() ??
+                                            [])
                                         .toList() as List;
                                 final newNumItems =
                                     nextPageMarker.numItems + pageItems.length;
@@ -1193,6 +1224,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           15.0, 10.0, 15.0, 10.0),
                                       child: InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
                                         onTap: () async {
                                           setState(() {
                                             _model.group = null;
@@ -1307,6 +1342,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 0.0, 15.0, 10.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         setState(() {
                                           _model.group = getJsonField(
@@ -1541,6 +1580,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                         bytes: m.bytes,
                                         height: m.dimensions?.height,
                                         width: m.dimensions?.width,
+                                        blurHash: m.blurHash,
                                       ))
                                   .toList();
                             } finally {
@@ -1655,6 +1695,7 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                       bytes: m.bytes,
                                       height: m.dimensions?.height,
                                       width: m.dimensions?.width,
+                                      blurHash: m.blurHash,
                                     ))
                                 .toList();
                           } finally {
@@ -1839,6 +1880,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                               alignment: AlignmentDirectional(0.0, 0.0),
                               children: [
                                 InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation4'] !=
@@ -1933,6 +1978,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   ),
                                 ),
                                 InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation4'] !=
@@ -2027,6 +2076,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   ),
                                 ),
                                 InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation4'] !=
@@ -2121,6 +2174,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   ),
                                 ),
                                 InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation4'] !=
@@ -2215,6 +2272,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   ),
                                 ),
                                 InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation4'] !=
@@ -2414,6 +2475,10 @@ class _CreatePostWidgetState extends State<CreatePostWidget>
                                   ),
                                 if (_model.group != null && _model.group != '')
                                   InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       if (animationsMap[
                                               'containerOnActionTriggerAnimation4'] !=

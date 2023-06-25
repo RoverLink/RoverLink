@@ -19,7 +19,6 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
   late ReportABugModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -69,11 +67,12 @@ class _ReportABugWidgetState extends State<ReportABugWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               FlutterFlowWebView(
-                url:
+                content:
                     'https://docs.google.com/forms/d/e/1FAIpQLSf3-GxG4VZaqvNjRCSd2oRjlfZDrbpgNp2E4m7VeXOq7upaqg/viewform?usp=sf_link',
                 bypass: false,
                 width: MediaQuery.of(context).size.width * 1.0,

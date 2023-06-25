@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -26,7 +26,6 @@ class _EventsWidgetState extends State<EventsWidget> {
   late EventsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -45,7 +44,6 @@ class _EventsWidgetState extends State<EventsWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -54,7 +52,7 @@ class _EventsWidgetState extends State<EventsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -76,6 +74,7 @@ class _EventsWidgetState extends State<EventsWidget> {
             ),
           ),
           body: SafeArea(
+            top: true,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
@@ -154,7 +153,8 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                           ?.jsonBody ??
                                                       ''),
                                                 )!
-                                                .toList();
+                                                .toList()
+                                                .cast<dynamic>();
                                             _model.loading = false;
                                           });
                                         }
@@ -274,12 +274,21 @@ class _EventsWidgetState extends State<EventsWidget> {
                                                                           16.0,
                                                                           0.0),
                                                               child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
                                                                 onTap:
                                                                     () async {
                                                                   context
                                                                       .pushNamed(
                                                                     'ViewEvent',
-                                                                    queryParams:
+                                                                    queryParameters:
                                                                         {
                                                                       'event':
                                                                           serializeParam(

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/follow_icon/follow_icon_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -56,11 +56,15 @@ class _PeopleChipLargeWidgetState extends State<PeopleChipLargeWidget> {
         Padding(
           padding: EdgeInsetsDirectional.fromSTEB(15.0, 0.0, 15.0, 0.0),
           child: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             onTap: () async {
               if (widget.isGroup) {
                 context.pushNamed(
                   'GroupProfile',
-                  queryParams: {
+                  queryParameters: {
                     'group': serializeParam(
                       getJsonField(
                         widget.user,
@@ -80,7 +84,7 @@ class _PeopleChipLargeWidgetState extends State<PeopleChipLargeWidget> {
                 } else {
                   context.pushNamed(
                     'OtherProfile',
-                    queryParams: {
+                    queryParameters: {
                       'user': serializeParam(
                         getJsonField(
                           widget.user,

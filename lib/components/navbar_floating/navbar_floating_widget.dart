@@ -88,46 +88,49 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  5.0, 0.0, 0.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 50.0,
-                                icon: FaIcon(
-                                  FontAwesomeIcons.home,
-                                  color: FFAppState().currentPage == 'Home'
-                                      ? FlutterFlowTheme.of(context)
-                                          .navbarActiveLink
-                                      : FlutterFlowTheme.of(context).navbarLink,
-                                  size: 25.0,
-                                ),
-                                showLoadingIndicator: true,
-                                onPressed: () async {
-                                  if (FFAppState().currentPage != 'Home') {
-                                    FFAppState().update(() {
-                                      FFAppState().currentPage = 'Home';
-                                    });
+                            if (!FFAppState().isAnonymous)
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    5.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderColor: Colors.transparent,
+                                  borderRadius: 30.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 50.0,
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.home,
+                                    color: FFAppState().currentPage == 'Home'
+                                        ? FlutterFlowTheme.of(context)
+                                            .navbarActiveLink
+                                        : FlutterFlowTheme.of(context)
+                                            .navbarLink,
+                                    size: 25.0,
+                                  ),
+                                  showLoadingIndicator: true,
+                                  onPressed: () async {
+                                    if (FFAppState().currentPage != 'Home') {
+                                      FFAppState().update(() {
+                                        FFAppState().currentPage = 'Home';
+                                      });
 
-                                    context.goNamed(
-                                      'HomePage',
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.fade,
-                                          duration: Duration(milliseconds: 50),
-                                        ),
-                                      },
-                                    );
-                                  } else {
-                                    return;
-                                  }
-                                },
+                                      context.goNamed(
+                                        'HomePage',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 50),
+                                          ),
+                                        },
+                                      );
+                                    } else {
+                                      return;
+                                    }
+                                  },
+                                ),
                               ),
-                            ),
                             FlutterFlowIconButton(
                               borderColor: Colors.transparent,
                               borderRadius: 30.0,
@@ -163,14 +166,15 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
                                 }
                               },
                             ),
-                            Container(
-                              width: 100.0,
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                color: Color(0x00101213),
-                                shape: BoxShape.circle,
+                            if (!FFAppState().isAnonymous)
+                              Container(
+                                width: 100.0,
+                                height: 100.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0x00101213),
+                                  shape: BoxShape.circle,
+                                ),
                               ),
-                            ),
                             FlutterFlowIconButton(
                               borderColor: Colors.transparent,
                               borderRadius: 30.0,
@@ -256,61 +260,63 @@ class _NavbarFloatingWidgetState extends State<NavbarFloatingWidget> {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
-          child: Container(
-            width: 80.0,
-            height: 80.0,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.of(context).primary,
-              shape: BoxShape.circle,
-            ),
-            child: FlutterFlowIconButton(
-              borderColor: Colors.transparent,
-              borderRadius: 30.0,
-              borderWidth: 1.0,
-              buttonSize: 100.0,
-              icon: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 40.0,
+        if (!FFAppState().isAnonymous)
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+            child: Container(
+              width: 80.0,
+              height: 80.0,
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.of(context).primary,
+                shape: BoxShape.circle,
               ),
-              onPressed: () async {
-                if (FFAppState().isAnonymous) {
-                  var confirmDialogResponse = await showDialog<bool>(
-                        context: context,
-                        builder: (alertDialogContext) {
-                          return AlertDialog(
-                            title: Text(
-                                'Posting is not available when signed in as a guest'),
-                            content:
-                                Text('Please try again once your logged in'),
-                            actions: [
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, false),
-                                child: Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.pop(alertDialogContext, true),
-                                child: Text('Log Out'),
-                              ),
-                            ],
-                          );
-                        },
-                      ) ??
-                      false;
-                  if (confirmDialogResponse) {
-                    context.pushNamed('SigningOut');
+              child: FlutterFlowIconButton(
+                borderColor: Colors.transparent,
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 100.0,
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 40.0,
+                ),
+                onPressed: () async {
+                  if (FFAppState().isAnonymous) {
+                    var confirmDialogResponse = await showDialog<bool>(
+                          context: context,
+                          builder: (alertDialogContext) {
+                            return AlertDialog(
+                              title: Text(
+                                  'Posting is not available when signed in as a guest'),
+                              content:
+                                  Text('Please try again once your logged in'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, false),
+                                  child: Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pop(alertDialogContext, true),
+                                  child: Text('Log Out'),
+                                ),
+                              ],
+                            );
+                          },
+                        ) ??
+                        false;
+                    if (confirmDialogResponse) {
+                      context.pushNamed('SigningOut');
+                    }
+                    return;
                   }
-                } else {
+
                   context.pushNamed('CreatePost');
-                }
-              },
+                },
+              ),
             ),
           ),
-        ),
       ],
     );
   }

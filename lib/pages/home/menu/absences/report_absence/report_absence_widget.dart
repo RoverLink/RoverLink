@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -28,7 +28,6 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
   late ReportAbsenceModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -50,9 +49,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                 .toList()!
                 .map((e) => e)
                 .toList()
-                .map((e) => e.toString())
                 .toList()
-                .toList();
+                .cast<String>();
         _model.reasons = (AbsencesGroup.getAbsenceReasonsCall.absenceReason(
           (_model.getAbsenceReasonsResult?.jsonBody ?? ''),
         ) as List)
@@ -60,9 +58,8 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
             .toList()!
             .map((e) => e)
             .toList()
-            .map((e) => e.toString())
             .toList()
-            .toList();
+            .cast<String>();
       });
       setState(() {
         _model.addToReasonIDs('Other');
@@ -78,7 +75,6 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -87,7 +83,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -116,6 +112,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -206,7 +203,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             }
                             final schoolGetBuildingsResponse = snapshot.data!;
                             return FlutterFlowDropDown<String>(
-                              controller: _model.schoolController ??=
+                              controller: _model.schoolValueController ??=
                                   FormFieldController<String>(
                                 _model.schoolValue ??= '',
                               ),
@@ -217,9 +214,6 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                       .map<String>((s) => s.toString())
                                       .toList()!
                                       .map((e) => e)
-                                      .toList()
-                                      .map((e) => e.toString())
-                                      .toList()
                                       .toList(),
                               optionLabels: (BuildingsGroup.getBuildingsCall
                                       .buildingNames(
@@ -228,9 +222,6 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                   .map<String>((s) => s.toString())
                                   .toList()!
                                   .map((e) => e)
-                                  .toList()
-                                  .map((e) => e.toString())
-                                  .toList()
                                   .toList(),
                               onChanged: (val) =>
                                   setState(() => _model.schoolValue = val),
@@ -308,7 +299,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
                         child: FlutterFlowDropDown<int>(
-                          controller: _model.gradeController ??=
+                          controller: _model.gradeValueController ??=
                               FormFieldController<int>(null),
                           options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                           optionLabels: [
@@ -420,6 +411,10 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 20.0, 20.0, 0.0),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 final _datePickedDate = await showDatePicker(
                                   context: context,
@@ -453,12 +448,12 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
                         child: FlutterFlowDropDown<String>(
-                          controller: _model.reasonController ??=
+                          controller: _model.reasonValueController ??=
                               FormFieldController<String>(
                             _model.reasonValue ??= '',
                           ),
-                          options: _model.reasonIDs.toList(),
-                          optionLabels: _model.reasons.toList(),
+                          options: _model.reasonIDs,
+                          optionLabels: _model.reasons,
                           onChanged: (val) =>
                               setState(() => _model.reasonValue = val),
                           width: MediaQuery.of(context).size.width * 1.0,
@@ -565,6 +560,7 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                                           bytes: m.bytes,
                                           height: m.dimensions?.height,
                                           width: m.dimensions?.width,
+                                          blurHash: m.blurHash,
                                         ))
                                     .toList();
                               } finally {
@@ -650,7 +646,12 @@ class _ReportAbsenceWidgetState extends State<ReportAbsenceWidget> {
                             ),
                             child: ClipRect(
                               child: Signature(
-                                controller: _model.signatureController,
+                                controller: _model.signatureController ??=
+                                    SignatureController(
+                                  penStrokeWidth: 2.0,
+                                  penColor: Color(0xFF888888),
+                                  exportBackgroundColor: Colors.white,
+                                ),
                                 backgroundColor: Colors.transparent,
                                 height: 120.0,
                               ),

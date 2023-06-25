@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/loading_wheel/loading_wheel_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -24,6 +24,7 @@ class EditProfileModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // Model for LoadingWheel component.
   late LoadingWheelModel loadingWheelModel;
@@ -81,11 +82,13 @@ class EditProfileModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     loadingWheelModel.dispose();
     displayNameController?.dispose();
     usernameController?.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

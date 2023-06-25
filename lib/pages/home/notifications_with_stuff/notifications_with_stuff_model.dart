@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 class NotificationsWithStuffModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   Completer<ApiCallResponse>? apiRequestCompleter;
   // Model for BackButton component.
   late BackButtonModel backButtonModel;
@@ -22,8 +23,11 @@ class NotificationsWithStuffModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     backButtonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

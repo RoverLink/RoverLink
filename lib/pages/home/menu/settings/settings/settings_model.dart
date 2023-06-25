@@ -12,9 +12,10 @@ import 'package:provider/provider.dart';
 class SettingsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for DropDown widget.
   String? dropDownValue;
-  FormFieldController<String>? dropDownController;
+  FormFieldController<String>? dropDownValueController;
   // Model for BackButton component.
   late BackButtonModel backButtonModel;
 
@@ -25,9 +26,11 @@ class SettingsModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     backButtonModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

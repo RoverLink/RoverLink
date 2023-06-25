@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/back_button_white/back_button_white_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -25,7 +25,6 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
   late ForgotPasswordModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'textFieldOnPageLoadAnimation': AnimationInfo(
@@ -62,7 +61,6 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -71,7 +69,7 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFF14181B),
@@ -307,7 +305,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                                       );
                                                       return;
                                                     }
-                                                    await resetPassword(
+                                                    await authManager
+                                                        .resetPassword(
                                                       email: _model
                                                           .emailAddressForgotPasswordController
                                                           .text,

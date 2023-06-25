@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/explore_app_bar/explore_app_bar_widget.dart';
@@ -26,7 +26,6 @@ class _ExploreWidgetState extends State<ExploreWidget> {
   late ExploreModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -45,7 +44,6 @@ class _ExploreWidgetState extends State<ExploreWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -54,7 +52,7 @@ class _ExploreWidgetState extends State<ExploreWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -118,12 +116,14 @@ class _ExploreWidgetState extends State<ExploreWidget> {
                                 )
                                     .then((listViewGetUserTimelineResponse) {
                                   final pageItems =
-                                      FeedGroup.getUserTimelineCall
-                                          .posts(
-                                            listViewGetUserTimelineResponse
-                                                .jsonBody,
-                                          )!
-                                          .map((e) => e)
+                                      (FeedGroup.getUserTimelineCall
+                                                  .posts(
+                                                    listViewGetUserTimelineResponse
+                                                        .jsonBody,
+                                                  )!
+                                                  .map((e) => e)
+                                                  .toList() ??
+                                              [])
                                           .toList() as List;
                                   final newNumItems = nextPageMarker.numItems +
                                       pageItems.length;
@@ -258,10 +258,20 @@ class _ExploreWidgetState extends State<ExploreWidget> {
                                                                       15.0,
                                                                       0.0),
                                                           child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
                                                                 'ExplorePeople',
-                                                                queryParams: {
+                                                                queryParameters:
+                                                                    {
                                                                   'users':
                                                                       serializeParam(
                                                                     columnGetUsersResponse

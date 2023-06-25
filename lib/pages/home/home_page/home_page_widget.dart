@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -26,7 +26,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   late HomePageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -35,6 +34,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if (FFAppState().isAnonymous) {
+        context.pushNamed(
+          'Explore',
+          extra: <String, dynamic>{
+            kTransitionInfoKey: TransitionInfo(
+              hasTransition: true,
+              transitionType: PageTransitionType.fade,
+              duration: Duration(milliseconds: 0),
+            ),
+          },
+        );
+      }
       FFAppState().update(() {
         FFAppState().currentPage = 'Home';
       });
@@ -48,7 +59,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -57,7 +67,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -127,12 +137,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   )
                                       .then((listViewGetUserTimelineResponse) {
                                     final pageItems =
-                                        FeedGroup.getUserTimelineCall
-                                            .posts(
-                                              listViewGetUserTimelineResponse
-                                                  .jsonBody,
-                                            )!
-                                            .map((e) => e)
+                                        (FeedGroup.getUserTimelineCall
+                                                    .posts(
+                                                      listViewGetUserTimelineResponse
+                                                          .jsonBody,
+                                                    )!
+                                                    .map((e) => e)
+                                                    .toList() ??
+                                                [])
                                             .toList() as List;
                                     final newNumItems =
                                         nextPageMarker.numItems +

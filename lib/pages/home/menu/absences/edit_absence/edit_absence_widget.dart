@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
@@ -33,7 +33,6 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
   late EditAbsenceModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -55,9 +54,8 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                 .toList()!
                 .map((e) => e)
                 .toList()
-                .map((e) => e.toString())
                 .toList()
-                .toList();
+                .cast<String>();
         _model.reasons = (AbsencesGroup.getAbsenceReasonsCall.absenceReason(
           (_model.getAbsenceReasonsResult?.jsonBody ?? ''),
         ) as List)
@@ -65,9 +63,8 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
             .toList()!
             .map((e) => e)
             .toList()
-            .map((e) => e.toString())
             .toList()
-            .toList();
+            .cast<String>();
       });
       setState(() {
         _model.addToReasonIDs('Other');
@@ -95,7 +92,6 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -104,7 +100,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -133,6 +129,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -223,7 +220,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                             }
                             final schoolGetBuildingsResponse = snapshot.data!;
                             return FlutterFlowDropDown<String>(
-                              controller: _model.schoolController ??=
+                              controller: _model.schoolValueController ??=
                                   FormFieldController<String>(
                                 _model.schoolValue ??= getJsonField(
                                   widget.absence,
@@ -237,9 +234,6 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                                       .map<String>((s) => s.toString())
                                       .toList()!
                                       .map((e) => e)
-                                      .toList()
-                                      .map((e) => e.toString())
-                                      .toList()
                                       .toList(),
                               optionLabels: (BuildingsGroup.getBuildingsCall
                                       .buildingNames(
@@ -248,9 +242,6 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                                   .map<String>((s) => s.toString())
                                   .toList()!
                                   .map((e) => e)
-                                  .toList()
-                                  .map((e) => e.toString())
-                                  .toList()
                                   .toList(),
                               onChanged: (val) =>
                                   setState(() => _model.schoolValue = val),
@@ -328,7 +319,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
                         child: FlutterFlowDropDown<int>(
-                          controller: _model.gradeController ??=
+                          controller: _model.gradeValueController ??=
                               FormFieldController<int>(
                             _model.gradeValue ??= getJsonField(
                               widget.absence,
@@ -445,6 +436,10 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 20.0, 20.0, 0.0),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 final _datePickedDate = await showDatePicker(
                                   context: context,
@@ -482,7 +477,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(
                             20.0, 20.0, 20.0, 0.0),
                         child: FlutterFlowDropDown<String>(
-                          controller: _model.reasonController ??=
+                          controller: _model.reasonValueController ??=
                               FormFieldController<String>(
                             _model.reasonValue ??= getJsonField(
                                       widget.absence,
@@ -495,8 +490,8 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                                     r'''$.reasonId''',
                                   ).toString(),
                           ),
-                          options: _model.reasonIDs.toList(),
-                          optionLabels: _model.reasons.toList(),
+                          options: _model.reasonIDs,
+                          optionLabels: _model.reasons,
                           onChanged: (val) =>
                               setState(() => _model.reasonValue = val),
                           width: MediaQuery.of(context).size.width * 1.0,
@@ -603,6 +598,7 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                                           bytes: m.bytes,
                                           height: m.dimensions?.height,
                                           width: m.dimensions?.width,
+                                          blurHash: m.blurHash,
                                         ))
                                     .toList();
                               } finally {
@@ -688,7 +684,12 @@ class _EditAbsenceWidgetState extends State<EditAbsenceWidget> {
                             ),
                             child: ClipRect(
                               child: Signature(
-                                controller: _model.signatureController,
+                                controller: _model.signatureController ??=
+                                    SignatureController(
+                                  penStrokeWidth: 2.0,
+                                  penColor: Color(0xFF888888),
+                                  exportBackgroundColor: Colors.white,
+                                ),
                                 backgroundColor: Colors.transparent,
                                 height: 120.0,
                               ),
