@@ -18,7 +18,6 @@ class _LinksWidgetState extends State<LinksWidget> {
   late LinksModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -30,7 +29,6 @@ class _LinksWidgetState extends State<LinksWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -39,7 +37,7 @@ class _LinksWidgetState extends State<LinksWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -77,6 +75,7 @@ class _LinksWidgetState extends State<LinksWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -95,6 +94,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://www.eastonsd.org/');
                         },
@@ -161,6 +164,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://www.safe2saypa.org');
                         },
@@ -227,6 +234,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://qrs.ly/8wedin8');
                         },
@@ -293,6 +304,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://qrs.ly/aeediqj');
                         },
@@ -359,6 +374,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://e-hallpass.com/login');
                         },
@@ -425,6 +444,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://qrs.ly/zledip5');
                         },
@@ -491,6 +514,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL(
                               'https://www.fdmealplanner.com/#EastonPA');
@@ -558,6 +585,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://qrs.ly/3redirw');
                         },
@@ -624,6 +655,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL(
                               'https://eastonsd.follettdestiny.com/common/welcome.jsp?context=saas54_3720746');
@@ -691,6 +726,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL(
                               'https://youtube.com/@easdboemeetings7688');
@@ -758,6 +797,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL(
                               'https://eastonsd.org/apps/pages/index.jsp?uREC_ID=325694&type=d');
@@ -825,6 +868,10 @@ class _LinksWidgetState extends State<LinksWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 12.0),
                       child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
                         onTap: () async {
                           await launchURL('https://clever.com/in/easd');
                         },

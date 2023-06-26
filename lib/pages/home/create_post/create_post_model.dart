@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -33,6 +33,8 @@ class CreatePostModel extends FlutterFlowModel {
   void removeFromUploadedImageID(String item) => uploadedImageID.remove(item);
   void removeAtIndexFromUploadedImageID(int index) =>
       uploadedImageID.removeAt(index);
+  void updateUploadedImageIDAtIndex(int index, Function(String) updateFn) =>
+      uploadedImageID[index] = updateFn(uploadedImageID[index]);
 
   String visibility = 'Public';
 
@@ -53,6 +55,8 @@ class CreatePostModel extends FlutterFlowModel {
   void removeFromUploadedVideos(String item) => uploadedVideos.remove(item);
   void removeAtIndexFromUploadedVideos(int index) =>
       uploadedVideos.removeAt(index);
+  void updateUploadedVideosAtIndex(int index, Function(String) updateFn) =>
+      uploadedVideos[index] = updateFn(uploadedVideos[index]);
 
   ///  State fields for stateful widgets in this page.
 
@@ -94,6 +98,7 @@ class CreatePostModel extends FlutterFlowModel {
     loadingWheelModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

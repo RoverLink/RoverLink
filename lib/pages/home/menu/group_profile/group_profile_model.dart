@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/follow_button/follow_button_widget.dart';
@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 class GroupProfileModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for FollowButton component.
   late FollowButtonModel followButtonModel;
   // Model for EmptyList component.
@@ -32,9 +33,12 @@ class GroupProfileModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     followButtonModel.dispose();
     emptyListModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

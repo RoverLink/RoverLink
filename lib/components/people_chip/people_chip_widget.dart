@@ -49,10 +49,14 @@ class _PeopleChipWidgetState extends State<PeopleChipWidget> {
     return Padding(
       padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
       child: InkWell(
+        splashColor: Colors.transparent,
+        focusColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
         onTap: () async {
           context.pushNamed(
             'OtherProfile',
-            queryParams: {
+            queryParameters: {
               'user': serializeParam(
                 getJsonField(
                   widget.user,

@@ -44,7 +44,8 @@ export '/pages/home/notifications_with_stuff/notifications_with_stuff_widget.dar
     show NotificationsWithStuffWidget;
 export '/pages/home/announcements/announcements_widget.dart'
     show AnnouncementsWidget;
-export '/pages/home/eahs/eahs_widget.dart' show EahsWidget;
+export '/pages/home/building_profile/building_profile_widget.dart'
+    show BuildingProfileWidget;
 export '/pages/home/menu/absences/edit_absence/edit_absence_widget.dart'
     show EditAbsenceWidget;
 export '/pages/home/menu/absences/absence_expanded/absence_expanded_widget.dart'
@@ -59,3 +60,8 @@ export '/pages/home/menu/settings/following/following_widget.dart'
     show FollowingWidget;
 export '/pages/home/view_announcement/view_announcement_widget.dart'
     show ViewAnnouncementWidget;
+export '/pages/home/building_profile_copy/building_profile_copy_widget.dart'
+    show BuildingProfileCopyWidget;
+export '/pages/rover_chat/rover_chat_widget.dart' show RoverChatWidget;
+export '/pages/home/announcements_copy/announcements_copy_widget.dart'
+    show AnnouncementsCopyWidget;

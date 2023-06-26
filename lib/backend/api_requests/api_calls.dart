@@ -653,6 +653,11 @@ class GetBuildingsCall {
         r'''$.buildings[:].id''',
         true,
       );
+  dynamic buildings(dynamic response) => getJsonField(
+        response,
+        r'''$.buildings''',
+        true,
+      );
 }
 
 class GetBuildingCall {
@@ -1300,11 +1305,11 @@ String _serializeList(List? list) {
   }
 }
 
-String _serializeJson(dynamic jsonVar) {
-  jsonVar ??= {};
+String _serializeJson(dynamic jsonVar, [bool isList = false]) {
+  jsonVar ??= (isList ? [] : {});
   try {
     return json.encode(jsonVar);
   } catch (_) {
-    return '{}';
+    return isList ? '[]' : '{}';
   }
 }

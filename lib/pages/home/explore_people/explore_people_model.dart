@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 class ExplorePeopleModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for SearchField widget.
   TextEditingController? searchFieldController;
   String? Function(BuildContext, String?)? searchFieldControllerValidator;
@@ -28,10 +29,12 @@ class ExplorePeopleModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     searchFieldController?.dispose();
     backButtonModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,12 +10,19 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class SigningOutModel extends FlutterFlowModel {
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {}
 
-  void dispose() {}
+  void dispose() {
+    unfocusNode.dispose();
+  }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
-
 }

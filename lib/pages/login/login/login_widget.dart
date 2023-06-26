@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -31,7 +31,6 @@ class _LoginWidgetState extends State<LoginWidget>
   late LoginModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'textFieldOnPageLoadAnimation1': AnimationInfo(
@@ -80,8 +79,8 @@ class _LoginWidgetState extends State<LoginWidget>
           curve: Curves.bounceOut,
           delay: 140.ms,
           duration: 600.ms,
-          begin: 1.3,
-          end: 1.0,
+          begin: Offset(1.3, 1.3),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -92,8 +91,8 @@ class _LoginWidgetState extends State<LoginWidget>
           curve: Curves.bounceOut,
           delay: 140.ms,
           duration: 600.ms,
-          begin: 1.3,
-          end: 1.0,
+          begin: Offset(1.3, 1.3),
+          end: Offset(1.0, 1.0),
         ),
       ],
     ),
@@ -161,8 +160,8 @@ class _LoginWidgetState extends State<LoginWidget>
           curve: Curves.bounceOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: 1.2,
-          end: 1.0,
+          begin: Offset(1.2, 1.2),
+          end: Offset(1.0, 1.0),
         ),
         MoveEffect(
           curve: Curves.easeInOut,
@@ -202,7 +201,6 @@ class _LoginWidgetState extends State<LoginWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -211,7 +209,7 @@ class _LoginWidgetState extends State<LoginWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Color(0xFF14181B),
@@ -279,24 +277,27 @@ class _LoginWidgetState extends State<LoginWidget>
                           initialIndex: 0,
                           child: Column(
                             children: [
-                              TabBar(
-                                isScrollable: true,
-                                labelColor: Colors.white,
-                                labelStyle:
-                                    FlutterFlowTheme.of(context).titleMedium,
-                                indicatorColor: Colors.white,
-                                tabs: [
-                                  Tab(
-                                    text: FFLocalizations.of(context).getText(
-                                      'fw22h2r7' /* Sign In */,
+                              Align(
+                                alignment: Alignment(0.0, 0),
+                                child: TabBar(
+                                  isScrollable: true,
+                                  labelColor: Colors.white,
+                                  labelStyle:
+                                      FlutterFlowTheme.of(context).titleMedium,
+                                  indicatorColor: Colors.white,
+                                  tabs: [
+                                    Tab(
+                                      text: FFLocalizations.of(context).getText(
+                                        'fw22h2r7' /* Sign In */,
+                                      ),
                                     ),
-                                  ),
-                                  Tab(
-                                    text: FFLocalizations.of(context).getText(
-                                      '432nyxa1' /* Sign Up */,
+                                    Tab(
+                                      text: FFLocalizations.of(context).getText(
+                                        '432nyxa1' /* Sign Up */,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                               Expanded(
                                 child: TabBarView(
@@ -658,7 +659,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .prepareAuthEvent();
 
                                                                 final user =
-                                                                    await signInWithEmail(
+                                                                    await authManager
+                                                                        .signInWithEmail(
                                                                   context,
                                                                   _model
                                                                       .emailAddressLoginController
@@ -682,14 +684,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     currentUserEmail,
                                                                   );
 
-                                                                  final usersUpdateData =
-                                                                      createUsersRecordData(
-                                                                    photoUrl: _model
-                                                                        .gravatarHashUrl,
-                                                                  );
                                                                   await currentUserReference!
                                                                       .update(
-                                                                          usersUpdateData);
+                                                                          createUsersRecordData(
+                                                                    photoUrl: _model
+                                                                        .gravatarHashUrl,
+                                                                  ));
                                                                 }
                                                                 _model.loginNotifySyncResult =
                                                                     await UsersGroup
@@ -703,7 +703,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                 context.pushNamedAuth(
                                                                     'HomePage',
-                                                                    mounted);
+                                                                    context
+                                                                        .mounted);
                                                               }
 
                                                               setState(() {});
@@ -783,17 +784,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                       context)
                                                                   .prepareAuthEvent();
                                                               final user =
-                                                                  await signInAnonymously(
-                                                                      context);
+                                                                  await authManager
+                                                                      .signInAnonymously(
+                                                                          context);
                                                               if (user ==
                                                                   null) {
                                                                 return;
                                                               }
 
-                                                              context
-                                                                  .goNamedAuth(
-                                                                      'HomePage',
-                                                                      mounted);
+                                                              context.goNamedAuth(
+                                                                  'HomePage',
+                                                                  context
+                                                                      .mounted);
                                                             },
                                                             text: FFLocalizations
                                                                     .of(context)
@@ -982,14 +984,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .spaceEvenly,
                                                             children: [
                                                               InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
                                                                 onTap:
                                                                     () async {
                                                                   GoRouter.of(
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInWithGoogle(
-                                                                          context);
+                                                                      await authManager
+                                                                          .signInWithGoogle(
+                                                                              context);
                                                                   if (user ==
                                                                       null) {
                                                                     return;
@@ -1013,14 +1025,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         currentUserEmail,
                                                                       );
 
-                                                                      final usersUpdateData =
-                                                                          createUsersRecordData(
-                                                                        photoUrl:
-                                                                            _model.gravatarHashUrlGuest,
-                                                                      );
                                                                       await currentUserReference!
                                                                           .update(
-                                                                              usersUpdateData);
+                                                                              createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      ));
                                                                     }
                                                                     FFAppState()
                                                                         .update(
@@ -1041,7 +1051,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                     context.pushNamedAuth(
                                                                         'EditProfile',
-                                                                        mounted);
+                                                                        context
+                                                                            .mounted);
                                                                   } else {
                                                                     _model.googleLoginNotifySyncResult =
                                                                         await UsersGroup
@@ -1096,14 +1107,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               ),
                                                               if (isiOS == true)
                                                                 InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
                                                                   onTap:
                                                                       () async {
                                                                     GoRouter.of(
                                                                             context)
                                                                         .prepareAuthEvent();
                                                                     final user =
-                                                                        await signInWithApple(
-                                                                            context);
+                                                                        await authManager
+                                                                            .signInWithApple(context);
                                                                     if (user ==
                                                                         null) {
                                                                       return;
@@ -1122,13 +1143,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           currentUserEmail,
                                                                         );
 
-                                                                        final usersUpdateData =
-                                                                            createUsersRecordData(
+                                                                        await currentUserReference!
+                                                                            .update(createUsersRecordData(
                                                                           photoUrl:
                                                                               _model.gravatarHashUrlGuest,
-                                                                        );
-                                                                        await currentUserReference!
-                                                                            .update(usersUpdateData);
+                                                                        ));
                                                                       }
                                                                       FFAppState()
                                                                           .update(
@@ -1147,7 +1166,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                       context.pushNamedAuth(
                                                                           'EditProfile',
-                                                                          mounted);
+                                                                          context
+                                                                              .mounted);
                                                                     } else {
                                                                       _model.appleLoginNotifySyncResult = await UsersGroup
                                                                           .notifySyncCall
@@ -1203,14 +1223,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   ),
                                                                 ),
                                                               InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
                                                                 onTap:
                                                                     () async {
                                                                   GoRouter.of(
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInWithFacebook(
-                                                                          context);
+                                                                      await authManager
+                                                                          .signInWithFacebook(
+                                                                              context);
                                                                   if (user ==
                                                                       null) {
                                                                     return;
@@ -1234,14 +1264,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         currentUserEmail,
                                                                       );
 
-                                                                      final usersUpdateData =
-                                                                          createUsersRecordData(
-                                                                        photoUrl:
-                                                                            _model.gravatarHashUrlGuest,
-                                                                      );
                                                                       await currentUserReference!
                                                                           .update(
-                                                                              usersUpdateData);
+                                                                              createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      ));
                                                                     }
                                                                     FFAppState()
                                                                         .update(
@@ -1262,7 +1290,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                     context.pushNamedAuth(
                                                                         'EditProfile',
-                                                                        mounted);
+                                                                        context
+                                                                            .mounted);
                                                                   } else {
                                                                     _model.facebookLoginNotifySyncResult =
                                                                         await UsersGroup
@@ -1307,14 +1336,26 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0),
                                                                   child:
                                                                       InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
                                                                     onTap:
                                                                         () async {
                                                                       GoRouter.of(
                                                                               context)
                                                                           .prepareAuthEvent();
                                                                       final user =
-                                                                          await signInWithFacebook(
-                                                                              context);
+                                                                          await authManager
+                                                                              .signInWithFacebook(context);
                                                                       if (user ==
                                                                           null) {
                                                                         return;
@@ -1322,7 +1363,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                       context.goNamedAuth(
                                                                           'HomePage',
-                                                                          mounted);
+                                                                          context
+                                                                              .mounted);
                                                                     },
                                                                     child:
                                                                         FaIcon(
@@ -1801,7 +1843,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               }
 
                                                               final user =
-                                                                  await createAccountWithEmail(
+                                                                  await authManager
+                                                                      .createAccountWithEmail(
                                                                 context,
                                                                 _model
                                                                     .emailAddressController
@@ -1825,14 +1868,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   currentUserEmail,
                                                                 );
 
-                                                                final usersUpdateData =
-                                                                    createUsersRecordData(
-                                                                  photoUrl: _model
-                                                                      .gravatarHashUrlGuest,
-                                                                );
                                                                 await currentUserReference!
                                                                     .update(
-                                                                        usersUpdateData);
+                                                                        createUsersRecordData(
+                                                                  photoUrl: _model
+                                                                      .gravatarHashUrlGuest,
+                                                                ));
                                                               }
                                                               FFAppState()
                                                                   .update(() {
@@ -1852,7 +1893,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                               context.pushNamedAuth(
                                                                   'EditProfile',
-                                                                  mounted);
+                                                                  context
+                                                                      .mounted);
 
                                                               setState(() {});
                                                             },
@@ -1977,14 +2019,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     .spaceEvenly,
                                                             children: [
                                                               InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
                                                                 onTap:
                                                                     () async {
                                                                   GoRouter.of(
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInWithGoogle(
-                                                                          context);
+                                                                      await authManager
+                                                                          .signInWithGoogle(
+                                                                              context);
                                                                   if (user ==
                                                                       null) {
                                                                     return;
@@ -2008,14 +2060,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         currentUserEmail,
                                                                       );
 
-                                                                      final usersUpdateData =
-                                                                          createUsersRecordData(
-                                                                        photoUrl:
-                                                                            _model.gravatarHashUrlGuest,
-                                                                      );
                                                                       await currentUserReference!
                                                                           .update(
-                                                                              usersUpdateData);
+                                                                              createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      ));
                                                                     }
                                                                     FFAppState()
                                                                         .update(
@@ -2036,7 +2086,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                     context.pushNamedAuth(
                                                                         'EditProfile',
-                                                                        mounted);
+                                                                        context
+                                                                            .mounted);
                                                                   } else {
                                                                     _model.googleLoginNotifySyncResult2 =
                                                                         await UsersGroup
@@ -2091,14 +2142,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                               ),
                                                               if (isiOS == true)
                                                                 InkWell(
+                                                                  splashColor:
+                                                                      Colors
+                                                                          .transparent,
+                                                                  focusColor: Colors
+                                                                      .transparent,
+                                                                  hoverColor: Colors
+                                                                      .transparent,
+                                                                  highlightColor:
+                                                                      Colors
+                                                                          .transparent,
                                                                   onTap:
                                                                       () async {
                                                                     GoRouter.of(
                                                                             context)
                                                                         .prepareAuthEvent();
                                                                     final user =
-                                                                        await signInWithApple(
-                                                                            context);
+                                                                        await authManager
+                                                                            .signInWithApple(context);
                                                                     if (user ==
                                                                         null) {
                                                                       return;
@@ -2117,13 +2178,11 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           currentUserEmail,
                                                                         );
 
-                                                                        final usersUpdateData =
-                                                                            createUsersRecordData(
+                                                                        await currentUserReference!
+                                                                            .update(createUsersRecordData(
                                                                           photoUrl:
                                                                               _model.gravatarHashUrlGuest,
-                                                                        );
-                                                                        await currentUserReference!
-                                                                            .update(usersUpdateData);
+                                                                        ));
                                                                       }
                                                                       FFAppState()
                                                                           .update(
@@ -2142,7 +2201,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                       context.pushNamedAuth(
                                                                           'EditProfile',
-                                                                          mounted);
+                                                                          context
+                                                                              .mounted);
                                                                     } else {
                                                                       _model.appleLoginNotifySyncResult2 = await UsersGroup
                                                                           .notifySyncCall
@@ -2198,14 +2258,24 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                   ),
                                                                 ),
                                                               InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
                                                                 onTap:
                                                                     () async {
                                                                   GoRouter.of(
                                                                           context)
                                                                       .prepareAuthEvent();
                                                                   final user =
-                                                                      await signInWithFacebook(
-                                                                          context);
+                                                                      await authManager
+                                                                          .signInWithFacebook(
+                                                                              context);
                                                                   if (user ==
                                                                       null) {
                                                                     return;
@@ -2229,14 +2299,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         currentUserEmail,
                                                                       );
 
-                                                                      final usersUpdateData =
-                                                                          createUsersRecordData(
-                                                                        photoUrl:
-                                                                            _model.gravatarHashUrlGuest,
-                                                                      );
                                                                       await currentUserReference!
                                                                           .update(
-                                                                              usersUpdateData);
+                                                                              createUsersRecordData(
+                                                                        photoUrl:
+                                                                            _model.gravatarHashUrlGuest,
+                                                                      ));
                                                                     }
                                                                     FFAppState()
                                                                         .update(
@@ -2257,7 +2325,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                     context.pushNamedAuth(
                                                                         'EditProfile',
-                                                                        mounted);
+                                                                        context
+                                                                            .mounted);
                                                                   } else {
                                                                     _model.facebookLoginNotifySyncResult2 =
                                                                         await UsersGroup
@@ -2302,14 +2371,26 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                           0.0),
                                                                   child:
                                                                       InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
                                                                     onTap:
                                                                         () async {
                                                                       GoRouter.of(
                                                                               context)
                                                                           .prepareAuthEvent();
                                                                       final user =
-                                                                          await signInWithFacebook(
-                                                                              context);
+                                                                          await authManager
+                                                                              .signInWithFacebook(context);
                                                                       if (user ==
                                                                           null) {
                                                                         return;
@@ -2317,7 +2398,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
                                                                       context.goNamedAuth(
                                                                           'HomePage',
-                                                                          mounted);
+                                                                          context
+                                                                              .mounted);
                                                                     },
                                                                     child:
                                                                         FaIcon(
@@ -2383,6 +2465,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                         .center,
                                                                 children: [
                                                                   InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
                                                                     onTap:
                                                                         () async {
                                                                       context.pushNamed(
@@ -2444,6 +2538,18 @@ class _LoginWidgetState extends State<LoginWidget>
                                                                     ),
                                                                   ),
                                                                   InkWell(
+                                                                    splashColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    focusColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    hoverColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    highlightColor:
+                                                                        Colors
+                                                                            .transparent,
                                                                     onTap:
                                                                         () async {
                                                                       context.pushNamed(

@@ -867,77 +867,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Schools
   {
-    'b2z1lt2q': {
-      'en': 'Easton Area High School',
-      'de': 'Easton Area Highschool',
-      'es': 'Escuela secundaria del área de Easton',
-      'fr': 'École secondaire de la région d\'Easton',
-      'zh_Hans': '伊斯顿地区高中',
-    },
-    '2wcub7za': {
-      'en': 'Easton Area Middle School',
-      'de': 'Easton Area Mittelschule',
-      'es': 'Escuela secundaria del área de Easton',
-      'fr': 'École intermédiaire de la région d\'Easton',
-      'zh_Hans': '伊斯顿地区中学',
-    },
-    'b5hul5cu': {
-      'en': 'Palmer Elementary School',
-      'de': 'Palmer Grundschule',
-      'es': 'Escuela Primaria Palmer',
-      'fr': 'École primaire Palmer',
-      'zh_Hans': '帕默小学',
-    },
-    't4jfdxu5': {
-      'en': 'Forks Elementary School',
-      'de': 'Forks Grundschule',
-      'es': 'Escuela Primaria Forks',
-      'fr': 'École primaire de la fourche',
-      'zh_Hans': '福克斯小学',
-    },
-    'y043ys9o': {
-      'en': 'Tracy Elementary School',
-      'de': 'Tracy Grundschule',
-      'es': 'Escuela Primaria Tracy',
-      'fr': 'École primaire Tracy',
-      'zh_Hans': '特雷西小学',
-    },
-    'vv6u4bob': {
-      'en': 'Cheston Elementary School',
-      'de': 'Cheston Grundschule',
-      'es': 'Escuela Primaria Cheston',
-      'fr': 'École primaire de Cheston',
-      'zh_Hans': '切斯顿小学',
-    },
-    '2szsr0t6': {
-      'en': 'Paxinosa Elementary School',
-      'de': 'Paxinosa-Grundschule',
-      'es': 'Escuela Primaria Paxinosa',
-      'fr': 'École primaire Paxinosa',
-      'zh_Hans': '帕西诺萨小学',
-    },
-    '21cxw6j7': {
-      'en': 'Shawnee Elementary School',
-      'de': 'Shawnee-Grundschule',
-      'es': 'Escuela Primaria Shawnee',
-      'fr': 'École primaire Shawnee',
-      'zh_Hans': '肖尼小学',
-    },
-    '601gv7lh': {
-      'en': 'March Elementary School',
-      'de': 'März Grundschule',
-      'es': 'Escuela primaria de marzo',
-      'fr': 'École primaire de mars',
-      'zh_Hans': '三月小学',
-    },
-    'ri0pi2zq': {
-      'en': 'Easton Cyber Academy',
-      'de': 'Easton Cyber-Akademie',
-      'es': 'Academia cibernética de Easton',
-      'fr': 'CyberAcadémie d\'Easton',
-      'zh_Hans': '伊斯顿网络学院',
-    },
-    'jmemrulo': {
+    'qpm8t5az': {
       'en': 'Followed Schools',
       'de': 'Gefolgte Schulen',
       'es': 'Escuelas seguidas',
@@ -1026,13 +956,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'es': 'Acerca de',
       'fr': 'À propos',
       'zh_Hans': '关于',
-    },
-    'cubss1bv': {
-      'en': 'Log Out',
-      'de': 'Ausloggen',
-      'es': 'Cerrar sesión',
-      'fr': 'Se déconnecter',
-      'zh_Hans': '登出',
     },
     'jk2shv6o': {
       'en': 'Home',
@@ -1844,6 +1767,34 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Announcements
   {
+    'qvia11pf': {
+      'en': 'FBLA Second Harvest Food Bank',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'dz3vuyws': {
+      'en': 'St. Lukes Volunteering',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '18b8e4bl': {
+      'en': 'End of School for Students',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'onw44wo1': {
+      'en': 'Half Day on 5/28/23',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
     '8ik7jrgg': {
       'en': 'Announcements',
       'de': 'Ankündigungen',
@@ -1859,22 +1810,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
-  // EAHS
+  // BuildingProfile
   {
-    'bct7slbk': {
-      'en': 'Easton Area High School',
-      'de': 'Easton Area Highschool',
-      'es': 'Escuela secundaria del área de Easton',
-      'fr': 'École secondaire de la région d\'Easton',
-      'zh_Hans': '伊斯顿地区高中',
-    },
-    'kew24zs0': {
-      'en': '#eahs',
-      'de': '#eahs',
-      'es': '#eahs',
-      'fr': '#eahs',
-      'zh_Hans': '#eahs',
-    },
     '313i98wx': {
       'en': 'Information',
       'de': 'Information',
@@ -1882,24 +1819,40 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'fr': 'Information',
       'zh_Hans': '信息',
     },
-    'z2acb03f': {
-      'en':
-          'Easton Area High School\n2601 William Penn Hwy, Easton, PA 18045\n(610) 250-2481',
-      'de':
-          'Easton Area Highschool\n2601 William Penn Highway, Easton, PA 18045\n(610) 250-2481',
-      'es':
-          'Escuela secundaria del área de Easton\n2601 William Penn Hwy, Easton, PA 18045\n(610) 250-2481',
-      'fr':
-          'École secondaire de la région d\'Easton\n2601 William Penn Highway, Easton, PA 18045\n(610) 250-2481',
-      'zh_Hans':
-          '伊斯顿地区高中\n2601 William Penn Hwy, 伊斯顿, PA 18045\n(610) 250-2481',
-    },
     'ze5elsd7': {
       'en': 'Announcements',
       'de': 'Ankündigungen',
       'es': 'Anuncios',
       'fr': 'Annonces',
       'zh_Hans': '公告',
+    },
+    'b2z0tpq6': {
+      'en': 'FBLA Second Harvest Food Bank',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'hao90m7e': {
+      'en': 'St. Lukes Volunteering',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    '8bi5qz29': {
+      'en': 'End of School for Students',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
+    },
+    'ebwd0gyl': {
+      'en': 'Half Day on 5/28/23',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
     'sxuum9rm': {
       'en': 'Posts',
@@ -2572,6 +2525,97 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '家',
     },
   },
+  // BuildingProfileCopy
+  {
+    '0u00k9k6': {
+      'en': 'Easton Area High School',
+      'de': 'Easton Area Highschool',
+      'es': 'Escuela secundaria del área de Easton',
+      'fr': 'École secondaire de la région d\'Easton',
+      'zh_Hans': '伊斯顿地区高中',
+    },
+    'p9nuea5m': {
+      'en': '#eahs',
+      'de': '#eahs',
+      'es': '#eahs',
+      'fr': '#eahs',
+      'zh_Hans': '#eahs',
+    },
+    'xocck0do': {
+      'en': 'Information',
+      'de': 'Information',
+      'es': 'Información',
+      'fr': 'Information',
+      'zh_Hans': '信息',
+    },
+    '0nzvl92m': {
+      'en':
+          'Easton Area High School\n2601 William Penn Hwy, Easton, PA 18045\n(610) 250-2481',
+      'de':
+          'Easton Area Highschool\n2601 William Penn Highway, Easton, PA 18045\n(610) 250-2481',
+      'es':
+          'Escuela secundaria del área de Easton\n2601 William Penn Hwy, Easton, PA 18045\n(610) 250-2481',
+      'fr':
+          'École secondaire de la région d\'Easton\n2601 William Penn Highway, Easton, PA 18045\n(610) 250-2481',
+      'zh_Hans':
+          '伊斯顿地区高中\n2601 William Penn Hwy, 伊斯顿, PA 18045\n(610) 250-2481',
+    },
+    'hgyzrfa1': {
+      'en': 'Announcements',
+      'de': 'Ankündigungen',
+      'es': 'Anuncios',
+      'fr': 'Annonces',
+      'zh_Hans': '公告',
+    },
+    'v6lb8rgj': {
+      'en': 'Posts',
+      'de': 'Beiträge',
+      'es': 'Publicaciones',
+      'fr': 'Des postes',
+      'zh_Hans': '帖子',
+    },
+    'rb35iua8': {
+      'en': 'This group hasn\'t posted anything yet.',
+      'de': 'Diese Gruppe hat noch nichts gepostet.',
+      'es': 'Este grupo aún no ha publicado nada.',
+      'fr': 'Ce groupe n\'a encore rien publié.',
+      'zh_Hans': '该小组尚未发布任何内容。',
+    },
+    '2qjtntl1': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
+    },
+  },
+  // RoverChat
+  {
+    'oejpg5qn': {
+      'en': 'RoverChat',
+      'de': 'Bekanntmachung',
+      'es': 'Anuncio',
+      'fr': 'Annonce',
+      'zh_Hans': '公告',
+    },
+  },
+  // AnnouncementsCopy
+  {
+    'qyhicx0r': {
+      'en': 'Announcements',
+      'de': 'Ankündigungen',
+      'es': 'Anuncios',
+      'fr': 'Annonces',
+      'zh_Hans': '公告',
+    },
+    'i3wk8o8a': {
+      'en': 'Home',
+      'de': 'Heim',
+      'es': 'Hogar',
+      'fr': 'Maison',
+      'zh_Hans': '家',
+    },
+  },
   // AddContentSelector
   {
     't7nb2xmc': {
@@ -2654,17 +2698,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '搜索...',
     },
   },
-  // SocialPostCopy
-  {
-    'l8uxyhmh': {
-      'en': '•',
-      'de': '•',
-      'es': '•',
-      'fr': '•',
-      'zh_Hans': '•',
-    },
-  },
-  // SocialPostCopy2
+  // SocialPostWNumbers
   {
     '01oc5sv9': {
       'en': '•',
@@ -2674,86 +2708,42 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'zh_Hans': '•',
     },
   },
-  // SocialPostCopy3
+  // EmptyRoverChat
   {
-    '3yza8993': {
-      'en': '•',
-      'de': '•',
-      'es': '•',
-      'fr': '•',
-      'zh_Hans': '•',
+    'a1xbvs8y': {
+      'en': 'Ask me anything!',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
-  },
-  // SocialPostCopy4
-  {
-    'befcpenm': {
-      'en': '•',
-      'de': '•',
-      'es': '•',
-      'fr': '•',
-      'zh_Hans': '•',
+    'gi3m50bu': {
+      'en': 'Try asking...',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
-    'mkvzjumi': {
-      'en': 'Expand v',
-      'de': 'Erweitern V',
-      'es': 'Ampliar v',
-      'fr': 'Développer v',
-      'zh_Hans': '展开 v',
+    'eluk6m6p': {
+      'en': 'How many credits are required to graduate High School?',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
-    '23uyqiwk': {
-      'en': 'Collapse ^',
-      'de': 'Reduzieren ^',
-      'es': 'Contraer ^',
-      'fr': 'Réduire ^',
-      'zh_Hans': '收起^',
+    'scgqxkhy': {
+      'en': 'Does the dress code allow shorts?',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
-  },
-  // SocialPostCopy5
-  {
-    'mk91k3wp': {
-      'en': '•',
-      'de': '•',
-      'es': '•',
-      'fr': '•',
-      'zh_Hans': '•',
-    },
-    'yvm44zxm': {
-      'en': 'Expand v',
-      'de': 'Erweitern V',
-      'es': 'Ampliar v',
-      'fr': 'Développer v',
-      'zh_Hans': '展开 v',
-    },
-    '465eb9ft': {
-      'en': 'Collapse ^',
-      'de': 'Reduzieren ^',
-      'es': 'Contraer ^',
-      'fr': 'Réduire ^',
-      'zh_Hans': '收起^',
-    },
-  },
-  // SocialPostCopy6
-  {
-    'eo0fd8w9': {
-      'en': '•',
-      'de': '•',
-      'es': '•',
-      'fr': '•',
-      'zh_Hans': '•',
-    },
-    'wkatpzex': {
-      'en': 'Expand v',
-      'de': 'Erweitern V',
-      'es': 'Ampliar v',
-      'fr': 'Développer v',
-      'zh_Hans': '展开 v',
-    },
-    'tlqt764i': {
-      'en': 'Collapse ^',
-      'de': 'Reduzieren ^',
-      'es': 'Contraer ^',
-      'fr': 'Réduire ^',
-      'zh_Hans': '收起^',
+    'qow83zf6': {
+      'en': 'Who is the principal of the Middle School?',
+      'de': '',
+      'es': '',
+      'fr': '',
+      'zh_Hans': '',
     },
   },
   // Miscellaneous

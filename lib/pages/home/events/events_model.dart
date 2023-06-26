@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -20,6 +20,8 @@ class EventsModel extends FlutterFlowModel {
   void addToEvents(dynamic item) => events.add(item);
   void removeFromEvents(dynamic item) => events.remove(item);
   void removeAtIndexFromEvents(int index) => events.removeAt(index);
+  void updateEventsAtIndex(int index, Function(dynamic) updateFn) =>
+      events[index] = updateFn(events[index]);
 
   bool loading = true;
 
@@ -27,6 +29,7 @@ class EventsModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for Calendar widget.
   DateTimeRange? calendarSelectedDay;
   // Stores action output result for [Backend Call - API (GetUserCalendarEvents)] action in Calendar widget.
@@ -51,11 +54,13 @@ class EventsModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     loadingWheelModel.dispose();
     customAppBarModel.dispose();
     navbarFloatingModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

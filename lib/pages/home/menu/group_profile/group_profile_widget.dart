@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/follow_button/follow_button_widget.dart';
@@ -32,7 +32,6 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
   late GroupProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -60,19 +58,22 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: CircularProgressIndicator(
-                color: FlutterFlowTheme.of(context).primary,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: CircularProgressIndicator(
+                  color: FlutterFlowTheme.of(context).primary,
+                ),
               ),
             ),
           );
         }
         final groupProfileGetGroupResponse = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -112,6 +113,7 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
               elevation: 0.0,
             ),
             body: SafeArea(
+              top: true,
               child: Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(
@@ -263,49 +265,57 @@ class _GroupProfileWidgetState extends State<GroupProfileWidget> {
                             initialIndex: 0,
                             child: Column(
                               children: [
-                                TabBar(
-                                  isScrollable: true,
-                                  labelColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  unselectedLabelColor:
-                                      FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .titleSmallFamily,
-                                        fontSize: 11.0,
-                                        fontWeight: FontWeight.w900,
-                                        useGoogleFonts: GoogleFonts.asMap()
-                                            .containsKey(
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily),
+                                Align(
+                                  alignment: Alignment(0.0, 0),
+                                  child: TabBar(
+                                    isScrollable: true,
+                                    labelColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    unselectedLabelColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                    labelStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmallFamily,
+                                          fontSize: 11.0,
+                                          fontWeight: FontWeight.w900,
+                                          useGoogleFonts: GoogleFonts.asMap()
+                                              .containsKey(
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily),
+                                        ),
+                                    indicatorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    tabs: [
+                                      Tab(
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '9jbvbomx' /* Information */,
+                                        ),
                                       ),
-                                  indicatorColor:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  tabs: [
-                                    Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        '9jbvbomx' /* Information */,
+                                      Tab(
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'l5yaqxof' /* Announcements */,
+                                        ),
                                       ),
-                                    ),
-                                    Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        'l5yaqxof' /* Announcements */,
+                                      Tab(
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          '8dv3lm20' /* Posts */,
+                                        ),
                                       ),
-                                    ),
-                                    Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        '8dv3lm20' /* Posts */,
+                                      Tab(
+                                        text:
+                                            FFLocalizations.of(context).getText(
+                                          'iu0vowae' /* Members */,
+                                        ),
                                       ),
-                                    ),
-                                    Tab(
-                                      text: FFLocalizations.of(context).getText(
-                                        'iu0vowae' /* Members */,
-                                      ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                                 Expanded(
                                   child: TabBarView(

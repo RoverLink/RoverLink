@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/follow_button/follow_button_widget.dart';
@@ -29,7 +29,6 @@ class _OtherProfileWidgetState extends State<OtherProfileWidget> {
   late OtherProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _OtherProfileWidgetState extends State<OtherProfileWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -57,19 +55,22 @@ class _OtherProfileWidgetState extends State<OtherProfileWidget> {
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
-          return Center(
-            child: SizedBox(
-              width: 50.0,
-              height: 50.0,
-              child: CircularProgressIndicator(
-                color: FlutterFlowTheme.of(context).primary,
+          return Scaffold(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            body: Center(
+              child: SizedBox(
+                width: 50.0,
+                height: 50.0,
+                child: CircularProgressIndicator(
+                  color: FlutterFlowTheme.of(context).primary,
+                ),
               ),
             ),
           );
         }
         final otherProfileGetUserProfileResponse = snapshot.data!;
         return GestureDetector(
-          onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+          onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -109,6 +110,7 @@ class _OtherProfileWidgetState extends State<OtherProfileWidget> {
               elevation: 0.0,
             ),
             body: SafeArea(
+              top: true,
               child: Align(
                 alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(

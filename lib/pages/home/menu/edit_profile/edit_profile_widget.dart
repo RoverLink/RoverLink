@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/loading_wheel/loading_wheel_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -26,7 +26,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   late EditProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -43,7 +42,6 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -52,7 +50,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -93,6 +91,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -224,6 +223,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                                     height:
                                                         m.dimensions?.height,
                                                     width: m.dimensions?.width,
+                                                    blurHash: m.blurHash,
                                                   ))
                                               .toList();
                                         } finally {
@@ -274,7 +274,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           ) ==
                                           'Success') {
                                         setState(() {
-                                          _model.newPFP = getJsonField(
+                                          _model.previewURL = getJsonField(
                                             (_model.uploadPFP?.jsonBody ?? ''),
                                             r'''$.mediaUrl''',
                                           );
@@ -494,6 +494,10 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       await Clipboard.setData(ClipboardData(
                                           text: getJsonField(
@@ -506,7 +510,7 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           .showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            'Username copied to clipboard',
+                                            'Username copied to clipboard.',
                                             style: TextStyle(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -515,7 +519,9 @@ class _EditProfileWidgetState extends State<EditProfileWidget> {
                                           ),
                                           duration:
                                               Duration(milliseconds: 4000),
-                                          backgroundColor: Color(0x00000000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
                                         ),
                                       );
                                     },

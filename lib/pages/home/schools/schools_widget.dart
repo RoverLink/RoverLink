@@ -1,4 +1,6 @@
+import '/backend/api_requests/api_calls.dart';
 import '/components/custom_app_bar/custom_app_bar_widget.dart';
+import '/components/follow_icon/follow_icon_widget.dart';
 import '/components/navbar_floating/navbar_floating_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -21,7 +23,6 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
   late SchoolsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -40,7 +41,6 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -49,7 +49,7 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -66,6 +66,7 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
             ),
           ),
           body: SafeArea(
+            top: true,
             child: Stack(
               children: [
                 Align(
@@ -80,774 +81,303 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Because of the Appbar we don't want to start the posts directly underneath so on the very first post we want to introduce some spacing
-                          Container(
-                            width: MediaQuery.of(context).size.width * 1.0,
-                            height: 54.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).appbarSpacer,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('EAHS');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: Hero(
-                                        tag: 'SchoolBanner',
-                                        transitionOnUserGestures: true,
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          child: Image.asset(
-                                            'assets/images/EAHS.png',
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                1.0,
-                                            height: 100.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                          FutureBuilder<ApiCallResponse>(
+                            future: BuildingsGroup.getBuildingsCall.call(),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
+                                  ),
+                                );
+                              }
+                              final listViewGetBuildingsResponse =
+                                  snapshot.data!;
+                              return Builder(
+                                builder: (context) {
+                                  final buildings =
+                                      BuildingsGroup.getBuildingsCall
+                                              .buildings(
+                                                listViewGetBuildingsResponse
+                                                    .jsonBody,
+                                              )
+                                              ?.map((e) => e)
+                                              .toList()
+                                              ?.toList() ??
+                                          [];
+                                  return ListView.builder(
+                                    padding: EdgeInsets.zero,
+                                    primary: false,
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: buildings.length,
+                                    itemBuilder: (context, buildingsIndex) {
+                                      final buildingsItem =
+                                          buildings[buildingsIndex];
+                                      return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'b2z1lt2q' /* Easton Area High School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
+                                          // Because of the Appbar we don't want to start the posts directly underneath so on the very first post we want to introduce some spacing
+                                          if (buildingsIndex == 0)
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  1.0,
+                                              height: 54.0,
+                                              decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
+                                                        .appbarSpacer,
+                                              ),
+                                            ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 12.0, 16.0, 0.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'BuildingProfile',
+                                                  queryParameters: {
+                                                    'id': serializeParam(
+                                                      getJsonField(
+                                                        buildingsItem,
+                                                        r'''$.id''',
+                                                      ).toString(),
+                                                      ParamType.String,
+                                                    ),
+                                                  }.withoutNulls,
+                                                );
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                      blurRadius: 10.0,
+                                                      color: Color(0x3416202A),
+                                                    )
+                                                  ],
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.0),
+                                                  shape: BoxShape.rectangle,
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  5.0,
+                                                                  5.0,
+                                                                  5.0,
+                                                                  0.0),
+                                                      child: Stack(
+                                                        children: [
+                                                          Hero(
+                                                            tag: getJsonField(
+                                                                      buildingsItem,
+                                                                      r'''$.groupProfile.profileCoverUrl''',
+                                                                    ) !=
+                                                                    null
+                                                                ? getJsonField(
+                                                                    buildingsItem,
+                                                                    r'''$.groupProfile.profileCoverUrl''',
+                                                                  )
+                                                                : 'https://archrover.b-cdn.net/media/2023/05/11/y8nvo72r21l23x.webp',
+                                                            transitionOnUserGestures:
+                                                                true,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12.0),
+                                                              child:
+                                                                  Image.network(
+                                                                getJsonField(
+                                                                          buildingsItem,
+                                                                          r'''$.groupProfile.profileCoverUrl''',
+                                                                        ) !=
+                                                                        null
+                                                                    ? getJsonField(
+                                                                        buildingsItem,
+                                                                        r'''$.groupProfile.profileCoverUrl''',
+                                                                      )
+                                                                    : 'https://archrover.b-cdn.net/media/2023/05/11/y8nvo72r21l23x.webp',
+                                                                width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width *
+                                                                    1.0,
+                                                                height: 100.0,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    1.0, 0.0),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                              child: Container(
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                ),
+                                                                child:
+                                                                    FollowIconWidget(
+                                                                  key: Key(
+                                                                      'Keyl4y_${buildingsIndex}_of_${buildings.length}'),
+                                                                  followState:
+                                                                      getJsonField(
+                                                                    buildingsItem,
+                                                                    r'''$.groupProfile.followState''',
+                                                                  ).toString(),
+                                                                  id: getJsonField(
+                                                                    buildingsItem,
+                                                                    r'''$.groupProfile.id''',
+                                                                  ).toString(),
+                                                                  isGroup: true,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  15.0,
+                                                                  15.0,
+                                                                  15.0,
+                                                                  15.0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Column(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                getJsonField(
+                                                                  buildingsItem,
+                                                                  r'''$.name''',
+                                                                ).toString(),
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryText,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                    ),
+                                                              ),
+                                                              Text(
+                                                                '#${getJsonField(
+                                                                  buildingsItem,
+                                                                  r'''$.slug''',
+                                                                ).toString()}',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .titleSmallFamily,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                      useGoogleFonts: GoogleFonts
+                                                                              .asMap()
+                                                                          .containsKey(
+                                                                              FlutterFlowTheme.of(context).titleSmallFamily),
+                                                                    ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Expanded(
+                                                            child: Align(
+                                                              alignment:
+                                                                  AlignmentDirectional(
+                                                                      1.0, 0.0),
+                                                              child: Icon(
+                                                                Icons
+                                                                    .arrow_forward_ios,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryText,
+                                                                size: 18.0,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/EAMS.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '2wcub7za' /* Easton Area Middle School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Palmer.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'b5hul5cu' /* Palmer Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Forks.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              't4jfdxu5' /* Forks Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Tracy.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'y043ys9o' /* Tracy Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Cheston.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'vv6u4bob' /* Cheston Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Pax.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '2szsr0t6' /* Paxinosa Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/Shawnee.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '21cxw6j7' /* Shawnee Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/March.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              '601gv7lh' /* March Elementary School */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 12.0, 16.0, 0.0),
-                            child: InkWell(
-                              onTap: () async {
-                                context.pushNamed('SchoolsFollowed');
-                              },
-                              child: Container(
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10.0,
-                                      color: Color(0x3416202A),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  shape: BoxShape.rectangle,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          5.0, 5.0, 5.0, 0.0),
-                                      child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/cyberacademylogo.png',
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              1.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          15.0, 15.0, 15.0, 15.0),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Text(
-                                            FFLocalizations.of(context).getText(
-                                              'ri0pi2zq' /* Easton Cyber Academy */,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleSmall,
-                                          ),
-                                          Expanded(
-                                            child: Align(
-                                              alignment: AlignmentDirectional(
-                                                  1.0, 0.0),
-                                              child: Icon(
-                                                Icons.arrow_forward_ios,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 18.0,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            },
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 12.0, 16.0, 101.0),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed('SchoolsFollowed');
                               },
@@ -887,7 +417,7 @@ class _SchoolsWidgetState extends State<SchoolsWidget> {
                                             12.0, 0.0, 0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
-                                            'jmemrulo' /* Followed Schools */,
+                                            'qpm8t5az' /* Followed Schools */,
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .titleSmall,

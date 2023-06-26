@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/components/empty_list/empty_list_widget.dart';
@@ -22,7 +22,6 @@ class _FollowingWidgetState extends State<FollowingWidget> {
   late FollowingModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -34,7 +33,6 @@ class _FollowingWidgetState extends State<FollowingWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -43,7 +41,7 @@ class _FollowingWidgetState extends State<FollowingWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -71,34 +69,40 @@ class _FollowingWidgetState extends State<FollowingWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: DefaultTabController(
             length: 2,
             initialIndex: 0,
             child: Column(
               children: [
-                TabBar(
-                  labelColor: FlutterFlowTheme.of(context).primary,
-                  labelStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily:
-                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts: GoogleFonts.asMap().containsKey(
-                            FlutterFlowTheme.of(context).bodyMediumFamily),
+                Align(
+                  alignment: Alignment(0.0, 0),
+                  child: TabBar(
+                    labelColor: FlutterFlowTheme.of(context).primary,
+                    labelStyle: FlutterFlowTheme.of(context)
+                        .bodyMedium
+                        .override(
+                          fontFamily:
+                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          useGoogleFonts: GoogleFonts.asMap().containsKey(
+                              FlutterFlowTheme.of(context).bodyMediumFamily),
+                        ),
+                    indicatorColor: FlutterFlowTheme.of(context).primary,
+                    tabs: [
+                      Tab(
+                        text: FFLocalizations.of(context).getText(
+                          'ewyoxm39' /* People */,
+                        ),
                       ),
-                  indicatorColor: FlutterFlowTheme.of(context).primary,
-                  tabs: [
-                    Tab(
-                      text: FFLocalizations.of(context).getText(
-                        'ewyoxm39' /* People */,
+                      Tab(
+                        text: FFLocalizations.of(context).getText(
+                          'd9refqz4' /* Groups */,
+                        ),
                       ),
-                    ),
-                    Tab(
-                      text: FFLocalizations.of(context).getText(
-                        'd9refqz4' /* Groups */,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: TabBarView(

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -185,6 +185,10 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
                               13.0, 20.0, 13.0, 5.0),
                           child: AuthUserStreamWidget(
                             builder: (context) => InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed('Menu');
                               },
@@ -264,7 +268,7 @@ class _ExploreAppBarWidgetState extends State<ExploreAppBarWidget> {
 
                   context.pushNamed(
                     'ExplorePeople',
-                    queryParams: {
+                    queryParameters: {
                       'users': serializeParam(
                         (_model.searchResult?.jsonBody ?? ''),
                         ParamType.JSON,

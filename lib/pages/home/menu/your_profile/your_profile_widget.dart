@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/social_post/social_post_widget.dart';
@@ -24,7 +24,6 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
   late YourProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -43,7 +42,6 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -52,7 +50,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -106,6 +104,7 @@ class _YourProfileWidgetState extends State<YourProfileWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(

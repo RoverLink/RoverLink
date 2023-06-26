@@ -30,7 +30,6 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
   late AbsenceExpandedModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -42,7 +41,6 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -51,7 +49,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -94,7 +92,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                 onPressed: () async {
                   context.pushNamed(
                     'EditAbsence',
-                    queryParams: {
+                    queryParameters: {
                       'absence': serializeParam(
                         widget.absence,
                         ParamType.JSON,
@@ -109,6 +107,7 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -848,6 +847,10 @@ class _AbsenceExpandedWidgetState extends State<AbsenceExpandedWidget> {
                                           ),
                                         ),
                                         InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
                                           onTap: () async {
                                             setState(() {
                                               _model.noteImage = getJsonField(

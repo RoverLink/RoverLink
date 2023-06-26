@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -52,8 +52,42 @@ class _FollowIconWidgetState extends State<FollowIconWidget> {
     context.watch<FFAppState>();
 
     return InkWell(
+      splashColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () async {
         var _shouldSetState = false;
+        if (FFAppState().isAnonymous) {
+          var confirmDialogResponse = await showDialog<bool>(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    title: Text(
+                        'Following is not available when signed in as a guest'),
+                    content: Text('Please try again once your logged in'),
+                    actions: [
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, false),
+                        child: Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, true),
+                        child: Text('Log Out'),
+                      ),
+                    ],
+                  );
+                },
+              ) ??
+              false;
+          if (confirmDialogResponse) {
+            context.pushNamed('SigningOut');
+          }
+          if (_shouldSetState) setState(() {});
+          return;
+        }
         if (((_model.newFollowState != null && _model.newFollowState != ''
                     ? _model.newFollowState
                     : widget.followState) ==

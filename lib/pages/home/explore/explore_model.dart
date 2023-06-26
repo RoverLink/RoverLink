@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/components/empty_list/empty_list_widget.dart';
 import '/components/explore_app_bar/explore_app_bar_widget.dart';
@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 class ExploreModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for ListView widget.
   PagingController<ApiPagingParams, dynamic>? pagingController;
   // Model for ExploreAppBar component.
@@ -31,10 +32,12 @@ class ExploreModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     exploreAppBarModel.dispose();
     navbarFloatingModel.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 class LoginModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for emailAddress_Login widget.
   TextEditingController? emailAddressLoginController;
   String? Function(BuildContext, String?)? emailAddressLoginControllerValidator;
@@ -93,6 +94,7 @@ class LoginModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     emailAddressLoginController?.dispose();
     passwordLoginController?.dispose();
     emailAddressController?.dispose();
@@ -100,6 +102,7 @@ class LoginModel extends FlutterFlowModel {
     passwordConfirmController?.dispose();
   }
 
-  /// Additional helper methods are added here.
+  /// Action blocks are added here.
 
+  /// Additional helper methods are added here.
 }

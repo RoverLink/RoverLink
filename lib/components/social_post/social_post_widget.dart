@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -82,6 +82,10 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8.0, 8.0, 8.0, 8.0),
                   child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
                     onTap: () async {
                       if (widget.allowPFPClick) {
                         if (getJsonField(
@@ -93,7 +97,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                         } else {
                           context.pushNamed(
                             'OtherProfile',
-                            queryParams: {
+                            queryParameters: {
                               'user': serializeParam(
                                 getJsonField(
                                   widget.post,
@@ -301,16 +305,21 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                 path: FFAppState().selectedPostEntity,
                               ));
                             } else {
-                              await launchUrl(Uri(
-                                scheme: 'sms',
-                                path: FFAppState().selectedPostEntity,
-                              ));
+                              if (isiOS) {
+                                await launchUrl(Uri.parse(
+                                    "sms:FFAppState().selectedPostEntity&body=${Uri.encodeComponent('')}"));
+                              } else {
+                                await launchUrl(Uri(
+                                  scheme: 'sms',
+                                  path: FFAppState().selectedPostEntity,
+                                ));
+                              }
                             }
                           },
                           mentionHandler: () async {
                             context.pushNamed(
                               'OtherProfile',
-                              queryParams: {
+                              queryParameters: {
                                 'user': serializeParam(
                                   valueOrDefault<String>(
                                     FFAppState().selectedPostEntity,
@@ -351,6 +360,10 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                     true,
                                   ))
                                     InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         await Navigator.push(
                                           context,
@@ -363,7 +376,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                                       getJsonField(
                                                     widget.post,
                                                     r'''$.attachments''',
-                                                  )),
+                                                  )!),
                                                   r'''$.link''',
                                                 ).toString()}?width=${valueOrDefault<String>(
                                                   MediaQuery.of(context)
@@ -380,7 +393,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                                     getJsonField(
                                                   widget.post,
                                                   r'''$.attachments''',
-                                                )),
+                                                )!),
                                                 r'''$.link''',
                                               ).toString()}?width=${valueOrDefault<String>(
                                                 MediaQuery.of(context)
@@ -400,7 +413,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                               .returnFirstItem(getJsonField(
                                             widget.post,
                                             r'''$.attachments''',
-                                          )),
+                                          )!),
                                           r'''$.link''',
                                         ).toString()}?width=${valueOrDefault<String>(
                                           MediaQuery.of(context)
@@ -419,7 +432,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                                   .returnFirstItem(getJsonField(
                                                 widget.post,
                                                 r'''$.attachments''',
-                                              )),
+                                              )!),
                                               r'''$.link''',
                                             ).toString()}?width=${valueOrDefault<String>(
                                               MediaQuery.of(context)
@@ -446,7 +459,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                         functions.returnFirstItem(getJsonField(
                                           widget.post,
                                           r'''$.attachments''',
-                                        )),
+                                        )!),
                                         r'''$.link''',
                                       ),
                                       videoType: VideoType.network,
@@ -496,6 +509,10 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                             ))
                               Expanded(
                                 child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     _model.imageDownload =
                                         await actions.downloadImage(
@@ -503,7 +520,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                         functions.returnFirstItem(getJsonField(
                                           widget.post,
                                           r'''$.attachments''',
-                                        )),
+                                        )!),
                                         r'''$.link''',
                                       ),
                                       isiOS,
@@ -537,6 +554,10 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                             Expanded(
                               child: Builder(
                                 builder: (context) => InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
                                   onTap: () async {
                                     await Share.share(
                                       valueOrDefault<bool>(
@@ -555,7 +576,7 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                                   .returnFirstItem(getJsonField(
                                                 widget.post,
                                                 r'''$.attachments''',
-                                              )),
+                                              )!),
                                               r'''$.link''',
                                             ).toString()}'
                                           : getJsonField(
@@ -566,11 +587,31 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                                           getWidgetBoundingBox(context),
                                     );
                                   },
-                                  child: Icon(
-                                    Icons.ios_share,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
+                                  child: Stack(
+                                    children: [
+                                      if (!isAndroid)
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Icon(
+                                            Icons.ios_share,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                      if (isAndroid)
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Icon(
+                                            Icons.share_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ),

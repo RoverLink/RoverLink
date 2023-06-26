@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -22,7 +22,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   late MenuModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _MenuWidgetState extends State<MenuWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -50,7 +48,7 @@ class _MenuWidgetState extends State<MenuWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -58,6 +56,10 @@ class _MenuWidgetState extends State<MenuWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           leading: InkWell(
+            splashColor: Colors.transparent,
+            focusColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             onTap: () async {
               context.pop();
             },
@@ -108,6 +110,7 @@ class _MenuWidgetState extends State<MenuWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Align(
             alignment: AlignmentDirectional(0.0, 0.0),
             child: Container(
@@ -122,18 +125,22 @@ class _MenuWidgetState extends State<MenuWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                    child: Stack(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      children: [
-                        // Profile card
-                        if (FFAppState().isAnonymous == false)
+                  if (!FFAppState().isAnonymous)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                      child: Stack(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        children: [
+                          // Profile card
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 20.0, 0.0),
                             child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
                               onTap: () async {
                                 context.pushNamed('YourProfile');
                               },
@@ -288,17 +295,17 @@ class _MenuWidgetState extends State<MenuWidget> {
                               ),
                             ),
                           ),
-                        Align(
-                          alignment: AlignmentDirectional(0.8, 0.0),
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                            size: 18.0,
+                          Align(
+                            alignment: AlignmentDirectional(0.8, 0.0),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              size: 18.0,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
 
                   // Contains settings options
                   Expanded(
@@ -313,81 +320,120 @@ class _MenuWidgetState extends State<MenuWidget> {
                             Stack(
                               alignment: AlignmentDirectional(0.0, 0.0),
                               children: [
-                                if (FFAppState().isAnonymous == false)
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        context.pushNamed('Following');
-                                      },
-                                      child: Container(
-                                        width: double.infinity,
-                                        height: 50.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                          boxShadow: [
-                                            BoxShadow(
-                                              blurRadius: 10.0,
-                                              color: Color(0x3416202A),
-                                            )
-                                          ],
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
-                                          shape: BoxShape.rectangle,
-                                        ),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 8.0, 8.0, 8.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              Icon(
-                                                Icons.favorite,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 20.0,
-                                              ),
-                                              Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 0.0, 0.0, 0.0),
-                                                child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    '2uz6uzd3' /* Following */,
-                                                  ),
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                        fontSize: 15.0,
-                                                        useGoogleFonts: GoogleFonts
-                                                                .asMap()
-                                                            .containsKey(
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily),
-                                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 0.0, 16.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      if (FFAppState().isAnonymous) {
+                                        var confirmDialogResponse =
+                                            await showDialog<bool>(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Following is not available when signed in as a guest'),
+                                                      content: Text(
+                                                          'Please try again once your logged in'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  false),
+                                                          child: Text('Cancel'),
+                                                        ),
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext,
+                                                                  true),
+                                                          child:
+                                                              Text('Log Out'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
+                                                ) ??
+                                                false;
+                                        if (confirmDialogResponse) {
+                                          context.pushNamed('SigningOut');
+                                        }
+                                        return;
+                                      }
+
+                                      context.pushNamed('Following');
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 50.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            blurRadius: 10.0,
+                                            color: Color(0x3416202A),
+                                          )
+                                        ],
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                        shape: BoxShape.rectangle,
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 8.0, 8.0, 8.0),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Icon(
+                                              Icons.favorite,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              size: 20.0,
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 0.0, 0.0),
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  '2uz6uzd3' /* Following */,
                                                 ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 15.0,
+                                                          useGoogleFonts: GoogleFonts
+                                                                  .asMap()
+                                                              .containsKey(
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily),
+                                                        ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
                                   ),
+                                ),
                                 Align(
                                   alignment: AlignmentDirectional(0.8, 0.0),
                                   child: Icon(
@@ -409,6 +455,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         if (FFAppState().isAnonymous) {
                                           var confirmDialogResponse =
@@ -446,9 +496,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                           if (confirmDialogResponse) {
                                             context.pushNamed('SigningOut');
                                           }
-                                        } else {
-                                          context.pushNamed('Absences');
+                                          return;
                                         }
+
+                                        context.pushNamed('Absences');
                                       },
                                       child: Container(
                                         width: double.infinity,
@@ -539,6 +590,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed('Links');
                                       },
@@ -632,6 +687,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed('Settings');
                                       },
@@ -724,6 +783,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         Instabug.show();
                                         // context.pushNamed('ReportABug');
@@ -822,6 +885,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed('About');
                                       },
@@ -915,6 +982,10 @@ class _MenuWidgetState extends State<MenuWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16.0, 0.0, 16.0, 0.0),
                                     child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
                                       onTap: () async {
                                         var confirmDialogResponse =
                                             await showDialog<bool>(
@@ -985,10 +1056,9 @@ class _MenuWidgetState extends State<MenuWidget> {
                                                     .fromSTEB(
                                                         15.0, 0.0, 0.0, 0.0),
                                                 child: Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'cubss1bv' /* Log Out */,
-                                                  ),
+                                                  FFAppState().isAnonymous
+                                                      ? 'Sign In'
+                                                      : 'Log Out',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium

@@ -1,4 +1,4 @@
-import '/auth/auth_util.dart';
+import '/auth/firebase_auth/auth_util.dart';
 import '/components/back_button/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -25,7 +25,6 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
   late ViewEventModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -46,7 +44,7 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -75,6 +73,7 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
           elevation: 0.0,
         ),
         body: SafeArea(
+          top: true,
           child: Container(
             width: MediaQuery.of(context).size.width * 1.0,
             height: MediaQuery.of(context).size.height * 1.0,
@@ -143,10 +142,14 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       context.pushNamed(
                                         'GroupProfile',
-                                        queryParams: {
+                                        queryParameters: {
                                           'group': serializeParam(
                                             getJsonField(
                                               widget.event,
@@ -256,6 +259,10 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
                                     onTap: () async {
                                       if (getJsonField(
                                             widget.event,
@@ -268,7 +275,7 @@ class _ViewEventWidgetState extends State<ViewEventWidget> {
                                       } else {
                                         context.pushNamed(
                                           'OtherProfile',
-                                          queryParams: {
+                                          queryParameters: {
                                             'user': serializeParam(
                                               getJsonField(
                                                 widget.event,

@@ -3,7 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'auth/firebase_auth/firebase_user_provider.dart';
+import 'auth/firebase_auth/auth_util.dart';
 import 'package:instabug_flutter/instabug_flutter.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
@@ -19,12 +22,14 @@ import 'package:instabug_flutter/instabug_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  usePathUrlStrategy();
   await initFirebase();
 
   await FlutterFlowTheme.initialize();
   await FFLocalizations.initialize();
 
   final appState = FFAppState(); // Initialize FFAppState
+  await appState.initializePersistedState();
 
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
@@ -45,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   Locale? _locale = FFLocalizations.getStoredLocale();
   ThemeMode _themeMode = FlutterFlowTheme.themeMode;
 
-  late Stream<RoverLinkFirebaseUser> userStream;
+  late Stream<BaseAuthUser> userStream;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
@@ -56,7 +61,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Instabug.start('d8bfcd37cead64895597bb66e3ecaee2', [InvocationEvent.shake]);
-    _appStateNotifier = AppStateNotifier();
+    _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier);
     userStream = roverLinkFirebaseUserStream()
       ..listen((user) => _appStateNotifier.update(user));
@@ -105,8 +110,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),
       themeMode: _themeMode,
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
+      routerConfig: _router,
     );
   }
 }
