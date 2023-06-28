@@ -3,7 +3,6 @@ import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
-import '/custom_code/actions/index.dart' as actions;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
@@ -508,47 +507,11 @@ class _SocialPostWidgetState extends State<SocialPostWidget> {
                               true,
                             ))
                               Expanded(
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    _model.imageDownload =
-                                        await actions.downloadImage(
-                                      getJsonField(
-                                        functions.returnFirstItem(getJsonField(
-                                          widget.post,
-                                          r'''$.attachments''',
-                                        )!),
-                                        r'''$.link''',
-                                      ),
-                                      isiOS,
-                                      isAndroid,
-                                      isWeb,
-                                    );
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          'Image Downloaded',
-                                          style: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryText,
-                                          ),
-                                        ),
-                                        duration: Duration(milliseconds: 4000),
-                                        backgroundColor: Color(0x00000000),
-                                      ),
-                                    );
-
-                                    setState(() {});
-                                  },
-                                  child: Icon(
-                                    Icons.download_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 24.0,
-                                  ),
+                                child: Icon(
+                                  Icons.download_outlined,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
                                 ),
                               ),
                             Expanded(
